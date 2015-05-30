@@ -31,5 +31,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "swagger_api": {
+    "dataSource": null,
+    "public": true
+  },
+  "report": {
+    "dataSource": "postgres",
+    "public": true
   }
 }
