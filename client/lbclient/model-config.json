@@ -1,0 +1,8 @@
+{
+  "_meta": {
+    "sources": ["../../common/models", "./models"]
+  },
+  "Report": {
+    "dataSource": "remote"
+  }
+}

@@ -1,0 +1,606 @@
+/* ================================================================== */
+/* Resets */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ================================================================== */
+/* Font selection */
+
+html {
+  font-family: "Charter", serif;
+  line-height: 1.4;
+}
+
+h1, h2, nav, .toc {
+  font-family: "Fira Sans", sans-serif;
+}
+
+pre, code {
+  font-family: "Source Code Pro", monospace;
+}
+
+
+/* ================================================================== */
+/* Document structure */
+
+html {
+  font-size: 16px;
+  color: #1c1c1c;
+  background-color: #fff;
+  min-width: 320px;
+}
+
+nav {
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+main {
+  margin-bottom: 10rem !important;
+}
+
+footer {
+  color: #b4b4b4;
+  background-color: #26292c;
+}
+
+.container {
+  margin: auto;
+}
+
+
+/* ================================================================== */
+/* Rows */
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+header .row {
+  align-items: center;
+  margin: 3.5rem 0 4.5rem;
+}
+
+.pad-below {
+  margin-bottom: 6rem !important;
+}
+
+.row.title {
+  margin-bottom: 0;
+}
+
+footer .row {
+  padding: 3.2rem 0 4.5rem;
+}
+
+
+/* ================================================================== */
+/* Columns */
+
+.col-1 {
+  margin-right: 0 !important;
+}
+
+
+/* ================================================================== */
+/* Single-column layout */
+
+@media (max-width: 699px) {
+  html { font-size: 14px; }
+  .row { display: block; }
+  .col-1, .col-2, .col-3 { margin: 0 2.5rem !important; }
+  .container { width: auto; min-width: 20rem; }
+  .homepage nav .col-1 { display: none; }
+  nav { display: block; margin: 2rem 0 4rem !important; }
+  nav .col-2 { margin-top: 1rem !important; line-height: 2; }
+  .homepage nav a { margin: 0 1rem !important; }
+  .homepage header, .homepage nav, .homepage footer { text-align: center; }
+  .homepage header img { margin-bottom: 0.6rem !important; }
+  .homepage header p { width: auto; max-width: 23em; margin: auto; }
+  .toc { display: none; }
+  .homepage .col-1 h2 { margin: 6rem 0 2.5rem !important; width: 12rem; }
+  .homepage .how-it-works .col-1 h2 { margin: 0 !important; }
+  .sponsors { display: block !important; }
+  .sponsors a { margin-bottom: 2rem; }
+  .measurements table, .homepage .how-it-works img { width: calc(100% - 3rem * 2); }
+  .tcol-1 { width: 8rem !important; padding-right: 1rem; }
+}
+
+@media (min-width: 350px) {
+  html { font-size: 15px; }
+  .col-1, .col-2, .col-3 { margin: 0 2.75rem; }
+}
+
+@media (min-width: 500px) {
+  html { font-size: 16px; }
+  .col-1, .col-2, .col-3 { margin: 0 3rem; }
+}
+
+
+/* ================================================================== */
+/* Viewport width breakpoints */
+
+@media (min-width: 700px) {
+  html { font-size: 14px; }
+  .col-1, .col-2, .col-3 { margin: 0 3rem; }
+  .tcol-1           { padding-right: 3rem; }
+  .col-1     { width: calc(12.5rem * 1 + 3rem * 0); }
+  .col-2     { width: calc(12.5rem * 2 + 3rem * 1); }
+  .col-3     { width: calc(12.5rem * 3 + 3rem * 2); }
+  .container { width: calc(12.5rem * 3 + 3rem * 4); }
+  .tcol-1    { width: calc(12.5rem * 1 + 3rem * 1); }
+}
+
+@media (min-width: 810px) {
+  html { font-size: 15px; }
+  .col-1, .col-2, .col-3 { margin: 0 4rem; }
+  .tcol-1           { padding-right: 4rem; }
+  .col-1     { width: calc(12.5rem * 1 + 4rem * 0); }
+  .col-2     { width: calc(12.5rem * 2 + 4rem * 1); }
+  .col-3     { width: calc(12.5rem * 3 + 4rem * 2); }
+  .container { width: calc(12.5rem * 3 + 4rem * 4); }
+  .tcol-1    { width: calc(12.5rem * 1 + 4rem * 1); }
+}
+
+@media (min-width: 920px) {
+  html { font-size: 16px; }
+  .col-1, .col-2, .col-3 { margin: 0 4.2rem; }
+  .tcol-1           { padding-right: 4.2rem; }
+  .col-1     { width: calc(12.5rem * 1 + 4.2rem * 0); }
+  .col-2     { width: calc(12.5rem * 2 + 4.2rem * 1); }
+  .col-3     { width: calc(12.5rem * 3 + 4.2rem * 2); }
+  .container { width: calc(12.5rem * 3 + 4.2rem * 4); }
+  .tcol-1    { width: calc(12.5rem * 1 + 4.2rem * 1); }
+}
+
+@media (min-width: 1030px) {
+  html { font-size: 17px; }
+  .col-1, .col-2, .col-3 { margin: 0 5rem; }
+  .tcol-1           { padding-right: 5rem; }
+  .col-1     { width: calc(13rem * 1 + 5rem * 0); }
+  .col-2     { width: calc(13rem * 2 + 5rem * 1); }
+  .col-3     { width: calc(13rem * 3 + 5rem * 2); }
+  .container { width: calc(13rem * 3 + 5rem * 4); }
+  .tcol-1    { width: calc(13rem * 1 + 5rem * 1); }
+}
+
+@media (min-width: 1200px) {
+  html { font-size: 18px; }
+  .col-1, .col-2, .col-3 { margin: 0 5.5rem; }
+  .tcol-1           { padding-right: 5.5rem; }
+  .col-1     { width: calc(14rem * 1 + 5.5rem * 0); }
+  .col-2     { width: calc(14rem * 2 + 5.5rem * 1); }
+  .col-3     { width: calc(14rem * 3 + 5.5rem * 2); }
+  .container { width: calc(14rem * 3 + 5.5rem * 4); }
+  .tcol-1    { width: calc(14rem * 1 + 5.5rem * 1); }
+}
+
+
+/* ================================================================== */
+/* Collapsable table columns */
+
+@media (max-width: 570px) { .measurements td:nth-last-child(1) { display: none; } }
+@media (max-width: 530px) { .measurements td:nth-last-child(2) { display: none; } }
+@media (max-width: 490px) { .measurements td:nth-last-child(3) { display: none; } }
+@media (max-width: 450px) { .measurements td:nth-last-child(4) { display: none; } }
+@media (max-width: 410px) { .measurements td:nth-last-child(5) { display: none; } }
+@media (max-width: 370px) { .measurements td:nth-last-child(6) { display: none; } }
+
+
+/* ================================================================== */
+/* Generic elements */
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.6em;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 3em 0 1em;
+}
+
+.homepage .col-1 h2 {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #0588cb;
+  border-top: 0.2rem solid #0588cb;
+  padding-top: 0.2rem;
+  margin: 0 0 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: #0588cb;
+}
+
+p, ol, ul {
+  margin-bottom: 1.2em;
+}
+
+li {
+  margin-left: 1.2em;
+  padding-left: 0.2em;
+}
+
+th, td {
+  font-weight: inherit;
+}
+
+pre {
+  background-color: #f2f2f2;
+  padding: 0.5rem 1rem;
+  margin: 1.6rem 0;
+  position: relative;
+}
+
+pre code {
+  margin: 0;
+}
+
+code {
+  font-size: 0.9rem;
+}
+
+
+/* ================================================================== */
+/* Paragraphs */
+
+p.cta {
+  margin-bottom: 2.6em;
+}
+
+.col-2 p:last-child, p.cta:last-child {
+  margin-bottom: 0;
+}
+
+p.cta a:hover, p a:hover, li a:hover {
+  text-decoration: underline;
+}
+
+p.cta a::after {
+  content: " →";
+}
+
+
+/* ================================================================== */
+/* Block quotes */
+
+blockquote {
+  margin: 0 0 1.2rem 3em;
+}
+
+blockquote p {
+  text-indent: -0.38em;
+}
+
+blockquote dl {
+  font-size: 0.8rem;
+  margin-left: 3rem;
+}
+
+blockquote dl dt {
+  text-indent: -1.7em;
+}
+
+
+/* ================================================================== */
+/* Figures */
+
+.figure {
+  margin: 2.6rem 0;
+}
+
+.figure img {
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+.figure .caption {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+
+/* ================================================================== */
+/* Navigation */
+
+nav .col-2 {
+  flex: 1 1;
+}
+
+.article nav .col-2 {
+  opacity: 0.3;
+}
+
+nav a {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 2rem;
+  color: inherit;
+}
+
+nav a:last-child {
+  margin-right: 0;
+}
+
+nav h1 {
+  display: inline;
+  font-weight: bold;
+  font-size: 1.38rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+nav .logo {
+  vertical-align: -5px;
+  margin-right: 0.32rem;
+  opacity: 0.5;
+}
+
+nav .wordmark {
+  opacity: 0.3;
+}
+
+
+/* ================================================================== */
+/* Header */
+
+header h2 {
+  margin: 0;
+}
+
+header p {
+  width: 21.5em;
+}
+
+header .logo {
+  object-fit: contain;
+  height: 12.5rem;
+}
+
+header .wordmark {
+  height: 2.6rem;
+  margin: 1.4rem 0 1.2rem;
+}
+
+
+/* ================================================================== */
+/* How it works */
+
+.homepage .how-it-works {
+  background-color: #0588cb;
+  color: #fff;
+  padding: 2rem 0;
+  margin-bottom: 3.5rem;
+}
+
+.homepage .how-it-works h2 {
+  color: #fff;
+  border-color: #fff;
+  margin-bottom: 0;
+}
+
+.homepage .how-it-works img {
+  display: block;
+  object-fit: contain;
+  height: 17.5rem;
+}
+
+
+/* ================================================================== */
+/* Recent measurements */
+
+.measurements {
+  margin-bottom: 2rem;
+}
+
+.measurements table, .measurements tbody, .measurements td {
+}
+
+.measurements tr {
+  height: 40px;
+  align-items: center;
+}
+
+.measurements td {
+  text-align: center;
+}
+
+.measurements td.tcol-1 {
+  text-align: right;
+}
+
+.measurements img {
+  display: block;
+  margin: auto;
+}
+
+.table-caption {
+  font-size: 0.85rem;
+  color: #c1c1c1;
+}
+
+
+/* ================================================================== */
+/* Blog */
+
+.blog-summary a {
+  display: block;
+  color: inherit;
+  margin-bottom: 2em;
+}
+
+.blog-summary p.title {
+  margin-bottom: 0.2rem;
+}
+
+h1.article-title {
+  margin-bottom: 0.2rem;
+}
+
+.byline {
+  color: #c1c1c1;
+  font-size: 0.8rem;
+  margin-bottom: 2.6rem;
+}
+
+.byline .author::after {
+  content: ", ";
+}
+
+
+/* ================================================================== */
+/* Footer */
+
+footer h2 {
+  color: #b4b4b4;
+  border: none;
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 0 0 1.5rem;
+}
+
+.sponsors {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sponsors a {
+  display: block;
+}
+
+.sponsors img {
+  opacity: 0.5;
+  mix-blend-mode: luminosity;
+  vertical-align: middle;
+}
+
+.sponsors .bytemark {
+  opacity: 0.38;
+}
+
+
+/* ================================================================== */
+/* Article pages */
+
+.article nav {
+  margin-bottom: 7rem;
+}
+
+.cover {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 20rem;
+  background-color: #0588cb;
+  margin-top: 0.24rem;
+}
+
+pre span.chr {
+  font-size: 10px;
+  color: #fff;
+  background-color: #099;
+  border-radius: 4px;
+  vertical-align: 2px;
+  padding: 0 2px;
+  margin: 0 1px;
+}
+
+pre span.explain {
+  color: #d14;
+}
+
+pre span.lw {
+  position: absolute;
+  right: -22px;
+  color: #b4b4b4;
+}
+
+
+/* ================================================================== */
+/* Table of contents */
+
+.toc h2 {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 1.4em 0 1.4em;
+}
+
+.toc h3 {
+  font-size: 1.15rem;
+  font-weight: normal;
+  margin: 0 0 0.6em;
+}
+
+.toc h4 {
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin: 0 0 0.2em;
+}
+
+.toc h2, .toc h3 {
+  position: relative;
+  margin-left: 1.4rem;
+}
+
+.toc .closure {
+  margin-right: 0.5rem;
+  position: absolute;
+  left: -1.4rem;
+}
+
+.toc .indent {
+  margin-left: 0.25rem;
+  padding-left: 1rem;
+  border-left: 1px solid #f2f2f2;
+}
+
+.toc .active {
+  font-weight: bold;
+  color: #0588cb;
+}
+
+.toc a {
+  color: inherit;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.toc h2 .closure::before {
+  content: "►";
+  font-size: 0.8rem;
+}
+
+.toc h3 .closure::before {
+  content: "▼";
+  font-size: 0.7rem;
+}
+
+.probe-country {
+}
+
+.probe-country-info:hover {
+  background-color: #c1c1c1;
+}
+
+.probe-country-info h2 {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #0588cb;
+  border-top: 0.2rem solid #0588cb;
+  padding-top: 0.2rem;
+  margin: 0 0 1rem;
+}

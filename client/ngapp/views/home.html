@@ -1,0 +1,24 @@
+<main>
+<div class="report-listing">
+  <div class="probe-country" ng-repeat="(cc, reports) in report_files">
+    <div class="row pad-below">
+      <div class="col-1">
+        <div class="probe-country-info" ng-click="shown=!shown">
+          <h2>{{cc}}</h2>
+          <p class="byline">click to show report files</p>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="report-files-list" ng-show="shown">
+          <ul>
+            <li ng-repeat="report in reports">
+              {{report.report_filename}}
+            </li>
+          </ul>
+          <a ng-click="shown=!shown">hide</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
