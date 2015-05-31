@@ -10,7 +10,7 @@ var DB = db_url.protocol.split(":")[0];
 
 if (!(DB in SUPPORTED_DATASTORES)) {
   console.error('Invalid DB "%s"', DB);
-  console.error('Supported values', Object.keys(SUPPORTED_DATASTORES.join(' ')));
+  console.error('Supported values', Object.keys(SUPPORTED_DATASTORES).join(' '));
   process.exit(1);
 }
 
