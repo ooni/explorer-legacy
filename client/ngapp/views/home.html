@@ -1,26 +1,30 @@
 <main>
-<div class="header">
-  <h1>Open Observatory of Network Interference gathered data per country</h1>
+<div class="container">
+  <div class="col-3">
+    <h1>Open Observatory of Network Interference gathered data per country</h1>
+  </div>
 </div>
 <div class="report-listing">
-  <div class="probe-country" ng-repeat="report in reports_by_country">
+  <div class="probe-country" ng-repeat="(country_code, reports) in reports_by_country">
     <div class="row pad-below">
       <div class="col-1">
         <div class="probe-country-info" ng-click="shown=!shown">
           <span class="label label-primary">
-            <span class="flag-icon" ng-class="'flag-icon-' + report.country_code | lowercase "></span>
-            {{report.country_code}}
+            <span class="flag-icon" ng-class="'flag-icon-' + country_code | lowercase "></span>
+            {{ country_code }}
           </span>
-          <h2 ng-hide="!report.country">{{ report.country }}</h2>
-          <h2 ng-show="!report.country">Unknown country</h2>
-          <p class="byline">click to show report files</p>
+          <h2 ng-hide="!get_country(country_code)">{{ get_country(country_code) }}</h2>
+          <h2 ng-show="!get_country(country_code)">Unknown country</h2>
+          <p class="report-count">{{reports.length}} reports</p>
+          <p class="byline">click to toggle report files</p>
         </div>
       </div>
       <div class="col-2">
         <div class="report-files-list" ng-show="shown">
           <ul>
-            <li ng-repeat="report in report.report_files">
-              {{report.report_filename}}
+            <li ng-repeat="report in reports">
+            {{report.start_time * 1000 | date:medium}} - {{report.test_name}} - {{ report.probe_asn}}
+            <a href="https://ooni.torproject.org/reports/{{report.start_time * 1000 | date:'yyyy-MM-dd'}}/{{report.report_filename}}">download</a>
             </li>
           </ul>
           <a ng-click="shown=!shown">hide</a>

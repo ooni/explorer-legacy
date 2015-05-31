@@ -24,19 +24,26 @@ module.exports = function(Report) {
   }
 
   Report.listReportFiles = function(key, callback) {
+    var allowed_keys = ["test_name", "probe_cc", "probe_asn", "start_time"];
+    if (allowed_keys.indexOf(key) === -1) {
+      callback(new Error("Key must be in " + allowed_keys));
+    }
     var filter = {
       fields: {
-        report_filename: true
+        report_filename: true,
       }
     }
-    filter.fields[key] = true;
+    allowed_keys.forEach(function(k){
+      filter.fields[k] = true;
+    });
     function done(err, data) {
       var result = {};
-      data.forEach(function(item){
-        result[item[key]] = result[item[key]] || [];
-        result[item[key]].push(item);
+      data.forEach(function(item) {
+        var key_value = item[key];
+        delete item[key];
+        result[key_value] = result[key_value] || [];
+        result[key_value].push(item);
       });
-      console.log(result);
       callback(err, result);
     }
     Report.app.models.report.find(filter, done);

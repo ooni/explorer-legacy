@@ -592,8 +592,7 @@ pre span.lw {
 .probe-country {
 }
 
-.probe-country-info:hover {
-  background-color: #c1c1c1;
+.probe-country-info {
 }
 
 .probe-country-info h2 {
@@ -605,8 +604,16 @@ pre span.lw {
   margin: 0 0 1rem;
 }
 
+.probe-country-info:hover h2 {
+  border-top: 0.2rem solid #ccc;
+}
+
 .probe-country-info .label {
   font-size: 0.95rem;
   font-weight: bold;
   color: #0588cb;
+}
+
+.report-files-list ul {
+  list-style: none;
 }
