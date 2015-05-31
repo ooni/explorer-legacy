@@ -1,3 +1,4 @@
+var country = require('countryjs');
 module.exports = function(Report) {
 
   /**
@@ -37,13 +38,22 @@ module.exports = function(Report) {
       filter.fields[k] = true;
     });
     function done(err, data) {
-      var result = {};
+      var reports = {};
       data.forEach(function(item) {
         var key_value = item[key];
         delete item[key];
-        result[key_value] = result[key_value] || [];
-        result[key_value].push(item);
+        reports[key_value] = reports[key_value] || [];
+        reports[key_value].push(item);
       });
+      var result = {
+        reports: reports
+      }
+      if (key === "probe_cc") {
+        result["countries"] = {};
+        Object.keys(reports).forEach(function(country_code){
+          result["countries"][country_code] = country.info(country_code);
+        });
+      }
       callback(err, result);
     }
     Report.app.models.report.find(filter, done);

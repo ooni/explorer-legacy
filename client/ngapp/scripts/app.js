@@ -11,7 +11,8 @@ angular
   .module('ooniAPIApp', [
     'ngRoute',
     'ngResource',
-    'lbServices'
+    'lbServices',
+    'datamaps'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)

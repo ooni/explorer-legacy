@@ -17,7 +17,8 @@
     "loopback-datasource-juggler": "^2.19.0",
     "serve-favicon": "^2.0.1",
     "loopback-connector-postgresql": "~2.1.0",
-    "proquint": "0.0.1"
+    "proquint": "0.0.1",
+    "countryjs": "~1.4.2"
   },
   "optionalDependencies": {
     "loopback-explorer": "^1.1.0"

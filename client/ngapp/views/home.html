@@ -2,10 +2,14 @@
 <div class="container">
   <div class="col-3">
     <h1>Open Observatory of Network Interference gathered data per country</h1>
+    <div class="worldMap"></div>
   </div>
 </div>
+<div ng-show="!loaded" class="loading">
+  Loading list of reports...
+</div>
 <div class="report-listing">
-  <div class="probe-country" ng-repeat="(country_code, reports) in reports_by_country">
+  <div class="probe-country" ng-repeat="(country_code, reports) in reports_by_country.reports">
     <div class="row pad-below">
       <div class="col-1">
         <div class="probe-country-info" ng-click="shown=!shown">
@@ -13,7 +17,7 @@
             <span class="flag-icon" ng-class="'flag-icon-' + country_code | lowercase "></span>
             {{ country_code }}
           </span>
-          <h2 ng-hide="!get_country(country_code)">{{ get_country(country_code) }}</h2>
+          <h2 ng-hide="!get_country(country_code)">{{ get_country(country_code).name }}</h2>
           <h2 ng-show="!get_country(country_code)">Unknown country</h2>
           <p class="report-count">{{reports.length}} reports</p>
           <p class="byline">click to toggle report files</p>
