@@ -604,3 +604,9 @@ pre span.lw {
   padding-top: 0.2rem;
   margin: 0 0 1rem;
 }
+
+.probe-country-info .label {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #0588cb;
+}
