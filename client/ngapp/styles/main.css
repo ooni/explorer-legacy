@@ -617,3 +617,44 @@ pre span.lw {
 .report-files-list ul {
   list-style: none;
 }
+
+/* .ooni-loader { */
+/*   width: 178px; */
+/*   height: 220px; */
+/*   margin: 0 auto; */
+/* } */
+
+.ooni-loading-text {
+}
+
+.saying::after {
+  content: "|";
+  font-family: Arial, sans-serif;
+  font-size: 1.2em;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: baseline;
+  opacity: 1;
+  animation: caret 500ms infinite;
+}
+
+.ooni-loading-text pre {
+  font-size: 18px;
+  line-height: 1;
+  overflow: auto;
+}
+
+.ooni-loading-text h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0588cb;
+}
+
+.report-list-header {
+  margin-top: 4rem; 
+  text-align: center;
+}
+
+.report-list-header h1 {
+  font-size: 3rem;
+}

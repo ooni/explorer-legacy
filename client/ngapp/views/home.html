@@ -1,12 +1,24 @@
 <main>
 <div class="container">
-  <div class="col-3">
-    <h1>Open Observatory of Network Interference gathered data per country</h1>
-    <div class="worldMap"></div>
+  <div class="row report-list-header">
+    <div class="col-3">
+      <h1>Collected data</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="worldMap"></div>
+    </div>
   </div>
 </div>
-<div ng-show="!loaded" class="loading">
-  Loading list of reports...
+<div ng-show="!loaded" class="loading row">
+  <div class="ooni-loader col-1">
+    <img src="../images/ooni-loader.svg">
+  </div>
+  <div class="col-2 ooni-loading-text">
+    <h2>Loading...</h2>
+    <pre id="loading-text" class="saying"></pre>
+  </div>
 </div>
 <div class="report-listing">
   <div class="probe-country" ng-repeat="(country_code, reports) in reports_by_country.reports">
