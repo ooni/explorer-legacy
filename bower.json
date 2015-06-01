@@ -21,8 +21,7 @@
     "angular-resource": "~1.2.16",
     "angular-datamaps": "~0.1.0",
     "colorbrewer": "~1.0.0",
-    "typed.js": "*",
-    "theaterjs": "~1.4.2"
+    "angular-typewrite": "~0.0.4"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.16",

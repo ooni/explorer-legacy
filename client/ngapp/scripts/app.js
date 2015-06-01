@@ -12,7 +12,8 @@ angular
     'ngRoute',
     'ngResource',
     'lbServices',
-    'datamaps'
+    'datamaps',
+    'angularTypewrite'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)

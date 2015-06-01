@@ -18,18 +18,13 @@ angular.module('ooniAPIApp')
       return $scope.reports_by_country.countries[country_code];
     }
     
-    var loading_phrases = [
+    $scope.loading_phrases = [
       "Hacking some planet",
       "Extracting square root of i",
       "Modifying the space time continium",
       "Adjusting ultra speed variable to be nominal",
       "Performing a safety meeting"
     ]
-    var theater = new TheaterJS();
-    theater.describe("loader", 1, "#loading-text");
-    angular.forEach(loading_phrases, function(phrase){
-      theater.write("loader: "+phrase, 600);
-    });
 
     $scope.reports_by_country = Report.listReportFiles({by: "probe_cc"}, function(reports_by_country) {
         var worldMap = {

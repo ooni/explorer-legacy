@@ -627,17 +627,6 @@ pre span.lw {
 .ooni-loading-text {
 }
 
-.saying::after {
-  content: "|";
-  font-family: Arial, sans-serif;
-  font-size: 1.2em;
-  line-height: 1;
-  display: inline-block;
-  vertical-align: baseline;
-  opacity: 1;
-  animation: caret 500ms infinite;
-}
-
 .ooni-loading-text pre {
   font-size: 18px;
   line-height: 1;
