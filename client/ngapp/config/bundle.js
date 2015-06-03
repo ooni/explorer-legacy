@@ -4,9 +4,9 @@ window.CONFIG = {
       "controller": "HomeCtrl",
       "templateUrl": "/views/home.html"
     },
-    "/report-list": {
-      "controller": "ReportListCtrl",
-      "templateUrl": "/views/report-list.html"
+    "/report/:id": {
+      "controller": "ReportViewCtrl",
+      "templateUrl": "/views/view-report.html"
     }
   }
 };

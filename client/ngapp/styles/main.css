@@ -618,11 +618,11 @@ pre span.lw {
   list-style: none;
 }
 
-/* .ooni-loader { */
-/*   width: 178px; */
-/*   height: 220px; */
-/*   margin: 0 auto; */
-/* } */
+.report-files-list ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 .ooni-loading-text {
 }

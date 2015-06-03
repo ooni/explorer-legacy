@@ -323,7 +323,6 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            '../../bower_components/flag-icon-css/flags/*/*.svg',
             'fonts/*'
           ]
         }, {
@@ -331,6 +330,11 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/../../bower_components/flag-icon-css',
+          src: ['flags/*/*.svg'],
+          dest: "<%= yeoman.dist %>/"
         }]
       },
       styles: {

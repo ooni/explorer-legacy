@@ -1,4 +1,3 @@
-var country = require('countryjs');
 module.exports = function(Report) {
 
   /**
@@ -10,29 +9,28 @@ module.exports = function(Report) {
   * @param {Object} result Result object
   */
   Report.findReports = function(country_code, fields, limit, callback) {
-    var filter = {limit: limit};
+    var filter = {
+      limit: limit,
+      fields: {}
+    };
     if (country_code && country_code.length) {
-      filter.where = {country_code: {inq: country_code}};
+      filter.where = {probe_cc: {inq: country_code}};
     }
     if (fields && fields.length) {
-      filter.fields = {}
-      for (i in fields) {
-        var field = fields[i];
+      fields.forEach(function(field){
         filter.fields[field] = true;
-      }
-    }
+      });
+    };
     Report.app.models.report.find(filter, callback)
   }
-
-  Report.listReportFiles = function(key, callback) {
+  
+  Report.listReports = function(key, callback) {
     var allowed_keys = ["test_name", "probe_cc", "probe_asn", "start_time"];
     if (allowed_keys.indexOf(key) === -1) {
       callback(new Error("Key must be in " + allowed_keys));
     }
     var filter = {
-      fields: {
-        report_filename: true,
-      }
+      fields: {}
     }
     allowed_keys.forEach(function(k){
       filter.fields[k] = true;
@@ -41,20 +39,10 @@ module.exports = function(Report) {
       var reports = {};
       data.forEach(function(item) {
         var key_value = item[key];
-        delete item[key];
-        reports[key_value] = reports[key_value] || [];
-        reports[key_value].push(item);
+        reports[key_value] = reports[key_value] || {count: 0};
+        reports[key_value]["count"] += 1;
       });
-      var result = {
-        reports: reports
-      }
-      if (key === "probe_cc") {
-        result["countries"] = {};
-        Object.keys(reports).forEach(function(country_code){
-          result["countries"][country_code] = country.info(country_code);
-        });
-      }
-      callback(err, result);
+      callback(err, reports);
     }
     Report.app.models.report.find(filter, done);
   }
@@ -77,22 +65,23 @@ module.exports = function(Report) {
         type: 'number',
         description: 'maximum number of results to return',
         required: false,
-        http: { source: 'query' } },
-      { arg: 'unique',
-        type:  'boolean',
-        description: 'if to return only unique values',
-        required: false,
         http: { source: 'query' } }],
     returns: 
     [ { description: 'unexpected error',
         type: 'Object',
         arg: 'data',
-        root: true } ],
+        root: true } ,
+      {
+        description: 'list of reports',
+        type: 'array',
+        arg: 'reports'
+      }
+    ],
     http: { verb: 'get', path: '/headers' },
     description: 'Returns all the report headers that have been collected' }
   );
 
-  Report.remoteMethod('listReportFiles',
+  Report.remoteMethod('listReports',
     { isStatic: true,
     produces: [ 'application/json', 'application/xml', 'text/xml', 'text/html' ],
     accepts: 
@@ -106,7 +95,7 @@ module.exports = function(Report) {
         type: 'Object',
         arg: 'data',
         root: true } ],
-    http: { verb: 'get', path: '/files' },
+    http: { verb: 'get', path: '/list' },
     description: 'Returns all the report files submitted' }
   );
 

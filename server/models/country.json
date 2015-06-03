@@ -1,0 +1,23 @@
+{
+  "name": "country",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "String"
+    }, 
+    "iso_alpha3": {
+      "type": "String"
+    },
+    "iso_alpha2": {
+      "type": "String"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

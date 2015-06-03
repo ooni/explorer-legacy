@@ -36,5 +36,9 @@
   "report": {
     "dataSource": "postgres",
     "public": true
+  },
+  "country": {
+    "dataSource": "db",
+    "public": true
   }
 }
