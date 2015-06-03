@@ -26,10 +26,10 @@ angular.module('ooniAPIApp')
       "Performing a safety meeting"
     ]
 
-    $scope.reports_by_country = Report.listReportFiles({by: "probe_cc"}, function(reports_by_country) {
+    Report.listReportFiles({by: "probe_cc"}, function(reports_by_country) {
+        $scope.reports_by_country = reports_by_country;
         var worldMap = {
           scope: 'world',
-          element: d3.select(".worldMap").node(),
           responsive: true,
           geographyConfig: {
             borderColor: '#636363',
@@ -61,7 +61,8 @@ angular.module('ooniAPIApp')
             worldMap.data[country.ISO.alpha3]["fillKey"] = "HIGH";
           }
         });
-        $scope.worldMap = new Datamap(worldMap);
+        //$scope.worldMap = new Datamap(worldMap);
+        $scope.worldMap = worldMap;
         $scope.loaded = true;
     });
 });

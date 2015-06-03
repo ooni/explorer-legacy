@@ -21,7 +21,8 @@
     "angular-resource": "~1.2.16",
     "angular-datamaps": "~0.1.0",
     "colorbrewer": "~1.0.0",
-    "angular-typewrite": "~0.0.4"
+    "angular-typewrite": "~0.0.4",
+    "flag-icon-css": ""
   },
   "devDependencies": {
     "angular-mocks": "~1.2.16",
