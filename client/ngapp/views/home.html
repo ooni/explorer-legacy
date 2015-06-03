@@ -45,7 +45,7 @@
             <a href="https://ooni.torproject.org/reports/{{report.start_time * 1000 | date:'yyyy-MM-dd'}}/{{report.report_filename}}">download</a>
             </li>
           </ul>
-          <a ng-click="shown=!shown">hide</a>
+          <a ng-click="toggle_reports(country_code)">hide</a>
         </div>
       </div>
     </div>
