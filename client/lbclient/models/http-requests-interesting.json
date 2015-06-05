@@ -1,0 +1,7 @@
+{
+  "name": "RemoteHttpRequestsInteresting",
+  "base": "httpRequestsInteresting",
+  "plural": "httpRequestsInterestings",
+  "trackChanges": false,
+  "enableRemoteReplication": true
+}

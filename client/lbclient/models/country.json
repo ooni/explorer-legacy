@@ -1,0 +1,7 @@
+{
+  "name": "RemoteCountry",
+  "base": "country",
+  "plural": "countries",
+  "trackChanges": false,
+  "enableRemoteReplication": true
+}

@@ -2,7 +2,13 @@
   "_meta": {
     "sources": ["../../common/models", "./models"]
   },
-  "Report": {
+  "RemoteReport": {
     "dataSource": "remote"
-  }
+  },
+  "RemoteHttpRequestsInteresting": {
+    "dataSource": "remote"
+  },
+  "RemoteCountry": {
+    "dataSource": "remote"
+  } 
 }

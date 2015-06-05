@@ -1,7 +1,0 @@
-{
-  "name": "RemoteReports",
-  "base": "Report",
-  "plural": "Reports",
-  "trackChanges": false,
-  "enableRemoteReplication": true
-}
