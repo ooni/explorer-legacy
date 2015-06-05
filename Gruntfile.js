@@ -393,7 +393,13 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-lbclient', 'Build lbclient browser bundle', function() {
     var done = this.async();
-    buildClientBundle(process.env.NODE_ENV || 'development', done);
+    grunt.util.spawn({
+      cmd: ["lb-ng"],
+      args: ["server/server.js", "client/ngapp/scripts/services/lbclient.js"],
+      opts: {stdio: "inherit"}
+    }, function cb(){
+      done();
+    });
   });
 
   grunt.registerTask('build-config', 'Build confg.js from JSON files', function() {

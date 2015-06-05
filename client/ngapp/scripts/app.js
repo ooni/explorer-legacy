@@ -10,8 +10,8 @@
 angular
   .module('ooniAPIApp', [
     'ngRoute',
-    'ngResource',
     'lbServices',
+    'ngResource',
     'datamaps',
     'angularTypewrite'
   ])

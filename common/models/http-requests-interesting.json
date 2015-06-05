@@ -1,0 +1,38 @@
+{
+  "name": "httpRequestsInteresting",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "postgresql": {
+      "table": "http_requests_interesting"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "String",
+      "postgresql": {
+        "columnName": "report_id"
+      }
+    },
+    "report_filename": {
+      "type": "String"
+    },
+    "input": {
+      "type": "String"
+    },
+    "probe_cc": {
+      "type": "String"
+    },
+    "probe_asn": {
+      "type": "String"
+    },
+    "start_time": {
+      "type": "Float"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

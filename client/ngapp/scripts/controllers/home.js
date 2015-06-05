@@ -56,11 +56,9 @@ angular.module('ooniAPIApp')
     
     $scope.toggle_reports = function(country_code, show) {
       if ($scope.reports_by_country[country_code].shown === true && !show) {
-        $scope.reports_by_country[country_code].shown = false;
-        delete $scope.reports_by_country[country_code].report_files;
+        delete $scope.reports_by_country[country_code];
       } else {
-        $scope.reports_by_country[country_code].shown = true;
-        $scope.reports_by_country[country_code].report_files = Report.findReports({
+        $scope.reports_by_country[country_code] = Report.findReports({
           country_code: country_code,
           limit: 0,
           fields: ["report_filename", "start_time", "test_name", "probe_asn", "report_id"]

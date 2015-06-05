@@ -37,6 +37,10 @@
     "dataSource": "postgres",
     "public": true
   },
+  "httpRequestsInteresting": {
+    "dataSource": "postgres",
+    "public": true
+  },
   "country": {
     "dataSource": "db",
     "public": true

@@ -34,13 +34,14 @@
           <h2 ng-hide="!get_country(country_code)">{{ get_country(country_code).name }}</h2>
           <h2 ng-show="!get_country(country_code)">Unknown country</h2>
           <p class="report-count">{{reports.count}} reports</p>
+          <p ng-show="reports.interesting" class="report-anomalies">{{reports.interesting}} anomalies</p>
           <p class="byline">click to toggle report files</p>
         </div>
       </div>
       <div class="col-2">
-        <div class="report-files-list" ng-show="reports.shown">
+        <div class="report-files-list" ng-show="reports.$resolved">
           <ul>
-            <li ng-repeat="report in reports.report_files">
+            <li ng-repeat="report in reports.reports">
             <a href="/#/report/{{report.report_id}}">{{report.start_time * 1000 | date:medium}} - {{report.test_name}} - {{ report.probe_asn}}</a>
             <a href="https://ooni.torproject.org/reports/{{report.start_time * 1000 | date:'yyyy-MM-dd'}}/{{report.report_filename}}">download</a>
             </li>
