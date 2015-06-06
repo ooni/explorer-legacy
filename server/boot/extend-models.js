@@ -11,4 +11,16 @@ module.exports = function(app) {
       next();
     });
   });
+  remotes.after('report.findReports', function(ctx, next) {
+    app.models.httpRequestsInteresting.findInteresting(ctx.args.country_code, ["report_id"],
+                                                       function(err, data) {
+      ctx.result.reports.forEach(function(report, idx) {
+        if (data[report.report_id]) {
+           ctx.result.reports[idx]["interesting"] = data[report.report_id].length;
+        }
+      });
+      next();
+    });
+  });
+
 }

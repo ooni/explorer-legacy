@@ -18,6 +18,9 @@
     "report_filename": {
       "type": "String"
     },
+    "report_id": {
+      "type": "String"
+    },
     "input": {
       "type": "String"
     },

@@ -31,7 +31,14 @@
     </span>
   </div>
 </div>
-<div class="row" ng-show="loaded">
-  <h2>Report not yet analysed</h2>
+<div class="row" ng-show="loaded_anomalies">
+  <div class="col-1">
+    <h2>Found anomalies for the following inputs</h2>
+  </div>
+  <div class="col-1">
+    <ul>
+      <li ng-repeat="anomaly in anomalies">{{anomaly.input}}</li>
+    </ul>
+  </div>
 </div>
 </main>

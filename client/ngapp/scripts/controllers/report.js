@@ -9,7 +9,7 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('ReportViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $routeParams) {
+  .controller('ReportViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, HttpRequestsInteresting, $routeParams) {
     $scope.loading_phrases = [
       "Hacking some planet",
       "Extracting square root of i",
@@ -25,5 +25,21 @@ angular.module('ooniAPIApp')
     }, function() {
       $scope.loaded = true;
       $scope.not_found = true;
+    });
+    $scope.loaded_anomalies = false;
+
+    $scope.anomalies = HttpRequestsInteresting.find({
+      filter: {
+        where: {
+          report_id: $scope.report_id,
+        },
+        fields: {
+          "report_id": true,
+          "input": true,
+          "start_time": true
+        }
+      }
+    }, function(){
+      $scope.loaded_anomalies = true;
     });
 });

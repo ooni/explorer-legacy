@@ -56,12 +56,16 @@ angular.module('ooniAPIApp')
     
     $scope.toggle_reports = function(country_code, show) {
       if ($scope.reports_by_country[country_code].shown === true && !show) {
-        delete $scope.reports_by_country[country_code];
+        $scope.reports_by_country[country_code].shown = false;
+        delete $scope.reports_by_country[country_code].report_files;
       } else {
-        $scope.reports_by_country[country_code] = Report.findReports({
+        Report.findReports({
           country_code: country_code,
           limit: 0,
           fields: ["report_filename", "start_time", "test_name", "probe_asn", "report_id"]
+        }, function(result){
+          $scope.reports_by_country[country_code].shown = true;
+          $scope.reports_by_country[country_code].reports = result.reports;
         });
       }
     }

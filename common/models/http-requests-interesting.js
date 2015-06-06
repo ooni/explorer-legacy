@@ -7,9 +7,8 @@ module.exports = function(HttpRequestsInteresting) {
   * @param {Error|string} err Error object
   * @param {Object} result Result object
   */
-  HttpRequestsInteresting.findInteresting = function(country_code, fields, limit, callback) {
+  HttpRequestsInteresting.findInteresting = function(country_code, fields, callback) {
     var filter = {
-      limit: limit,
       fields: {}
     };
     if (country_code && country_code.length) {
@@ -20,7 +19,15 @@ module.exports = function(HttpRequestsInteresting) {
         filter.fields[field] = true;
       });
     };
-    HttpRequestsInteresting.find(filter, callback)
+    function done(err, data) {
+      var interesting = {};
+      data.forEach(function(report){
+        interesting[report.report_id] = interesting[report.report_id] || [];
+        interesting[report.report_id].push(report);
+      });
+      callback(err, interesting);
+    }
+    HttpRequestsInteresting.find(filter, done)
   }
   
   HttpRequestsInteresting.listInteresting = function(key, callback) {
