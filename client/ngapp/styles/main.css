@@ -614,16 +614,6 @@ pre span.lw {
   color: #0588cb;
 }
 
-.report-files-list ul {
-  list-style: none;
-}
-
-.report-files-list ul li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .ooni-loading-text {
 }
 
@@ -647,4 +637,9 @@ pre span.lw {
 .report-list-header h1 {
   font-size: 3rem;
   margin-bottom: 0rem;
+}
+
+.report-file-grid {
+  width: 500px;
+  height: 400px;
 }

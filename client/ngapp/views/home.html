@@ -24,7 +24,7 @@
 </div>
 <div class="report-listing">
   <div class="probe-country" ng-repeat="(country_code, reports) in reports_by_country">
-    <div class="row pad-below">
+    <div class="row pad-below" ng-controller="ReportListCtrl">
       <div class="col-1">
         <div id="reports-{{country_code}}" class="probe-country-info" ng-click="toggle_reports(country_code)">
           <span class="label label-primary">
@@ -39,14 +39,8 @@
         </div>
       </div>
       <div class="col-2">
-        <div class="report-files-list" ng-show="reports.shown">
-          <ul>
-            <li ng-repeat="report in reports.reports">
-            <strong ng-show="report.interesting">{{report.interesting}} anomalies</strong>
-            <a href="/#/report/{{report.report_id}}">{{report.start_time * 1000 | date:medium}} - {{report.test_name}} - {{ report.probe_asn}}</a>
-            <a target="_self" href="/reportFiles/{{report.start_time * 1000 | date:'yyyy-MM-dd'}}/{{report.report_filename}}.gz">download</a>
-            </li>
-          </ul>
+        <div class="report-files-list" ng-if="shown">
+          <div id="grid1" ui-grid="gridOptions" class="report-file-grid"></div>
           <a ng-click="toggle_reports(country_code)">hide</a>
         </div>
       </div>

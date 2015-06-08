@@ -13,7 +13,8 @@ angular
     'lbServices',
     'ngResource',
     'datamaps',
-    'angularTypewrite'
+    'angularTypewrite',
+    'ui.grid'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)

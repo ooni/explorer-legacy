@@ -22,7 +22,8 @@
     "angular-datamaps": "~0.1.0",
     "colorbrewer": "~1.0.0",
     "angular-typewrite": "~0.0.4",
-    "flag-icon-css": ""
+    "flag-icon-css": "",
+    "angular-ui-grid": "~3.0.0-rc.21"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.16",
