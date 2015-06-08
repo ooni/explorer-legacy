@@ -1,5 +1,20 @@
 module.exports = function(app) {
-  var remotes = app.remotes();
+  var remotes = app.remotes(),
+    StorageService = require('loopback-component-storage').StorageService,
+    providers = null;
+
+  try {
+    providers = require('../providers-private.json');
+  } catch(err) {
+    providers = require('../providers.json');
+  }
+  
+  var storageHandler = StorageService({
+    provider: 'amazon',
+    key: providers.amazon.key,
+    keyId: providers.amazon.keyId,
+  });
+
   remotes.after('report.listReports', function(ctx, next) {
     app.models.httpRequestsInteresting.listInteresting(ctx.args.by, function(err, data) {
       if (err) {
@@ -11,6 +26,7 @@ module.exports = function(app) {
       next();
     });
   });
+
   remotes.after('report.findReports', function(ctx, next) {
     app.models.httpRequestsInteresting.findInteresting(ctx.args.country_code, ["report_id"],
                                                        function(err, data) {
@@ -22,5 +38,14 @@ module.exports = function(app) {
       next();
     });
   });
-
+  
+  app.get("/reportFiles/:year/:report_filename", function(req, res) {
+    var container = "ooni-public",
+      filename = "reports-sanitised/yaml/" + req.params.year + "/" + req.params.report_filename;
+    storageHandler.download(container, filename, res, function(err, result) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    });
+  });
 }

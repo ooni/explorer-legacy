@@ -44,7 +44,7 @@
             <li ng-repeat="report in reports.reports">
             <strong ng-show="report.interesting">{{report.interesting}} anomalies</strong>
             <a href="/#/report/{{report.report_id}}">{{report.start_time * 1000 | date:medium}} - {{report.test_name}} - {{ report.probe_asn}}</a>
-            <a href="https://ooni.torproject.org/reports/{{report.start_time * 1000 | date:'yyyy-MM-dd'}}/{{report.report_filename}}">download</a>
+            <a href="/reportFiles/{{report.start_time * 1000 | date:'yyyy-MM-dd'}}/{{report.report_filename}}.gz">download</a>
             </li>
           </ul>
           <a ng-click="toggle_reports(country_code)">hide</a>
