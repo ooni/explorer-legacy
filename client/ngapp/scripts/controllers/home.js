@@ -109,7 +109,7 @@ angular.module('ooniAPIApp')
   $scope.gridApi = null;
   $scope.columns = [];
   if ($scope.reports.interesting) {
-    $scope.columns.push({"name": "anomalies", "field": "anomalies"});
+    $scope.columns.push({"name": "anomalies", "field": "interesting"});
   }
   $scope.columns.push({"name": "date", "field": "date"});
   $scope.columns.push({"name": "testName", "field": "test_name"});
