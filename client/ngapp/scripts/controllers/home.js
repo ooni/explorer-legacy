@@ -20,8 +20,6 @@ angular.module('ooniAPIApp')
       $location.hash(to);
       $anchorScroll();
       $location.hash(from);
-
-      $scope.toggle_reports(country_code, true);
     }
 
     $scope.loaded = false;
@@ -146,7 +144,7 @@ angular.module('ooniAPIApp')
   $scope.toggle_reports = function(country_code, show) {
     if ($scope.shown === true && !show) {
       $scope.shown = false;
-      delete $scope.gridData;
+      $scope.gridData = [];
     } else {
       Report.findReports({
         country_code: country_code,
