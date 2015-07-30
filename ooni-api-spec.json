@@ -73,7 +73,7 @@
     },
     "/reports/{id}": {
       "get": {
-        "description": "Returns a user based on a single ID, if the user does not have access to the pet",
+        "description": "Returns a the report that matches the specified ID",
         "operationId": "findReportById",
         "produces": [
           "application/json",
