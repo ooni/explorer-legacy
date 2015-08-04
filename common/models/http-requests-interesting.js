@@ -7,7 +7,7 @@ module.exports = function(HttpRequestsInteresting) {
   * @param {Error|string} err Error object
   * @param {Object} result Result object
   */
-  HttpRequestsInteresting.findInteresting = function(country_code, input, fields, callback) {
+  HttpRequestsInteresting.findInteresting = function(country_code, input, fields, limit, callback) {
     var filter = {
       fields: {},
       where: {}
@@ -15,7 +15,7 @@ module.exports = function(HttpRequestsInteresting) {
     if (country_code && country_code.length) {
       filter.where["probe_cc"] = {inq: country_code};
     }
-    if (input && input.length) {
+    if (input && typeof(input) == "string") {
       filter.where["input"] = {like: input};
     }
     if (fields && fields.length) {
@@ -24,6 +24,9 @@ module.exports = function(HttpRequestsInteresting) {
       });
     };
     function done(err, data) {
+      if (err) {
+        console.log(err);
+      }
       var interesting = {};
       data.forEach(function(report){
         interesting[report.report_id] = interesting[report.report_id] || [];
@@ -67,7 +70,7 @@ module.exports = function(HttpRequestsInteresting) {
         required: false,
         http: { source: 'query' } },
       { arg: 'input',
-        type: [ 'string' ],
+        type: 'string',
         description: 'the input to look for',
         required: false,
         http: { source: 'query' } },
@@ -82,6 +85,7 @@ module.exports = function(HttpRequestsInteresting) {
         description: 'maximum number of results to return',
         required: false,
         http: { source: 'query' } }],
+
     returns: 
     [ { description: 'unexpected error',
         type: 'Object',

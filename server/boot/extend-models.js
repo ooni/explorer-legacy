@@ -28,7 +28,8 @@ module.exports = function(app) {
   });
 
   remotes.after('report.findReports', function(ctx, next) {
-    app.models.httpRequestsInteresting.findInteresting(ctx.args.country_code, ["report_id"],
+    app.models.httpRequestsInteresting.findInteresting(ctx.args.country_code, undefined,
+                                                       ["report_id"], undefined,
                                                        function(err, data) {
       ctx.result.reports.forEach(function(report, idx) {
         if (data[report.report_id]) {

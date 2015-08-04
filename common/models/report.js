@@ -30,20 +30,26 @@ module.exports = function(Report) {
   * @param {Error|string} err Error object
   * @param {Object} result Result object
   */
-  Report.findReports = function(country_code, fields, limit, callback) {
+  Report.findReports = function(country_code, input, fields, limit, callback) {
     var filter = {
       limit: limit,
-      fields: {}
+      fields: {},
+      where: {}
     };
     if (country_code && country_code.length) {
-      filter.where = {probe_cc: {inq: country_code}};
+      filter.where["probe_cc"] = {inq: country_code};
     }
     if (fields && fields.length) {
       fields.forEach(function(field){
         filter.fields[field] = true;
       });
     };
-    Report.find(filter, callback);
+    Report.find(filter, function(err, result) {
+      if (err) {
+        callback(err, null);
+      }
+      callback(null, result);
+    });
   }
 
   Report.remoteMethod('findReports',
@@ -55,6 +61,13 @@ module.exports = function(Report) {
         description: 'country codes to filter by',
         required: false,
         http: { source: 'query' } },
+
+      { arg: 'input',
+        type: 'string',
+        description: 'input to filter by',
+        required: false,
+        http: { source: 'query' } },
+
         { arg: 'fields',
         type: [ 'string' ],
         description: 'list of fields to include in response',
