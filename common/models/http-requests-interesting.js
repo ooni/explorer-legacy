@@ -7,12 +7,16 @@ module.exports = function(HttpRequestsInteresting) {
   * @param {Error|string} err Error object
   * @param {Object} result Result object
   */
-  HttpRequestsInteresting.findInteresting = function(country_code, fields, callback) {
+  HttpRequestsInteresting.findInteresting = function(country_code, input, fields, callback) {
     var filter = {
-      fields: {}
+      fields: {},
+      where: {}
     };
     if (country_code && country_code.length) {
-      filter.where = {probe_cc: {inq: country_code}};
+      filter.where["probe_cc"] = {inq: country_code};
+    }
+    if (input && input.length) {
+      filter.where["input"] = {inq: input};
     }
     if (fields && fields.length) {
       fields.forEach(function(field){
