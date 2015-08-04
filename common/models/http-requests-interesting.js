@@ -66,6 +66,12 @@ module.exports = function(HttpRequestsInteresting) {
         description: 'country codes to filter by',
         required: false,
         http: { source: 'query' } },
+      { arg: 'input',
+        type: [ 'string' ],
+        description: 'the input to look for',
+        required: false,
+        http: { source: 'query' } },
+       
         { arg: 'fields',
         type: [ 'string' ],
         description: 'list of fields to include in response',
