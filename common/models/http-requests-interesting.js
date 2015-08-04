@@ -16,7 +16,7 @@ module.exports = function(HttpRequestsInteresting) {
       filter.where["probe_cc"] = {inq: country_code};
     }
     if (input && input.length) {
-      filter.where["input"] = {inq: input};
+      filter.where["input"] = {like: input};
     }
     if (fields && fields.length) {
       fields.forEach(function(field){
