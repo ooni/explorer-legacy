@@ -14,10 +14,20 @@ brew install node
 
 ### Install dependencies
 
+Install the node dependencies:
+
 ```
 npm install --development
 npm install -g jshint
+npm install -g bower
 npm install -g grunt-cli
+npm install -g strongloop
+```
+
+Then install the bower dependencies:
+
+```
+bower update
 ```
 
 ### Run with local postgres
