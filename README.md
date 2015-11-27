@@ -24,7 +24,13 @@ npm install -g grunt-cli
 
 #### Setup a test postgres database
 
-On Mac OS X you can use: (http://postgresapp.com/)[http://postgresapp.com/]
+On Mac OS X you can use [PostgresApp.com/](http://postgresapp.com/)
+
+Then add to your `PATH` the following directory:
+
+```
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+```
 
 Run the postgres shell and run the following commands:
 
@@ -53,3 +59,7 @@ To start the server run:
 ```
 grunt server
 ```
+
+## Production deployment
+
+For details about deploying in production see [docs/deployment.md](docs/deployment.md)
