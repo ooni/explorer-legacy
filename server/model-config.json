@@ -34,11 +34,11 @@
     "public": false
   },
   "report": {
-    "dataSource": "postgres",
+    "dataSource": "db",
     "public": true
   },
   "httpRequestsInteresting": {
-    "dataSource": "postgres",
+    "dataSource": "db",
     "public": true
   },
   "country": {
