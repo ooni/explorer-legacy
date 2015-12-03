@@ -47,7 +47,7 @@ angular.module('ooniAPIApp')
     $scope.loading_phrases = [
       "Hacking some planet",
       "Extracting square root of i",
-      "Modifying the space time continium",
+      "Modifying the space time continuum",
       "Adjusting ultra speed variable to be nominal",
       "Performing a safety meeting"
     ]
