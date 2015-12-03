@@ -14,23 +14,23 @@
     ]
   },
   "User": {
-    "dataSource": "db",
+    "dataSource": "mem",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mem",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mem",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mem",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mem",
     "public": false
   },
   "report": {
@@ -42,7 +42,7 @@
     "public": true
   },
   "country": {
-    "dataSource": "db",
+    "dataSource": "mem",
     "public": true
   }
 }

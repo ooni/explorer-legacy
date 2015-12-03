@@ -9,5 +9,9 @@ module.exports = {
     "debug": false,
     "connector": "postgresql",
     "ssl": true
+  },
+  "mem": {
+    "name": "mem",
+    "connector": "memory"
   }
 }
