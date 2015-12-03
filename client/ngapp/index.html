@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>OONI API</title>
+    <title>OONI APIS</title>
 
     <!--
     The base allows us to use relative links to resources even when
@@ -13,6 +13,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
     <!-- build:css(client/) styles/vendor.css -->
     <link rel="stylesheet" href="../bower_components/flag-icon-css/css/flag-icon.css">
     <link rel="stylesheet" href="../bower_components/colorbrewer/colorbrewer.css">
@@ -27,12 +28,23 @@
     <!-- endbuild -->
   </head>
   <body ng-app="ooniAPIApp">
- 
+
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <div class="container">
+      <header class="row">
+        <div class="brand">
+          <h1>OONI</h1>
+        </div>
+      </header>
+    </div>
 
     <div class="container">
+      <div class="view-chooser" role="group" aria-label="...">
+        <a href="/">World</a>
+        <a href="/explore/">Explorer</a>
+      </div>
       <div ng-view></div>
     </div>
 
@@ -64,6 +76,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/report.js"></script>
+    <script src="scripts/controllers/explore.js"></script>
     <!-- endbuild -->
 </body>
 </html>

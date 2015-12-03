@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name ooniAPIApp.controller:HomeCtrl
+ * @name ooniAPIApp.controller:ReportDetailViewCtrl
  * @description
- * # HomeCtrl
+ * # ReportDetailViewCtrl
  * Controller of the ooniAPIApp
  */
 
 angular.module('ooniAPIApp')
-  .controller('ReportViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, HttpRequestsInteresting, $routeParams) {
+  .controller('ReportDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, HttpRequestsInteresting, $routeParams) {
     $scope.loading_phrases = [
       "Hacking some planet",
       "Extracting square root of i",
@@ -18,11 +18,12 @@ angular.module('ooniAPIApp')
       "Performing a safety meeting"
     ];
     $scope.report_id = $routeParams.id;
- 
     $scope.loaded = false;
-    $scope.report = Report.findById({id: $scope.report_id}, function(){
+    $scope.report = Report.findById({'id': $scope.report_id}, function(){
       $scope.loaded = true;
-    }, function() {
+      console.log('success');
+    }, function(error) {
+      console.log('error', error)
       $scope.loaded = true;
       $scope.not_found = true;
     });
