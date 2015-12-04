@@ -49,8 +49,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.scss'],
+        tasks: ['sass', 'newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -219,6 +219,17 @@ module.exports = function (grunt) {
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images', '<%= yeoman.dist %>/flags']
+      }
+    },
+
+    sass: {
+      options: {
+        sourceMap: true,
+      },
+      dist: {
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.scss'
+        }
       }
     },
 
@@ -466,6 +477,7 @@ module.exports = function (grunt) {
       'build-lbclient',
       'build-config',
       'wiredep',
+      'sass',
       'concurrent:server',
       'autoprefixer',
       'run:development',
@@ -482,6 +494,7 @@ module.exports = function (grunt) {
     'clean:server',
     'build-lbclient',
     'build-config',
+    'sass',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -508,6 +521,7 @@ module.exports = function (grunt) {
     'build-config',
     'wiredep',
     'useminPrepare',
+    'sass',
     'concurrent:dist',
     'autoprefixer',
     'concat',

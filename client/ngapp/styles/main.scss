@@ -1,0 +1,96 @@
+$ooni-blue: #0588CB;
+
+@import "fonts",
+        "base";
+
+
+.header-wrapper {
+  background-color: $ooni-blue;
+
+  .row {
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  header h1 {
+    color: white;
+    margin-bottom: 0;
+    padding: 1rem 0;
+  }
+}
+
+.view-chooser {
+
+  text-align: center;
+
+  a {
+    border: 1px solid grey;
+    padding: .25rem .5rem;
+  }
+
+  a:first-child {
+    border-right: 0;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+
+  a:last-child {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+}
+
+.probe-country {
+}
+
+.probe-country-info {
+}
+
+.probe-country-info h2 {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #0588cb;
+  border-top: 0.2rem solid #0588cb;
+  padding-top: 0.2rem;
+  margin: 0 0 1rem;
+}
+
+.probe-country-info:hover h2 {
+  border-top: 0.2rem solid #ccc;
+}
+
+.probe-country-info .label {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #0588cb;
+}
+
+.ooni-loading-text {
+}
+
+.ooni-loading-text pre {
+  font-size: 18px;
+  line-height: 1;
+  overflow: auto;
+}
+
+.ooni-loading-text h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0588cb;
+}
+
+.report-list-header {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.report-list-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0rem;
+}
+
+.report-file-grid {
+  width: 500px;
+  height: 400px;
+}

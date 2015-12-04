@@ -17,5 +17,4 @@ window.CONFIG = {
       "templateUrl": "/views/country-view.html"
     }
   }
-
 };

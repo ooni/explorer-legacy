@@ -32,18 +32,19 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="container">
-      <header class="row">
+    <div class="header-wrapper">
+    <header class="container">
+      <div class="row">
         <div class="brand">
           <h1>OONI</h1>
         </div>
-      </header>
+      </div>
+    </header>
     </div>
 
     <div class="container">
       <div class="view-chooser" role="group" aria-label="...">
-        <a href="/">World</a>
-        <a href="/explore/">Explorer</a>
+        <a href="/">World</a><a href="/explore/">Explorer</a>
       </div>
       <div ng-view></div>
     </div>
