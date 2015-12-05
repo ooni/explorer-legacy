@@ -4,7 +4,7 @@ This is the code for the OONI report API accessible via:
 
 http://api.ooni.io/
 
-## How to run locally
+## Setup
 
 ### On Mac OS X
 
@@ -30,9 +30,21 @@ Then install the bower dependencies:
 bower update
 ```
 
-### Run with local postgres
+## Development environment
 
-#### Setup a test postgres database
+To run this within a development environment for network and postgres free
+development do:
+
+```
+NODE_ENV="development" slc run
+```
+
+Edit the script inside of `server/boot/create-fixtures.js` to create custom
+fixtures for development.
+
+## Local staging
+
+### Setup a test postgres database
 
 On Mac OS X you can use [PostgresApp.com/](http://postgresapp.com/)
 
@@ -55,21 +67,22 @@ CREATE DATABASE ooni_api_db
 GRANT ALL PRIVILEGES ON DATABASE ooni_api_db to operator
 ```
 
-### Export the environment variable
+### Run
 
-You have to export the proper environment variables in order to make it function
-properly:
+If needed edit `server/datasources.staging.js` to suit your needs.
 
-`export REPORTS_DB_URL="postgres://operator:seCure@127.0.0.1:5432/ooni_data_api"`
-
-### Run grunt-cli
-
-To start the server run:
+Then build the app for production with:
 
 ```
-grunt server
+grunt build
+```
+
+Then you can run it in staging by running:
+
+```
+NODE_ENV="staging" node .
 ```
 
 ## Production deployment
 
-For details about deploying in production see [docs/deployment.md](docs/deployment.md)
+For more details about deploying in production see [docs/deployment.md](docs/deployment.md)
