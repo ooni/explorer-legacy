@@ -17,9 +17,9 @@ angular.module('ooniAPIApp')
       "Adjusting ultra speed variable to be nominal",
       "Performing a safety meeting"
     ];
-    $scope.report_id = $routeParams.id;
+    $scope.reportId = $routeParams.id;
     $scope.loaded = false;
-    $scope.report = Report.findById({'id': $scope.report_id}, function(){
+    $scope.report = Report.findOne({'id': $scope.reportId}, function(){
       $scope.loaded = true;
       console.log('success');
     }, function(error) {

@@ -1,0 +1,24 @@
+<table class="countries">
+  <thead>
+    <tr>
+      <th>
+        Country Code
+      </th>
+      <th>
+        Name
+      </th>
+      <th>
+        Number of reports
+      </th>
+      <th>
+        Number of interesting reports
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="countryObj in reportsByCountryArray"
+      ooni-countries-table-item="countryObj"
+      id="reports-{{countryReportsObj.countryCode}}"
+      ng-click="viewCountry(countryObj.countryCode)"></tr>
+  </tbody>
+</table>

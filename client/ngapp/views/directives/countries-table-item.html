@@ -1,0 +1,16 @@
+<td>
+  <span class="label label-primary">
+    <span class="flag-icon" ng-class="'flag-icon-' + country_code | lowercase "></span>
+    {{ countryObj.countryCode }}
+  </span>
+</td>
+<td>
+  <span ng-hide="!countryObj.country">{{ countryObj.country.name }}</span>
+  <span ng-show="!countryObj.country">Unknown country</span>
+</td>
+<td>
+  {{ countryObj.reports.count }}
+</td>
+<td>
+  {{ countryObj.reports.interesting }}
+</td>
