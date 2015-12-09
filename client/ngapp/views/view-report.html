@@ -1,11 +1,5 @@
-<main>
-<div class="container">
-  <div class="row report-list-header">
-    <div class="col-3">
-      <h2>{{report_id}}</h2>
-    </div>
-  </div>
-</div>
+<main class="report">
+
 <div ng-show="!loaded" class="loading row">
   <div class="ooni-loader col-1">
     <img src="../images/ooni-loader.svg">
@@ -15,13 +9,83 @@
     <pre typewrite text="loading_phrases" type-delay="100" class="saying"></pre>
   </div>
 </div>
+
 <div ng-show="not_found">
   <h2>404 - Report not found</h2>
   <p>This can either mean that the report you submitted has not yet been
   processed or that it was not submitted successfully.</p>
   <p>Try again later</p>
 </div>
-<div class="row" ng-repeat="(key, value) in report">
+
+<div class="container">
+  <div class="row report-list-header">
+    <div class="col-3">
+      <h1>Report: #{{reportId}} - {{report.start_time | date:'shortDate'}}</h1>
+      <h2>{{ report.test_name }}</h2>
+
+      <div class="experiment-vs-control">
+        <div class="experiment">
+          <!-- TODO: What's this? -->
+          <span class="results"></span>
+          experiment
+        </div>
+        <div class="control">
+          <!-- TODO: What's this? -->
+          <span class="results"></span>
+          control
+        </div>
+      </div>
+
+      <div class="overview">
+        <div>
+          <label for="input">input: </label><span id="input">google.com</span><!-- TODO: hard coded -->
+        </div>
+
+        <!-- <div>
+          <label for="start_time">started on: </label>
+          <span id="start_time">
+            {{ report.start_time | date:'shortDate' }}
+          </span>
+        </div> -->
+        <div class="description">
+          <h3>What does this test do?</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. </p><p>Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. </p><p>Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.
+        </div>
+      </div>
+
+      <label for="anomalies">Found anomalies with the following inputs:</label>
+      <ul class="anomalies" id="anomalies">
+        <li ng-repeat="anomaly in anomalies">
+          <i class="fa fa-check-square"></i> {{anomaly.input}}
+        </li>
+      </ul>
+
+      <div class="details">
+        <h3>
+          Report Details
+        </h3>
+
+        <div>
+          <label for="country">probe country: </label><span id="country"><i class="flag-icon" ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ report.probe_cc }}</span>
+        </div>
+        <div>
+          <label for="asn">probe ASN: </label><span id="asn">{{ report.probe_asn }}</span>
+        </div>
+        <div>
+          <label for="software_name">software name: </label><span id="software_name">{{ report.software_name }}</span>
+        </div>
+        <div>
+          <label for="software_version">software version: </label><span id="software_version">{{ report.software_version }}</span>
+        </div>
+        <div>
+          <label for="probe_ip">probe IP: </label><span id="probe_ip">{{ report.probe_ip }}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row" ng-repeat="(key, value) in report">
   <div class="col-1">
     <strong>{{key}}</strong>
   </div>
@@ -30,15 +94,5 @@
     {{value}}
     </span>
   </div>
-</div>
-<div class="row" ng-show="loaded_anomalies">
-  <div class="col-1">
-    <h2>Found anomalies for the following inputs</h2>
-  </div>
-  <div class="col-1">
-    <ul>
-      <li ng-repeat="anomaly in anomalies">{{anomaly.input}}</li>
-    </ul>
-  </div>
-</div>
+</div> -->
 </main>

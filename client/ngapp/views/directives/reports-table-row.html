@@ -1,8 +1,8 @@
-<td>
-  {{ report.probe_cc }}
+<td ng-show="showCountry" ng-click="viewCountry(report.probe_cc)" class="country-code clickable">
+  <i class="flag-icon" ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ report.probe_cc }} <i class="fa fa-arrow-right"></i>
 </td>
-<td ng-click="viewReport(report)">
-  {{ report.test_name }}
+<td ng-click="viewReport(report)" class="report-name clickable">
+  {{ report.test_name }} <i class="fa fa-arrow-right"></i>
 </td>
 <td>
   {{ report.input }}
@@ -11,6 +11,6 @@
   {{ report.interesting }}
 </td>
 <td>
-  {{ report.start_time }}
+  {{ report.start_time | date: 'shortDate' }}
 </td>
 

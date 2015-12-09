@@ -43,6 +43,35 @@
   src: url("fonts/source-code-pro-bold.woff");
   font-weight: bold; }
 
+table {
+  width: 100%;
+  border-collapse: collapse; }
+
+thead th {
+  font-weight: bold;
+  text-align: left; }
+
+tbody td {
+  padding: .25rem;
+  transition: 0.5s background-color; }
+
+tbody tr:nth-child(even) td {
+  background-color: #fafafa; }
+
+tbody tr:hover td {
+  background-color: #f2f2f2; }
+
+table.countries td {
+  cursor: pointer; }
+
+.clickable {
+  cursor: pointer; }
+  .clickable i::before {
+    color: #f2f2f2;
+    transition: color 0.5s; }
+  .clickable:hover i::before {
+    color: #0588CB; }
+
 /* ================================================================== */
 /* Resets */
 * {
@@ -290,24 +319,22 @@ footer .row {
 /* ================================================================== */
 /* Generic elements */
 h1 {
-  font-size: 1.5rem;
-  margin-bottom: 1.6em; }
+  font-size: 1.5rem; }
 
 h2 {
-  font-size: 1.15rem;
-  margin: 3em 0 1em; }
+  font-size: 1.15rem; }
 
 .homepage .col-1 h2 {
   font-size: 0.95rem;
   font-weight: bold;
-  color: #0588cb;
+  color: #0588CB;
   border-top: 0.2rem solid #0588cb;
   padding-top: 0.2rem;
   margin: 0 0 1rem; }
 
 a {
   text-decoration: none;
-  color: #0588cb; }
+  color: #0588CB; }
 
 p, ol, ul {
   margin-bottom: 1.2em; }
@@ -425,7 +452,7 @@ header .wordmark {
 /* ================================================================== */
 /* How it works */
 .homepage .how-it-works {
-  background-color: #0588cb;
+  background-color: #0588CB;
   color: #fff;
   padding: 2rem 0;
   margin-bottom: 3.5rem; }
@@ -519,7 +546,7 @@ footer h2 {
   object-fit: cover;
   width: 100%;
   height: 20rem;
-  background-color: #0588cb;
+  background-color: #0588CB;
   margin-top: 0.24rem; }
 
 pre span.chr {
@@ -572,7 +599,7 @@ pre span.lw {
 
 .toc .active {
   font-weight: bold;
-  color: #0588cb; }
+  color: #0588CB; }
 
 .toc a {
   color: inherit; }
@@ -588,8 +615,37 @@ pre span.lw {
   content: "▼";
   font-size: 0.7rem; }
 
-table {
-  width: 100%; }
+.anomalies {
+  list-style: none; }
+  .anomalies li {
+    margin-left: 0; }
+
+label[for="anomalies"] {
+  margin-top: 1rem;
+  display: block; }
+
+.experiment-vs-control {
+  margin-top: 1rem; }
+  .experiment-vs-control div {
+    width: 49%;
+    text-align: center;
+    display: inline-block; }
+    .experiment-vs-control div .results {
+      background-color: #f2f2f2;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      display: block; }
+
+.overview,
+.details {
+  margin-top: 1rem; }
+  .overview label,
+  .details label {
+    font-weight: bold; }
+  .overview .description,
+  .details .description {
+    margin-top: 1rem; }
 
 .header-wrapper {
   background-color: #0588CB; }
@@ -611,7 +667,10 @@ table {
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px; }
   .view-chooser a:last-child {
+    border-left: 0;
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px; }
+  .view-chooser a:nth-child(2) {
+    border-left: 1px solid grey; }
 
 /*# sourceMappingURL=main.css.map */

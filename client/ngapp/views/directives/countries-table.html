@@ -18,7 +18,7 @@
   <tbody>
     <tr ng-repeat="countryObj in reportsByCountryArray"
       ooni-countries-table-item="countryObj"
-      id="reports-{{countryReportsObj.countryCode}}"
+      id="reports-{{countryObj.countryCode}}"
       ng-click="viewCountry(countryObj.countryCode)"></tr>
   </tbody>
 </table>

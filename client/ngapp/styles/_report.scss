@@ -1,0 +1,43 @@
+.anomalies {
+  list-style: none;
+
+  li {
+    margin-left: 0;
+  }
+}
+
+label[for="anomalies"] {
+  margin-top: 1rem;
+  display: block;
+}
+
+.experiment-vs-control {
+  margin-top: 1rem;
+
+  div {
+    width: 49%;
+    text-align: center;
+    display: inline-block;
+
+    .results {
+      background-color: $off-white;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+}
+
+.overview,
+.details {
+  margin-top: 1rem;
+
+  label {
+    font-weight: bold;
+  }
+
+  .description {
+    margin-top: 1rem;
+  }
+}
