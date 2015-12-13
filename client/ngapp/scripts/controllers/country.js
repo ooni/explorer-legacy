@@ -9,18 +9,23 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('CountryDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, HttpRequestsInteresting, $routeParams) {
+  .controller('CountryDetailViewCtrl', function ($q, $scope, Report, $routeParams, ISO3166) {
 
     $scope.countryCode = $routeParams.id;
-    $scope.country = {};
+    $scope.country = ISO3166.getCountryName($scope.countryCode);
+    $scope.pageNumber = 0;
+    $scope.pageSize = 100;
 
-    $scope.countryReports = {};
-
-    Country.getCountryInfo({country_code: $scope.countryCode}, function(country) {
-      $scope.country = country;
-    });
-
-    Report.findReports({country_code: "IT"}, function(response) {
-      $scope.reports = response.reports;
+    var query = {
+        filter: {
+            where: {
+                'probe_cc': $scope.countryCode
+            },
+            offset: $scope.pageNumber * $scope.pageSize,
+            limit: $scope.pageSize
+        }
+    }
+    Report.find(query, function(data) {
+        $scope.reports = data;
     });
 })

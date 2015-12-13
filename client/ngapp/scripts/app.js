@@ -14,7 +14,8 @@ angular
     'ngResource',
     'datamaps',
     'angularTypewrite',
-    'ui.grid'
+    'ui.grid',
+    'iso-3166-country-codes'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)

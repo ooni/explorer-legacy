@@ -5,24 +5,21 @@
   "options": {
     "validateUpsert": true,
     "postgresql": {
-      "table": "headers"
+      "table": "reports"
     }
   },
   "properties": {
     "id": {
       "type": "String",
       "postgresql": {
-        "columnName": "report_id"
+          "columnName": "report_id"
       }
     },
-    "backend_version": {
-      "type": "String"
-    },
-    "input_hashes": {
+    "input": {
       "type": "String"
     },
     "options": {
-      "type": "String"
+      "type": "Object"
     },
     "probe_asn": {
       "type": "String"
@@ -34,41 +31,27 @@
     "probe_ip": {
       "type": "String"
     },
-    "record_type": {
-      "type": "String"
-    },
     "report_filename": {
       "type": "String"
     },
-    "report_id": {
-      "type": "String",
-      "required": true
-    },
-    "software_name": {
-      "type": "String"
-    },
-    "software_version": {
-      "type": "String"
-    },
-    "start_time": {
-      "type": "String"
+    "test_start_time": {
+      "type": "Date"
     },
     "test_name": {
       "type": "String",
       "required": true
     },
-    "test_version": {
-      "type": "String"
-    },
     "data_format_version": {
       "type": "String"
     },
     "test_helpers": {
-      "type": "String"
+      "type": "Object"
     }
   },
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": [
+       "countByCountry"
+  ]
 }
