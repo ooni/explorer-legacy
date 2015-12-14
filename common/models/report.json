@@ -46,6 +46,9 @@
     },
     "test_helpers": {
       "type": "Object"
+    },
+    "test_keys": {
+      "type": "Object"
     }
   },
   "validations": [],

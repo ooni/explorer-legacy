@@ -12,6 +12,7 @@ angular.module('ooniAPIApp')
   .controller('HomeCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country) {
 
     $scope.map_clicked = function(geo) {
+      // XXX add support for navigating to the country page
       var country_code = $scope.countries.alpha3[geo.id].alpha2,
         from = $location.hash(),
         to = "reports-" + country_code;
@@ -42,7 +43,6 @@ angular.module('ooniAPIApp')
             worldMap.data[country.alpha3] = {
                 reportCount: country.name
             };
-            console.log(report_counts);
             if (country.count < 100) {
                 worldMap.data[country.alpha3]["fillKey"] = "LOW";
             } else if (country.count < 1000) {
@@ -53,7 +53,6 @@ angular.module('ooniAPIApp')
         })
         $scope.worldMap = worldMap;
         $scope.loaded = true;
-
     });
 
     var worldMap = {
@@ -87,7 +86,7 @@ angular.module('ooniAPIApp')
     return {
       restrict: 'A',
       scope: {
-        reportsByCountryArray: '='
+        reportsByCountry: '='
       },
       link: function ($scope, $element, $attrs) {
         $scope.viewCountry = function(countryCode) {

@@ -15,6 +15,7 @@ module.exports = function(Report) {
                 result.push({
                     name: country.name,
                     alpha3: country.alpha3,
+                    alpha2: country.alpha2,
                     count: row['count']
                 });
             }

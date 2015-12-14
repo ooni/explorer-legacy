@@ -11,8 +11,26 @@
 angular.module('ooniAPIApp')
   .controller('ExploreViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, HttpRequestsInteresting, $routeParams) {
 
-    Report.findReports({}, function(response) {
-      $scope.reports = response.reports;
+    // XXX should use external pagination feature of ui grid
+    // http://ui-grid.info/docs/#/tutorial/314_external_pagination
+    $scope.pageNumber = 0;
+    $scope.pageSize = 100;
+
+    // XXX The ordering should be determined from the GUI
+    $scope.order = "test_start_time DESC";
+
+    var query = {
+        filter: {
+            where: {
+                'probe_cc': $scope.countryCode
+            },
+            order: $scope.order,
+            offset: $scope.pageNumber * $scope.pageSize,
+            limit: $scope.pageSize
+        }
+    }
+    Report.find(query, function(data) {
+        $scope.reports = data;
     });
 })
 

@@ -17,6 +17,7 @@ angular.module('ooniAPIApp')
       "Adjusting ultra speed variable to be nominal",
       "Performing a safety meeting"
     ];
+
     $scope.reportId = $routeParams.id;
     $scope.loaded = false;
     $scope.report = Report.findOne({'id': $scope.reportId}, function(){
@@ -27,20 +28,19 @@ angular.module('ooniAPIApp')
       $scope.loaded = true;
       $scope.not_found = true;
     });
-    $scope.loaded_anomalies = false;
 
-    $scope.anomalies = HttpRequestsInteresting.find({
-      filter: {
-        where: {
-          report_id: $scope.report_id,
-        },
-        fields: {
-          "report_id": true,
-          "input": true,
-          "start_time": true
+    // XXX should use external pagination feature of ui grid
+    // http://ui-grid.info/docs/#/tutorial/314_external_pagination
+    $scope.pageNumber = 0;
+    $scope.pageSize = 100;
+    var query = {
+        filter: {
+            where: {
+                'id': $scope.report_id
+            },
+            offset: $scope.pageNumber * $scope.pageSize,
+            limit: $scope.pageSize
         }
-      }
-    }, function(){
-      $scope.loaded_anomalies = true;
-    });
+    }
+    $scope.measurements = Report.find(query);
 });

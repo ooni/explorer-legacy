@@ -20,7 +20,7 @@
 <div class="container">
   <div class="row report-list-header">
     <div class="col-3">
-      <h1>Report: #{{reportId}} - {{report.start_time | date:'shortDate'}}</h1>
+      <h1>Report: #{{reportId}} - {{report.test_start_time | date:'shortDate'}}</h1>
       <h2>{{ report.test_name }}</h2>
 
       <div class="experiment-vs-control">
@@ -41,25 +41,26 @@
           <label for="input">input: </label><span id="input">google.com</span><!-- TODO: hard coded -->
         </div>
 
-        <!-- <div>
-          <label for="start_time">started on: </label>
-          <span id="start_time">
-            {{ report.start_time | date:'shortDate' }}
-          </span>
-        </div> -->
         <div class="description">
           <h3>What does this test do?</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. </p><p>Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. </p><p>Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.
         </div>
       </div>
 
-      <label for="anomalies">Found anomalies with the following inputs:</label>
-      <ul class="anomalies" id="anomalies">
-        <li ng-repeat="anomaly in anomalies">
-          <i class="fa fa-check-square"></i> {{anomaly.input}}
-        </li>
-      </ul>
+      <!-- <label for="anomalies">Found anomalies with the following inputs:</label> -->
+      <!-- <ul class="anomalies" id="anomalies"> -->
+      <!--   <li ng-repeat="anomaly in anomalies"> -->
+      <!--     <i class="fa fa-check-square"></i> {{anomaly.input}} -->
+      <!--   </li> -->
+      <!-- </ul> -->
 
+      <div class="measurements">
+          <ul>
+              <li ng-repeat="measurement in measurements">
+                  {{ measurement  }}
+              </li>
+          </ul>
+      </div>
       <div class="details">
         <h3>
           Report Details

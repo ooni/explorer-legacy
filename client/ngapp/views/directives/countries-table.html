@@ -10,15 +10,12 @@
       <th>
         Number of reports
       </th>
-      <th>
-        Number of interesting reports
-      </th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="countryObj in reportsByCountryArray"
+    <tr ng-repeat="countryObj in reportsByCountry"
       ooni-countries-table-item="countryObj"
-      id="reports-{{countryObj.countryCode}}"
-      ng-click="viewCountry(countryObj.countryCode)"></tr>
+      id="reports-{{countryObj.alpha3}}"
+      ng-click="viewCountry(countryObj.alpha2)"></tr>
   </tbody>
 </table>
