@@ -1,0 +1,53 @@
+<div ng-controller="HTTPRequestsViewCtrl">
+    <div class="experiment-vs-control">
+        <div class="experiment">
+            <!-- TODO: What's this? -->
+            <span class="results">
+                {{experiment.body}}
+            </span>
+            experiment
+        </div>
+        <div class="control">
+            <!-- TODO: What's this? -->
+            <span class="results">
+                {{control.body}}
+            </span>
+            control
+        </div>
+    </div>
+    <div class="overview">
+        <div>
+            <label for="body_length_match">body_length_match: </label><span id="input">{{ report.test_keys.body_length_match }}</span>
+            <label for="input">input: </label><span id="input">{{ report.input  }}</span>
+        </div>
+
+        <div class="description">
+            <h3>What does this test do?</h3>
+
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a
+            diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam
+            viverra nec consectetur ante hendrerit. Donec et mollis dolor.
+            </p>
+
+            <p>
+            Praesent et diam eget libero egestas mattis sit amet vitae augue.
+            Nam tincidunt congue enim, ut porta lorem lacinia consectetur.
+            Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem
+            ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut
+            gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing
+            id dolor. Pellentesque auctor nisi id magna consequat sagittis.
+            </p>
+
+            <p>
+            Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat
+            nisl imperdiet. Ut convallis libero in urna ultrices accumsan.
+            Donec sed odio eros. Donec viverra mi quis quam pulvinar at
+            malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus. In rutrum accumsan
+            ultricies. Mauris vitae nisi at sem facilisis semper ac in est.
+            </p>
+
+        </div>
+    </div>
+</div>

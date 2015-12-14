@@ -21,6 +21,13 @@ angular.module('ooniAPIApp')
 
     var query = {
         filter: {
+            fields: {
+                'test_name': true,
+                'probe_cc': true,
+                'input': true,
+                'test_start_time': true,
+                'report_id': true
+            },
             where: {
                 'probe_cc': $scope.countryCode
             },
@@ -75,7 +82,12 @@ angular.module('ooniAPIApp')
       },
       link: function ($scope, $element, $attrs) {
         $scope.viewReport = function(report) {
-          $location.path('/report/' + report.id);
+            if (report.input === undefined) {
+                $location.path('/report/' + report.id);
+            } else {
+                $location.path('/report/' + report.id)
+                    .search({input: report.input});
+            }
         };
 
         $scope.viewCountry = function(countryCode) {
