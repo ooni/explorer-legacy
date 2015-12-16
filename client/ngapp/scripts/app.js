@@ -15,6 +15,7 @@ angular
     'datamaps',
     'angularTypewrite',
     'ui.grid',
+    'ui.grid.pagination',
     'iso-3166-country-codes'
   ])
   .config(function ($routeProvider, $locationProvider) {
