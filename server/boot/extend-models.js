@@ -8,7 +8,7 @@ module.exports = function(app) {
   } catch(err) {
     providers = require('../providers.json');
   }
-  
+
   var storageHandler = StorageService({
     provider: 'amazon',
     key: providers.amazon.key,
@@ -39,7 +39,7 @@ module.exports = function(app) {
       next();
     });
   });
-  
+
   app.get("/reportFiles/:year/:report_filename", function(req, res) {
     var container = "ooni-public",
       filename = "reports-sanitised/yaml/" + req.params.year + "/" + req.params.report_filename;

@@ -12,7 +12,7 @@
     "id": {
       "type": "String",
       "postgresql": {
-          "columnName": "report_id"
+        "columnName": "report_id"
       }
     },
     "input": {
@@ -52,9 +52,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "country": {
+      "type": "belongsTo",
+      "model": "country",
+      "foreignKey": "probe_cc"
+    }
+  },
   "acls": [],
-  "methods": [
-       "countByCountry"
-  ]
+  "methods": {}
 }

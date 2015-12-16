@@ -37,12 +37,12 @@
     "dataSource": "db",
     "public": true
   },
-  "httpRequestsInteresting": {
+  "country": {
     "dataSource": "db",
     "public": true
   },
-  "country": {
-    "dataSource": "mem",
+  "nettest": {
+    "dataSource": "db",
     "public": true
   }
 }
