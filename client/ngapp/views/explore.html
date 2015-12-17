@@ -5,8 +5,28 @@
       <h1>Explore</h1>
     </div>
   </div>
-    <div id="grid1" ui-grid="gridOptions" ui-grid-pagination class="grid">
-    </div>
+
+  <form class="form-inline">
+      <div class="form-group">
+          <label class="sr-only" for="input">input</label>
+          <input type="text" class="form-control" ng-model="inputFilter" placeholder="input">
+      </div>
+      <div class="form-group">
+          <label class="sr-only" for="testName">Test name</label>
+          <select name="repeatSelect" id="repeatSelect" ng-model="testNameFilter">
+            <option value="">-- select nettest --</option>
+            <option ng-repeat="option in nettests" value="{{option.name}}">{{option.long_name}}</option>
+          </select>
+      </div>
+      <div class="form-group">
+          <label class="sr-only" for="countryCode">Country code</label>
+          <input type="text" class="form-control" ng-model="countryCodeFilter" placeholder="Country code">
+      </div>
+      <button type="submit" ng-click="filterMeasurements()">Filter</button>
+  </form>
+
+  <div id="grid1" ui-grid="gridOptions" ui-grid-pagination class="grid">
+  </div>
   <!-- <div ooni-reports-table -->
   <!--   reports="reports" -->
   <!--   show-country="true"> -->

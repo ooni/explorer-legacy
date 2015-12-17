@@ -10,18 +10,21 @@
 
 angular.module('ooniAPIApp')
   .controller('ExploreViewCtrl', function ($q, $scope, $anchorScroll,
-                                           $location, Report, Country,
+                                           $location, Report, Nettest,
                                            $routeParams, uiGridConstants) {
 
     $scope.gridOptions = {};
 
-    // XXX should use external pagination feature of ui grid
-    // http://ui-grid.info/docs/#/tutorial/314_external_pagination
     $scope.pageNumber = 0;
     $scope.pageSize = 100;
 
-    // XXX The ordering should be determined from the GUI
     $scope.order = "test_start_time DESC";
+    $scope.where = {};
+
+    $scope.inputFilter = "";
+    $scope.testNameFilter = "";
+    $scope.countryCodeFilter = "";
+    $scope.nettests = Nettest.find();
 
     var loadMeasurements = function() {
         var query = {
@@ -33,9 +36,7 @@ angular.module('ooniAPIApp')
                     'test_start_time': true,
                     'report_id': true
                 },
-                where: {
-                    'probe_cc': $scope.countryCode
-                },
+                where: $scope.where,
                 order: $scope.order,
                 offset: $scope.pageNumber * $scope.pageSize,
                 limit: $scope.pageSize
@@ -46,16 +47,46 @@ angular.module('ooniAPIApp')
         });
     }
 
+    $scope.filterMeasurements = function() {
+        $scope.where = {};
+        if ($scope.inputFilter.length > 0) {
+            $scope.where['input'] = $scope.inputFilter;
+        }
+        if ($scope.testNameFilter.length > 0) {
+            $scope.where['test_name'] = $scope.testNameFilter;
+        }
+        if ($scope.countryCodeFilter.length > 0) {
+            $scope.where['probe_cc'] = $scope.countryCodeFilter;
+        }
+        loadMeasurements();
+    }
+
     $scope.gridOptions.columnDefs = [
-        {name: 'Test name', field:'test_name'},
-        {name: 'Input', field:'input'},
-        {name: 'Start time', field:'test_start_time'}
+        {
+            name: 'Country code',
+            field:'probe_cc'
+        },
+        {
+            name: 'ASN',
+            field:'probe_asn'
+        },
+        {
+            name: 'Test name',
+            field:'test_name'
+        },
+        {
+            name: 'Input',
+            field:'input'
+        },
+        {
+            name: 'Start time',
+            field:'test_start_time'
+        }
     ];
     $scope.gridOptions.useExternalPagination = true;
     $scope.gridOptions.useExternalSorting = true;
     $scope.gridOptions.paginationPageSize = $scope.pageSize;
     $scope.gridOptions.paginationPageSizes = [50, 100, 150];
-
 
     $scope.gridOptions.onRegisterApi = function(gridApi) {
         $scope.gridApi = gridApi;
