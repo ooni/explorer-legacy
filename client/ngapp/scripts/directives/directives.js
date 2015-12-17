@@ -77,26 +77,24 @@ angular.module('ooniAPIApp')
           }
         }
 
-        $scope.rowTemplate = '<div ng-click="grid.appScope.viewRowObject(row)">' +
-                      '  <div ng-if="row.entity.merge">{{row.entity.title}}</div>' +
-                      '  <div ng-if="!row.entity.merge" ' +
-                          'ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name"' +
-                          ' class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader  }"' +
-                          ' ui-grid-cell></div>' +
-                      '</div>';
+        $scope.rowTemplate = '/views/directives/row-template.html'
+
+        var assignData = function(data) {
+          $scope.gridOptions.data = data;
+        }
 
         $scope.filterMeasurements = function() {
             $scope.where = {};
             if ($scope.inputFilter.length > 0) {
-                $scope.where['input'] = $scope.inputFilter;
+                $scope.queryOptions.where['input'] = $scope.inputFilter;
             }
             if ($scope.testNameFilter.length > 0) {
-                $scope.where['test_name'] = $scope.testNameFilter;
+                $scope.queryOptions.where['test_name'] = $scope.testNameFilter;
             }
             if ($scope.countryCodeFilter.length > 0) {
-                $scope.where['probe_cc'] = $scope.countryCodeFilter;
+                $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
             }
-            $scope.getDataFunction($scope.queryOptions, $scope.gridOptions.data);
+            $scope.getDataFunction($scope.queryOptions).then(assignData);
         }
 
         $scope.gridOptions.rowTemplate = $scope.rowTemplate;
@@ -109,20 +107,17 @@ angular.module('ooniAPIApp')
             $scope.gridApi = gridApi;
             $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
                 $scope.queryOptions.order = sortColumns[0].field + " " + sortColumns[0].sort.direction.toUpperCase();
-                $scope.getDataFunction($scope.queryOptions, $scope.gridOptions.data);
+                $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
             gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
                 $scope.queryOptions.pageNumber = newPage;
                 $scope.queryOptions.pageSize = pageSize;
-                $scope.getDataFunction($scope.queryOptions, $scope.gridOptions.data);
+                $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
         }
 
 
-      $scope.getDataFunction($scope.queryOptions)
-        .then(function(data) {
-          $scope.gridOptions.data = data;
-        });
+        $scope.getDataFunction($scope.queryOptions).then(assignData);
 
       },
       templateUrl: 'views/directives/ooni-grid-wrapper-directive.html',

@@ -32,8 +32,9 @@ angular.module('ooniAPIApp')
           }
       }
       Report.find(query, function(data) {
-          deferred.resolve(data);
+        deferred.resolve(data);
       });
+
       return deferred.promise;
     }
 
