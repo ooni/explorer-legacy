@@ -3,7 +3,7 @@
  * @name ooniAPIApp.directive:ooniGridWrapper
  * @description
  * # ooniReportsTableRow
- * A directive that displays each OONI report as a table row.
+ * A directive that displays a UI Grid according to OONI standards.
  */
 
 angular.module('ooniAPIApp')
@@ -11,7 +11,10 @@ angular.module('ooniAPIApp')
     return {
       restrict: 'A',
       scope: {
-        getDataFunction: '='
+        getDataFunction: '=',
+        queryOptions: '=?', // TODO: still need to implement this
+        viewRowObjectFunction: '=?', // TODO: still need to implement this
+        customColumnDefs: '=?'
       },
       link: function ($scope, $element, $attrs) {
 
@@ -28,44 +31,52 @@ angular.module('ooniAPIApp')
         $scope.countryCodeFilter = "";
         $scope.nettests = Nettest.find();
 
-        $scope.gridOptions.columnDefs = [
-            {
-                name: 'Country code',
-                field:'probe_cc'
-            },
-            {
-                name: 'ASN',
-                field:'probe_asn'
-            },
-            {
-                name: 'Test name',
-                field:'test_name'
-            },
-            {
-                name: 'Input',
-                field:'input'
-            },
-            {
-                name: 'Start time',
-                field:'test_start_time'
-            },
-            {
-                field: 'id',
-                visible: false
-            }
-        ];
-
-        $scope.viewReport = function(row) {
-            var report = row.entity;
-            if (report.input === undefined) {
-                $location.path('/report/' + report.id);
-            } else {
-                $location.path('/report/' + report.id)
-                    .search({input: report.input});
-            }
+        if ($scope.customColumnDefs !== undefined) {
+          $scope.gridOptions.columnDefs = $scope.customColumnDefs;
+        } else {
+          $scope.gridOptions.columnDefs = [
+              {
+                  name: 'Country code',
+                  field:'probe_cc'
+              },
+              {
+                  name: 'ASN',
+                  field:'probe_asn'
+              },
+              {
+                  name: 'Test name',
+                  field:'test_name'
+              },
+              {
+                  name: 'Input',
+                  field:'input'
+              },
+              {
+                  name: 'Start time',
+                  field:'test_start_time'
+              },
+              {
+                  field: 'id',
+                  visible: false
+              }
+          ];
         }
 
-        $scope.rowTemplate = '<div ng-click="grid.appScope.viewReport(row)">' +
+        if ($scope.viewRowObjectFunction !== undefined) {
+          $scope.viewRowObject = $scope.viewRowObjectFunction
+        } else {
+          $scope.viewRowObject = function(row) {
+              var report = row.entity;
+              if (report.input === undefined) {
+                  $location.path('/report/' + report.id);
+              } else {
+                  $location.path('/report/' + report.id)
+                      .search({input: report.input});
+              }
+          }
+        }
+
+        $scope.rowTemplate = '<div ng-click="grid.appScope.viewRowObject(row)">' +
                       '  <div ng-if="row.entity.merge">{{row.entity.title}}</div>' +
                       '  <div ng-if="!row.entity.merge" ' +
                           'ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name"' +
@@ -110,10 +121,6 @@ angular.module('ooniAPIApp')
       $scope.getDataFunction($scope.queryOptions)
         .then(function(data) {
           $scope.gridOptions.data = data;
-        });
-
-        $scope.$watch('gridOptions.data', function(){
-          console.log($scope.gridOptions.data)
         });
 
       },

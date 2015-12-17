@@ -37,27 +37,4 @@ angular.module('ooniAPIApp')
       return deferred.promise;
     }
 
-})
-
-/**
- * @ngdoc function
- * @name ooniAPIApp.directive:ooniReportsTable
- * @description
- * # ooniReportsTable
- * A directive that wraps rows of the ooni reports
- */
-
-.directive('ooniReportsTable', ["$location", "$filter", "Report", "Country", "uiGridConstants",
-  function ($location, $filter, Report, Country, uiGridConstants) {
-    return {
-      restrict: 'A',
-      scope: {
-        reports: '=',
-        showCountry: '='
-      },
-      link: function ($scope, $element, $attrs) {
-
-      },
-      templateUrl: 'views/directives/reports-table.html',
-    };
-}])
+});

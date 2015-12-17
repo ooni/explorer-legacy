@@ -35,9 +35,7 @@ angular.module('ooniAPIApp')
               limit: queryOptions.pageSize
           }
       }
-      console.log('querying', query);
       Report.find(query, function(data) {
-        console.log('getting reports')
         deferred.resolve(data);
       });
 

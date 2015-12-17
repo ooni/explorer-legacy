@@ -17,7 +17,9 @@
   </div>
 </div>
 
-<div ooni-countries-table
-  reports-by-country="reportsByCountry">
+<div ooni-grid-wrapper
+  get-data-function="loadReports"
+  view-row-object-function="viewCountry"
+  custom-column-defs="columnDefs">
 </div>
 </main>
