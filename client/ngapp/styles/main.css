@@ -72,6 +72,48 @@ table.countries td {
   .clickable:hover i::before {
     color: #0588CB; }
 
+button {
+  padding: .25rem .5rem;
+  font-size: .8rem;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid #0588CB;
+  font-family: "Fira Sans";
+  font-weight: 300;
+  transition: 0.5s background-color, 0.5s color;
+  background-color: #0588CB;
+  color: #fff;
+  border: 1px solid #046799; }
+  button:hover {
+    background-color: #046799;
+    color: white; }
+
+.form-inline {
+  margin-bottom: 1rem; }
+  .form-inline ::-webkit-input-placeholder {
+    font-family: "Fira Sans";
+    font-weight: 300; }
+  .form-inline :-moz-placeholder {
+    /* Firefox 18- */
+    font-family: "Fira Sans";
+    font-weight: 300; }
+  .form-inline ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-family: "Fira Sans";
+    font-weight: 300; }
+  .form-inline :-ms-input-placeholder {
+    font-family: "Fira Sans";
+    font-weight: 300; }
+  .form-inline .form-group {
+    display: inline-block;
+    margin-right: 1rem; }
+  .form-inline select,
+  .form-inline input {
+    font-size: .8rem;
+    padding: .25rem .5rem; }
+  .form-inline input {
+    border-radius: 3px; }
+
 /* ================================================================== */
 /* Resets */
 * {
@@ -659,14 +701,38 @@ label[for="anomalies"] {
 
 .view-chooser {
   text-align: center;
-  margin-bottom: 1rem; }
+  margin: 2rem 0; }
   .view-chooser a {
+    padding: .25rem .5rem;
+    font-size: .8rem;
+    border-radius: 3px;
+    cursor: pointer;
     border: 1px solid #0588CB;
-    padding: .25rem .5rem; }
+    font-family: "Fira Sans";
+    font-weight: 300;
+    transition: 0.5s background-color, 0.5s color;
+    border-radius: 0;
+    font-size: 1rem; }
+    .view-chooser a:hover {
+      background-color: #046799;
+      color: white; }
   .view-chooser .selected {
+    padding: .25rem .5rem;
+    font-size: .8rem;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid #0588CB;
+    font-family: "Fira Sans";
+    font-weight: 300;
+    transition: 0.5s background-color, 0.5s color;
     background-color: #0588CB;
     color: #fff;
-    border-color: #0aa8f9; }
+    border: 1px solid #046799;
+    border-radius: 0;
+    font-size: 1rem; }
+    .view-chooser .selected:hover {
+      background-color: #046799;
+      color: white; }
   .view-chooser a:first-child {
     border-right: 0;
     border-bottom-left-radius: 3px;

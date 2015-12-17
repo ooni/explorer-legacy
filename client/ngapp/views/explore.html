@@ -1,28 +1,22 @@
 <main>
 <div class="container">
-  <div class="row report-list-header">
-    <div class="col-3">
-      <h1>Explore</h1>
-    </div>
-  </div>
-
   <form class="form-inline">
       <div class="form-group">
-          <label class="sr-only" for="input">input</label>
-          <input type="text" class="form-control" ng-model="inputFilter" placeholder="input">
+          <label class="sr-only" for="input">Test Input:</label>
+          <input type="text" class="form-control" ng-model="inputFilter" placeholder="Test Input">
       </div>
       <div class="form-group">
-          <label class="sr-only" for="testName">Test name</label>
+          <label class="sr-only" for="testName">Test Name:</label>
           <select name="repeatSelect" id="repeatSelect" ng-model="testNameFilter">
-            <option value="">-- select nettest --</option>
+            <option value="">-- Select Nettest --</option>
             <option ng-repeat="option in nettests" value="{{option.name}}">{{option.long_name}}</option>
           </select>
       </div>
       <div class="form-group">
-          <label class="sr-only" for="countryCode">Country code</label>
+          <label class="sr-only" for="countryCode">Country Code:</label>
           <input type="text" class="form-control" ng-model="countryCodeFilter" placeholder="Country code">
       </div>
-      <button type="submit" ng-click="filterMeasurements()">Filter</button>
+      <button class="" type="submit" ng-click="filterMeasurements()">Apply Filter</button>
   </form>
 
   <div ooni-grid-wrapper

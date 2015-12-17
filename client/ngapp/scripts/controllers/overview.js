@@ -11,5 +11,4 @@
 angular.module('ooniAPIApp')
   .controller('OverviewCtrl', function ($rootScope, $location) {
 
-
 });

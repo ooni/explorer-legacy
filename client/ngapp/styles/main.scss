@@ -8,9 +8,14 @@ $off-white: #f2f2f2;
 $grey: #c1c1c1;
 
 $transition-speed: .5s;
+$button-border-radius: 3px;
+
+@import "mixins";
 
 @import "ui/fonts",
         "ui/table",
+        "ui/buttons",
+        "ui/forms",
         "base",
         "report",
         "world";
@@ -31,31 +36,31 @@ $transition-speed: .5s;
 }
 
 .view-chooser {
-
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 2rem 0;
 
   a {
-    border: 1px solid $ooni-blue;
-    padding: .25rem .5rem;
+    @include button-mixin;
+    border-radius: 0;
+    font-size: 1rem;
   }
 
   .selected {
-    background-color: $ooni-blue;
-    color: $white;
-    border-color: lighten($ooni-blue, 10%);
+    @include primary-button-mixin;
+    border-radius: 0;
+    font-size: 1rem;
   }
 
   a:first-child {
     border-right: 0;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
+    border-bottom-left-radius: $button-border-radius;
+    border-top-left-radius: $button-border-radius;
   }
 
   a:last-child {
     border-left: 0;
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
+    border-bottom-right-radius: $button-border-radius;
+    border-top-right-radius: $button-border-radius;
   }
 
   a:nth-child(2) {

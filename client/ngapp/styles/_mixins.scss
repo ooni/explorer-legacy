@@ -1,0 +1,45 @@
+@mixin button-mixin {
+  padding: .25rem .5rem;
+  font-size: .8rem;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  border: 1px solid $ooni-blue;
+  font-family: "Fira Sans";
+  font-weight: 300;
+
+  transition: $transition-speed background-color, $transition-speed color;
+
+  &:hover {
+    background-color: darken($ooni-blue, 10%);
+    color: white;
+  };
+}
+
+@mixin primary-button-mixin {
+  @include button-mixin;
+  background-color: $ooni-blue;
+  color: $white;
+  border: 1px solid darken($ooni-blue, 10%);
+}
+
+@mixin placeholder-text($font-family, $font-weight) {
+  ::-webkit-input-placeholder {
+    font-family: $font-family;
+    font-weight: $font-weight;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+    font-family: $font-family;
+    font-weight: $font-weight;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+    font-family: $font-family;
+    font-weight: $font-weight;
+  }
+
+  :-ms-input-placeholder {
+    font-family: $font-family;
+    font-weight: $font-weight;
+  }
+}
