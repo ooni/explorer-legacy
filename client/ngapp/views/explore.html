@@ -25,8 +25,12 @@
       <button type="submit" ng-click="filterMeasurements()">Filter</button>
   </form>
 
-  <div id="grid1" ui-grid="gridOptions" ui-grid-pagination class="grid">
+  <div ooni-grid-wrapper
+    view-report-function="viewReport"
+    get-data-function="loadMeasurements"
+    row-template="rowTemplate">
   </div>
+
   <!-- <div ooni-reports-table -->
   <!--   reports="reports" -->
   <!--   show-country="true"> -->

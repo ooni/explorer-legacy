@@ -13,12 +13,12 @@ angular.module('ooniAPIApp')
 
     $scope.map_clicked = function(geo) {
       // XXX add support for navigating to the country page
-      var country_code = $scope.countries.alpha3[geo.id].alpha2,
-        from = $location.hash(),
-        to = "reports-" + country_code;
-      $location.hash(to);
-      $anchorScroll();
-      $location.hash(from);
+      var country_code = $scope.worldMap.data[geo.id].alpha2;
+        // from = $location.hash(),
+        // to = "reports-" + country_code;
+      // $location.hash(to);
+      // $anchorScroll();
+      $location.path('/country/' + country_code);
     };
 
     $scope.loaded = false;
@@ -41,7 +41,8 @@ angular.module('ooniAPIApp')
         $scope.reportsByCountry = report_counts;
         angular.forEach(report_counts, function(country){
             worldMap.data[country.alpha3] = {
-                reportCount: country.name
+                reportCount: country.name,
+                alpha2: country.alpha2
             };
             if (country.count < 100) {
                 worldMap.data[country.alpha3]["fillKey"] = "LOW";
@@ -72,50 +73,3 @@ angular.module('ooniAPIApp')
     };
 })
 
-/**
- * @ngdoc function
- * @name ooniAPIApp.directive:ooniCountriesTable
- * @description
- * # ooniCountriesTable
- * A table that wraps summaries of reports for each country
- */
-
-.directive('ooniCountriesTable', ["$location", "$filter", "Report", "Country",
-            "uiGridConstants",
-  function ($location, $filter, Report, Country, uiGridConstants) {
-    return {
-      restrict: 'A',
-      scope: {
-        reportsByCountry: '='
-      },
-      link: function ($scope, $element, $attrs) {
-        $scope.viewCountry = function(countryCode) {
-          $location.path('/country/'+countryCode);
-        };
-      },
-      templateUrl: 'views/directives/countries-table.html',
-    };
-}])
-
-/**
- * @ngdoc function
- * @name ooniAPIApp.directive:ooniCountriesTableItem
- * @description
- * # ooniCountriesTableItem
- * The rows of a table that show summaries of the reports for each country
- */
-
-.directive('ooniCountriesTableItem', ["$location", "$filter", "Report", "Country",
-            "uiGridConstants",
-  function ($location, $filter, Report, Country, uiGridConstants) {
-    return {
-      restrict: 'A',
-      scope: {
-        countryObj: '=ooniCountriesTableItem',
-      },
-      link: function ($scope, $element, $attrs) {
-
-      },
-      templateUrl: 'views/directives/countries-table-item.html',
-    };
-}]);

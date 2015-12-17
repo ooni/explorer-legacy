@@ -658,7 +658,8 @@ label[for="anomalies"] {
     padding: 1rem 0; }
 
 .view-chooser {
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 1rem; }
   .view-chooser a {
     border: 1px solid grey;
     padding: .25rem .5rem; }

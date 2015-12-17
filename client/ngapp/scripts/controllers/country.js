@@ -16,25 +16,32 @@ angular.module('ooniAPIApp')
 
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
-    $scope.pageNumber = 0;
-    $scope.pageSize = 100;
 
-    var query = {
-        filter: {
-            fields: {
-                'test_name': true,
-                'input': true,
-                'test_start_time': true,
-                'report_id': true
-            },
-            where: {
-                'probe_cc': $scope.countryCode
-            },
-            offset: $scope.pageNumber * $scope.pageSize,
-            limit: $scope.pageSize
-        }
+    $scope.loadMeasurements = function(queryOptions) {
+      var deferred = $q.defer();
+
+      var query = {
+          filter: {
+              fields: {
+                  'test_name': true,
+                  'input': true,
+                  'test_start_time': true,
+                  'report_id': true
+              },
+              where: {
+                  'probe_cc': $scope.countryCode
+              },
+              offset: queryOptions.pageNumber * queryOptions.pageSize,
+              limit: queryOptions.pageSize
+          }
+      }
+      console.log('querying', query);
+      Report.find(query, function(data) {
+        console.log('getting reports')
+        deferred.resolve(data);
+      });
+
+      return deferred.promise;
     }
-    Report.find(query, function(data) {
-        $scope.reports = data;
-    });
+
 })

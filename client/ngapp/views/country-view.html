@@ -1,13 +1,12 @@
 <main>
-<div class="container">
-  <div class="row report-list-header">
-    <div class="col-3">
-      <h1>{{ country.name }}</h1>
+  <div class="container">
+    <div class="row report-list-header">
+      <div class="col-3">
+        <h1>{{ country.name }}</h1>
+      </div>
+    </div>
+    <div ooni-grid-wrapper
+      get-data-function="loadMeasurements">
     </div>
   </div>
-  <div ooni-reports-table
-    reports="reports"
-    show-country="false">
-  </div>
-</div>
 </main>
