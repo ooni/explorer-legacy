@@ -9,7 +9,7 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('ReportDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, HttpRequestsInteresting, $routeParams) {
+  .controller('ReportDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $routeParams) {
     $scope.loading_phrases = [
       "Hacking some planet",
       "Extracting square root of i",

@@ -45,10 +45,13 @@
         </div>
       </div>
 
-      <pre>
-        {{ report.test_keys | json  }}
-      </pre>
       <div ng-if="report.test_name == 'http_requests'" ng-include="'views/nettests/http-requests.html'"></div>
+
+      <h3>
+          Measurement data
+      </h3>
+      <json-formatter open="1" json="report.test_keys">
+      </json-formatter>
 
     </div>
   </div>

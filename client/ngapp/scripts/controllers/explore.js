@@ -26,6 +26,16 @@ angular.module('ooniAPIApp')
     $scope.countryCodeFilter = "";
     $scope.nettests = Nettest.find();
 
+    $scope.viewReport = function(row) {
+        var report = row.entity;
+        if (report.input === undefined) {
+            $location.path('/report/' + report.id);
+        } else {
+            $location.path('/report/' + report.id)
+                .search({input: report.input});
+        }
+    }
+
     var loadMeasurements = function() {
         var query = {
             filter: {
@@ -34,7 +44,7 @@ angular.module('ooniAPIApp')
                     'probe_cc': true,
                     'input': true,
                     'test_start_time': true,
-                    'report_id': true
+                    'id': true
                 },
                 where: $scope.where,
                 order: $scope.order,
@@ -81,8 +91,22 @@ angular.module('ooniAPIApp')
         {
             name: 'Start time',
             field:'test_start_time'
+        },
+        {
+            field: 'id',
+            visible: false
         }
     ];
+
+    var rowTemplate = '<div ng-click="grid.appScope.viewReport(row)">' +
+                      '  <div ng-if="row.entity.merge">{{row.entity.title}}</div>' +
+                      '  <div ng-if="!row.entity.merge" ' +
+                          'ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name"' +
+                          ' class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader  }"' +
+                          ' ui-grid-cell></div>' +
+                      '</div>';
+
+    $scope.gridOptions.rowTemplate = rowTemplate;
     $scope.gridOptions.useExternalPagination = true;
     $scope.gridOptions.useExternalSorting = true;
     $scope.gridOptions.paginationPageSize = $scope.pageSize;

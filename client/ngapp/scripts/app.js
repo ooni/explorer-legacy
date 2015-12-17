@@ -16,7 +16,8 @@ angular
     'angularTypewrite',
     'ui.grid',
     'ui.grid.pagination',
-    'iso-3166-country-codes'
+    'iso-3166-country-codes',
+    'jsonFormatter'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)
