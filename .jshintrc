@@ -17,6 +17,6 @@
   "unused": false,
   "trailing": true,
   "sub": true,
-  "maxlen": 80,
+  "maxlen": false,
   "asi": true
 }

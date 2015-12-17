@@ -36,8 +36,14 @@ $transition-speed: .5s;
   margin-bottom: 1rem;
 
   a {
-    border: 1px solid grey;
+    border: 1px solid $ooni-blue;
     padding: .25rem .5rem;
+  }
+
+  .selected {
+    background-color: $ooni-blue;
+    color: $white;
+    border-color: lighten($ooni-blue, 10%);
   }
 
   a:first-child {
@@ -53,6 +59,6 @@ $transition-speed: .5s;
   }
 
   a:nth-child(2) {
-    border-left: 1px solid grey;
+    border-left: 1px solid $ooni-blue;
   }
 }

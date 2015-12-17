@@ -11,6 +11,8 @@
 angular.module('ooniAPIApp')
   .controller('HomeCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
 
+    // $rootScope.$location = $location
+
     $rootScope.loaded = false;
 
     $scope.countries = {

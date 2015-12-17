@@ -1,6 +1,10 @@
 window.CONFIG = {
   "routes": {
     "/": {
+      "controller": "OverviewCtrl",
+      "templateUrl": "/views/overview.html"
+    },
+    "/world/": {
       "controller": "HomeCtrl",
       "templateUrl": "/views/home.html"
     },

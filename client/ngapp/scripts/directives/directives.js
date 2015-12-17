@@ -7,7 +7,8 @@
  */
 
 angular.module('ooniAPIApp')
-.directive('ooniGridWrapper', function ($location, $filter, Report, Country, Nettest, uiGridConstants ) {
+.directive('ooniGridWrapper',
+  function ($location, $filter, Report, Country, Nettest, uiGridConstants ) {
     return {
       restrict: 'A',
       scope: {
@@ -126,4 +127,4 @@ angular.module('ooniAPIApp')
       },
       templateUrl: 'views/directives/ooni-grid-wrapper-directive.html',
     };
-});
+})

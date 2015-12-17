@@ -33,7 +33,11 @@ angular
 
     $locationProvider.html5Mode(true);
   })
-  .run(function($rootScope) {
+  // Things to run before the app loads;
+  .run(function($rootScope, $location) {
+
+    $rootScope.$location = $location;
+
     $rootScope.loading_phrases = [
       "Hacking some planet",
       "Extracting square root of i",

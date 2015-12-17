@@ -44,8 +44,8 @@
     </div>
 
     <div class="container">
-      <div class="view-chooser" role="group" aria-label="...">
-        <a href="/">World</a><a href="/explore/">Explorer</a><a href="/overview/">Overview</a>
+      <div class="view-chooser" role="group" aria-label="choose a view">
+        <a ng-class="{selected: $location.path() === '/'}" href="/">Overview</a><a ng-class="{selected: $location.path() === '/world/'}" href="/world/">World</a><a ng-class="{selected: $location.path() === '/explore/'}" href="/explore/">Explorer</a>
       </div>
       <div ng-view></div>
     </div>
@@ -82,6 +82,7 @@
     <script src="scripts/controllers/report.js"></script>
     <script src="scripts/controllers/explore.js"></script>
     <script src="scripts/controllers/country.js"></script>
+    <script src="scripts/controllers/overview.js"></script>
     <script src="scripts/directives/directives.js"></script>
     <script src="scripts/controllers/nettests/http-requests.js"></script>
     <!-- endbuild -->

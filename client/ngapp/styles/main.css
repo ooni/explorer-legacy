@@ -661,8 +661,12 @@ label[for="anomalies"] {
   text-align: center;
   margin-bottom: 1rem; }
   .view-chooser a {
-    border: 1px solid grey;
+    border: 1px solid #0588CB;
     padding: .25rem .5rem; }
+  .view-chooser .selected {
+    background-color: #0588CB;
+    color: #fff;
+    border-color: #0aa8f9; }
   .view-chooser a:first-child {
     border-right: 0;
     border-bottom-left-radius: 3px;
@@ -672,6 +676,6 @@ label[for="anomalies"] {
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px; }
   .view-chooser a:nth-child(2) {
-    border-left: 1px solid grey; }
+    border-left: 1px solid #0588CB; }
 
 /*# sourceMappingURL=main.css.map */

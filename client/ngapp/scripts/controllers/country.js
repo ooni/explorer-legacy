@@ -25,8 +25,10 @@ angular.module('ooniAPIApp')
               fields: {
                   'test_name': true,
                   'input': true,
+                  'probe_cc': true,
                   'test_start_time': true,
-                  'report_id': true
+                  'id': true,
+                  'probe_asn': true
               },
               where: {
                   'probe_cc': $scope.countryCode
