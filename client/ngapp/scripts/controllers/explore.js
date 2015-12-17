@@ -31,6 +31,7 @@ angular.module('ooniAPIApp')
               limit: queryOptions.pageSize
           }
       }
+
       Report.find(query, function(data) {
         deferred.resolve(data);
       });

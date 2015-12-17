@@ -84,7 +84,7 @@ angular.module('ooniAPIApp')
         }
 
         $scope.filterMeasurements = function() {
-            $scope.where = {};
+            $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
                 $scope.queryOptions.where['input'] = $scope.inputFilter;
             }
