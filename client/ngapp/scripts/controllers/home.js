@@ -46,7 +46,19 @@ angular.module('ooniAPIApp')
             'LOW': colorbrewer.PuBu[4][1],
             'defaultFill': colorbrewer.PuBu[4][0]
         },
-        data: {}
+        data: {},
+        geographyConfig: {
+            popupTemplate: function(geo, data) {
+                return ['<div class="hoverinfo"><strong>',
+                        'Number of reports ' + data.reportCountry,
+                        ': ' + data.reportCount,
+                        '</strong></div>'].join('');
+            },
+            highlightFillColor: '#26292C',
+            highlightBorderColor: '#B4B4B4',
+            highlightBorderWidth: 1,
+            highlightBorderOpacity: 1
+        }
     };
 
     $scope.loadReports = function(queryOptions) {
@@ -56,7 +68,8 @@ angular.module('ooniAPIApp')
           $scope.reportsByCountry = report_counts;
           angular.forEach(report_counts, function(country){
               worldMap.data[country.alpha3] = {
-                  reportCount: country.name,
+                  reportCount: country.count,
+                  reportCountry: country.name,
                   alpha2: country.alpha2
               };
               if (country.count < 100) {

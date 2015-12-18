@@ -114,6 +114,19 @@ button {
   .form-inline input {
     border-radius: 3px; }
 
+.ui-grid {
+  border: none; }
+
+.ui-grid-header {
+  border-top: 3px solid #0588CB; }
+  .ui-grid-header .ui-grid-top-panel {
+    background: transparent; }
+  .ui-grid-header .ui-grid-header-cell {
+    border-right: none; }
+
+.ui-grid-viewport .ui-grid-cell {
+  border-right: none; }
+
 /* ================================================================== */
 /* Resets */
 * {
@@ -698,6 +711,9 @@ label[for="anomalies"] {
     color: white;
     margin-bottom: 0;
     padding: 1rem 0; }
+
+.map {
+  margin-top: -80px; }
 
 .view-chooser {
   text-align: center;

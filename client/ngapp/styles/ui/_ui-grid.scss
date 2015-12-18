@@ -1,0 +1,21 @@
+.ui-grid {
+  border: none;
+}
+
+.ui-grid-header {
+  border-top: 3px solid $ooni-blue;
+
+  .ui-grid-top-panel {
+    background: transparent;
+  }
+
+  .ui-grid-header-cell {
+    border-right: none;
+  }
+}
+
+.ui-grid-viewport {
+  .ui-grid-cell {
+    border-right: none;
+  }
+}

@@ -16,6 +16,7 @@ $button-border-radius: 3px;
         "ui/table",
         "ui/buttons",
         "ui/forms",
+        "ui/ui-grid",
         "base",
         "report",
         "world";
@@ -33,6 +34,10 @@ $button-border-radius: 3px;
     margin-bottom: 0;
     padding: 1rem 0;
   }
+}
+
+.map {
+  margin-top: -80px;
 }
 
 .view-chooser {
