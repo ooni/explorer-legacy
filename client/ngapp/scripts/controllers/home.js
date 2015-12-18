@@ -64,7 +64,6 @@ angular.module('ooniAPIApp')
     $scope.loadReports = function(queryOptions) {
       var deferred = $q.defer();
       Report.countByCountry(function(report_counts) {
-        console.log('loading reports', report_counts)
           $scope.reportsByCountry = report_counts;
           angular.forEach(report_counts, function(country){
               worldMap.data[country.alpha3] = {

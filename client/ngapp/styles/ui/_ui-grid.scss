@@ -14,6 +14,18 @@
   }
 }
 
+.ui-grid-row {
+  cursor: pointer;
+
+  &:hover {
+    .ui-grid-cell {
+      background-color: darken($white, 10%);
+    }
+  }
+}
+
+
+
 .ui-grid-viewport {
   .ui-grid-cell {
     border-right: none;

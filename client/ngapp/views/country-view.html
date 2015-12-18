@@ -1,9 +1,7 @@
-<main>
+<main class="country">
   <div class="container">
-    <div class="row report-list-header">
-      <div class="col-3">
-        <h1>{{ country.name }}</h1>
-      </div>
+    <div class="row">
+        <h1><i class="flag-icon" ng-class="'flag-icon-' + countryCode | lowercase"></i> {{ countryName }}</h1>
     </div>
     <div ooni-grid-wrapper
       get-data-function="loadMeasurements">

@@ -12,9 +12,9 @@ window.CONFIG = {
       "controller": "ExploreViewCtrl",
       "templateUrl": "/views/explore.html"
     },
-    "/report/:id": {
-      "controller": "ReportDetailViewCtrl",
-      "templateUrl": "/views/view-report.html"
+    "/measurement/:id": {
+      "controller": "MeasurementDetailViewCtrl",
+      "templateUrl": "/views/view-measurement.html"
     },
     "/country/:id": {
       "controller": "CountryDetailViewCtrl",

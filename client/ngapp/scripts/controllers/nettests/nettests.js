@@ -1,5 +1,11 @@
+'use strict';
+
+// The idea behind this file is to keep a place for all specific nettest
+// controllers in one place, as long as they don't have any specific
+// functionality
+
 angular.module('ooniAPIApp')
-.controller('HTTPRequestsViewCtrl', function ($scope, $location){
+.controller('NettestDefaultViewCtrl', function ($scope, $location){
   angular.forEach($scope.report.test_keys.requests, function(request){
     if (request.request.tor === true || request.request.is_tor === true) {
       $scope.control = request.response;
@@ -10,3 +16,4 @@ angular.module('ooniAPIApp')
     }
   })
 });
+

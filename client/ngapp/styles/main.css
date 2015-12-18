@@ -124,6 +124,11 @@ button {
   .ui-grid-header .ui-grid-header-cell {
     border-right: none; }
 
+.ui-grid-row {
+  cursor: pointer; }
+  .ui-grid-row:hover .ui-grid-cell {
+    background-color: #e6e6e6; }
+
 .ui-grid-viewport .ui-grid-cell {
   border-right: none; }
 
@@ -669,6 +674,9 @@ pre span.lw {
 .toc h3 .closure::before {
   content: "▼";
   font-size: 0.7rem; }
+
+.country h1 {
+  margin-bottom: 1rem; }
 
 .anomalies {
   list-style: none; }

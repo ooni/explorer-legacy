@@ -2,23 +2,16 @@
 
 /**
  * @ngdoc function
- * @name ooniAPIApp.controller:ReportDetailViewCtrl
+ * @name ooniAPIApp.controller:MeasurementDetailViewCtrl
  * @description
  * # ReportDetailViewCtrl
  * Controller of the ooniAPIApp
  */
 
 angular.module('ooniAPIApp')
-  .controller('ReportDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $routeParams) {
-    $scope.loading_phrases = [
-      "Hacking some planet",
-      "Extracting square root of i",
-      "Modifying the space time continuum",
-      "Adjusting ultra speed variable to be nominal",
-      "Performing a safety meeting"
-    ];
+  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $routeParams) {
 
-    $scope.reportId = $routeParams.id;
+    $scope.measurementId = $routeParams.id;
     $scope.measurementInput = $routeParams.input;
 
     $scope.loaded = false;
@@ -30,7 +23,7 @@ angular.module('ooniAPIApp')
     var query = {
         filter: {
             where: {
-                'id': $scope.reportId,
+                'id': $scope.measurementId,
             },
             offset: $scope.pageNumber * $scope.pageSize,
             limit: $scope.pageSize
@@ -38,14 +31,17 @@ angular.module('ooniAPIApp')
     }
 
     function loading_success(data) {
-        $scope.report = data[0];
-        $scope.loaded = true;
+      console.log('success');
+      $scope.report = data[0];
+      $scope.loaded = true;
     }
 
     function loading_failure() {
+      console.log('hi');
       $scope.loaded = true;
       $scope.not_found = true;
     }
+
     if ($scope.measurementInput != undefined) {
         query['filter']['where']['input'] = $scope.measurementInput;
         $scope.measurement = Report.find(query, loading_success, loading_failure);

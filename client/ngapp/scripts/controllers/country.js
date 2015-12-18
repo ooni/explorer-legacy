@@ -12,7 +12,7 @@ angular.module('ooniAPIApp')
   .controller('CountryDetailViewCtrl', function ($q, $scope, Report, $routeParams, ISO3166) {
 
     $scope.countryCode = $routeParams.id;
-    $scope.country = ISO3166.getCountryName($scope.countryCode);
+    $scope.countryName = ISO3166.getCountryName($scope.countryCode);
 
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
