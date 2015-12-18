@@ -255,9 +255,19 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // concat: {
-    //   dist: {}
-    // },
+    concat: {
+      options: {
+        // define a string to put between each file in the concatenated output
+        separator: ';',
+        sourceMap: true
+      },
+      dist: {
+        // the files to concatenate
+        src: ['<%= yeoman.app %>/scripts/**/*.js'],
+        // the location of the resulting JS file
+        dest: 'client/ngapp/build/main.js'
+      }
+    },
 
     imagemin: {
       dist: {
@@ -359,12 +369,14 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'concat',
         'copy:styles'
       ],
       test: [
         'copy:styles'
       ],
       dist: [
+        'concat',
         'copy:styles',
         'imagemin',
         'svgmin'
