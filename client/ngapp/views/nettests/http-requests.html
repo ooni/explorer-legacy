@@ -3,7 +3,7 @@
         <div class="experiment">
             <!-- TODO: What's this? -->
             <span class="results">
-                {{experiment.body}}
+                {{experiment.body | limitTo : 40 }}
             </span>
             experiment
         </div>
@@ -47,7 +47,6 @@
             parturient montes, nascetur ridiculus mus. In rutrum accumsan
             ultricies. Mauris vitae nisi at sem facilisis semper ac in est.
             </p>
-
         </div>
     </div>
 </div>

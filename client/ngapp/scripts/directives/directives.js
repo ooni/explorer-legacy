@@ -123,3 +123,26 @@ angular.module('ooniAPIApp')
       templateUrl: 'views/directives/ooni-grid-wrapper-directive.html',
     };
 })
+
+.directive('ooniNettestDetails', function ($location) {
+  return {
+    restrict: 'A',
+    scope: {
+      report: '='
+    },
+    link: function($scope) {
+
+      // Not sure if this is the best way to go about doing this.
+      // It runs at all times.
+      $scope.getContentUrl = function() {
+        var nettestSlug = 'nettest';
+        if ($scope.report !== undefined) {
+          nettestSlug = $scope.report.test_name.replace('_', '-');
+        }
+        var url = '/views/nettests/' + nettestSlug + '.html';
+        return url;
+      }
+    },
+    template: '<div ng-include="getContentUrl()">fasdfdas</div>'
+  }
+})

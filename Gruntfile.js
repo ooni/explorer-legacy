@@ -38,8 +38,8 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        files: ['<%= yeoman.app %>/scripts/**/*.js'],
+        tasks: ['newer:jshint:all', 'concat'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -258,8 +258,7 @@ module.exports = function (grunt) {
     concat: {
       options: {
         // define a string to put between each file in the concatenated output
-        separator: ';',
-        sourceMap: true
+        separator: ';'
       },
       dist: {
         // the files to concatenate

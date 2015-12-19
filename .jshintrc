@@ -18,5 +18,9 @@
   "trailing": true,
   "sub": true,
   "maxlen": false,
-  "asi": true
+  "asi": true,
+  "predef": [
+    "angular",
+    "colorbrewer"
+  ]
 }

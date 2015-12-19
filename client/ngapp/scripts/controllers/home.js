@@ -36,10 +36,6 @@ angular.module('ooniAPIApp')
     var worldMap = {
         scope: 'world',
         responsive: true,
-        geographyConfig: {
-            borderColor: '#636363',
-            borderWidth: 1
-        },
         fills: {
             'HIGH': colorbrewer.PuBu[4][3],
             'MEDIUM': colorbrewer.PuBu[4][2],
@@ -57,7 +53,9 @@ angular.module('ooniAPIApp')
             highlightFillColor: '#26292C',
             highlightBorderColor: '#B4B4B4',
             highlightBorderWidth: 1,
-            highlightBorderOpacity: 1
+            highlightBorderOpacity: 1,
+            borderColor: '#636363',
+            borderWidth: 1
         }
     };
 
@@ -92,7 +90,6 @@ angular.module('ooniAPIApp')
     };
 
     $scope.viewCountry = function(row) {
-      console.log("viewing country", row.entitry)
       $location.path('/country/' + row.entity.alpha2);
     }
 });
