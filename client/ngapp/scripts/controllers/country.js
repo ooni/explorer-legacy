@@ -20,6 +20,7 @@ angular.module('ooniAPIApp')
     $scope.loadMeasurements = function(queryOptions) {
       var deferred = $q.defer();
 
+      queryOptions.where['probe_cc'] = $scope.countryCode;
       var query = {
           filter: {
               fields: {
@@ -30,9 +31,7 @@ angular.module('ooniAPIApp')
                   'id': true,
                   'probe_asn': true
               },
-              where: {
-                  'probe_cc': $scope.countryCode
-              },
+              where: queryOptions.where,
               offset: queryOptions.pageNumber * queryOptions.pageSize,
               limit: queryOptions.pageSize
           }
