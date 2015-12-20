@@ -765,7 +765,9 @@ label[for="anomalies"] {
 
 .view-chooser {
   text-align: center;
-  margin: 2rem 0; }
+  margin: 2rem 0;
+  position: relative;
+  z-index: 999; }
   .view-chooser a {
     padding: .25rem .5rem;
     font-size: .8rem;
