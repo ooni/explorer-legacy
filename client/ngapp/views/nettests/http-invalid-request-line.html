@@ -1,0 +1,16 @@
+<div>
+    <div class="overview">
+        <div>
+            <label for="body_length_match">body_length_match: </label><span id="input">{{ report.test_keys.body_length_match }}</span>
+            <label for="input">input: </label><span id="input">{{ report.input  }}</span>
+        </div>
+
+        <div class="description">
+            <h3>What does this test do?</h3>
+
+            <p>
+            This test attempts to trigger parsing errors in middle boxes that parse the HTTP protocol. This indicates that the network under analysis has deep packet inspection (DPI) capabilities. It can also often lead to fingerprinting the version and model of interference equipment used by a certain network. For example, the use of BlueCoat has been detected through this test. You can learn about BlueCoat here (link to report). This test sends out invalid HTTP requests and verifies if a control back-end is able to receive them and if it's not able to, then there's a sign of tampering.
+            </p>
+        </div>
+    </div>
+</div>

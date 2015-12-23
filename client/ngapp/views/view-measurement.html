@@ -20,8 +20,17 @@
 <div class="container" ng-hide="!loaded">
   <div class="row report-list-header">
     <div class="col-3">
-      <h1>Report: #{{measurementId}}</h1>
-      <h2>{{report.test_start_time | date:'shortDate'}} - {{ report.test_name }}</h2>
+      <h1>Report: {{measurementId}}</h1>
+      <h2>A {{ nettest.long_name }} test ran on {{report.test_start_time | date:'shortDate'}}</h2>
+
+      <div class="summary">
+        <h3>
+          Summary
+        </h3>
+        <div ng-if="report"
+          ooni-nettest-summary
+          report="report"></div>
+      </div>
 
       <div class="details">
         <h3>
@@ -29,32 +38,47 @@
         </h3>
 
         <div>
-          <label for="country">probe country: </label><span id="country"><i class="flag-icon" ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ report.probe_cc }}</span>
+          <label for="country">This test was run in </label>
+          <span id="country">
+            <i class="flag-icon"
+              ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ countryName }}
+          </span>
         </div>
-        <div>
-          <label for="asn">probe ASN: </label><span id="asn">{{ report.probe_asn }}</span>
-        </div>
-        <div>
-          <label for="software_name">software name: </label><span id="software_name">{{ report.software_name }}</span>
-        </div>
-        <div>
-          <label for="software_version">software version: </label><span id="software_version">{{ report.software_version }}</span>
-        </div>
-        <div>
-          <label for="probe_ip">probe IP: </label><span id="probe_ip">{{ report.probe_ip }}</span>
+        <div class="spec-in-all-tests">
+          <div class="inline-test-spec">
+            <span id="'asn'"
+                label="'probe ASN'"
+                ooni-more-info-hover
+                content="report.probe_asn"
+                definition="definitions.probe_asn"></span>
+          </div><div class="inline-test-spec">
+            <span id="'software_name'"
+                label="'Software Name'"
+                ooni-more-info-hover
+                content="report.test_keys.software_name"
+                definition="definitions.software_name"></span>
+          </div><div class="inline-test-spec">
+            <span id="'software_version'"
+                label="'Software Version'"
+                ooni-more-info-hover
+                content="report.test_keys.software_version"
+                definition="definitions.software_version"></span>
+          </div><div class="inline-test-spec">
+              <span id="'probe_ip'"
+                label="'probe IP'"
+                ooni-more-info-hover
+                content="report.probe_ip"
+                definition="definitions.probe_ip"></span>
+          </div>
         </div>
       </div>
 
-      <!-- <div
-        ng-if="report.test_name == 'http_requests'"
-        ng-include="'views/nettests/http-requests.html'">
-      </div> -->
       <div ng-if="report"
         ooni-nettest-details
         report="report"></div>
 
       <h3>
-          Measurement data
+          Inspect raw measurement data:
       </h3>
       <json-formatter open="1" json="report.test_keys">
       </json-formatter>

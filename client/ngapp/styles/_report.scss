@@ -41,3 +41,28 @@ label[for="anomalies"] {
     margin-top: 1rem;
   }
 }
+
+.inline-test-spec {
+  display: inline-block;
+  box-sizing: border-box;
+  margin-top: .5rem;
+  border: 1px solid $grey;
+  border-right: 0;
+  padding: .5rem 1rem;
+
+  &:last-child {
+    border-right: 1px solid $grey;
+  }
+
+  /*&:hover {
+    max-width: 1000px;
+    width: auto;
+    text-overflow: auto;
+  }*/
+}
+
+.note {
+  padding: .5rem .7rem;
+  background-color: transparentize($ooni-blue, .5);
+  border: 1px solid $ooni-blue;
+}

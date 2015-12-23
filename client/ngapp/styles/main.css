@@ -132,6 +132,26 @@ button {
 .ui-grid-viewport .ui-grid-cell {
   border-right: none; }
 
+.hover-wrapper {
+  position: relative;
+  cursor: pointer; }
+  .hover-wrapper label {
+    font-size: .8em; }
+  .hover-wrapper .hover-definition {
+    display: none;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: .5em;
+    width: 20rem;
+    opacity: 0;
+    top: 2rem;
+    left: 0;
+    vertical-align: top; }
+  .hover-wrapper:hover .hover-definition {
+    display: inline-block;
+    opacity: 1; }
+
 /* ================================================================== */
 /* Resets */
 * {
@@ -709,6 +729,26 @@ label[for="anomalies"] {
   .overview .description,
   .details .description {
     margin-top: 1rem; }
+
+.inline-test-spec {
+  display: inline-block;
+  box-sizing: border-box;
+  margin-top: .5rem;
+  border: 1px solid #c1c1c1;
+  border-right: 0;
+  padding: .5rem 1rem;
+  /*&:hover {
+    max-width: 1000px;
+    width: auto;
+    text-overflow: auto;
+  }*/ }
+  .inline-test-spec:last-child {
+    border-right: 1px solid #c1c1c1; }
+
+.note {
+  padding: .5rem .7rem;
+  background-color: rgba(5, 136, 203, 0.5);
+  border: 1px solid #0588CB; }
 
 .header-wrapper {
   background-color: #0588CB; }
