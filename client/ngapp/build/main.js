@@ -116,6 +116,7 @@ angular.module('ooniAPIApp')
               fields: {
                   'test_name': true,
                   'probe_cc': true,
+                  'probe_asn': true,
                   'input': true,
                   'test_start_time': true,
                   'id': true
