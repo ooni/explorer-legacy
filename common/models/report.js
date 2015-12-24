@@ -3,7 +3,7 @@ module.exports = function(Report) {
 
   Report.countByCountry = function(callback) {
     var ds = Report.dataSource;
-    var sql = "SELECT probe_cc, count(probe_cc) FROM reports GROUP BY probe_cc;";
+    var sql = "SELECT probe_cc, count FROM country_counts_view;";
     ds.connector.query(sql, function(err, data){
         if (err) {
             callback(err, null);

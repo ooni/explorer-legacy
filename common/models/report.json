@@ -5,7 +5,7 @@
   "options": {
     "validateUpsert": true,
     "postgresql": {
-      "table": "reports"
+      "table": "metrics"
     }
   },
   "properties": {
