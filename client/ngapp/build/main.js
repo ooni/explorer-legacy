@@ -509,7 +509,7 @@ angular.module('ooniAPIApp')
         $scope.filterMeasurements = function() {
             $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
-                $scope.queryOptions.where['input'] = $scope.inputFilter;
+                $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
             }
             if ($scope.testNameFilter.length > 0) {
                 $scope.queryOptions.where['test_name'] = $scope.testNameFilter;
