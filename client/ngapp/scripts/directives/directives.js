@@ -125,7 +125,7 @@ angular.module('ooniAPIApp')
 })
 
 .directive('ooniMoreInfoHover',
-  function ($location, $filter, Report, Country, Nettest, uiGridConstants ) {
+  function () {
     return {
       restrict: 'A',
       scope: {
@@ -135,5 +135,19 @@ angular.module('ooniAPIApp')
         label: '=?'
       },
       templateUrl: 'views/directives/ooni-more-info-hover-directive.html',
+    };
+})
+
+.directive('ooniReportDetailTableRow',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        definition: '=?',
+        content: '=',
+        id: '=?',
+        label: '=?'
+      },
+      templateUrl: 'views/directives/ooni-report-detail-table-row.html',
     };
 })
