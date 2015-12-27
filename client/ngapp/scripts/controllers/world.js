@@ -2,16 +2,14 @@
 
 /**
  * @ngdoc function
- * @name ooniAPIApp.controller:HomeCtrl
+ * @name ooniAPIApp.controller:WorldCtrl
  * @description
- * # HomeCtrl
+ * # WorldCtrl
  * Controller of the ooniAPIApp
  */
 
 angular.module('ooniAPIApp')
-  .controller('HomeCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
-
-    // $rootScope.$location = $location
+  .controller('WorldCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
 
     $rootScope.loaded = false;
 
@@ -69,9 +67,9 @@ angular.module('ooniAPIApp')
                   reportCountry: country.name,
                   alpha2: country.alpha2
               };
-              if (country.count < 100) {
+              if (country.count < 1000) {
                   worldMap.data[country.alpha3]["fillKey"] = "LOW";
-              } else if (country.count < 1000) {
+              } else if (country.count < 10000) {
                   worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
               } else {
                   worldMap.data[country.alpha3]["fillKey"] = "HIGH";
