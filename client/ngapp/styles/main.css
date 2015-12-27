@@ -51,14 +51,21 @@ thead th {
   font-weight: bold;
   text-align: left; }
 
-tbody td {
+tbody td,
+tbody th {
   padding: .25rem;
   transition: 0.5s background-color; }
 
-tbody tr:nth-child(even) td {
+tbody th {
+  font-weight: 600;
+  text-align: left; }
+
+tbody tr:nth-child(even) td,
+tbody tr:nth-child(even) th {
   background-color: #fafafa; }
 
-tbody tr:hover td {
+tbody tr:hover td,
+tbody tr:hover th {
   background-color: #f2f2f2; }
 
 table.countries td {
@@ -702,6 +709,9 @@ pre span.lw {
   list-style: none; }
   .anomalies li {
     margin-left: 0; }
+
+.report h3 {
+  line-height: 2.6; }
 
 label[for="anomalies"] {
   margin-top: 1rem;

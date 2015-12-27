@@ -10,5 +10,5 @@
 
 angular.module('ooniAPIApp')
   .controller('OverviewCtrl', function ($rootScope, $location) {
-
+    $rootScope.loaded = true;
 });

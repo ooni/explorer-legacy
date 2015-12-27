@@ -11,9 +11,12 @@
 angular.module('ooniAPIApp')
   .controller('ExploreViewCtrl', function ($q, $scope, $anchorScroll,
                                            $location, Report, Nettest,
-                                           $routeParams, uiGridConstants) {
+                                           $routeParams, uiGridConstants,
+                                           $rootScope) {
 
     $scope.loadMeasurements = function(queryOptions) {
+      $rootScope.loaded = false;
+
       var deferred = $q.defer();
 
       var query = {
@@ -35,6 +38,7 @@ angular.module('ooniAPIApp')
 
       Report.find(query, function(data) {
         deferred.resolve(data);
+        $rootScope.loaded = true;
       });
 
       return deferred.promise;
