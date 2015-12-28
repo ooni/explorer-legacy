@@ -1,13 +1,16 @@
-<main>
+<main ng-show="loaded">
 <div class="container">
   <div class="row">
     <div class="col-3">
-
+      <p class="explanation">OONI's network test probe runs from several locations across the globe to detect anomalies in internet connections. This map shows where our probe gets run most often.</p>
       <datamap map="worldMap" on-click="map_clicked" class="map"></datamap>
       <div class="worldMap"></div>
     </div>
   </div>
 </div>
+<p>
+  Browse the countries below to find a country you want to investigate the tests for:
+</p>
 
 <div ooni-grid-wrapper
   hide-filter="true"

@@ -43,10 +43,11 @@ angular.module('ooniAPIApp')
         data: {},
         geographyConfig: {
             popupTemplate: function(geo, data) {
-                return ['<div class="hoverinfo"><strong>',
-                        'Number of reports ' + data.reportCountry,
-                        ': ' + data.reportCount,
-                        '</strong></div>'].join('');
+              var reportCount = data !== null ? data.reportCount : 0;
+              return ['<div class="hoverinfo"><strong>',
+                      'Number of reports ' + geo.properties.name,
+                      ': ' +  reportCount,
+                      '</strong></div>'].join('');
             },
             highlightFillColor: '#26292C',
             highlightBorderColor: '#B4B4B4',
