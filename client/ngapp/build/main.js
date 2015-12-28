@@ -442,7 +442,8 @@ angular.module('ooniAPIApp')
         getDataFunction: '=',
         queryOptions: '=?', // TODO: still need to implement this
         viewRowObjectFunction: '=?', // TODO: still need to implement this
-        customColumnDefs: '=?'
+        customColumnDefs: '=?',
+        showFilter: '=?'
       },
       link: function ($scope, $element, $attrs) {
 
