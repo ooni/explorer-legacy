@@ -14,11 +14,12 @@ angular.module('ooniAPIApp')
                                            $routeParams, uiGridConstants,
                                            $rootScope) {
 
+
     $scope.loadMeasurements = function(queryOptions) {
+
       $rootScope.loaded = false;
 
       var deferred = $q.defer();
-
       var query = {
           filter: {
               fields: {
@@ -36,8 +37,11 @@ angular.module('ooniAPIApp')
           }
       }
 
+      console.log('right before send', query)
+
       Report.find(query, function(data) {
         deferred.resolve(data);
+        console.log("brought back data", data)
         $rootScope.loaded = true;
       });
 

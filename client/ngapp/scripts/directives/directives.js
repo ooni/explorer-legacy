@@ -8,7 +8,7 @@
 
 angular.module('ooniAPIApp')
 .directive('ooniGridWrapper',
-  function ($location, $filter, Report, Country, Nettest, uiGridConstants ) {
+  function ($location, $rootScope, $filter, Report, Country, Nettest, uiGridConstants ) {
     return {
       restrict: 'A',
       scope: {
@@ -16,9 +16,15 @@ angular.module('ooniAPIApp')
         queryOptions: '=?', // TODO: still need to implement this
         viewRowObjectFunction: '=?', // TODO: still need to implement this
         customColumnDefs: '=?',
-        showFilter: '=?'
+        hideFilter: '=?'
       },
       link: function ($scope, $element, $attrs) {
+
+        $rootScope.$watch('loaded', function() {
+          // There is some problems with how rootscope is seen
+          // by this directive
+          $scope.loaded = $rootScope.loaded;
+        })
 
         $scope.gridOptions = {};
         $scope.queryOptions = {};
@@ -31,6 +37,8 @@ angular.module('ooniAPIApp')
         $scope.inputFilter = "";
         $scope.testNameFilter = "";
         $scope.countryCodeFilter = "";
+        $scope.startDateFilter = "";
+        $scope.endDateFilter = "";
         $scope.nettests = Nettest.find();
 
         if ($scope.customColumnDefs !== undefined) {
@@ -85,6 +93,7 @@ angular.module('ooniAPIApp')
         }
 
         $scope.filterMeasurements = function() {
+            console.log('date filters', $scope.startDateFilter, $scope.endDateFilter);
             $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
                 $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
@@ -95,6 +104,19 @@ angular.module('ooniAPIApp')
             if ($scope.countryCodeFilter.length > 0) {
                 $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
             }
+            if ($scope.startDateFilter.length > 0) {
+              if ($scope.queryOptions.where['test_start_time'] === undefined) {
+                $scope.queryOptions.where['test_start_time'] = {}
+              }
+              $scope.queryOptions.where['test_start_time']['gte'] = $scope.startDateFilter;
+            }
+            if ($scope.endDateFilter.length > 0) {
+              if ($scope.queryOptions.where['test_start_time'] === undefined) {
+                $scope.queryOptions.where['test_start_time'] = {}
+              }
+              $scope.queryOptions.where['test_start_time']['lte'] = $scope.endDateFilter;
+            }
+            console.log('resending query', $scope.queryOptions.where)
             $scope.getDataFunction($scope.queryOptions).then(assignData);
         }
 

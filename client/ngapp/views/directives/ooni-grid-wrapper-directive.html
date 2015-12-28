@@ -1,19 +1,28 @@
 
-<form class="form-inline" ng-show="showFilter">
+<form class="form-inline" ng-hide="hideFilter" ng-show="loaded">
   <div class="form-group">
-      <label class="sr-only" for="input">Test Input:</label>
-      <input type="text" class="form-control" ng-model="inputFilter" placeholder="Test Input">
+    <label class="sr-only" for="input">Test Input:</label>
+    <input type="text" class="form-control" ng-model="inputFilter" placeholder="Test Input"/>
   </div>
   <div class="form-group">
-      <label class="sr-only" for="testName">Test Name:</label>
-      <select name="repeatSelect" id="repeatSelect" ng-model="testNameFilter">
+    <label class="sr-only" for="testName">Test Name:</label>
+    <select name="repeatSelect" id="repeatSelect" ng-model="testNameFilter">
         <option value="">-- Select Nettest --</option>
         <option ng-repeat="option in nettests" value="{{option.name}}">{{option.long_name}}</option>
-      </select>
+    </select>
   </div>
   <div class="form-group">
-      <label class="sr-only" for="countryCode">Country Code:</label>
-      <input type="text" class="form-control" ng-model="countryCodeFilter" placeholder="Country code">
+    <label class="sr-only" for="countryCode">Country Code:</label>
+    <input type="text" class="form-control" ng-model="countryCodeFilter" placeholder="Country code"/>
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="startDate">Start Date:</label>
+    <input type="date" class="form-control" ng-model="startDateFilter"/>
+  </div>
+  {{ startDateFilter }}
+  <div class="form-group">
+    <label class="sr-only" for="endDate">End Date:</label>
+    <input type="date" class="form-control" ng-model="endDateFilter"/>
   </div>
   <button class="" type="submit" ng-click="filterMeasurements()">Apply Filter</button>
 </form>
@@ -21,5 +30,6 @@
 <div id="grid1"
   ui-grid="gridOptions"
   ui-grid-pagination
-  class="grid">
+  class="grid"
+  ng-if="loaded">
 </div>

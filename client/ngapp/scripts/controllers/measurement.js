@@ -9,12 +9,12 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Nettest, Country, $routeParams, ISO3166) {
+  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $rootScope, $location, Report, Nettest, Country, $routeParams, ISO3166) {
 
     $scope.measurementId = $routeParams.id;
     $scope.measurementInput = $routeParams.input;
 
-    $scope.loaded = false;
+    $rootScope.loaded = false;
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
     $scope.pageNumber = 0;
@@ -46,11 +46,11 @@ angular.module('ooniAPIApp')
 
       $scope.countryName = ISO3166.getCountryName($scope.report.probe_cc);
 
-      $scope.loaded = true;
+      $rootScope.loaded = true;
     }
 
     function loading_failure() {
-      $scope.loaded = true;
+      $rootScope.loaded = true;
       $scope.not_found = true;
     }
 

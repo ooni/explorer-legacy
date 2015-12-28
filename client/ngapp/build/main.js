@@ -110,11 +110,12 @@ angular.module('ooniAPIApp')
                                            $routeParams, uiGridConstants,
                                            $rootScope) {
 
+
     $scope.loadMeasurements = function(queryOptions) {
+
       $rootScope.loaded = false;
 
       var deferred = $q.defer();
-
       var query = {
           filter: {
               fields: {
@@ -132,8 +133,11 @@ angular.module('ooniAPIApp')
           }
       }
 
+      console.log('right before send', query)
+
       Report.find(query, function(data) {
         deferred.resolve(data);
+        console.log("brought back data", data)
         $rootScope.loaded = true;
       });
 
@@ -152,12 +156,12 @@ angular.module('ooniAPIApp')
  */
 
 angular.module('ooniAPIApp')
-  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Nettest, Country, $routeParams, ISO3166) {
+  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $rootScope, $location, Report, Nettest, Country, $routeParams, ISO3166) {
 
     $scope.measurementId = $routeParams.id;
     $scope.measurementInput = $routeParams.input;
 
-    $scope.loaded = false;
+    $rootScope.loaded = false;
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
     $scope.pageNumber = 0;
@@ -189,11 +193,11 @@ angular.module('ooniAPIApp')
 
       $scope.countryName = ISO3166.getCountryName($scope.report.probe_cc);
 
-      $scope.loaded = true;
+      $rootScope.loaded = true;
     }
 
     function loading_failure() {
-      $scope.loaded = true;
+      $rootScope.loaded = true;
       $scope.not_found = true;
     }
 
@@ -435,7 +439,7 @@ angular.module('ooniAPIApp')
 
 angular.module('ooniAPIApp')
 .directive('ooniGridWrapper',
-  function ($location, $filter, Report, Country, Nettest, uiGridConstants ) {
+  function ($location, $rootScope, $filter, Report, Country, Nettest, uiGridConstants ) {
     return {
       restrict: 'A',
       scope: {
@@ -443,9 +447,15 @@ angular.module('ooniAPIApp')
         queryOptions: '=?', // TODO: still need to implement this
         viewRowObjectFunction: '=?', // TODO: still need to implement this
         customColumnDefs: '=?',
-        showFilter: '=?'
+        hideFilter: '=?'
       },
       link: function ($scope, $element, $attrs) {
+
+        $rootScope.$watch('loaded', function() {
+          // There is some problems with how rootscope is seen
+          // by this directive
+          $scope.loaded = $rootScope.loaded;
+        })
 
         $scope.gridOptions = {};
         $scope.queryOptions = {};
@@ -458,6 +468,8 @@ angular.module('ooniAPIApp')
         $scope.inputFilter = "";
         $scope.testNameFilter = "";
         $scope.countryCodeFilter = "";
+        $scope.startDateFilter = "";
+        $scope.endDateFilter = "";
         $scope.nettests = Nettest.find();
 
         if ($scope.customColumnDefs !== undefined) {
@@ -512,6 +524,7 @@ angular.module('ooniAPIApp')
         }
 
         $scope.filterMeasurements = function() {
+            console.log('date filters', $scope.startDateFilter, $scope.endDateFilter);
             $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
                 $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
@@ -522,6 +535,19 @@ angular.module('ooniAPIApp')
             if ($scope.countryCodeFilter.length > 0) {
                 $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
             }
+            if ($scope.startDateFilter.length > 0) {
+              if ($scope.queryOptions.where['test_start_time'] === undefined) {
+                $scope.queryOptions.where['test_start_time'] = {}
+              }
+              $scope.queryOptions.where['test_start_time']['gte'] = $scope.startDateFilter;
+            }
+            if ($scope.endDateFilter.length > 0) {
+              if ($scope.queryOptions.where['test_start_time'] === undefined) {
+                $scope.queryOptions.where['test_start_time'] = {}
+              }
+              $scope.queryOptions.where['test_start_time']['lte'] = $scope.endDateFilter;
+            }
+            console.log('resending query', $scope.queryOptions.where)
             $scope.getDataFunction($scope.queryOptions).then(assignData);
         }
 
