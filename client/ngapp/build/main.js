@@ -106,7 +106,7 @@ angular.module('ooniAPIApp')
 
 angular.module('ooniAPIApp')
   .controller('ExploreViewCtrl', function ($q, $scope, $anchorScroll,
-                                           $location, Report, Nettest,
+                                           $location, Nettest, Report,
                                            $routeParams, uiGridConstants,
                                            $rootScope) {
 
@@ -133,11 +133,9 @@ angular.module('ooniAPIApp')
           }
       }
 
-      console.log('right before send', query)
-
       Report.find(query, function(data) {
         deferred.resolve(data);
-        console.log("brought back data", data)
+
         $rootScope.loaded = true;
       });
 
@@ -447,7 +445,8 @@ angular.module('ooniAPIApp')
         queryOptions: '=?', // TODO: still need to implement this
         viewRowObjectFunction: '=?', // TODO: still need to implement this
         customColumnDefs: '=?',
-        hideFilter: '=?'
+        hideFilter: '=?',
+        countryCodes: '=?',
       },
       link: function ($scope, $element, $attrs) {
 
@@ -456,6 +455,22 @@ angular.module('ooniAPIApp')
           // by this directive
           $scope.loaded = $rootScope.loaded;
         })
+
+        $scope.$watch('countryCodes', function(ccsBool) {
+          if (ccsBool !== undefined && ccsBool === true) {
+            $scope.allCountryCodes = {}
+            Report.countByCountry({}, function(data) {
+              // TODO: this should be loaded on app load if it's used regularly in views.
+              // Don't want to reload every time the view is loaded.
+
+              data.forEach(function(country) {
+                $scope.allCountryCodes[country.alpha2] = country.name;
+              })
+            }, function(error) {
+              console.log('error', error)
+            })
+          }
+        });
 
         $scope.gridOptions = {};
         $scope.queryOptions = {};
@@ -547,7 +562,6 @@ angular.module('ooniAPIApp')
               }
               $scope.queryOptions.where['test_start_time']['lte'] = $scope.endDateFilter;
             }
-            console.log('resending query', $scope.queryOptions.where)
             $scope.getDataFunction($scope.queryOptions).then(assignData);
         }
 
@@ -569,7 +583,6 @@ angular.module('ooniAPIApp')
                 $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
         }
-
 
         $scope.getDataFunction($scope.queryOptions).then(assignData);
 

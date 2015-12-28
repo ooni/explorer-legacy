@@ -10,7 +10,7 @@
 
 angular.module('ooniAPIApp')
   .controller('ExploreViewCtrl', function ($q, $scope, $anchorScroll,
-                                           $location, Report, Nettest,
+                                           $location, Nettest, Report,
                                            $routeParams, uiGridConstants,
                                            $rootScope) {
 
@@ -37,11 +37,9 @@ angular.module('ooniAPIApp')
           }
       }
 
-      console.log('right before send', query)
-
       Report.find(query, function(data) {
         deferred.resolve(data);
-        console.log("brought back data", data)
+
         $rootScope.loaded = true;
       });
 
