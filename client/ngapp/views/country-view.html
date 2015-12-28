@@ -1,15 +1,15 @@
 <main class="country">
   <div class="container">
     <div class="row">
-        <h1>
-          <i class="flag-icon" ng-class="'flag-icon-' + countryCode | lowercase"></i>
-          <span ng-bind="countryName"><span>
-        </h1>
+      <h1>
+        <i class="flag-icon" ng-class="'flag-icon-' + countryCode | lowercase"></i>
+        <span ng-bind="countryName"><span>
+      </h1>
     </div>
 
-    <div ooni-grid-wrapper
-      get-data-function="loadMeasurements">
-    </div>
+    <p>
+      Here's what we know about anomalies with internect connections located in {{ countryName }}.
+    </p>
 
     <h3>
       Country Internet Statistics
@@ -37,5 +37,9 @@
       </tr>
       </tbody>
     </table>
+
+    <div ooni-grid-wrapper
+      get-data-function="loadMeasurements">
+    </div>
   </div>
 </main>

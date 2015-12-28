@@ -21,11 +21,13 @@ angular.module('ooniAPIApp')
       },
       link: function ($scope, $element, $attrs) {
 
+        $scope.filterFormOpen = false;
+
         $rootScope.$watch('loaded', function() {
           // There is some problems with how rootscope is seen
           // by this directive
           $scope.loaded = $rootScope.loaded;
-        })
+        });
 
         $scope.$watch('countryCodes', function(ccsBool) {
           if (ccsBool !== undefined && ccsBool === true) {

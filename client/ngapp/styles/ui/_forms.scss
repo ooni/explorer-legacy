@@ -1,11 +1,35 @@
-.form-inline {
+.fa-chevron-circle-down {
+  transition: $transition-speed;
+}
+
+.fa-chevron-circle-down.open {
+  transform: rotate(180deg);
+}
+
+.filter-form {
+  padding: 1.5rem;
+  background: $off-white none repeat scroll 0% 0%;
+  margin: 1rem 0;
+}
+
+.filter-toggle {
+  margin: 1rem 0 1rem;
+  cursor: pointer;
+  display: block;
+}
+
+.filter-form {
   @include placeholder-text("Fira Sans", 300)
 
   margin-bottom: 1rem;
 
   .form-group {
+    margin: 0 1rem 1rem 0;
+    display: block;
+  }
+
+  .form-group.inline {
     display: inline-block;
-    margin-right: 1rem;
   }
 
   select,
