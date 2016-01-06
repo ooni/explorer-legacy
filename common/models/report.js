@@ -1,9 +1,16 @@
 var countries = require('country-data').countries;
 module.exports = function(Report) {
 
-  Report.countByCountry = function(callback) {
+  Report.countByCountry = function(alpha2, callback) {
     var ds = Report.dataSource;
-    var sql = "SELECT probe_cc, count FROM country_counts_view;";
+    var sql = "SELECT probe_cc, count FROM country_counts_view";
+
+    // This is clearly not ideal, does Strongloop provide for sanitization?
+    // Surely their query language is a bit stronger than this?
+    if (alpha2 !== undefined && alpha2 !== null) {
+      sql += " WHERE probe_cc='" + alpha2 + "';";
+    }
+
     ds.connector.query(sql, function(err, data){
         if (err) {
             callback(err, null);
@@ -20,6 +27,7 @@ module.exports = function(Report) {
                 });
             }
         });
+
         callback(err, result);
     });
   }
@@ -28,9 +36,8 @@ module.exports = function(Report) {
       'countByCountry',
       { http: { verb: 'get' },
         description: 'Get number of reports by country code',
-        accepts: [],
+        accepts: { arg: 'alpha2', type: 'string' },
         returns: { arg: 'data', type: ['Object'], root: true  }
       }
   );
-
 };

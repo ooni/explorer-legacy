@@ -18,10 +18,13 @@ angular.module('ooniAPIApp')
     $http.get('bower_components/factbook-country-data/data/' + $scope.countryCode + '.json')
       .then(function(response) {
         $scope.countryDetails = response.data;
-        console.log(response.data);
       }, function(error) {
         console.log('error', error)
       })
+
+    Report.countByCountry({ alpha2: $scope.countryCode }, function(count) {
+      $scope.count = count[0].count;
+    });
 
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
@@ -46,6 +49,7 @@ angular.module('ooniAPIApp')
           }
       }
       Report.find(query, function(data) {
+        console.log(data);
         deferred.resolve(data);
         $rootScope.loaded = true;
       });

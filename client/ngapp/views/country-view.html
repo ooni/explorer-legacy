@@ -11,6 +11,14 @@
       Here's what we know about anomalies with internect connections located in {{ countryName }}.
     </p>
 
+    <p>
+      <h4>We've got {{ count | number }} measurements for {{ countryName }}.
+    </p>
+
+    <div ooni-grid-wrapper
+      get-data-function="loadMeasurements">
+    </div>
+
     <h3>
       Country Internet Statistics
     </h3>
@@ -37,9 +45,5 @@
       </tr>
       </tbody>
     </table>
-
-    <div ooni-grid-wrapper
-      get-data-function="loadMeasurements">
-    </div>
   </div>
 </main>
