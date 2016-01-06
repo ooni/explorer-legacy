@@ -461,6 +461,7 @@ angular.module('ooniAPIApp')
         customColumnDefs: '=?',
         hideFilter: '=?',
         countryCodes: '=?',
+        totalItems: '=?'
       },
       link: function ($scope, $element, $attrs) {
 
@@ -470,6 +471,8 @@ angular.module('ooniAPIApp')
           // There is some problems with how rootscope is seen
           // by this directive
           $scope.loaded = $rootScope.loaded;
+
+          $scope.gridOptions.totalItems = $scope.totalItems;
         });
 
         $scope.$watch('countryCodes', function(ccsBool) {
@@ -555,7 +558,6 @@ angular.module('ooniAPIApp')
         }
 
         $scope.filterMeasurements = function() {
-            console.log('date filters', $scope.startDateFilter, $scope.endDateFilter);
             $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
                 $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
@@ -584,6 +586,7 @@ angular.module('ooniAPIApp')
         $scope.gridOptions.rowTemplate = $scope.rowTemplate;
         $scope.gridOptions.useExternalPagination = true;
         $scope.gridOptions.useExternalSorting = true;
+
         $scope.gridOptions.paginationPageSize = $scope.queryOptions.pageSize;
         $scope.gridOptions.paginationPageSizes = [50, 100, 150];
 
