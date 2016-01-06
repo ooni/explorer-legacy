@@ -22,8 +22,8 @@ angular.module('ooniAPIApp')
         console.log('error', error)
       })
 
-    Report.countByCountry({ alpha2: $scope.countryCode }, function(count) {
-      $scope.count = count[0].count;
+    Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
+      $scope.count = count.count;
     });
 
     // XXX should use external pagination feature of ui grid
@@ -49,7 +49,6 @@ angular.module('ooniAPIApp')
           }
       }
       Report.find(query, function(data) {
-        console.log(data);
         deferred.resolve(data);
         $rootScope.loaded = true;
       });

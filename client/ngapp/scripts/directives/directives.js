@@ -28,9 +28,11 @@ angular.module('ooniAPIApp')
           // There is some problems with how rootscope is seen
           // by this directive
           $scope.loaded = $rootScope.loaded;
-
-          $scope.gridOptions.totalItems = $scope.totalItems;
         });
+
+        $scope.$watch('totalItems', function(newVal) {
+          $scope.gridOptions.totalItems = newVal;
+        })
 
         $scope.$watch('countryCodes', function(ccsBool) {
           if (ccsBool !== undefined && ccsBool === true) {
