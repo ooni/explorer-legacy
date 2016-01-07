@@ -460,7 +460,10 @@ angular.module('ooniAPIApp')
         customColumnDefs: '=?',
         hideFilter: '=?',
         countryCodes: '=?',
-        totalItems: '=?'
+        totalItems: '=?',
+        useExternalPagination: '=?', // defaults to True
+        enablePagination: '=?', // defaults to True
+        useExternalSorting: '=?', // defaults to True
       },
       link: function ($scope, $element, $attrs) {
 
@@ -585,8 +588,12 @@ angular.module('ooniAPIApp')
         }
 
         $scope.gridOptions.rowTemplate = $scope.rowTemplate;
-        $scope.gridOptions.useExternalPagination = true;
-        $scope.gridOptions.useExternalSorting = true;
+
+        $scope.gridOptions.enablePagination = $scope.enablePagination !== undefined ? $scope.enablePagination : true;
+        $scope.gridOptions.useExternalPagination = $scope.useExternalPagination !== undefined ? $scope.useExternalPagination : true;
+        $scope.gridOptions.useExternalSorting = $scope.useExternalSorting !== undefined ? $scope.useExternalSorting : true;
+
+        console.log($scope.gridOptions)
 
         $scope.gridOptions.paginationPageSize = $scope.queryOptions.pageSize;
         $scope.gridOptions.paginationPageSizes = [50, 100, 150];
