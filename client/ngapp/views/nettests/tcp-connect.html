@@ -2,19 +2,27 @@
     <div class="overview">
         <div>
           <h3>Details for this specific test:</h3>
-          <div class="inline-test-spec">
-              <span id="'connection'"
-                label="'Connection Success?'"
-                ooni-more-info-hover
-                content="report.test_keys.connection === 'success'"
-                definition="definitions.connection"></span>
-          </div><div class="inline-test-spec">
-              <span id="'input'"
-                label="'Test Input'"
-                ooni-more-info-hover
-                content="report.input"
-                definition="definitions.test_input"></span>
-          </div>
+          <table class="test-details">
+            <tbody>
+            <tr ooni-report-detail-table-row
+              content="report.test_keys.connection === 'success'"
+              label="'Connection Success?'"
+              >
+            </tr>
+            <tr ooni-report-detail-table-row
+              content="report.input"
+              label="'Test Input'">
+            </tr>
+            <tr ooni-report-detail-table-row
+              content="report.test_keys.test_version"
+              label="'Test Version'">
+            </tr>
+            <tr ooni-report-detail-table-row
+              content="report.test_keys.test_start_time | date: 'short'"
+              label="'Test Start Time'">
+            </tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="description">

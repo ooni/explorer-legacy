@@ -10,12 +10,16 @@
 
 angular.module('ooniAPIApp')
   .controller('ExploreViewCtrl', function ($q, $scope, $anchorScroll,
-                                           $location, Report, Nettest,
-                                           $routeParams, uiGridConstants) {
+                                           $location, Nettest, Report,
+                                           $routeParams, uiGridConstants,
+                                           $rootScope) {
+
 
     $scope.loadMeasurements = function(queryOptions) {
-      var deferred = $q.defer();
 
+      $rootScope.loaded = false;
+
+      var deferred = $q.defer();
       var query = {
           filter: {
               fields: {
@@ -35,6 +39,8 @@ angular.module('ooniAPIApp')
 
       Report.find(query, function(data) {
         deferred.resolve(data);
+
+        $rootScope.loaded = true;
       });
 
       return deferred.promise;

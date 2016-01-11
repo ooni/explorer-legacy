@@ -1,15 +1,5 @@
 <main class="report">
 
-<div ng-show="!loaded" class="loading row">
-  <div class="ooni-loader col-1">
-    <img src="../images/ooni-loader.svg">
-  </div>
-  <div class="col-2 ooni-loading-text">
-    <h2>Loading...</h2>
-    <pre typewrite text="loading_phrases" type-delay="100" class="saying"></pre>
-  </div>
-</div>
-
 <div ng-show="not_found">
   <h2>404 - Report not found</h2>
   <p>This can either mean that the report you submitted has not yet been
@@ -23,14 +13,14 @@
       <h1>Report: {{measurementId}}</h1>
       <h2>A {{ nettest.long_name }} test ran on {{report.test_start_time | date:'shortDate'}}</h2>
 
-      <div class="summary">
+      <!-- <div class="summary">
         <h3>
           Summary
         </h3>
         <div ng-if="report"
           ooni-nettest-summary
           report="report"></div>
-      </div>
+      </div> -->
 
       <div class="details">
         <h3>
@@ -38,7 +28,7 @@
         </h3>
 
         <div>
-          <label for="country">This test was run in </label>
+          <span for="country">This test was run in </span>
           <span id="country">
             <i class="flag-icon"
               ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ countryName }}
@@ -76,7 +66,6 @@
       <div ng-if="report"
         ooni-nettest-details
         report="report"></div>
-
       <h3>
           Inspect raw measurement data:
       </h3>

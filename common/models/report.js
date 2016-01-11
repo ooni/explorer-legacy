@@ -3,7 +3,8 @@ module.exports = function(Report) {
 
   Report.countByCountry = function(callback) {
     var ds = Report.dataSource;
-    var sql = "SELECT probe_cc, count FROM country_counts_view;";
+    var sql = "SELECT probe_cc, count FROM country_counts_view";
+
     ds.connector.query(sql, function(err, data){
         if (err) {
             callback(err, null);
@@ -20,6 +21,7 @@ module.exports = function(Report) {
                 });
             }
         });
+
         callback(err, result);
     });
   }
@@ -32,5 +34,4 @@ module.exports = function(Report) {
         returns: { arg: 'data', type: ['Object'], root: true  }
       }
   );
-
 };

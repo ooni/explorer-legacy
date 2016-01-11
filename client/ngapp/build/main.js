@@ -57,10 +57,22 @@ angular
  */
 
 angular.module('ooniAPIApp')
-  .controller('CountryDetailViewCtrl', function ($q, $scope, Report, $routeParams, ISO3166) {
+  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, Report, $http, $routeParams, ISO3166) {
+    $rootScope.loaded = false;
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
+
+    $http.get('bower_components/factbook-country-data/data/' + $scope.countryCode + '.json')
+      .then(function(response) {
+        $scope.countryDetails = response.data;
+      }, function(error) {
+        console.log('error', error)
+      })
+
+    Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
+      $scope.count = count.count;
+    });
 
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
@@ -68,6 +80,7 @@ angular.module('ooniAPIApp')
     $scope.loadMeasurements = function(queryOptions) {
       var deferred = $q.defer();
 
+      queryOptions.where['probe_cc'] = $scope.countryCode;
       var query = {
           filter: {
               fields: {
@@ -78,15 +91,14 @@ angular.module('ooniAPIApp')
                   'id': true,
                   'probe_asn': true
               },
-              where: {
-                  'probe_cc': $scope.countryCode
-              },
+              where: queryOptions.where,
               offset: queryOptions.pageNumber * queryOptions.pageSize,
               limit: queryOptions.pageSize
           }
       }
       Report.find(query, function(data) {
         deferred.resolve(data);
+        $rootScope.loaded = true;
       });
 
       return deferred.promise;
@@ -105,12 +117,16 @@ angular.module('ooniAPIApp')
 
 angular.module('ooniAPIApp')
   .controller('ExploreViewCtrl', function ($q, $scope, $anchorScroll,
-                                           $location, Report, Nettest,
-                                           $routeParams, uiGridConstants) {
+                                           $location, Nettest, Report,
+                                           $routeParams, uiGridConstants,
+                                           $rootScope) {
+
 
     $scope.loadMeasurements = function(queryOptions) {
-      var deferred = $q.defer();
 
+      $rootScope.loaded = false;
+
+      var deferred = $q.defer();
       var query = {
           filter: {
               fields: {
@@ -130,108 +146,14 @@ angular.module('ooniAPIApp')
 
       Report.find(query, function(data) {
         deferred.resolve(data);
+
+        $rootScope.loaded = true;
       });
 
       return deferred.promise;
     }
 
 });
-;'use strict';
-
-/**
- * @ngdoc function
- * @name ooniAPIApp.controller:HomeCtrl
- * @description
- * # HomeCtrl
- * Controller of the ooniAPIApp
- */
-
-angular.module('ooniAPIApp')
-  .controller('HomeCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
-
-    // $rootScope.$location = $location
-
-    $rootScope.loaded = false;
-
-    $scope.countries = {
-      alpha3: {},
-      alpha2: {}
-    };
-
-    $scope.columnDefs = [{
-        name: 'Country Code',
-        field:'alpha2'
-    },
-    {
-        name: 'Country Name',
-        field:'name'
-    },
-    {
-        name: 'Count',
-        field:'count'
-    }]
-
-    var worldMap = {
-        scope: 'world',
-        responsive: true,
-        fills: {
-            'HIGH': colorbrewer.PuBu[4][3],
-            'MEDIUM': colorbrewer.PuBu[4][2],
-            'LOW': colorbrewer.PuBu[4][1],
-            'defaultFill': colorbrewer.PuBu[4][0]
-        },
-        data: {},
-        geographyConfig: {
-            popupTemplate: function(geo, data) {
-                return ['<div class="hoverinfo"><strong>',
-                        'Number of reports ' + data.reportCountry,
-                        ': ' + data.reportCount,
-                        '</strong></div>'].join('');
-            },
-            highlightFillColor: '#26292C',
-            highlightBorderColor: '#B4B4B4',
-            highlightBorderWidth: 1,
-            highlightBorderOpacity: 1,
-            borderColor: '#636363',
-            borderWidth: 1
-        }
-    };
-
-    $scope.loadReports = function(queryOptions) {
-      var deferred = $q.defer();
-      Report.countByCountry(function(report_counts) {
-          $scope.reportsByCountry = report_counts;
-          angular.forEach(report_counts, function(country){
-              worldMap.data[country.alpha3] = {
-                  reportCount: country.count,
-                  reportCountry: country.name,
-                  alpha2: country.alpha2
-              };
-              if (country.count < 100) {
-                  worldMap.data[country.alpha3]["fillKey"] = "LOW";
-              } else if (country.count < 1000) {
-                  worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
-              } else {
-                  worldMap.data[country.alpha3]["fillKey"] = "HIGH";
-              }
-          })
-          $scope.worldMap = worldMap;
-          $rootScope.loaded = true;
-          deferred.resolve($scope.reportsByCountry);
-      });
-      return deferred.promise;
-    }
-
-    $scope.map_clicked = function(geo) {
-      var country_code = $scope.worldMap.data[geo.id].alpha2;
-      $location.path('/country/' + country_code);
-    };
-
-    $scope.viewCountry = function(row) {
-      $location.path('/country/' + row.entity.alpha2);
-    }
-});
-
 ;'use strict';
 
 /**
@@ -243,12 +165,12 @@ angular.module('ooniAPIApp')
  */
 
 angular.module('ooniAPIApp')
-  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $location, Report, Nettest, Country, $routeParams, ISO3166) {
+  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $rootScope, $location, Report, Nettest, Country, $routeParams, ISO3166) {
 
     $scope.measurementId = $routeParams.id;
     $scope.measurementInput = $routeParams.input;
 
-    $scope.loaded = false;
+    $rootScope.loaded = false;
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
     $scope.pageNumber = 0;
@@ -280,11 +202,11 @@ angular.module('ooniAPIApp')
 
       $scope.countryName = ISO3166.getCountryName($scope.report.probe_cc);
 
-      $scope.loaded = true;
+      $rootScope.loaded = true;
     }
 
     function loading_failure() {
-      $scope.loaded = true;
+      $rootScope.loaded = true;
       $scope.not_found = true;
     }
 
@@ -420,8 +342,104 @@ angular.module('ooniAPIApp')
 
 angular.module('ooniAPIApp')
   .controller('OverviewCtrl', function ($rootScope, $location) {
-
+    $rootScope.loaded = true;
 });
+;'use strict';
+
+/**
+ * @ngdoc function
+ * @name ooniAPIApp.controller:WorldCtrl
+ * @description
+ * # WorldCtrl
+ * Controller of the ooniAPIApp
+ */
+
+angular.module('ooniAPIApp')
+  .controller('WorldCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
+
+    $rootScope.loaded = false;
+
+    $scope.countries = {
+      alpha3: {},
+      alpha2: {}
+    };
+
+    $scope.columnDefs = [{
+        name: 'Country Code',
+        field:'alpha2'
+    },
+    {
+        name: 'Country Name',
+        field:'name'
+    },
+    {
+        name: 'Count',
+        field:'count'
+    }]
+
+    var worldMap = {
+        scope: 'world',
+        responsive: true,
+        fills: {
+            'HIGH': colorbrewer.PuBu[4][3],
+            'MEDIUM': colorbrewer.PuBu[4][2],
+            'LOW': colorbrewer.PuBu[4][1],
+            'defaultFill': colorbrewer.PuBu[4][0]
+        },
+        data: {},
+        geographyConfig: {
+            popupTemplate: function(geo, data) {
+              var reportCount = data !== null ? data.reportCount : 0;
+              return ['<div class="hoverinfo"><strong>',
+                      'Number of reports ' + geo.properties.name,
+                      ': ' +  reportCount,
+                      '</strong></div>'].join('');
+            },
+            highlightFillColor: '#26292C',
+            highlightBorderColor: '#B4B4B4',
+            highlightBorderWidth: 1,
+            highlightBorderOpacity: 1,
+            borderColor: '#636363',
+            borderWidth: 1
+        }
+    };
+
+    $scope.loadReports = function(queryOptions) {
+      var deferred = $q.defer();
+      Report.countByCountry(function(report_counts) {
+          $scope.reportsByCountry = report_counts;
+          angular.forEach(report_counts, function(country){
+              worldMap.data[country.alpha3] = {
+                  reportCount: country.count,
+                  reportCountry: country.name,
+                  alpha2: country.alpha2
+              };
+              if (country.count < 1000) {
+                  worldMap.data[country.alpha3]["fillKey"] = "LOW";
+              } else if (country.count < 10000) {
+                  worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
+              } else {
+                  worldMap.data[country.alpha3]["fillKey"] = "HIGH";
+              }
+          })
+          $scope.worldMap = worldMap;
+          $rootScope.loaded = true;
+          deferred.resolve($scope.reportsByCountry);
+      });
+      return deferred.promise;
+    }
+
+    $scope.map_clicked = function(geo) {
+      var country_code = $scope.worldMap.data[geo.id].alpha2;
+      $location.path('/country/' + country_code);
+    };
+
+    $scope.viewCountry = function(row) {
+      $rootScope.loaded = false;
+      $location.path('/country/' + row.entity.alpha2);
+    }
+});
+
 ;/**
  * @ngdoc function
  * @name ooniAPIApp.directive:ooniGridWrapper
@@ -432,16 +450,50 @@ angular.module('ooniAPIApp')
 
 angular.module('ooniAPIApp')
 .directive('ooniGridWrapper',
-  function ($location, $filter, Report, Country, Nettest, uiGridConstants ) {
+  function ($location, $rootScope, $filter, Report, Country, Nettest, uiGridConstants ) {
     return {
       restrict: 'A',
       scope: {
         getDataFunction: '=',
         queryOptions: '=?', // TODO: still need to implement this
         viewRowObjectFunction: '=?', // TODO: still need to implement this
-        customColumnDefs: '=?'
+        customColumnDefs: '=?',
+        hideFilter: '=?',
+        countryCodes: '=?',
+        totalItems: '=?',
+        useExternalPagination: '=?', // defaults to True
+        enablePagination: '=?', // defaults to True
+        useExternalSorting: '=?', // defaults to True
       },
       link: function ($scope, $element, $attrs) {
+
+        $scope.filterFormOpen = false;
+
+        $rootScope.$watch('loaded', function() {
+          // There is some problems with how rootscope is seen
+          // by this directive
+          $scope.loaded = $rootScope.loaded;
+        });
+
+        $scope.$watch('totalItems', function(newVal) {
+          $scope.gridOptions.totalItems = newVal;
+        })
+
+        $scope.$watch('countryCodes', function(ccsBool) {
+          if (ccsBool !== undefined && ccsBool === true) {
+            $scope.allCountryCodes = {}
+            Report.countByCountry({}, function(data) {
+              // TODO: this should be loaded on app load if it's used regularly in views.
+              // Don't want to reload every time the view is loaded.
+
+              data.forEach(function(country) {
+                $scope.allCountryCodes[country.alpha2] = country.name;
+              })
+            }, function(error) {
+              console.log('error', error)
+            })
+          }
+        });
 
         $scope.gridOptions = {};
         $scope.queryOptions = {};
@@ -454,6 +506,8 @@ angular.module('ooniAPIApp')
         $scope.inputFilter = "";
         $scope.testNameFilter = "";
         $scope.countryCodeFilter = "";
+        $scope.startDateFilter = "";
+        $scope.endDateFilter = "";
         $scope.nettests = Nettest.find();
 
         if ($scope.customColumnDefs !== undefined) {
@@ -510,7 +564,7 @@ angular.module('ooniAPIApp')
         $scope.filterMeasurements = function() {
             $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
-                $scope.queryOptions.where['input'] = $scope.inputFilter;
+                $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
             }
             if ($scope.testNameFilter.length > 0) {
                 $scope.queryOptions.where['test_name'] = $scope.testNameFilter;
@@ -518,12 +572,29 @@ angular.module('ooniAPIApp')
             if ($scope.countryCodeFilter.length > 0) {
                 $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
             }
+            if ($scope.startDateFilter.length > 0) {
+              if ($scope.queryOptions.where['test_start_time'] === undefined) {
+                $scope.queryOptions.where['test_start_time'] = {}
+              }
+              $scope.queryOptions.where['test_start_time']['gte'] = $scope.startDateFilter;
+            }
+            if ($scope.endDateFilter.length > 0) {
+              if ($scope.queryOptions.where['test_start_time'] === undefined) {
+                $scope.queryOptions.where['test_start_time'] = {}
+              }
+              $scope.queryOptions.where['test_start_time']['lte'] = $scope.endDateFilter;
+            }
             $scope.getDataFunction($scope.queryOptions).then(assignData);
         }
 
         $scope.gridOptions.rowTemplate = $scope.rowTemplate;
-        $scope.gridOptions.useExternalPagination = true;
-        $scope.gridOptions.useExternalSorting = true;
+
+        $scope.gridOptions.enablePagination = $scope.enablePagination !== undefined ? $scope.enablePagination : true;
+        $scope.gridOptions.useExternalPagination = $scope.useExternalPagination !== undefined ? $scope.useExternalPagination : true;
+        $scope.gridOptions.useExternalSorting = $scope.useExternalSorting !== undefined ? $scope.useExternalSorting : true;
+
+        console.log($scope.gridOptions)
+
         $scope.gridOptions.paginationPageSize = $scope.queryOptions.pageSize;
         $scope.gridOptions.paginationPageSizes = [50, 100, 150];
 
@@ -540,7 +611,6 @@ angular.module('ooniAPIApp')
             });
         }
 
-
         $scope.getDataFunction($scope.queryOptions).then(assignData);
 
       },
@@ -549,7 +619,7 @@ angular.module('ooniAPIApp')
 })
 
 .directive('ooniMoreInfoHover',
-  function ($location, $filter, Report, Country, Nettest, uiGridConstants ) {
+  function () {
     return {
       restrict: 'A',
       scope: {
@@ -559,6 +629,20 @@ angular.module('ooniAPIApp')
         label: '=?'
       },
       templateUrl: 'views/directives/ooni-more-info-hover-directive.html',
+    };
+})
+
+.directive('ooniReportDetailTableRow',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        definition: '=?',
+        content: '=',
+        id: '=?',
+        label: '=?'
+      },
+      templateUrl: 'views/directives/ooni-report-detail-table-row.html',
     };
 })
 ;;(function(window, angular, undefined) {'use strict';

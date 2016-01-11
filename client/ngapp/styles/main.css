@@ -51,14 +51,21 @@ thead th {
   font-weight: bold;
   text-align: left; }
 
-tbody td {
-  padding: .25rem;
+tbody td,
+tbody th {
+  padding: .25rem .5rem;
   transition: 0.5s background-color; }
 
-tbody tr:nth-child(even) td {
+tbody th {
+  font-weight: 600;
+  text-align: left; }
+
+tbody tr:nth-child(even) td,
+tbody tr:nth-child(even) th {
   background-color: #fafafa; }
 
-tbody tr:hover td {
+tbody tr:hover td,
+tbody tr:hover th {
   background-color: #f2f2f2; }
 
 table.countries td {
@@ -88,30 +95,48 @@ button {
     background-color: #046799;
     color: white; }
 
-.form-inline {
+.fa-chevron-circle-down {
+  transition: 0.5s; }
+
+.fa-chevron-circle-down.open {
+  transform: rotate(180deg); }
+
+.filter-form {
+  padding: 1.5rem;
+  background: #f2f2f2 none repeat scroll 0% 0%;
+  margin: 1rem 0; }
+
+.filter-toggle {
+  margin: 1rem 0 1rem;
+  cursor: pointer;
+  display: block; }
+
+.filter-form {
   margin-bottom: 1rem; }
-  .form-inline ::-webkit-input-placeholder {
+  .filter-form ::-webkit-input-placeholder {
     font-family: "Fira Sans";
     font-weight: 300; }
-  .form-inline :-moz-placeholder {
+  .filter-form :-moz-placeholder {
     /* Firefox 18- */
     font-family: "Fira Sans";
     font-weight: 300; }
-  .form-inline ::-moz-placeholder {
+  .filter-form ::-moz-placeholder {
     /* Firefox 19+ */
     font-family: "Fira Sans";
     font-weight: 300; }
-  .form-inline :-ms-input-placeholder {
+  .filter-form :-ms-input-placeholder {
     font-family: "Fira Sans";
     font-weight: 300; }
-  .form-inline .form-group {
-    display: inline-block;
-    margin-right: 1rem; }
-  .form-inline select,
-  .form-inline input {
+  .filter-form .form-group {
+    margin: 0 1rem 1rem 0;
+    display: block; }
+  .filter-form .form-group.inline {
+    display: inline-block; }
+  .filter-form select,
+  .filter-form input {
     font-size: .8rem;
     padding: .25rem .5rem; }
-  .form-inline input {
+  .filter-form input {
     border-radius: 3px; }
 
 .ui-grid {
@@ -698,10 +723,24 @@ pre span.lw {
 .country h1 {
   margin-bottom: 1rem; }
 
+.map {
+  margin-top: -80px; }
+
+.explanation {
+  text-align: center;
+  max-width: 640px;
+  margin: 0rem auto 2rem; }
+
+.statistics {
+  margin-top: 1rem; }
+
 .anomalies {
   list-style: none; }
   .anomalies li {
     margin-left: 0; }
+
+.report h3 {
+  line-height: 2.6; }
 
 label[for="anomalies"] {
   margin-top: 1rem;
@@ -759,9 +798,6 @@ label[for="anomalies"] {
     color: white;
     margin-bottom: 0;
     padding: 1rem 0; }
-
-.map {
-  margin-top: -80px; }
 
 .view-chooser {
   text-align: center;

@@ -5,8 +5,8 @@ window.CONFIG = {
       "templateUrl": "/views/overview.html"
     },
     "/world/": {
-      "controller": "HomeCtrl",
-      "templateUrl": "/views/home.html"
+      "controller": "WorldCtrl",
+      "templateUrl": "/views/world.html"
     },
     "/explore/": {
       "controller": "ExploreViewCtrl",

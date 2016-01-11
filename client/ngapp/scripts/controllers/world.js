@@ -2,16 +2,14 @@
 
 /**
  * @ngdoc function
- * @name ooniAPIApp.controller:HomeCtrl
+ * @name ooniAPIApp.controller:WorldCtrl
  * @description
- * # HomeCtrl
+ * # WorldCtrl
  * Controller of the ooniAPIApp
  */
 
 angular.module('ooniAPIApp')
-  .controller('HomeCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
-
-    // $rootScope.$location = $location
+  .controller('WorldCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
 
     $rootScope.loaded = false;
 
@@ -45,10 +43,11 @@ angular.module('ooniAPIApp')
         data: {},
         geographyConfig: {
             popupTemplate: function(geo, data) {
-                return ['<div class="hoverinfo"><strong>',
-                        'Number of reports ' + data.reportCountry,
-                        ': ' + data.reportCount,
-                        '</strong></div>'].join('');
+              var reportCount = data !== null ? data.reportCount : 0;
+              return ['<div class="hoverinfo"><strong>',
+                      'Number of reports ' + geo.properties.name,
+                      ': ' +  reportCount,
+                      '</strong></div>'].join('');
             },
             highlightFillColor: '#26292C',
             highlightBorderColor: '#B4B4B4',
@@ -69,9 +68,9 @@ angular.module('ooniAPIApp')
                   reportCountry: country.name,
                   alpha2: country.alpha2
               };
-              if (country.count < 100) {
+              if (country.count < 1000) {
                   worldMap.data[country.alpha3]["fillKey"] = "LOW";
-              } else if (country.count < 1000) {
+              } else if (country.count < 10000) {
                   worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
               } else {
                   worldMap.data[country.alpha3]["fillKey"] = "HIGH";
@@ -90,6 +89,7 @@ angular.module('ooniAPIApp')
     };
 
     $scope.viewCountry = function(row) {
+      $rootScope.loaded = false;
       $location.path('/country/' + row.entity.alpha2);
     }
 });

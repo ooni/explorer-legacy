@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../bower_components/colorbrewer/colorbrewer.css">
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/angular-typewrite/dist/angular-typewrite.css" />
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="../bower_components/flag-icon-css/css/flag-icon.min.css" />
     <link rel="stylesheet" href="../bower_components/angular-ui-grid/ui-grid.css" />
     <link rel="stylesheet" href="../bower_components/json-formatter/dist/json-formatter.css" />
@@ -46,6 +47,16 @@
     <div class="container">
       <div class="view-chooser" role="group" aria-label="choose a view">
         <a ng-class="{selected: $location.path() === '/world/'}" href="/world/">World</a><a ng-class="{selected: $location.path() === '/explore/'}" href="/explore/">Explorer</a><a ng-class="{selected: $location.path() === '/'}" href="/">Highlights</a>
+      </div>
+
+      <div ng-show="!loaded" class="loading row">
+        <div class="ooni-loader col-1">
+          <img src="../images/ooni-loader.svg">
+        </div>
+        <div class="col-2 ooni-loading-text">
+          <h2>Loading...</h2>
+          <pre typewrite text="loading_phrases" type-delay="100" class="saying"></pre>
+        </div>
       </div>
       <div ng-view></div>
     </div>

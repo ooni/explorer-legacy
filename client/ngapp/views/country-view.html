@@ -1,13 +1,52 @@
 <main class="country">
   <div class="container">
     <div class="row">
-        <h1>
-          <i class="flag-icon" ng-class="'flag-icon-' + countryCode | lowercase"></i>
-          <span ng-bind="countryName"><span>
-        </h1>
+      <h1>
+        <i class="flag-icon" ng-class="'flag-icon-' + countryCode | lowercase"></i>
+        <span ng-bind="countryName"><span>
+      </h1>
     </div>
+
+    <p>
+      Here's what we know about anomalies with internect connections located in {{ countryName }}.
+    </p>
+
+    <p>
+      <h4>We've got {{ count | number }} measurements for {{ countryName }}.</h4>
+    </p>
+
     <div ooni-grid-wrapper
-      get-data-function="loadMeasurements">
+      get-data-function="loadMeasurements"
+      total-items="count">
+    </div>
+
+    <div class="statistics">
+    <h3>
+      Country Internet Statistics
+    </h3>
+    <p>Datasource: <a href="https://github.com/simonv3/factbook-country-data">World Fact Book</a></p>
+
+    <table class="test-details">
+      <tbody>
+      <tr ooni-report-detail-table-row
+        content="countryDetails.Communications['Internet country code'].text"
+        label="'Top level domain'"
+        >
+      </tr>
+      <tr ooni-report-detail-table-row
+        content="countryDetails.Communications['Internet users']['percent of population'].text"
+        label="'Percent of population using the internet'">
+      </tr>
+      <tr ooni-report-detail-table-row
+        content="countryDetails.Communications['Internet users']['total'].text"
+        label="'Total population using the internet'">
+      </tr>
+      <tr ooni-report-detail-table-row
+        content="countryDetails['People and Society']['Population'].text"
+        label="'Total population'">
+      </tr>
+      </tbody>
+    </table>
     </div>
   </div>
 </main>
