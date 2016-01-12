@@ -536,6 +536,74 @@ module.factory(
           url: urlBase + "/reports/blockpageCount",
           method: "GET"
         },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#blockpageList
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns the list of URLs that appear to be blocked in a given country
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   - `probe_cc` – `{*}` - The countryCode queried for.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "blockpageList": {
+          isArray: true,
+          url: urlBase + "/reports/blockpageList",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#vendors
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns the identified vendors of censorship and surveillance equipment
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   - `probe_cc` – `{*}` - The countryCode queried for.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "vendors": {
+          isArray: true,
+          url: urlBase + "/reports/vendors",
+          method: "GET"
+        },
       }
     );
 
