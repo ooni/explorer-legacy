@@ -1,6 +1,23 @@
 var countries = require('country-data').countries;
 module.exports = function(Report) {
 
+
+  Report.blockpageCount = function(probe_cc, callback) {
+    var ds = Report.dataSource;
+    var sql = "SELECT * FROM blockpage_counts WHERE probe_cc = $1";
+
+    ds.connector.query(sql, [probe_cc], callback);
+  }
+
+  Report.remoteMethod(
+      'blockpageCount',
+      { http: { verb: 'get' },
+        description: 'Returns the number of blockpages detected per total',
+        accepts: {arg: 'probe_cc', type: 'string'},
+        returns: { arg: 'data', type: ['Object'], root: true  }
+      }
+  );
+
   Report.countByCountry = function(callback) {
     var ds = Report.dataSource;
     var sql = "SELECT probe_cc, count FROM country_counts_view";
