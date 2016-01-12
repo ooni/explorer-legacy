@@ -2,6 +2,39 @@ var countries = require('country-data').countries;
 module.exports = function(Report) {
 
 
+  Report.blockpageList = function(probe_cc, callback) {
+    var ds = Report.dataSource;
+    var sql = "SELECT * FROM blockpage_list WHERE probe_cc = $1";
+
+    ds.connector.query(sql, [probe_cc], callback);
+  }
+
+  Report.remoteMethod(
+      'blockpageList',
+      { http: { verb: 'get' },
+        description: 'Returns the list of URLs that appear to be blocked in a given country',
+        accepts: {arg: 'probe_cc', type: 'string'},
+        returns: { arg: 'data', type: ['Object'], root: true  }
+      }
+  );
+
+
+  Report.vendors = function(probe_cc, callback) {
+    var ds = Report.dataSource;
+    var sql = "SELECT * FROM identified_vendors WHERE probe_cc = $1";
+
+    ds.connector.query(sql, [probe_cc], callback);
+  }
+
+  Report.remoteMethod(
+      'vendors',
+      { http: { verb: 'get' },
+        description: 'Returns the identified vendors of censorship and surveillance equipment',
+        accepts: {arg: 'probe_cc', type: 'string'},
+        returns: { arg: 'data', type: ['Object'], root: true  }
+      }
+  );
+
   Report.blockpageCount = function(probe_cc, callback) {
     var ds = Report.dataSource;
     var sql = "SELECT * FROM blockpage_counts WHERE probe_cc = $1";
