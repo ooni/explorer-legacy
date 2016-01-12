@@ -4,7 +4,7 @@ module.exports = function(Report) {
 
   Report.blockpageList = function(probe_cc, callback) {
     var ds = Report.dataSource;
-    var sql = "SELECT * FROM blockpage_list WHERE probe_cc = $1";
+    var sql = "SELECT * FROM blockpage_urls WHERE probe_cc = $1";
 
     ds.connector.query(sql, [probe_cc], callback);
   }
