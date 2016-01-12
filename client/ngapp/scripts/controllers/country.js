@@ -22,6 +22,10 @@ angular.module('ooniAPIApp')
         console.log('error', error)
       })
 
+    Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
+      $scope.blockpageCount = resp;
+    })
+
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
       $scope.count = count.count;
     });

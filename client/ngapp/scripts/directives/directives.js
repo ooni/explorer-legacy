@@ -151,8 +151,6 @@ angular.module('ooniAPIApp')
         $scope.gridOptions.useExternalPagination = $scope.useExternalPagination !== undefined ? $scope.useExternalPagination : true;
         $scope.gridOptions.useExternalSorting = $scope.useExternalSorting !== undefined ? $scope.useExternalSorting : true;
 
-        console.log($scope.gridOptions)
-
         $scope.gridOptions.paginationPageSize = $scope.queryOptions.pageSize;
         $scope.gridOptions.paginationPageSizes = [50, 100, 150];
 
