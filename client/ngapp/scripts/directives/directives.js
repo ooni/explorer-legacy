@@ -117,7 +117,6 @@ angular.module('ooniAPIApp')
 
         var assignData = function(data) {
           $scope.gridOptions.data = data;
-          console.log('refreshing grid', data);
           $scope.gridApi.core.queueRefresh()
         }
 
@@ -216,7 +215,6 @@ angular.module('ooniAPIApp')
         phrases: '=?'
       },
       controller: function($scope) {
-        console.log('hi');
         $scope.loading_phrases = [
           "Hacking some planet",
           "Extracting square root of i",

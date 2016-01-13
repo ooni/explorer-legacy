@@ -50,7 +50,7 @@ angular
 
 angular.module('ooniAPIApp')
   .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, Report, $http, $routeParams, ISO3166) {
-    $rootScope.loaded = false;
+    $scope.loaded = false;
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
@@ -72,7 +72,6 @@ angular.module('ooniAPIApp')
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
-      console.log($scope.vendors)
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
@@ -108,7 +107,7 @@ angular.module('ooniAPIApp')
 
       Report.find(query, function(data) {
         deferred.resolve(data);
-        $rootScope.loaded = true;
+        $scope.loaded = true;
       });
 
       return deferred.promise;
@@ -586,7 +585,6 @@ angular.module('ooniAPIApp')
 
         var assignData = function(data) {
           $scope.gridOptions.data = data;
-          console.log('refreshing grid', data);
           $scope.gridApi.core.queueRefresh()
         }
 
@@ -685,7 +683,6 @@ angular.module('ooniAPIApp')
         phrases: '=?'
       },
       controller: function($scope) {
-        console.log('hi');
         $scope.loading_phrases = [
           "Hacking some planet",
           "Extracting square root of i",

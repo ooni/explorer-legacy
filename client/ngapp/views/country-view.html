@@ -15,6 +15,10 @@
       <h4>We've got {{ count | number }} measurements for {{ countryName }}.</h4>
     </p>
 
+    <div ooni-loader
+      loaded="loaded">
+    </div>
+
     <div ooni-grid-wrapper
       get-data-function="loadMeasurements"
       total-items="count">

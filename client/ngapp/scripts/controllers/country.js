@@ -10,7 +10,7 @@
 
 angular.module('ooniAPIApp')
   .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, Report, $http, $routeParams, ISO3166) {
-    $rootScope.loaded = false;
+    $scope.loaded = false;
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
@@ -32,7 +32,6 @@ angular.module('ooniAPIApp')
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
-      console.log($scope.vendors)
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
@@ -68,7 +67,7 @@ angular.module('ooniAPIApp')
 
       Report.find(query, function(data) {
         deferred.resolve(data);
-        $rootScope.loaded = true;
+        $scope.loaded = true;
       });
 
       return deferred.promise;
