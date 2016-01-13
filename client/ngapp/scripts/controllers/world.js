@@ -11,7 +11,7 @@
 angular.module('ooniAPIApp')
   .controller('WorldCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
 
-    $rootScope.loaded = false;
+    $scope.loaded = false;
 
     $scope.countries = {
       alpha3: {},
@@ -71,7 +71,13 @@ angular.module('ooniAPIApp')
 
     $scope.loadReports = function(queryOptions) {
       var deferred = $q.defer();
-      Report.countByCountry(function(report_counts) {
+
+      var query = {}
+      if (queryOptions.order) {
+        query.order = queryOptions.order;
+      }
+
+      Report.countByCountry(query, function(report_counts) {
           $scope.reportsByCountry = report_counts;
           angular.forEach(report_counts, function(country){
               worldMap.data[country.alpha3] = {
@@ -88,21 +94,20 @@ angular.module('ooniAPIApp')
               }
           })
           $scope.worldMap = worldMap;
-          $rootScope.loaded = true;
+          $scope.loaded = true;
           deferred.resolve($scope.reportsByCountry);
       });
+
       return deferred.promise;
     }
 
     $scope.map_clicked = function(geo) {
-      console.log('viewing country')
       var country_code = $scope.worldMap.data[geo.id].alpha2;
       $location.path('/country/' + country_code);
     };
 
     $scope.viewCountry = function(row) {
-      console.log('viewing country')
-      $rootScope.loaded = false;
+      $scope.loaded = false;
       $location.path('/country/' + row.entity.alpha2);
     }
 });

@@ -14,10 +14,9 @@ angular.module('ooniAPIApp')
                                            $routeParams, uiGridConstants,
                                            $rootScope) {
 
-
     $scope.loadMeasurements = function(queryOptions) {
 
-      $rootScope.loaded = false;
+      $scope.loaded = false;
 
       var deferred = $q.defer();
       var query = {
@@ -40,7 +39,7 @@ angular.module('ooniAPIApp')
       Report.find(query, function(data) {
         deferred.resolve(data);
 
-        $rootScope.loaded = true;
+        $scope.loaded = true;
       });
 
       return deferred.promise;

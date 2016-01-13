@@ -117,6 +117,8 @@ angular.module('ooniAPIApp')
 
         var assignData = function(data) {
           $scope.gridOptions.data = data;
+          console.log('refreshing grid', data);
+          $scope.gridApi.core.queueRefresh()
         }
 
         $scope.filterMeasurements = function() {

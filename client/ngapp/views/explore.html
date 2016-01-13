@@ -1,9 +1,13 @@
-<main ng-show="loaded">
+<main>
 <p>
   Explore our measurements and reports from various types of tests and countries. Use the filter to narrow down what you're looking for.
 </p>
-<div ooni-grid-wrapper
-  country-codes="true"
-  get-data-function="loadMeasurements">
-</div>
+  <div ooni-loader
+    loaded="loaded">
+  </div>
+  <div ooni-grid-wrapper
+    country-codes="true"
+    get-data-function="loadMeasurements"
+    >
+  </div>
 </main>
