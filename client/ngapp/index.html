@@ -49,14 +49,8 @@
         <a ng-class="{selected: $location.path() === '/world/'}" href="/world/">World</a><a ng-class="{selected: $location.path() === '/explore/'}" href="/explore/">Explorer</a><a ng-class="{selected: $location.path() === '/'}" href="/">Highlights</a>
       </div>
 
-      <div ng-show="!loaded" class="loading row">
-        <div class="ooni-loader col-1">
-          <img src="../images/ooni-loader.svg">
-        </div>
-        <div class="col-2 ooni-loading-text">
-          <h2>Loading...</h2>
-          <pre typewrite text="loading_phrases" type-delay="100" class="saying"></pre>
-        </div>
+      <div ooni-loader
+        loaded="loaded">
       </div>
       <div ng-view></div>
     </div>

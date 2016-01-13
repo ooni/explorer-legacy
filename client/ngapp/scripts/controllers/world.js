@@ -95,11 +95,13 @@ angular.module('ooniAPIApp')
     }
 
     $scope.map_clicked = function(geo) {
+      console.log('viewing country')
       var country_code = $scope.worldMap.data[geo.id].alpha2;
       $location.path('/country/' + country_code);
     };
 
     $scope.viewCountry = function(row) {
+      console.log('viewing country')
       $rootScope.loaded = false;
       $location.path('/country/' + row.entity.alpha2);
     }

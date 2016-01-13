@@ -37,12 +37,4 @@ angular
   .run(function($rootScope, $location) {
 
     $rootScope.$location = $location;
-
-    $rootScope.loading_phrases = [
-      "Hacking some planet",
-      "Extracting square root of i",
-      "Modifying the space time continuum",
-      "Adjusting ultra speed variable to be nominal",
-      "Performing a safety meeting"
-    ];
   });

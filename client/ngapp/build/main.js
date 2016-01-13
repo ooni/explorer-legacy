@@ -37,14 +37,6 @@ angular
   .run(function($rootScope, $location) {
 
     $rootScope.$location = $location;
-
-    $rootScope.loading_phrases = [
-      "Hacking some planet",
-      "Extracting square root of i",
-      "Modifying the space time continuum",
-      "Adjusting ultra speed variable to be nominal",
-      "Performing a safety meeting"
-    ];
   });
 ;'use strict';
 
@@ -109,6 +101,11 @@ angular.module('ooniAPIApp')
               limit: queryOptions.pageSize
           }
       }
+
+      if (queryOptions.order) {
+        query.filter.order = queryOptions;
+      }
+
       Report.find(query, function(data) {
         deferred.resolve(data);
         $rootScope.loaded = true;
@@ -454,11 +451,13 @@ angular.module('ooniAPIApp')
     }
 
     $scope.map_clicked = function(geo) {
+      console.log('viewing country')
       var country_code = $scope.worldMap.data[geo.id].alpha2;
       $location.path('/country/' + country_code);
     };
 
     $scope.viewCountry = function(row) {
+      console.log('viewing country')
       $rootScope.loaded = false;
       $location.path('/country/' + row.entity.alpha2);
     }
@@ -623,13 +622,16 @@ angular.module('ooniAPIApp')
         $scope.gridOptions.onRegisterApi = function(gridApi) {
             $scope.gridApi = gridApi;
             $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
+              if (sortColumns.length > 0) {
                 $scope.queryOptions.order = sortColumns[0].field + " " + sortColumns[0].sort.direction.toUpperCase();
-                $scope.getDataFunction($scope.queryOptions).then(assignData);
+              }
+              console.log($scope.queryOptions.order)
+              $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
             gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
-                $scope.queryOptions.pageNumber = newPage;
-                $scope.queryOptions.pageSize = pageSize;
-                $scope.getDataFunction($scope.queryOptions).then(assignData);
+              $scope.queryOptions.pageNumber = newPage;
+              $scope.queryOptions.pageSize = pageSize;
+              $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
         }
 
@@ -665,6 +667,28 @@ angular.module('ooniAPIApp')
         label: '=?'
       },
       templateUrl: 'views/directives/ooni-report-detail-table-row.html',
+    };
+})
+
+.directive('ooniLoader',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        loaded: '=',
+        phrases: '=?'
+      },
+      controller: function($scope) {
+        console.log('hi');
+        $scope.loading_phrases = [
+          "Hacking some planet",
+          "Extracting square root of i",
+          "Modifying the space time continuum",
+          "Adjusting ultra speed variable to be nominal",
+          "Performing a safety meeting"
+        ];
+      },
+      templateUrl: 'views/directives/ooni-loader.directive.html',
     };
 })
 ;;(function(window, angular, undefined) {'use strict';
