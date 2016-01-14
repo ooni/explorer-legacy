@@ -35,6 +35,20 @@ module.exports = function(Report) {
       }
   );
 
+  Report.blockpageDetected = function(callback) {
+    var ds = Report.dataSource;
+    var sql = "SELECT DISTINCT probe_cc FROM blockpage_count";
+    ds.connector.query(sql, callback);
+  }
+
+  Report.remoteMethod(
+      'blockpageDetected',
+      { http: { verb: 'get' },
+        description: 'Returns the country codes where we detected the presence of a blockpage',
+        returns: { arg: 'data', type: ['Object'], root: true  }
+      }
+  );
+
   Report.blockpageCount = function(probe_cc, callback) {
     var ds = Report.dataSource;
     var sql = "SELECT * FROM blockpage_count WHERE probe_cc = $1";
