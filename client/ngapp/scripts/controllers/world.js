@@ -93,9 +93,9 @@ angular.module('ooniAPIApp')
                   };
                   if (alpha2WithBlockingDetected.indexOf(country.alpha2) !== -1) {
                       worldMap.data[country.alpha3]["fillKey"] = "BLOCKPAGE";
-                  } else if (country.count < 1000) {
-                      worldMap.data[country.alpha3]["fillKey"] = "LOW";
                   } else if (country.count < 10000) {
+                      worldMap.data[country.alpha3]["fillKey"] = "LOW";
+                  } else if (country.count < 100000) {
                       worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
                   } else {
                       worldMap.data[country.alpha3]["fillKey"] = "HIGH";
