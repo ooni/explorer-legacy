@@ -49,6 +49,7 @@ angular.module('ooniAPIApp')
             'HIGH': colorbrewer.PuBu[4][3],
             'MEDIUM': colorbrewer.PuBu[4][2],
             'LOW': colorbrewer.PuBu[4][1],
+            'BLOCKPAGE': colorbrewer.OrRd[4][3],
             'defaultFill': colorbrewer.PuBu[4][0]
         },
         data: {},
@@ -78,24 +79,32 @@ angular.module('ooniAPIApp')
       }
 
       Report.countByCountry(query, function(report_counts) {
-          $scope.reportsByCountry = report_counts;
-          angular.forEach(report_counts, function(country){
-              worldMap.data[country.alpha3] = {
-                  reportCount: country.count,
-                  reportCountry: country.name,
-                  alpha2: country.alpha2
-              };
-              if (country.count < 1000) {
-                  worldMap.data[country.alpha3]["fillKey"] = "LOW";
-              } else if (country.count < 10000) {
-                  worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
-              } else {
-                  worldMap.data[country.alpha3]["fillKey"] = "HIGH";
-              }
-          })
-          $scope.worldMap = worldMap;
-          $scope.loaded = true;
-          deferred.resolve($scope.reportsByCountry);
+          Report.blockpageDetected(function(blockpage_countries) {
+              var alpha2WithBlockingDetected = [];
+              angular.forEach(blockpage_countries, function(country) {
+                alpha2WithBlockingDetected.push(country.probe_cc);
+              });
+              $scope.reportsByCountry = report_counts;
+              angular.forEach(report_counts, function(country){
+                  worldMap.data[country.alpha3] = {
+                      reportCount: country.count,
+                      reportCountry: country.name,
+                      alpha2: country.alpha2
+                  };
+                  if (alpha2WithBlockingDetected.indexOf(country.alpha2) !== -1) {
+                      worldMap.data[country.alpha3]["fillKey"] = "BLOCKPAGE";
+                  } else if (country.count < 1000) {
+                      worldMap.data[country.alpha3]["fillKey"] = "LOW";
+                  } else if (country.count < 10000) {
+                      worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
+                  } else {
+                      worldMap.data[country.alpha3]["fillKey"] = "HIGH";
+                  }
+              })
+              $scope.worldMap = worldMap;
+              $scope.loaded = true;
+              deferred.resolve($scope.reportsByCountry);
+          });
       });
 
       return deferred.promise;

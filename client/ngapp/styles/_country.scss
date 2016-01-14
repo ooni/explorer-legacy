@@ -18,3 +18,16 @@
 .statistics {
   margin-top: 1rem;
 }
+
+.worldMapLegend {
+    margin-top: -230px;
+    margin-bottom: 50px;
+    dt {
+        display: block;
+        width: 10px;
+        height: 10px;
+    }
+    dd {
+         display: inline;
+    }
+}

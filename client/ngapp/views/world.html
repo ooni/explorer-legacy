@@ -5,6 +5,18 @@
         <p class="explanation">OONI's network test probe runs from several locations across the globe to detect anomalies in internet connections. This map shows where our probe gets run most often.</p>
         <datamap map="worldMap" on-click="map_clicked" class="map"></datamap>
         <div class="worldMap"></div>
+        <div class="worldMapLegend">
+            <dl>
+                <dt style="background-color: {{worldMap.fills.HIGH}}"></dt>
+                <dd>More than 10.000 measurements</dd>
+                <dt style="background-color: {{worldMap.fills.MEDIUM}}"></dt>
+                <dd>More than 1.000 measurements</dd>
+                <dt style="background-color: {{worldMap.fills.LOW}}"></dt>
+                <dd>Less than 1.000 measurements</dd>
+                <dt style="background-color: {{worldMap.fills.BLOCKPAGE}}"></dt>
+                <dd>Confirmed cases of censorship</dd>
+            </dl>
+        </div>
       </div>
     </div>
   </div>
