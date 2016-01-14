@@ -79,7 +79,9 @@ angular.module('ooniAPIApp')
       }
 
       Report.countByCountry(query, function(report_counts) {
+        console.log('fetched report counts', report_counts)
           Report.blockpageDetected(function(blockpage_countries) {
+            console.log('fetched blockpage countries', blockpage_countries)
               var alpha2WithBlockingDetected = [];
               angular.forEach(blockpage_countries, function(country) {
                 alpha2WithBlockingDetected.push(country.probe_cc);
@@ -104,6 +106,8 @@ angular.module('ooniAPIApp')
               $scope.worldMap = worldMap;
               $scope.loaded = true;
               deferred.resolve($scope.reportsByCountry);
+          }, function(err, resp){
+            console.log(err, resp);
           });
       });
 

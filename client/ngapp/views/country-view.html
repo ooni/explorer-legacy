@@ -8,12 +8,18 @@
     </div>
 
     <p>
-      Here's what we know about anomalies with internect connections located in {{ countryName }}.
+      Here's what we know about anomalies with internet connections located in {{ countryName }}.
     </p>
 
     <p>
       <h4>We've got {{ count | number }} measurements for {{ countryName }}.</h4>
     </p>
+
+    <svg ng-show="blockpageCount.length > 0"
+      class="bar-chart"
+      id="blockpageCount-bar-chart">
+
+    </svg>
 
     <div ooni-loader
       loaded="loaded">

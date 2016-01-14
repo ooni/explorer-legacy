@@ -734,6 +734,30 @@ pre span.lw {
 .statistics {
   margin-top: 1rem; }
 
+.bar-chart .bar {
+  display: inline-block;
+  fill: #0588CB;
+  width: 4rem;
+  margin-right: 2rem; }
+  .bar-chart .bar.block {
+    fill: #cc0000; }
+
+.bar-chart text {
+  fill: #c1c1c1;
+  font-size: 16px; }
+  .bar-chart text.date {
+    text-anchor: middle; }
+
+.worldMapLegend {
+  margin-top: -230px;
+  margin-bottom: 50px; }
+  .worldMapLegend dt {
+    display: block;
+    width: 10px;
+    height: 10px; }
+  .worldMapLegend dd {
+    display: inline; }
+
 .anomalies {
   list-style: none; }
   .anomalies li {

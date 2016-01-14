@@ -51,7 +51,7 @@ module.exports = function(Report) {
 
   Report.blockpageCount = function(probe_cc, callback) {
     var ds = Report.dataSource;
-    var sql = "SELECT * FROM blockpage_count WHERE probe_cc = $1";
+    var sql = "SELECT * FROM blockpage_count WHERE probe_cc = $1 ORDER BY test_start_time";
 
     ds.connector.query(sql, [probe_cc], callback);
   }

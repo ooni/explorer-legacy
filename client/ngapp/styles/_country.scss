@@ -19,6 +19,29 @@
   margin-top: 1rem;
 }
 
+.bar-chart {
+  .bar {
+    display: inline-block;
+    fill: $ooni-blue;
+    width: 4rem;
+    margin-right: 2rem;
+
+    &.block {
+      fill: $red;
+    }
+  }
+
+  text {
+    fill: $grey;
+    font-size: 16px;
+
+    &.date {
+      text-anchor: middle;
+
+    }
+  }
+}
+
 .worldMapLegend {
     margin-top: -230px;
     margin-bottom: 50px;
