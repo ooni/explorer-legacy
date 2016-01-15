@@ -19,14 +19,34 @@
   margin-top: 1rem;
 }
 
+.graph-description {
+  text-align: center;
+  font-size: .8rem;
+  margin-top: .5rem;
+
+  i {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+  }
+
+  .measured {
+    background: $ooni-blue;
+  }
+  .blocked {
+    background: $red;
+  }
+}
+
 .bar-chart {
   .bar {
+    cursor: pointer;
     display: inline-block;
     fill: $ooni-blue;
     width: 4rem;
     margin-right: 2rem;
 
-    &.block {
+    &.blocked {
       fill: $red;
     }
   }
@@ -34,23 +54,15 @@
   text {
     fill: $grey;
     font-size: 16px;
+    transition: fill $transition-speed;
 
-    &.date {
+    &.date,
+    &.total {
       text-anchor: middle;
-
     }
   }
-}
 
-.worldMapLegend {
-    margin-top: -230px;
-    margin-bottom: 50px;
-    dt {
-        display: block;
-        width: 10px;
-        height: 10px;
-    }
-    dd {
-         display: inline;
-    }
+  .hidden {
+    fill: $white;
+  }
 }

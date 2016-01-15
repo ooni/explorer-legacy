@@ -734,29 +734,37 @@ pre span.lw {
 .statistics {
   margin-top: 1rem; }
 
+.graph-description {
+  text-align: center;
+  font-size: .8rem;
+  margin-top: .5rem; }
+  .graph-description i {
+    display: inline-block;
+    width: 1em;
+    height: 1em; }
+  .graph-description .measured {
+    background: #0588CB; }
+  .graph-description .blocked {
+    background: #cc0000; }
+
 .bar-chart .bar {
+  cursor: pointer;
   display: inline-block;
   fill: #0588CB;
   width: 4rem;
   margin-right: 2rem; }
-  .bar-chart .bar.block {
+  .bar-chart .bar.blocked {
     fill: #cc0000; }
 
 .bar-chart text {
   fill: #c1c1c1;
-  font-size: 16px; }
-  .bar-chart text.date {
+  font-size: 16px;
+  transition: fill 0.5s; }
+  .bar-chart text.date, .bar-chart text.total {
     text-anchor: middle; }
 
-.worldMapLegend {
-  margin-top: -230px;
-  margin-bottom: 50px; }
-  .worldMapLegend dt {
-    display: block;
-    width: 10px;
-    height: 10px; }
-  .worldMapLegend dd {
-    display: inline; }
+.bar-chart .hidden {
+  fill: #fff; }
 
 .anomalies {
   list-style: none; }
@@ -812,6 +820,16 @@ label[for="anomalies"] {
   padding: .5rem .7rem;
   background-color: rgba(5, 136, 203, 0.5);
   border: 1px solid #0588CB; }
+
+.worldMapLegend {
+  margin-top: -230px;
+  margin-bottom: 50px; }
+  .worldMapLegend dt {
+    display: block;
+    width: 10px;
+    height: 10px; }
+  .worldMapLegend dd {
+    display: inline; }
 
 .header-wrapper {
   background-color: #0588CB; }

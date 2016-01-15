@@ -62,17 +62,23 @@ angular.module('ooniAPIApp')
         console.log('error', error)
       })
 
+    var containerWidth = parseInt(d3.select('.container').style('width'), 10)
+
     Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageCount = resp;
 
       var margin = {top: 20, right: 30, bottom: 30, left: 40},
-          width = 960 - margin.left - margin.right,
+          width = containerWidth - margin.left - margin.right,
           height = 220 - margin.top - margin.bottom,
-          barWidth = 40;
+          groupWidth = width / $scope.blockpageCount.length,
+          barWidth = groupWidth / 3;
+
 
       var y = d3.scale.linear()
           .domain([0, d3.max($scope.blockpageCount, function(d) {return d.total_count })])
           .range([height, 0]);
+
+      console.log($scope.blockpageCount.length)
 
       var chart = d3.select('#blockpageCount-bar-chart')
         .attr("width", width + margin.left + margin.right)
@@ -81,39 +87,62 @@ angular.module('ooniAPIApp')
       var barGroup = chart.selectAll('g')
           .data($scope.blockpageCount)
         .enter().append('g')
-          .attr('transform', function(d, i) { return "translate(" + ((i * barWidth) * 3 + 40) + ",0)";})
+          .attr('transform', function(d, i) {
+            var eachBar = parseInt(groupWidth * i, 10)
+            return "translate(" + (eachBar) + ",20)";
+          })
 
       barGroup.append("rect")
         .attr('class', 'bar total')
-        .attr('y', function(d) { return y(d.total_count); })
-        .attr('height', function(d) { return height - y(d.total_count); })
-        .attr('width', barWidth - 1);
+        .attr('height', 0)
+        .attr('x', groupWidth / 2)
+        .attr('y', height)
+        .attr('width', barWidth)
+        .transition()
+          .duration(1000)
+          .attr('y', function(d) { return y(d.total_count); })
+          .attr('height', function(d) { return height - y(d.total_count); })
 
       barGroup.append("rect")
-        .attr('class', 'bar block')
-        .attr('y', function(d) { return y(d.block_count); })
-        .attr('height', function(d) { return height - y(d.block_count); })
-        .attr('width', barWidth - 1);
+        .attr('class', 'bar blocked')
+        .attr('width', barWidth)
+        .attr('x', groupWidth / 2)
+        .attr('y', height)
+        .attr('height', 0)
+        .transition()
+          .duration(1000)
+          .attr('y', function(d) { return y(d.block_count); })
+          .attr('height', function(d) { return height - y(d.block_count); })
 
-      barGroup.append("text")
-        .attr("x", barWidth)
-        .attr("y", function(d) { return y(d.total_count) ; })
+      barGroup.append('text')
+        .attr("x", barWidth * 2)
+        .classed({'hidden': true, 'tooltip': true, 'total': true})
+        .attr("y", function(d) { return y(d.total_count) - 20; })
         .attr("dy", ".75em")
         .text(function(d) { return d.total_count + ' measured'; });
 
-      barGroup.append("text")
-        .attr("x", barWidth)
-        .attr("y", function(d) { return y(d.block_count) ; })
+      barGroup.append('text')
+        .attr('x', barWidth * 2 + barWidth / 2 + 5)
+        .classed({'hidden': true, 'tooltip': true})
+        .attr('y', function(d) { return y(d.block_count) - 5; })
         .attr("dy", ".75em")
         .text(function(d) { return d.block_count + ' blocked'; });
 
       barGroup.append("text")
         .attr('class', 'date')
-        .attr("x", barWidth / 2)
-        .attr("y", height + margin.bottom )
+        .attr("x", barWidth * 2)
+        .attr("y", height + margin.bottom / 2 )
         .attr("dy", ".75em")
         .text(function(d) { return $filter('date')(d.test_start_time, 'mediumDate'); });
 
+      barGroup.on('mouseover', function() {
+        d3.select(this).selectAll('.tooltip')
+          .classed('hidden', false)
+      })
+      barGroup.on('mouseout', function() {
+        d3.select(this).selectAll('.tooltip')
+          .classed('hidden', true)
+      })
     });
 
     Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
