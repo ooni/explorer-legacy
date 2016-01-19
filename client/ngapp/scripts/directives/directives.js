@@ -161,7 +161,6 @@ angular.module('ooniAPIApp')
               if (sortColumns.length > 0) {
                 $scope.queryOptions.order = sortColumns[0].field + " " + sortColumns[0].sort.direction.toUpperCase();
               }
-              console.log($scope.queryOptions.order)
               $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
             gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
@@ -236,92 +235,151 @@ angular.module('ooniAPIApp')
       },
       link: function($scope) {
 
+        $scope.page = 1;
+        $scope.perPage = 5;
+
+        var sliceBackwards = function(arr, perPage, page) {
+          var start = -perPage * page;
+          var end = -$scope.perPage * ($scope.page - 1)
+          console.log('start, end', start, end)
+          if (end >= -0) {
+            return arr.slice(start)
+          } else {
+            return arr.slice(start, end)
+          }
+        }
+
+        var updateData = function(chart, data) {
+
+          console.log("updating data:", data);
+
+          var barWidth = $scope.groupWidth / 3,
+              groupWidth = $scope.groupWidth,
+              y = $scope.y,
+              height = $scope.height;
+
+          // set to data
+          var barGroup = chart.selectAll('.bar-group')
+              .data(data, function(d) {return d.test_start_time});
+
+          // update old attributes
+
+          barGroup
+            .transition()
+              .duration(750)
+              .attr('transform', function(d, i) {
+                var eachBar = parseInt(groupWidth * i, 10);
+                return "translate(" + (eachBar) + ",0)";
+              });
+
+          // enter
+          var barGroupEnter = barGroup
+            .enter().append('g')
+              .classed('bar-group', true)
+              .attr('transform', function(d, i) {
+                var eachBar = parseInt(groupWidth * i, 10);
+                return "translate(" + (eachBar) + ",0)";
+              });
+
+          barGroupEnter.append("rect")
+            .attr('class', 'bar total')
+            .attr('height', 0)
+            .attr('x', groupWidth / 2)
+            .attr('y', height)
+            .attr('width', barWidth)
+            .transition()
+              .duration(1000)
+              .attr('y', function(d) { return y(d.total_count); })
+              .attr('height', function(d) { return height - y(d.total_count); });
+
+          barGroupEnter.append("rect")
+            .attr('class', 'bar blocked')
+            .attr('width', barWidth)
+            .attr('x', groupWidth / 2)
+            .attr('y', height)
+            .attr('height', 0)
+            .transition()
+              .duration(1000)
+              .attr('y', function(d) { return y(d.block_count); })
+              .attr('height', function(d) { return height - y(d.block_count); });
+
+          // text
+          barGroupEnter.append('text')
+            .attr("x", barWidth * 2)
+            .classed({'total': true})
+            .attr("y", function(d) { return y(d.total_count) - 20; })
+            .attr("dy", ".75em")
+            .text(function(d) { return d.total_count; });
+
+          // blocked
+          barGroupEnter.append('text')
+            .attr('x', barWidth * 2 + barWidth)
+            .classed({'blocked': true})
+            .attr('y', function(d) { return y(d.block_count) - 10; })
+            .attr("dy", ".75em")
+            .text(function(d) { return d.block_count; });
+
+          // date
+          barGroupEnter.append("text")
+            .attr('class', 'date')
+            // .attr("", barWidth * 2)
+            // .attr("y", height )
+            .attr("dy", ".4em")
+            .attr("transform", "translate("+ (barWidth * 2) +"," +(+height + 10) +")rotate(65)")
+            .text(function(d) { return $filter('date')(d.test_start_time, 'shortDate'); });
+
+          // exit
+          barGroup.exit().remove()
+        };
+
         $scope.$watch('countryData', function() {
           if ($scope.countryData) {
-            console.log('country data loaded', $scope.countryData)
-            var minGroupWidth = 90;
-            var containerWidth = parseInt(d3.select('.container').style('width'), 10)
 
-            if (minGroupWidth * $scope.countryData.length > containerWidth) {
-              containerWidth = minGroupWidth * $scope.countryData.length;
-            }
+            var minGroupWidth = 90;
+            var containerWidth = parseInt(d3.select('.container').style('width'), 10);
 
             var margin = {top: 60, right: 30, bottom: 60, left: 0},
-                width = containerWidth - margin.left - margin.right,
-                height = 240 - margin.top - margin.bottom,
-                groupWidth = width / $scope.countryData.length,
-                barWidth = groupWidth / 3;
+                width = containerWidth - margin.left - margin.right;
 
-            var max = d3.max($scope.countryData, function(d) {return parseInt(d.total_count, 10) })
+            $scope.height = 240 - margin.top - margin.bottom;
+            $scope.groupWidth = width / $scope.perPage;
 
-            console.log(max)
+            // only get the most recent data
+            var viewing = sliceBackwards($scope.countryData, $scope.perPage, $scope.page);
 
-            var y = d3.scale.linear()
+            console.log("viewing", viewing)
+
+            var max = d3.max($scope.countryData, function(d) {return parseInt(d.total_count, 10) });
+
+            $scope.y = d3.scale.linear()
                 .domain([0, max])
-                .range([height, 0]);
+                .range([$scope.height, 0]);
 
-            var chart = d3.select('#blockpageCount-bar-chart')
+            $scope.chart = d3.select('#blockpageCount-bar-chart')
                 .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
+                .attr("height", $scope.height + margin.top + margin.bottom)
               .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            var barGroup = chart.selectAll('g')
-                .data($scope.countryData)
-              .enter().append('g')
-                .attr('transform', function(d, i) {
-                  var eachBar = parseInt(groupWidth * i, 10)
-                  return "translate(" + (eachBar) + ",0)";
-                })
+            updateData($scope.chart, viewing);
 
-            barGroup.append("rect")
-              .attr('class', 'bar total')
-              .attr('height', 0)
-              .attr('x', groupWidth / 2)
-              .attr('y', height)
-              .attr('width', barWidth)
-              .transition()
-                .duration(1000)
-                .attr('y', function(d) { console.log(d); return y(d.total_count); })
-                .attr('height', function(d) { return height - y(d.total_count); })
-
-            barGroup.append("rect")
-              .attr('class', 'bar blocked')
-              .attr('width', barWidth)
-              .attr('x', groupWidth / 2)
-              .attr('y', height)
-              .attr('height', 0)
-              .transition()
-                .duration(1000)
-                .attr('y', function(d) { return y(d.block_count); })
-                .attr('height', function(d) { return height - y(d.block_count); })
-
-            // text
-            barGroup.append('text')
-              .attr("x", barWidth * 2)
-              .classed({'total': true})
-              .attr("y", function(d) { return y(d.total_count) - 20; })
-              .attr("dy", ".75em")
-              .text(function(d) { return d.total_count; });
-
-            // blocked
-            barGroup.append('text')
-              .attr('x', barWidth * 2 + barWidth)
-              .classed({'blocked': true})
-              .attr('y', function(d) { return y(d.block_count) - 10; })
-              .attr("dy", ".75em")
-              .text(function(d) { return d.block_count; });
-
-            // date
-            barGroup.append("text")
-              .attr('class', 'date')
-              // .attr("", barWidth * 2)
-              // .attr("y", height )
-              .attr("dy", ".4em")
-              .attr("transform", "translate("+ (barWidth * 2) +"," +(+height + 10) +")rotate(65)")
-              .text(function(d) { return $filter('date')(d.test_start_time, 'shortDate'); });
           }
-        })
+        });
+
+        $scope.viewOlder = function(){
+          $scope.page++;
+          var viewing = sliceBackwards($scope.countryData, $scope.perPage, $scope.page)
+
+          updateData($scope.chart, viewing);
+        };
+
+        $scope.viewNewer = function(){
+          $scope.page--;
+          var viewing = sliceBackwards($scope.countryData, $scope.perPage, $scope.page)
+
+          console.log($scope.page, viewing)
+          updateData($scope.chart, viewing);
+        };
 
       },
       templateUrl: 'views/directives/ooni-country-bar-chart.directive.html',

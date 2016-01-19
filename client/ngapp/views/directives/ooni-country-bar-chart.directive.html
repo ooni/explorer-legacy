@@ -1,3 +1,7 @@
+{{ perPage * (page - 1) }}
+
+<a ng-click="viewOlder()" ng-show="perPage * (page + 1) < countryData.length + (countryData.length - countryData.length % 11) - 1">View Older</a>
+<a ng-click="viewNewer()" ng-show="perPage * (page - 1)">View Newer</a>
 <div class="bar-chart-wrapper">
   <svg class="bar-chart"
     id="blockpageCount-bar-chart">

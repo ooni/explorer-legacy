@@ -24,19 +24,14 @@ angular.module('ooniAPIApp')
 
     Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageCount = resp;
-      console.log('got block page count')
     });
 
     Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
-
-      console.log('blockpage list', resp)
     });
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
-
-      console.log('vendors', resp)
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
