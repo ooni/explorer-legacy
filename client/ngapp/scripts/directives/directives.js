@@ -226,3 +226,100 @@ angular.module('ooniAPIApp')
       templateUrl: 'views/directives/ooni-loader.directive.html',
     };
 })
+
+.directive('ooniCountryBarChart',
+  function ($filter) {
+    return {
+      restrict: 'A',
+      scope: {
+        countryData: '=',
+      },
+      link: function($scope) {
+
+        $scope.$watch('countryData', function() {
+          if ($scope.countryData) {
+            console.log('country data loaded', $scope.countryData)
+            var minGroupWidth = 90;
+            var containerWidth = parseInt(d3.select('.container').style('width'), 10)
+
+            if (minGroupWidth * $scope.countryData.length > containerWidth) {
+              containerWidth = minGroupWidth * $scope.countryData.length;
+            }
+
+            var margin = {top: 60, right: 30, bottom: 60, left: 0},
+                width = containerWidth - margin.left - margin.right,
+                height = 240 - margin.top - margin.bottom,
+                groupWidth = width / $scope.countryData.length,
+                barWidth = groupWidth / 3;
+
+            var y = d3.scale.linear()
+                .domain([0, d3.max($scope.countryData, function(d) {return d.total_count })])
+                .range([height, 0]);
+
+            var chart = d3.select('#blockpageCount-bar-chart')
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var barGroup = chart.selectAll('g')
+                .data($scope.countryData)
+              .enter().append('g')
+                .attr('transform', function(d, i) {
+                  var eachBar = parseInt(groupWidth * i, 10)
+                  return "translate(" + (eachBar) + ",0)";
+                })
+
+            barGroup.append("rect")
+              .attr('class', 'bar total')
+              .attr('height', 0)
+              .attr('x', groupWidth / 2)
+              .attr('y', height)
+              .attr('width', barWidth)
+              .transition()
+                .duration(1000)
+                .attr('y', function(d) { return y(d.total_count); })
+                .attr('height', function(d) { return height - y(d.total_count); })
+
+            barGroup.append("rect")
+              .attr('class', 'bar blocked')
+              .attr('width', barWidth)
+              .attr('x', groupWidth / 2)
+              .attr('y', height)
+              .attr('height', 0)
+              .transition()
+                .duration(1000)
+                .attr('y', function(d) { return y(d.block_count); })
+                .attr('height', function(d) { return height - y(d.block_count); })
+
+            // text
+            barGroup.append('text')
+              .attr("x", barWidth * 2)
+              .classed({'total': true})
+              .attr("y", function(d) { return y(d.total_count) - 20; })
+              .attr("dy", ".75em")
+              .text(function(d) { return d.total_count; });
+
+            // blocked
+            barGroup.append('text')
+              .attr('x', barWidth * 2 + barWidth)
+              .classed({'blocked': true})
+              .attr('y', function(d) { return y(d.block_count) - 10; })
+              .attr("dy", ".75em")
+              .text(function(d) { return d.block_count; });
+
+            // date
+            barGroup.append("text")
+              .attr('class', 'date')
+              // .attr("", barWidth * 2)
+              // .attr("y", height )
+              .attr("dy", ".4em")
+              .attr("transform", "translate("+ (barWidth * 2) +"," +(+height + 10) +")rotate(65)")
+              .text(function(d) { return $filter('date')(d.test_start_time, 'shortDate'); });
+          }
+        })
+
+      },
+      templateUrl: 'views/directives/ooni-country-bar-chart.directive.html',
+    };
+})

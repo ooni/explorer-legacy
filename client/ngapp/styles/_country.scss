@@ -34,8 +34,12 @@
     background: $ooni-blue;
   }
   .blocked {
-    background: $red;
+    background: $blocked;
   }
+}
+
+.bar-chart-wrapper {
+  overflow-x: scroll;
 }
 
 .bar-chart {
@@ -47,22 +51,31 @@
     margin-right: 2rem;
 
     &.blocked {
-      fill: $red;
+      fill: $blocked;
     }
   }
 
   text {
     fill: $grey;
+    opacity: 1;
     font-size: 16px;
-    transition: fill $transition-speed;
+    font-family: "Fira Sans", sans-serif;
 
-    &.date,
+    &.date {
+      text-anchor: start;
+      font-size: 14px;
+    }
     &.total {
+      fill: $ooni-blue;
+      text-anchor: middle;
+    }
+    &.blocked {
+      fill: $blocked;
       text-anchor: middle;
     }
   }
 
   .hidden {
-    fill: $white;
+    opacity: 0;
   }
 }

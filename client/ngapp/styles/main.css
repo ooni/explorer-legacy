@@ -745,7 +745,10 @@ pre span.lw {
   .graph-description .measured {
     background: #0588CB; }
   .graph-description .blocked {
-    background: #cc0000; }
+    background: #B83564; }
+
+.bar-chart-wrapper {
+  overflow-x: scroll; }
 
 .bar-chart .bar {
   cursor: pointer;
@@ -754,17 +757,25 @@ pre span.lw {
   width: 4rem;
   margin-right: 2rem; }
   .bar-chart .bar.blocked {
-    fill: #cc0000; }
+    fill: #B83564; }
 
 .bar-chart text {
   fill: #c1c1c1;
+  opacity: 1;
   font-size: 16px;
-  transition: fill 0.5s; }
-  .bar-chart text.date, .bar-chart text.total {
+  font-family: "Fira Sans", sans-serif; }
+  .bar-chart text.date {
+    text-anchor: start;
+    font-size: 14px; }
+  .bar-chart text.total {
+    fill: #0588CB;
+    text-anchor: middle; }
+  .bar-chart text.blocked {
+    fill: #B83564;
     text-anchor: middle; }
 
 .bar-chart .hidden {
-  fill: #fff; }
+  opacity: 0; }
 
 .anomalies {
   list-style: none; }
