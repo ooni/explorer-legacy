@@ -738,8 +738,12 @@ angular.module('ooniAPIApp')
                 groupWidth = width / $scope.countryData.length,
                 barWidth = groupWidth / 3;
 
+            var max = d3.max($scope.countryData, function(d) {return parseInt(d.total_count, 10) })
+
+            console.log(max)
+
             var y = d3.scale.linear()
-                .domain([0, d3.max($scope.countryData, function(d) {return d.total_count })])
+                .domain([0, max])
                 .range([height, 0]);
 
             var chart = d3.select('#blockpageCount-bar-chart')
@@ -764,7 +768,7 @@ angular.module('ooniAPIApp')
               .attr('width', barWidth)
               .transition()
                 .duration(1000)
-                .attr('y', function(d) { return y(d.total_count); })
+                .attr('y', function(d) { console.log(d); return y(d.total_count); })
                 .attr('height', function(d) { return height - y(d.total_count); })
 
             barGroup.append("rect")
