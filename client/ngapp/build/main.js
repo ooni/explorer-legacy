@@ -717,12 +717,11 @@ angular.module('ooniAPIApp')
       link: function($scope) {
 
         $scope.page = 1;
-        $scope.perPage = 5;
+        $scope.perPage = 11;
 
         var sliceBackwards = function(arr, perPage, page) {
           var start = -perPage * page;
           var end = -$scope.perPage * ($scope.page - 1)
-          console.log('start, end', start, end)
           if (end >= -0) {
             return arr.slice(start)
           } else {
@@ -732,12 +731,13 @@ angular.module('ooniAPIApp')
 
         var updateData = function(chart, data) {
 
-          console.log("updating data:", data);
 
           var barWidth = $scope.groupWidth / 3,
               groupWidth = $scope.groupWidth,
               y = $scope.y,
               height = $scope.height;
+
+          console.log('barwidth', barWidth);
 
           // set to data
           var barGroup = chart.selectAll('.bar-group')
@@ -765,9 +765,9 @@ angular.module('ooniAPIApp')
           barGroupEnter.append("rect")
             .attr('class', 'bar total')
             .attr('height', 0)
+            .attr('width', barWidth)
             .attr('x', groupWidth / 2)
             .attr('y', height)
-            .attr('width', barWidth)
             .transition()
               .duration(1000)
               .attr('y', function(d) { return y(d.total_count); })
@@ -822,13 +822,15 @@ angular.module('ooniAPIApp')
             var margin = {top: 60, right: 30, bottom: 60, left: 0},
                 width = containerWidth - margin.left - margin.right;
 
+            console.log(width);
+
             $scope.height = 240 - margin.top - margin.bottom;
             $scope.groupWidth = width / $scope.perPage;
 
+            console.log($scope.groupWidth);
+
             // only get the most recent data
             var viewing = sliceBackwards($scope.countryData, $scope.perPage, $scope.page);
-
-            console.log("viewing", viewing)
 
             var max = d3.max($scope.countryData, function(d) {return parseInt(d.total_count, 10) });
 
@@ -858,7 +860,6 @@ angular.module('ooniAPIApp')
           $scope.page--;
           var viewing = sliceBackwards($scope.countryData, $scope.perPage, $scope.page)
 
-          console.log($scope.page, viewing)
           updateData($scope.chart, viewing);
         };
 

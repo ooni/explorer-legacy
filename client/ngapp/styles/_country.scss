@@ -39,15 +39,26 @@
 }
 
 .bar-chart-wrapper {
-  overflow-x: scroll;
+  text-align: center;
+
+  a:hover {
+    color: darken($ooni-blue, 10%);
+    cursor: pointer;
+  }
 }
 
 .bar-chart {
+
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+
+
   .bar {
     cursor: pointer;
     display: inline-block;
     fill: $ooni-blue;
-    width: 4rem;
     margin-right: 2rem;
 
     &.blocked {

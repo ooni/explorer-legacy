@@ -748,34 +748,39 @@ pre span.lw {
     background: #B83564; }
 
 .bar-chart-wrapper {
-  overflow-x: scroll; }
+  text-align: center; }
+  .bar-chart-wrapper a:hover {
+    color: #046799;
+    cursor: pointer; }
 
-.bar-chart .bar {
-  cursor: pointer;
-  display: inline-block;
-  fill: #0588CB;
-  width: 4rem;
-  margin-right: 2rem; }
-  .bar-chart .bar.blocked {
-    fill: #B83564; }
-
-.bar-chart text {
-  fill: #c1c1c1;
-  opacity: 1;
-  font-size: 16px;
-  font-family: "Fira Sans", sans-serif; }
-  .bar-chart text.date {
-    text-anchor: start;
-    font-size: 14px; }
-  .bar-chart text.total {
+.bar-chart {
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: 100%; }
+  .bar-chart .bar {
+    cursor: pointer;
+    display: inline-block;
     fill: #0588CB;
-    text-anchor: middle; }
-  .bar-chart text.blocked {
-    fill: #B83564;
-    text-anchor: middle; }
-
-.bar-chart .hidden {
-  opacity: 0; }
+    margin-right: 2rem; }
+    .bar-chart .bar.blocked {
+      fill: #B83564; }
+  .bar-chart text {
+    fill: #c1c1c1;
+    opacity: 1;
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif; }
+    .bar-chart text.date {
+      text-anchor: start;
+      font-size: 14px; }
+    .bar-chart text.total {
+      fill: #0588CB;
+      text-anchor: middle; }
+    .bar-chart text.blocked {
+      fill: #B83564;
+      text-anchor: middle; }
+  .bar-chart .hidden {
+    opacity: 0; }
 
 .anomalies {
   list-style: none; }
