@@ -63,17 +63,17 @@ angular.module('ooniAPIApp')
       })
 
     Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
+      // this goes off and gets processed by the bar-chart directive
       $scope.blockpageCount = resp;
-      console.log('count', $scope.blockpageCount)
     });
 
     Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
-      console.log('list', $scope.blockpageList)
     });
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
+      console.log('vendors', resp);
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
@@ -739,8 +739,6 @@ angular.module('ooniAPIApp')
               y = $scope.y,
               height = $scope.height;
 
-          console.log('barwidth', barWidth);
-
           // set to data
           var barGroup = chart.selectAll('.bar-group')
               .data(data, function(d) {return d.test_start_time});
@@ -824,12 +822,8 @@ angular.module('ooniAPIApp')
             var margin = {top: 60, right: 30, bottom: 60, left: 0},
                 width = containerWidth - margin.left - margin.right;
 
-            console.log(width);
-
             $scope.height = 240 - margin.top - margin.bottom;
             $scope.groupWidth = width / $scope.perPage;
-
-            console.log($scope.groupWidth);
 
             // only get the most recent data
             var viewing = sliceBackwards($scope.countryData, $scope.perPage, $scope.page);

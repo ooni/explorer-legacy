@@ -58,12 +58,32 @@
     </table>
     </div>
 
-    <div class="websites-blocked">
+    <section class="reasons">
+      <h2>Methods of Censorship</h2>
+
+    </div>
+
+    <section class="vendors">
+      <h2>Identified Vendors</h2>
+      <ul ng-show="vendors.length > 0">
+        <li ng-repeat="vendor in vendors">
+          {{vendor.vendor}}
+        </li>
+      </ul>
+      <div class="no-show" ng-show="vendors.length === 0">
+        We've identified no vendors for this country.
+      </div>
+    </div>
+
+    <section class="websites-blocked">
       <h2>Blocked Websites</h2>
-      <ul>
+      <ul ng-show="blockpageList.length > 0">
         <li ng-repeat="blockedPage in blockpageList"> {{ blockedPage.input }} <a href="/measurement/{{ blockedPage.report_id }}"> Measurement</a>
         </li>
       </ul>
+      <div  class="no-show" ng-show="blockpageList.length === 0">
+        We've identified no blocked pages for this country.
+      </div>
     </div>
   </div>
 </main>

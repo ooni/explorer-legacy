@@ -256,8 +256,6 @@ angular.module('ooniAPIApp')
               y = $scope.y,
               height = $scope.height;
 
-          console.log('barwidth', barWidth);
-
           // set to data
           var barGroup = chart.selectAll('.bar-group')
               .data(data, function(d) {return d.test_start_time});
@@ -341,12 +339,8 @@ angular.module('ooniAPIApp')
             var margin = {top: 60, right: 30, bottom: 60, left: 0},
                 width = containerWidth - margin.left - margin.right;
 
-            console.log(width);
-
             $scope.height = 240 - margin.top - margin.bottom;
             $scope.groupWidth = width / $scope.perPage;
-
-            console.log($scope.groupWidth);
 
             // only get the most recent data
             var viewing = sliceBackwards($scope.countryData, $scope.perPage, $scope.page);

@@ -23,17 +23,17 @@ angular.module('ooniAPIApp')
       })
 
     Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
+      // this goes off and gets processed by the bar-chart directive
       $scope.blockpageCount = resp;
-      console.log('count', $scope.blockpageCount)
     });
 
     Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
-      console.log('list', $scope.blockpageList)
     });
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
+      console.log('vendors', resp);
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {

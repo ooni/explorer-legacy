@@ -782,19 +782,24 @@ pre span.lw {
   .bar-chart .hidden {
     opacity: 0; }
 
-.websites-blocked {
+.country section {
   margin-top: 2em; }
-  .websites-blocked h2 {
+  .country section h2 {
     margin-bottom: 1em; }
-  .websites-blocked ul {
+  .country section ul {
     -moz-columns: 3;
     -webkit-columns: 3;
     columns: 3;
     font-size: .8rem;
     list-style: none; }
-  .websites-blocked li {
+  .country section li {
     margin-left: 0;
     padding-left: 0; }
+  .country section .no-show {
+    background-color: #f2f2f2;
+    padding: 2rem;
+    text-align: center;
+    color: #c1c1c1; }
 
 .anomalies {
   list-style: none; }
