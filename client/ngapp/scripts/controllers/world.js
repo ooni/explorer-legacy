@@ -49,7 +49,7 @@ angular.module('ooniAPIApp')
             'HIGH': colorbrewer.PuBu[4][3],
             'MEDIUM': colorbrewer.PuBu[4][2],
             'LOW': colorbrewer.PuBu[4][1],
-            'BLOCKPAGE': colorbrewer.OrRd[4][3],
+            'BLOCKPAGE': '#B83564',
             'defaultFill': colorbrewer.PuBu[4][0]
         },
         data: {},

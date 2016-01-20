@@ -90,3 +90,24 @@
     opacity: 0;
   }
 }
+
+.websites-blocked {
+  margin-top: 2em;
+
+  h2 {
+    margin-bottom: 1em;
+  }
+
+  ul {
+    -moz-columns: 3;
+    -webkit-columns: 3;
+    columns: 3;
+    font-size: .8rem;
+    list-style: none;
+  }
+
+  li {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}

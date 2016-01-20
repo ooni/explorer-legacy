@@ -64,10 +64,12 @@ angular.module('ooniAPIApp')
 
     Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageCount = resp;
+      console.log('count', $scope.blockpageCount)
     });
 
     Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
+      console.log('list', $scope.blockpageList)
     });
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
@@ -403,7 +405,7 @@ angular.module('ooniAPIApp')
             'HIGH': colorbrewer.PuBu[4][3],
             'MEDIUM': colorbrewer.PuBu[4][2],
             'LOW': colorbrewer.PuBu[4][1],
-            'BLOCKPAGE': colorbrewer.OrRd[4][3],
+            'BLOCKPAGE': '#B83564',
             'defaultFill': colorbrewer.PuBu[4][0]
         },
         data: {},

@@ -782,6 +782,20 @@ pre span.lw {
   .bar-chart .hidden {
     opacity: 0; }
 
+.websites-blocked {
+  margin-top: 2em; }
+  .websites-blocked h2 {
+    margin-bottom: 1em; }
+  .websites-blocked ul {
+    -moz-columns: 3;
+    -webkit-columns: 3;
+    columns: 3;
+    font-size: .8rem;
+    list-style: none; }
+  .websites-blocked li {
+    margin-left: 0;
+    padding-left: 0; }
+
 .anomalies {
   list-style: none; }
   .anomalies li {
