@@ -69,6 +69,20 @@ angular.module('ooniAPIApp')
 
     Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
+
+      $scope.chunkedBlockpageList = {}
+
+      resp.forEach(function(page) {
+        if ($scope.chunkedBlockpageList[page.input] === undefined) {
+          $scope.chunkedBlockpageList[page.input] = {
+            measurements: [page]
+          }
+        } else {
+          $scope.chunkedBlockpageList[page.input].measurements.push(page)
+        }
+      })
+
+      console.log($scope.chunkedBlockpageList)
     });
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {

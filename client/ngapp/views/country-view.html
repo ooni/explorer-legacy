@@ -78,7 +78,15 @@
     <section class="websites-blocked">
       <h2>Blocked Websites</h2>
       <ul ng-show="blockpageList.length > 0">
-        <li ng-repeat="blockedPage in blockpageList"> {{ blockedPage.input }} <a href="/measurement/{{ blockedPage.report_id }}"> Measurement</a>
+        <li ng-repeat="(input, obj) in chunkedBlockpageList "> <strong>{{ input }}</strong>:
+        <ng-pluralize count="obj.measurements.length"
+                 when="{'0': 'No measurements (???)',
+                     'one': '1 measurement',
+                     'other': '{} measurements.'}">
+        </ng-pluralize>
+        <ul class="blockpage-measurements">
+          <li ng-repeat="measurement in obj.measurements">{{ measurement.test_start_time | date:'shortDate' }} <a href="/measurement/{{ measurement.report_id }}?input={{ input }}">view »</a></li>
+        </ul>
         </li>
       </ul>
       <div  class="no-show" ng-show="blockpageList.length === 0">
