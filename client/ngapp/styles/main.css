@@ -842,6 +842,9 @@ label[for="anomalies"] {
   .experiment-vs-control .difference td {
     background-color: rgba(184, 53, 100, 0.1); }
 
+.CodeMirror {
+  font-size: .8rem; }
+
 .overview,
 .details {
   margin-top: 1rem; }
