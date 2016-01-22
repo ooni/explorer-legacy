@@ -818,16 +818,18 @@ label[for="anomalies"] {
 
 .experiment-vs-control {
   margin-top: 1rem; }
-  .experiment-vs-control div {
-    width: 49%;
+  .experiment-vs-control table {
+    position: relative;
+    width: 100%; }
+  .experiment-vs-control thead {
     text-align: center;
-    display: inline-block; }
-    .experiment-vs-control div .results {
-      background-color: #f2f2f2;
-      width: 300px;
-      height: 300px;
-      margin: 0 auto;
-      display: block; }
+    font-weight: bold; }
+  .experiment-vs-control .control-value, .experiment-vs-control .experiment-value {
+    width: 40%; }
+  .experiment-vs-control .header-name {
+    width: 20%;
+    text-align: right;
+    font-weight: bold; }
 
 .overview,
 .details {
@@ -838,6 +840,20 @@ label[for="anomalies"] {
   .overview .description,
   .details .description {
     margin-top: 1rem; }
+  .overview .anomalous-result,
+  .details .anomalous-result {
+    background-color: #B83564;
+    padding: 2rem;
+    color: #f2f2f2; }
+  .overview .normal-result,
+  .details .normal-result {
+    background-color: #4FD156;
+    padding: 2rem;
+    color: #f2f2f2; }
+  .overview .result,
+  .details .result {
+    margin-bottom: 10px;
+    text-align: center; }
 
 .inline-test-spec {
   display: inline-block;

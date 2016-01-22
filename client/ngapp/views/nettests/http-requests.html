@@ -1,23 +1,16 @@
 <div ng-controller="HTTPRequestsViewCtrl">
-    <div class="experiment-vs-control">
-        <div class="experiment">
-            <!-- TODO: What's this? -->
-            <span class="results">
-                {{experiment.body | limitTo : 40 }}
-            </span>
-            experiment
-        </div>
-        <div class="control">
-            <!-- TODO: What's this? -->
-            <span class="results">
-                {{control.body}}
-            </span>
-            control
-        </div>
-    </div>
     <div class="overview">
+        <div class="result">
+            <div class="anomalous-result" ng-if="anomaly==true">
+                This measurement contains data that could be a sign of network tampering or censorship.
+            </div>
+            <div class="normal-result" ng-if="anomaly==false">
+                This measurement looks normal.
+            </div>
+        </div>
         <div>
-            <label for="body_length_match">body_length_match: </label><span id="input">{{ report.test_keys.body_length_match }}</span>
+            <label for="experiment_failure">Experiment failure: </label><span id="experiment-failure">{{ experiment_failure }}</span>
+            <label for="body_length_match">Body length match: </label><span id="body-length-match">{{ body_length_match }}</span>
             <label for="input">input: </label><span id="input">{{ report.input  }}</span>
         </div>
 
@@ -32,4 +25,29 @@
             </p>
         </div>
     </div>
+    <h3>Comparison of response headers</h3>
+    <div class="experiment-vs-control">
+        <table>
+            <thead>
+                <td class="header-name">Header Name</td>
+                <td class="control-value">Control</td>
+                <td class="experiment-value">Experiment</td>
+            </thead>
+            <tbody>
+                <tr ng-repeat="header_name in header_names">
+                    <td class="header-name">{{ header_name }}</td>
+                    <td>{{ control.response.headers[header_name] }}</td>
+                    <td>{{ experiment.response.headers[header_name] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="experiment-body" ng-if="experiment_body">
+            <h3>Experiment HTML body</h3>
+            <div ui-codemirror
+                    ui-codemirror-opts="code_mirror_options"
+                    ng-model="experiment_body">
+            </div>
+        </div>
+    </div>
+
 </div>

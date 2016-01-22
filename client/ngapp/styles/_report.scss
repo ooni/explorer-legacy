@@ -18,18 +18,24 @@ label[for="anomalies"] {
 .experiment-vs-control {
   margin-top: 1rem;
 
-  div {
-    width: 49%;
-    text-align: center;
-    display: inline-block;
+  table {
+    position: relative;
+    width: 100%;
+  }
 
-    .results {
-      background-color: $off-white;
-      width: 300px;
-      height: 300px;
-      margin: 0 auto;
-      display: block;
-    }
+  thead {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .control-value, .experiment-value {
+      width: 40%;
+  }
+
+  .header-name {
+       width: 20%;
+       text-align: right;
+       font-weight: bold;
   }
 }
 
@@ -44,6 +50,25 @@ label[for="anomalies"] {
   .description {
     margin-top: 1rem;
   }
+
+  .anomalous-result {
+      background-color: $blocked;
+      padding: 2rem;
+      color: $off-white;
+  }
+
+  .normal-result {
+      background-color: $unblocked;
+      padding: 2rem;
+      color: $off-white;
+  }
+
+
+  .result {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
 }
 
 .inline-test-spec {

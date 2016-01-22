@@ -16,6 +16,7 @@ angular
     'angularTypewrite',
     'ui.grid',
     'ui.grid.pagination',
+    'ui.codemirror',
     'iso-3166-country-codes',
     'jsonFormatter',
     'daterangepicker'
