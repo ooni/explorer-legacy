@@ -95,6 +95,14 @@ button {
     background-color: #046799;
     color: white; }
 
+button.secondary {
+  background-color: #fff;
+  color: #0588CB; }
+
+button.secondary.selected {
+  background-color: #046799;
+  color: #fff; }
+
 .fa-chevron-circle-down {
   transition: 0.5s; }
 
@@ -822,14 +830,17 @@ label[for="anomalies"] {
     position: relative;
     width: 100%; }
   .experiment-vs-control thead {
-    text-align: center;
     font-weight: bold; }
+    .experiment-vs-control thead td {
+      padding: 0.25rem 0.5rem; }
   .experiment-vs-control .control-value, .experiment-vs-control .experiment-value {
     width: 40%; }
   .experiment-vs-control .header-name {
-    width: 20%;
-    text-align: right;
-    font-weight: bold; }
+    width: 20%; }
+  .experiment-vs-control tbody td {
+    font-size: .8rem; }
+  .experiment-vs-control .difference td {
+    background-color: rgba(184, 53, 100, 0.1); }
 
 .overview,
 .details {

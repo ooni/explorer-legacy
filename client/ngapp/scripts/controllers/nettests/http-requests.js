@@ -25,6 +25,7 @@ angular.module('ooniAPIApp')
 
   $scope.header_names = [];
   if ($scope.control && $scope.control.response) {
+      console.log($scope.control);
       for (var header_name in $scope.control.response.headers) {
           if ($scope.header_names.indexOf(header_name) == -1) {
               $scope.header_names.push(header_name);

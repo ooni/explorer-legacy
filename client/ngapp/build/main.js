@@ -292,18 +292,6 @@ var definitions = {
 }
 
 ;angular.module('ooniAPIApp')
-.controller('HTTPRequestsViewCtrl', function ($scope){
-    angular.forEach($scope.report.test_keys.requests, function(request){
-        if (request.request.tor == true || request.request.tor.is_tor == true) {
-            $scope.control = request.response;
-        } else {
-            $scope.experiment = request.response;
-        }
-    })
-})
-.controller('DNSConsistencyViewCtrl', function ($scope, $location){
-});
-;angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
   angular.forEach($scope.report.test_keys.requests, function(request) {
@@ -330,6 +318,7 @@ var definitions = {
 
   $scope.header_names = [];
   if ($scope.control && $scope.control.response) {
+      console.log($scope.control);
       for (var header_name in $scope.control.response.headers) {
           if ($scope.header_names.indexOf(header_name) == -1) {
               $scope.header_names.push(header_name);

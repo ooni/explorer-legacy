@@ -27,6 +27,8 @@
     </div>
     <h3>Comparison of response headers</h3>
     <div class="experiment-vs-control">
+        View: <button class="secondary" ng-class="{'selected': viewingAllHeaders}" ng-click="viewingAllHeaders = true">all headers</button>
+        <button class="secondary" ng-class="{'selected': !viewingAllHeaders}" ng-click="viewingAllHeaders = false">different headers</button>
         <table>
             <thead>
                 <td class="header-name">Header Name</td>
@@ -34,8 +36,12 @@
                 <td class="experiment-value">Experiment</td>
             </thead>
             <tbody>
-                <tr ng-repeat="header_name in header_names">
-                    <td class="header-name">{{ header_name }}</td>
+                <tr ng-repeat="header_name in header_names"
+                    ng-class="{'difference': control.response.headers[header_name] !== experiment.response.headers[header_name]}"
+                    ng-show="viewingAllHeaders || control.response.headers[header_name] !== experiment.response.headers[header_name]">
+                    <td class="header-name">{{ header_name }}
+
+                      </td>
                     <td>{{ control.response.headers[header_name] }}</td>
                     <td>{{ experiment.response.headers[header_name] }}</td>
                 </tr>

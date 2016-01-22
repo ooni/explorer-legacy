@@ -1,3 +1,13 @@
 button {
   @include primary-button-mixin;
 }
+
+button.secondary {
+  background-color: $white;
+  color: $ooni-blue;
+}
+
+button.secondary.selected {
+  background-color: darken($ooni-blue, 10%);
+  color: $white;
+}

@@ -24,18 +24,26 @@ label[for="anomalies"] {
   }
 
   thead {
-    text-align: center;
     font-weight: bold;
+    td {
+      padding: 0.25rem 0.5rem
+    }
   }
 
   .control-value, .experiment-value {
-      width: 40%;
+    width: 40%;
   }
 
   .header-name {
-       width: 20%;
-       text-align: right;
-       font-weight: bold;
+    width: 20%;
+  }
+
+  tbody td {
+    font-size: .8rem;
+  }
+
+  .difference td{
+    background-color: transparentize($blocked, 0.9);
   }
 }
 
