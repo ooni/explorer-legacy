@@ -27,7 +27,8 @@
     "font-awesome": "fontawesome#~4.5.0",
     "iso-3166-country-codes-angular": "~1.1.1",
     "json-formatter": "~0.4.2",
-    "factbook-country-data": "~0.0.1"
+    "factbook-country-data": "~0.0.1",
+    "angular-daterangepicker": "~0.2.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.16",

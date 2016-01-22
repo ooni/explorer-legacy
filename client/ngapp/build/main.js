@@ -17,7 +17,8 @@ angular
     'ui.grid',
     'ui.grid.pagination',
     'iso-3166-country-codes',
-    'jsonFormatter'
+    'jsonFormatter',
+    'daterangepicker'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)
@@ -521,6 +522,17 @@ angular.module('ooniAPIApp')
         useExternalSorting: '=?', // defaults to True
       },
       link: function ($scope, $element, $attrs) {
+
+        $scope.datePicker = {}
+
+        $scope.specificDatePicker = {}
+
+        $scope.datePicker.date = {
+          startDate: moment().subtract(1, 'day'),
+          endDate: moment()
+        };
+
+        $scope.specificDatePicker.date = {startDate: null, endDate: null};
 
         $scope.filterFormOpen = false;
 

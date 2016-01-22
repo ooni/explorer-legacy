@@ -6,6 +6,12 @@
   transform: rotate(180deg);
 }
 
+.daterangepicker.dropdown-menu {
+  display: none;
+}
+
+// Specific Forms
+
 .filter-form {
   padding: 1.5rem;
   background: $off-white none repeat scroll 0% 0%;

@@ -25,6 +25,17 @@ angular.module('ooniAPIApp')
       },
       link: function ($scope, $element, $attrs) {
 
+        $scope.datePicker = {}
+
+        $scope.specificDatePicker = {}
+
+        $scope.datePicker.date = {
+          startDate: moment().subtract(1, 'day'),
+          endDate: moment()
+        };
+
+        $scope.specificDatePicker.date = {startDate: null, endDate: null};
+
         $scope.filterFormOpen = false;
 
         $rootScope.$watch('loaded', function() {

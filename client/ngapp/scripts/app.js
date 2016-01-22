@@ -17,7 +17,8 @@ angular
     'ui.grid',
     'ui.grid.pagination',
     'iso-3166-country-codes',
-    'jsonFormatter'
+    'jsonFormatter',
+    'daterangepicker'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)
