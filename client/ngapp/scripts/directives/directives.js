@@ -25,14 +25,21 @@ angular.module('ooniAPIApp')
       },
       link: function ($scope, $element, $attrs) {
 
-        $scope.datePicker = {}
+        $scope.dateRangePicker = {}
 
-        $scope.specificDatePicker = {}
+        $scope.specificDatePicker = {
+        }
 
-        $scope.datePicker.date = {
+        $scope.dateRangePicker.date = {
           startDate: moment().subtract(1, 'day'),
           endDate: moment()
+
         };
+
+        $scope.dateRangePicker.options = {
+          maxDate: moment(),
+          autoUpdateInput: true
+        }
 
         $scope.specificDatePicker.date = {startDate: null, endDate: null};
 
@@ -132,6 +139,7 @@ angular.module('ooniAPIApp')
         }
 
         $scope.filterMeasurements = function() {
+          console.log('filtering')
             $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
                 $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
@@ -142,17 +150,24 @@ angular.module('ooniAPIApp')
             if ($scope.countryCodeFilter.length > 0) {
                 $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
             }
-            if ($scope.startDateFilter.length > 0) {
-              if ($scope.queryOptions.where['test_start_time'] === undefined) {
-                $scope.queryOptions.where['test_start_time'] = {}
+            var start, end;
+            if ($scope.choosingRange && $scope.dateRangePicker.date) {
+              start = $scope.dateRangePicker.date.startDate.hours(0).minutes(0).toISOString();
+              end = $scope.dateRangePicker.date.endDate.hours(0).minutes(0).toISOString();
+              $scope.queryOptions.where = {
+                test_start_time: {
+                  between: [start, end]
+                }
               }
-              $scope.queryOptions.where['test_start_time']['gte'] = $scope.startDateFilter;
             }
-            if ($scope.endDateFilter.length > 0) {
-              if ($scope.queryOptions.where['test_start_time'] === undefined) {
-                $scope.queryOptions.where['test_start_time'] = {}
+            if (!$scope.choosingRange && $scope.specificDatePicker.date) {
+              start = moment.utc($scope.specificDatePicker.date).hours(0).minutes(0).toISOString();;
+              end = moment.utc($scope.specificDatePicker.date).hours(23).minutes(59).toISOString();;
+              $scope.queryOptions.where = {
+                test_start_time: {
+                  between: [start, end]
+                }
               }
-              $scope.queryOptions.where['test_start_time']['lte'] = $scope.endDateFilter;
             }
             $scope.getDataFunction($scope.queryOptions).then(assignData);
         }

@@ -25,17 +25,23 @@
     </select>
     <!-- <input type="text" class="form-control" ng-model="countryCodeFilter" placeholder="Country code"/> -->
   </div>
-  <br ng-if="!countryCodes"/>
-  <div class="form-group inline date-range">
+  <br ng-show="!countryCodes"/>
+
+  <button class="secondary" ng-class="{'selected': choosingRange}" ng-click="choosingRange = true">range</button>
+  <button class="secondary" ng-class="{'selected': !choosingRange}" ng-click="choosingRange = false">specific</button>
+
+  <div class="form-group inline date-range"
+    ng-show="choosingRange">
     <label>Date Range</label>
     <input date-range-picker
       class="form-control date-picker"
       type="text"
-      ng-model="datePicker.date"
-      options="{maxDate: moment().format('YYYY-MM-DD')}"/>
+      ng-model="dateRangePicker.date"
+      options="dateRangePicker.options"/>
   </div>
-  <div class="form-group inline start-date">
-    <label class="sr-only" for="startDate">Start Date:</label>
+  <div class="form-group inline start-date"
+    ng-show="!choosingRange">
+    <label class="sr-only" for="startDate">Specific Date:</label>
     <input date-range-picker
       class="form-control date-picker"
       type="text"

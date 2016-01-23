@@ -41,13 +41,10 @@ angular.module('ooniAPIApp')
           $scope.chunkedBlockpageList[page.input].measurements.push(page)
         }
       })
-
-      console.log($scope.chunkedBlockpageList)
     });
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
-      console.log('vendors', resp);
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
@@ -77,11 +74,14 @@ angular.module('ooniAPIApp')
           }
       }
 
+      console.log('query', query);
+
       if (queryOptions.order) {
         query.filter.order = queryOptions.order;
       }
 
       Report.find(query, function(data) {
+        console.log('finding', data)
         deferred.resolve(data);
         $scope.loaded = true;
       });
