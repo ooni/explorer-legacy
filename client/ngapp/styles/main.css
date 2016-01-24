@@ -899,6 +899,10 @@ label[for="anomalies"] {
   .worldMapLegend dd {
     display: inline; }
 
+.icon-legend {
+  font-size: 0.6em;
+  color: #cc0000; }
+
 .header-wrapper {
   background-color: #0588CB; }
   .header-wrapper .row {

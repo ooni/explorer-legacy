@@ -37,5 +37,12 @@
   },
   "resolutions": {
     "angular": "1.2.29"
+  },
+  "overrides": {
+      "font-awesome": {
+          "main": [
+              "css/font-awesome.css"
+          ]
+      }
   }
 }
