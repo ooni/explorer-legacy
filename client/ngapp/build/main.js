@@ -325,10 +325,17 @@ var definitions = {
   } else if ($scope.report.test_keys.body_length_match == false) {
     $scope.body_length_match = 'false';
   }
-  $scope.anomaly = $scope.body_length_match !== 'true';
 
   $scope.experiment_failure = $scope.experiment.failure || 'none';
   $scope.control_failure = $scope.control.failure || 'none';
+
+  $scope.anomaly = false;
+  if ($scope.body_length_match === 'false') {
+    $scope.anomaly = true;
+  }
+  if ($scope.experiment_failure !== 'none' && $scope.control_failure === 'none') {
+    $scope.anomaly = true;
+  }
 
   $scope.header_names = [];
   if ($scope.control && $scope.control.response) {
@@ -871,21 +878,20 @@ angular.module('ooniAPIApp')
 
         $scope.dateRangePicker = {}
 
-        $scope.specificDatePicker = {
-        }
-
         $scope.dateRangePicker.date = {
-          startDate: moment().subtract(1, 'day'),
-          endDate: moment()
-
+          startDate: null,
+          endDate: null
         };
 
         $scope.dateRangePicker.options = {
           maxDate: moment(),
-          autoUpdateInput: true
+          autoUpdateInput: true,
+          eventHandlers: {
+            'cancel.daterangepicker': function(ev, picker) {
+              $scope.dateRangePicker.date = {startDate: null, endDate: null}
+            }
+          }
         }
-
-        $scope.specificDatePicker.date = {startDate: null, endDate: null};
 
         $scope.filterFormOpen = false;
 
@@ -983,7 +989,6 @@ angular.module('ooniAPIApp')
         }
 
         $scope.filterMeasurements = function() {
-          console.log('filtering')
             $scope.queryOptions.where = {};
             if ($scope.inputFilter.length > 0) {
                 $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
@@ -995,22 +1000,11 @@ angular.module('ooniAPIApp')
                 $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
             }
             var start, end;
-            if ($scope.choosingRange && $scope.dateRangePicker.date) {
+            if ($scope.dateRangePicker.date.startDate && $scope.dateRangePicker.date.endDate) {
               start = $scope.dateRangePicker.date.startDate.hours(0).minutes(0).toISOString();
               end = $scope.dateRangePicker.date.endDate.hours(0).minutes(0).toISOString();
-              $scope.queryOptions.where = {
-                test_start_time: {
-                  between: [start, end]
-                }
-              }
-            }
-            if (!$scope.choosingRange && $scope.specificDatePicker.date) {
-              start = moment.utc($scope.specificDatePicker.date).hours(0).minutes(0).toISOString();;
-              end = moment.utc($scope.specificDatePicker.date).hours(23).minutes(59).toISOString();;
-              $scope.queryOptions.where = {
-                test_start_time: {
-                  between: [start, end]
-                }
+              $scope.queryOptions.where['test_start_time'] = {
+                between: [start, end]
               }
             }
             $scope.getDataFunction($scope.queryOptions).then(assignData);

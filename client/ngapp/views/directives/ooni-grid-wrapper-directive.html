@@ -27,26 +27,13 @@
   </div>
   <br ng-show="!countryCodes"/>
 
-  <button class="secondary" ng-class="{'selected': choosingRange}" ng-click="choosingRange = true">range</button>
-  <button class="secondary" ng-class="{'selected': !choosingRange}" ng-click="choosingRange = false">specific</button>
-
-  <div class="form-group inline date-range"
-    ng-show="choosingRange">
+  <div class="form-group inline date-range">
     <label>Date Range</label>
     <input date-range-picker
       class="form-control date-picker"
       type="text"
       ng-model="dateRangePicker.date"
       options="dateRangePicker.options"/>
-  </div>
-  <div class="form-group inline start-date"
-    ng-show="!choosingRange">
-    <label class="sr-only" for="startDate">Specific Date:</label>
-    <input date-range-picker
-      class="form-control date-picker"
-      type="text"
-      ng-model="specificDatePicker.date"
-      options="{singleDatePicker: true}"/>
   </div>
   <button class="form-group" type="submit" ng-click="filterMeasurements()">Apply Filter</button>
 </form>
