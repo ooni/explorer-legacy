@@ -488,7 +488,7 @@ angular.module('ooniAPIApp')
             popupTemplate: function(geo, data) {
               var reportCount = data !== null ? data.reportCount : 0;
               return ['<div class="hoverinfo"><strong>',
-                      'Number of reports ' + geo.properties.name,
+                      'Number of measurements ' + geo.properties.name,
                       ': ' +  reportCount,
                       '</strong></div>'].join('');
             },
@@ -597,8 +597,10 @@ angular.module('ooniAPIApp')
     }
 
     $scope.map_clicked = function(geo) {
-      var country_code = $scope.worldMap.data[geo.id].alpha2;
-      $location.path('/country/' + country_code);
+      if (typeof $scope.worldMap.data[geo.id] !== 'undefined') {
+        var country_code = $scope.worldMap.data[geo.id].alpha2;
+        $location.path('/country/' + country_code);
+      }
     };
 
     $scope.viewCountry = function(row) {
