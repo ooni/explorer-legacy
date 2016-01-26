@@ -50,9 +50,11 @@
         <div class="experiment-body" ng-if="experiment_body">
             <h3>Experiment HTML body</h3>
             <div ui-codemirror
-                    ui-codemirror-opts="code_mirror_options"
-                    ng-model="experiment_body">
+                ng-class="{'openCodeMirror': expandExperimentBody}"
+                ui-codemirror-opts="code_mirror_options"
+                ng-model="experiment_body">
             </div>
+            <div class="expandBody" ng-click="expandExperimentBody = !expandExperimentBody">expand ›</div>
         </div>
     </div>
 

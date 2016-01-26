@@ -846,7 +846,17 @@ label[for="anomalies"] {
     background-color: rgba(184, 53, 100, 0.1); }
 
 .CodeMirror {
-  font-size: .8rem; }
+  font-size: .8rem;
+  background-color: #f2f2f2;
+  padding: .5rem;
+  height: 250px;
+  transition: height 0.5s; }
+
+.openCodeMirror .CodeMirror {
+  height: 500px; }
+
+.expandBody {
+  color: #bfbfbf; }
 
 .overview,
 .details {

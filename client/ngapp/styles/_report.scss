@@ -49,6 +49,20 @@ label[for="anomalies"] {
 
 .CodeMirror {
   font-size: .8rem;
+  background-color: $off-white;
+  padding: .5rem;
+  height: 250px;
+  transition: height $transition-speed;
+}
+
+.openCodeMirror {
+  .CodeMirror {
+    height: 500px;
+  }
+}
+
+.expandBody {
+  color: darken($off-white, 20%);
 }
 
 .overview,
