@@ -319,15 +319,16 @@ var definitions = {
   if ($scope.experiment && $scope.experiment.response && $scope.experiment.response.body) {
     $scope.experiment_body = $scope.experiment.response.body;
   }
-  $scope.anomaly = $scope.report.test_keys.body_length_match !== true;
   $scope.body_length_match = 'unknown';
   if ($scope.report.test_keys.body_length_match == true) {
     $scope.body_length_match = 'true';
   } else if ($scope.report.test_keys.body_length_match == false) {
     $scope.body_length_match = 'false';
   }
+  $scope.anomaly = $scope.body_length_match !== 'true';
 
   $scope.experiment_failure = $scope.experiment.failure || 'none';
+  $scope.control_failure = $scope.control.failure || 'none';
 
   $scope.header_names = [];
   if ($scope.control && $scope.control.response) {

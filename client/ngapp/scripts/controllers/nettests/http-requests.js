@@ -13,7 +13,6 @@ angular.module('ooniAPIApp')
   if ($scope.experiment && $scope.experiment.response && $scope.experiment.response.body) {
     $scope.experiment_body = $scope.experiment.response.body;
   }
-  $scope.anomaly = $scope.report.test_keys.body_length_match !== true;
   $scope.body_length_match = 'unknown';
   if ($scope.report.test_keys.body_length_match == true) {
     $scope.body_length_match = 'true';
@@ -22,6 +21,15 @@ angular.module('ooniAPIApp')
   }
 
   $scope.experiment_failure = $scope.experiment.failure || 'none';
+  $scope.control_failure = $scope.control.failure || 'none';
+
+  $scope.anomaly = false;
+  if ($scope.body_length_match === 'false') {
+    $scope.anomaly = true;
+  }
+  if ($scope.experiment_failure !== 'none' && $scope.control_failure === 'none') {
+    $scope.anomaly = true;
+  }
 
   $scope.header_names = [];
   if ($scope.control && $scope.control.response) {
