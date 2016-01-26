@@ -792,7 +792,7 @@ pre span.lw {
       text-anchor: middle; }
     .bar-chart text.blocked {
       fill: #B83564;
-      text-anchor: middle; }
+      text-anchor: start; }
   .bar-chart .hidden {
     opacity: 0; }
 

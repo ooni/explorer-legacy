@@ -75,8 +75,6 @@ angular.module('ooniAPIApp')
           }
       }
 
-      console.log('query', query);
-
       if (queryOptions.order) {
         query.filter.order = queryOptions.order;
       }
