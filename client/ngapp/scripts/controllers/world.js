@@ -173,8 +173,7 @@ angular.module('ooniAPIApp')
     };
 
     $scope.viewCountry = function(row) {
-      $scope.loaded = false;
-      $location.path('/country/' + row.entity.alpha2);
+      return '/country/' + row.entity.alpha2;
     }
 });
 

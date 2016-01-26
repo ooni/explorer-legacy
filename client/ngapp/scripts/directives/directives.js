@@ -24,7 +24,6 @@ angular.module('ooniAPIApp')
         useExternalSorting: '=?', // defaults to True
       },
       link: function ($scope, $element, $attrs) {
-
         $scope.dateRangePicker = {}
 
         $scope.dateRangePicker.date = {
@@ -122,10 +121,9 @@ angular.module('ooniAPIApp')
           $scope.viewRowObject = function(row) {
               var report = row.entity;
               if (report.input === undefined) {
-                  $location.path('/measurement/' + report.id);
+                  return '/measurement/' + report.id;
               } else {
-                  $location.path('/measurement/' + report.id)
-                      .search({input: report.input});
+                  return '/measurement/' + report.id + '?input=' + encodeURIComponent(report.input);
               }
           }
         }

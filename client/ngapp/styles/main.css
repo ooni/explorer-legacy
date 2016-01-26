@@ -168,6 +168,9 @@ button.secondary.selected {
 .ui-grid-viewport .ui-grid-cell {
   border-right: none; }
 
+.row-link {
+  color: #000; }
+
 .hover-wrapper {
   position: relative;
   cursor: pointer; }

@@ -31,6 +31,12 @@
     "probe_ip": {
       "type": "String"
     },
+    "software_name": {
+      "type": "String"
+    },
+    "software_version": {
+      "type": "String"
+    },
     "report_filename": {
       "type": "String"
     },
