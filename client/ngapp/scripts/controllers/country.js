@@ -46,6 +46,7 @@ angular.module('ooniAPIApp')
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
+      console.log(resp)
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
@@ -80,7 +81,6 @@ angular.module('ooniAPIApp')
       }
 
       Report.find(query, function(data) {
-        console.log('finding', data)
         deferred.resolve(data);
         $scope.loaded = true;
       });

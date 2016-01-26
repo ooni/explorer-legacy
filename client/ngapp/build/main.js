@@ -88,6 +88,7 @@ angular.module('ooniAPIApp')
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
+      console.log(resp)
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
@@ -122,7 +123,6 @@ angular.module('ooniAPIApp')
       }
 
       Report.find(query, function(data) {
-        console.log('finding', data)
         deferred.resolve(data);
         $scope.loaded = true;
       });
@@ -213,6 +213,7 @@ angular.module('ooniAPIApp')
     }
 
     function loading_success(data) {
+      console.log('found')
       $scope.report = data[0];
       console.log(data[0]);
 
@@ -231,6 +232,7 @@ angular.module('ooniAPIApp')
     }
 
     function loading_failure() {
+      console.log('failed')
       $rootScope.loaded = true;
       $scope.not_found = true;
     }
