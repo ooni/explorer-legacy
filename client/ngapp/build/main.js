@@ -30,7 +30,7 @@ angular
 
     $routeProvider
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/world'
       });
 
     $locationProvider.html5Mode(true);
