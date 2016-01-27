@@ -1015,7 +1015,7 @@ angular.module('ooniAPIApp')
               $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
             gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
-              $scope.queryOptions.pageNumber = newPage;
+              $scope.queryOptions.pageNumber = newPage - 1;
               $scope.queryOptions.pageSize = pageSize;
               $scope.getDataFunction($scope.queryOptions).then(assignData);
             });
