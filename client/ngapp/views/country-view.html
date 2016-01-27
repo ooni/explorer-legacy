@@ -93,9 +93,9 @@
           </ul>
         </li>
       </ul>
-      <div class="loading-more"
+      <div class="loading-more no-show"
         in-view="loadMoreChunks($index, $inview, $inviewpart)" in-view-options="{debounce: 1000}" ng-hide="chunkEndReached">
-        loading more...
+        <i class="fa fa-spinner fa-spin"></i> loading more...
       </div>
       <div  class="no-show" ng-show="blockpageList.length === 0">
         We've identified no blocked pages for this country.
