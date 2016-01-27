@@ -67,7 +67,9 @@
       <h2>Identified Vendors</h2>
       <ul ng-show="vendors.length > 0">
         <li ng-repeat="vendor in vendors">
-          {{vendor.vendor}}
+          <h3>{{vendor.vendor}}</h3>
+          Identified on: {{ vendor.test_start_time | date:'shortDate'}} <br/>
+          <a href="/measurement/{{ vendor.report_id }}">view measurement »</a>
         </li>
       </ul>
       <div class="no-show" ng-show="vendors.length === 0">

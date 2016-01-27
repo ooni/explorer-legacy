@@ -247,7 +247,7 @@ angular.module('ooniAPIApp')
       link: function($scope) {
 
         $scope.page = 1;
-        $scope.perPage = 11;
+        $scope.perPage = 14;
 
         var sliceBackwards = function(arr, perPage, page) {
           var start = -perPage * page;
@@ -322,7 +322,7 @@ angular.module('ooniAPIApp')
 
           // blocked
           barGroupEnter.append('text')
-            .attr('x', barWidth * 2 + barWidth)
+            .attr('x', barWidth * 2 + barWidth - 8)
             .classed({'blocked': true})
             .attr('y', function(d) { return y(d.block_count) - 10; })
             .attr("dy", ".75em")
@@ -331,8 +331,6 @@ angular.module('ooniAPIApp')
           // date
           barGroupEnter.append("text")
             .attr('class', 'date')
-            // .attr("", barWidth * 2)
-            // .attr("y", height )
             .attr("dy", ".4em")
             .attr("transform", "translate("+ (barWidth * 2) +"," +(+height + 10) +")rotate(65)")
             .text(function(d) { return $filter('date')(d.test_start_time, 'shortDate'); });
@@ -347,7 +345,7 @@ angular.module('ooniAPIApp')
             var minGroupWidth = 90;
             var containerWidth = parseInt(d3.select('.container').style('width'), 10);
 
-            var margin = {top: 60, right: 30, bottom: 60, left: 0},
+            var margin = {top: 60, right: 30, bottom: 80, left: 0},
                 width = containerWidth - margin.left - margin.right;
 
             $scope.height = 240 - margin.top - margin.bottom;

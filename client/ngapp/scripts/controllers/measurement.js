@@ -32,6 +32,7 @@ angular.module('ooniAPIApp')
     }
 
     function loading_success(data) {
+      console.log('found')
       $scope.report = data[0];
       console.log(data[0]);
 
@@ -50,6 +51,7 @@ angular.module('ooniAPIApp')
     }
 
     function loading_failure() {
+      console.log('failed')
       $rootScope.loaded = true;
       $scope.not_found = true;
     }

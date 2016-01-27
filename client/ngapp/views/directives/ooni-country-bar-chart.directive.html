@@ -4,10 +4,10 @@
   </svg>
 
   <a ng-click="viewOlder()"
-  ng-show="perPage * (page + 1) < countryData.length + (countryData.length - countryData.length % 11) - 1">
+    ng-show="perPage * page < countryData.length">
     <i class="fa fa-chevron-circle-left"></i>
     View Older
-  </a>
+  </a> &nbsp; &nbsp;
   <a ng-click="viewNewer()"
     ng-show="perPage * (page - 1)">
     View Newer
