@@ -131,9 +131,7 @@ angular.module('ooniAPIApp')
       }
 
       Report.countByCountry(query, function(report_counts) {
-        console.log('fetched report counts', report_counts)
           Report.blockpageDetected(function(blockpage_countries) {
-            console.log('fetched blockpage countries', blockpage_countries)
               var alpha2WithBlockingDetected = [];
               angular.forEach(blockpage_countries, function(country) {
                 alpha2WithBlockingDetected.push(country.probe_cc);
@@ -166,6 +164,8 @@ angular.module('ooniAPIApp')
     }
 
     $scope.map_clicked = function(geo) {
+      console.log('map clicked', moment().unix())
+      $scope.loaded = false;
       if (typeof $scope.worldMap.data[geo.id] !== 'undefined') {
         var country_code = $scope.worldMap.data[geo.id].alpha2;
         $location.path('/country/' + country_code);

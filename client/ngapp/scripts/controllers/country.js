@@ -11,6 +11,7 @@
 angular.module('ooniAPIApp')
   .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166) {
     $scope.loaded = false;
+    console.log('country controller loaded', moment().unix())
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
@@ -50,8 +51,6 @@ angular.module('ooniAPIApp')
         $scope.chunkedArray.push(val)
       })
 
-      console.log($scope.chunkedArray.length)
-
       $scope.loadedChunks = $scope.chunkedArray.slice(0, 10)
     });
 
@@ -63,7 +62,6 @@ angular.module('ooniAPIApp')
         var len = $scope.loadedChunks.length;
         var next = $scope.chunkedArray.slice(len, len + chunkLength)
         $scope.loadedChunks = $scope.loadedChunks.concat(next)
-        console.log(next.length)
         if (next.length < chunkLength) {
           $scope.chunkEndReached = true;
         }
@@ -76,7 +74,6 @@ angular.module('ooniAPIApp')
       $scope.vendors.forEach(function(vendor) {
 
         var url = 'data/' + vendor.vendor + '.json'
-        console.log(url)
         $http.get(url)
           .then(function(resp) {
             vendor.data = resp.data;
@@ -120,6 +117,7 @@ angular.module('ooniAPIApp')
       Report.find(query, function(data) {
         deferred.resolve(data);
         $scope.loaded = true;
+        console.log('finished loading country data', moment().unix())
       });
 
       return deferred.promise;
