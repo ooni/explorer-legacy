@@ -41,8 +41,35 @@ angular.module('ooniAPIApp')
         } else {
           $scope.chunkedBlockpageList[page.input].measurements.push(page)
         }
+      });
+
+      $scope.chunkedArray = [];
+
+      angular.forEach($scope.chunkedBlockpageList, function(val, key) {
+        val.input = key;
+        $scope.chunkedArray.push(val)
       })
+
+      console.log($scope.chunkedArray.length)
+
+      $scope.loadedChunks = $scope.chunkedArray.slice(0, 10)
     });
+
+    var loadingMore = false;
+    var chunkLength = 50;
+    $scope.loadMoreChunks = function() {
+      if ($scope.chunkedArray && !loadingMore) {
+        loadingMore = true;
+        var len = $scope.loadedChunks.length;
+        var next = $scope.chunkedArray.slice(len, len + chunkLength)
+        $scope.loadedChunks = $scope.loadedChunks.concat(next)
+        console.log(next.length)
+        if (next.length < chunkLength) {
+          $scope.chunkEndReached = true;
+        }
+      }
+      loadingMore = false;
+    }
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
@@ -52,7 +79,6 @@ angular.module('ooniAPIApp')
         console.log(url)
         $http.get(url)
           .then(function(resp) {
-            console.log('resp', resp.data)
             vendor.data = resp.data;
           }, function(err, resp) {
             console.log('err', resp)

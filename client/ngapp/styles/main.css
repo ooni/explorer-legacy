@@ -806,12 +806,12 @@ pre span.lw {
     text-align: center;
     color: #c1c1c1; }
   .country section.websites-blocked ul {
-    -moz-columns: 3;
-    -webkit-columns: 3;
-    columns: 3;
     font-size: .8rem;
     list-style: none; }
   .country section.websites-blocked li {
+    display: inline-block;
+    vertical-align: top;
+    width: 32%;
     margin-left: 0;
     padding-left: 0; }
   .country section.vendors ul {

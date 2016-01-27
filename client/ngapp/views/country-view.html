@@ -76,13 +76,13 @@
       <div class="no-show" ng-show="vendors.length === 0">
         We've identified no vendors for this country.
       </div>
-    </div>
+    </section>
 
     <section class="websites-blocked">
       <h2>Blocked Websites</h2>
       <ul ng-show="blockpageList.length > 0">
-        <li ng-repeat="(input, obj) in chunkedBlockpageList ">
-          <strong>{{ input }}</strong>:
+        <li ng-repeat="obj in loadedChunks track by $index">
+          <strong>{{ obj.input }}</strong>:
           <ng-pluralize count="obj.measurements.length"
                    when="{'0': 'No measurements (???)',
                        'one': '1 measurement',
@@ -93,6 +93,10 @@
           </ul>
         </li>
       </ul>
+      <div class="loading-more"
+        in-view="loadMoreChunks($index, $inview, $inviewpart)" in-view-options="{debounce: 1000}" ng-hide="chunkEndReached">
+        loading more...
+      </div>
       <div  class="no-show" ng-show="blockpageList.length === 0">
         We've identified no blocked pages for this country.
       </div>
