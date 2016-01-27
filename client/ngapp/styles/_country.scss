@@ -98,23 +98,36 @@
     margin-bottom: 1em;
   }
 
-  ul {
-    -moz-columns: 3;
-    -webkit-columns: 3;
-    columns: 3;
-    font-size: .8rem;
-    list-style: none;
-  }
-
-  li {
-    margin-left: 0;
-    padding-left: 0;
-  }
-
   .no-show {
     background-color: $off-white;
     padding: 2rem;
     text-align: center;
     color: $grey;
+  }
+
+  &.websites-blocked {
+    ul {
+      -moz-columns: 3;
+      -webkit-columns: 3;
+      columns: 3;
+      font-size: .8rem;
+      list-style: none;
+    }
+
+    li {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  &.vendors {
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        width: 45%;
+      }
+    }
   }
 }

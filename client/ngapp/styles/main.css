@@ -800,20 +800,25 @@ pre span.lw {
   margin-top: 2em; }
   .country section h2 {
     margin-bottom: 1em; }
-  .country section ul {
-    -moz-columns: 3;
-    -webkit-columns: 3;
-    columns: 3;
-    font-size: .8rem;
-    list-style: none; }
-  .country section li {
-    margin-left: 0;
-    padding-left: 0; }
   .country section .no-show {
     background-color: #f2f2f2;
     padding: 2rem;
     text-align: center;
     color: #c1c1c1; }
+  .country section.websites-blocked ul {
+    -moz-columns: 3;
+    -webkit-columns: 3;
+    columns: 3;
+    font-size: .8rem;
+    list-style: none; }
+  .country section.websites-blocked li {
+    margin-left: 0;
+    padding-left: 0; }
+  .country section.vendors ul {
+    list-style: none; }
+    .country section.vendors ul li {
+      display: inline-block;
+      width: 45%; }
 
 .anomalies {
   list-style: none; }

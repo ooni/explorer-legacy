@@ -46,7 +46,18 @@ angular.module('ooniAPIApp')
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
-      console.log(resp)
+      $scope.vendors.forEach(function(vendor) {
+
+        var url = 'data/' + vendor.vendor + '.json'
+        console.log(url)
+        $http.get(url)
+          .then(function(resp) {
+            console.log('resp', resp.data)
+            vendor.data = resp.data;
+          }, function(err, resp) {
+            console.log('err', resp)
+          })
+      })
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
