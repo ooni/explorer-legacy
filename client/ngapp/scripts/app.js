@@ -19,7 +19,8 @@ angular
     'ui.codemirror',
     'iso-3166-country-codes',
     'jsonFormatter',
-    'daterangepicker'
+    'daterangepicker',
+    'angular-inview'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)

@@ -11,6 +11,7 @@
 angular.module('ooniAPIApp')
   .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166) {
     $scope.loaded = false;
+    console.log('country controller loaded', moment().unix())
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
@@ -41,12 +42,45 @@ angular.module('ooniAPIApp')
         } else {
           $scope.chunkedBlockpageList[page.input].measurements.push(page)
         }
+      });
+
+      $scope.chunkedArray = [];
+
+      angular.forEach($scope.chunkedBlockpageList, function(val, key) {
+        val.input = key;
+        $scope.chunkedArray.push(val)
       })
+
+      $scope.loadedChunks = $scope.chunkedArray.slice(0, 10)
     });
+
+    var loadingMore = false;
+    var chunkLength = 50;
+    $scope.loadMoreChunks = function() {
+      if ($scope.chunkedArray && !loadingMore) {
+        loadingMore = true;
+        var len = $scope.loadedChunks.length;
+        var next = $scope.chunkedArray.slice(len, len + chunkLength)
+        $scope.loadedChunks = $scope.loadedChunks.concat(next)
+        if (next.length < chunkLength) {
+          $scope.chunkEndReached = true;
+        }
+      }
+      loadingMore = false;
+    }
 
     Report.vendors( {probe_cc: $scope.countryCode}, function(resp) {
       $scope.vendors = resp;
-      console.log(resp)
+      $scope.vendors.forEach(function(vendor) {
+
+        var url = 'data/' + vendor.vendor + '.json'
+        $http.get(url)
+          .then(function(resp) {
+            vendor.data = resp.data;
+          }, function(err, resp) {
+            console.log('err', resp)
+          })
+      })
     });
 
     Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
@@ -83,6 +117,7 @@ angular.module('ooniAPIApp')
       Report.find(query, function(data) {
         deferred.resolve(data);
         $scope.loaded = true;
+        console.log('finished loading country data', moment().unix())
       });
 
       return deferred.promise;

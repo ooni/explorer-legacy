@@ -202,6 +202,20 @@ angular.module('ooniAPIApp')
     };
 })
 
+.directive('ooniLoadingMore',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        initialChunks: '=',
+        allChunks: '='
+      },
+      controller: function($scope, $element, $attrs) {
+        console.log($element)
+      }
+    };
+})
+
 .directive('ooniReportDetailTableRow',
   function () {
     return {

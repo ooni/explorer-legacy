@@ -68,6 +68,7 @@
       <ul ng-show="vendors.length > 0">
         <li ng-repeat="vendor in vendors">
           <h3>{{vendor.vendor}}</h3>
+          <strong>ASN: {{ vendor.probe_asn }}</strong><br/>
           Identified on: {{ vendor.test_start_time | date:'shortDate'}} <br/>
           <a href="/measurement/{{ vendor.report_id }}">view measurement »</a>
         </li>
@@ -75,22 +76,27 @@
       <div class="no-show" ng-show="vendors.length === 0">
         We've identified no vendors for this country.
       </div>
-    </div>
+    </section>
 
     <section class="websites-blocked">
       <h2>Blocked Websites</h2>
       <ul ng-show="blockpageList.length > 0">
-        <li ng-repeat="(input, obj) in chunkedBlockpageList "> <strong>{{ input }}</strong>:
-        <ng-pluralize count="obj.measurements.length"
-                 when="{'0': 'No measurements (???)',
-                     'one': '1 measurement',
-                     'other': '{} measurements.'}">
-        </ng-pluralize>
-        <ul class="blockpage-measurements">
-          <li ng-repeat="measurement in obj.measurements">{{ measurement.test_start_time | date:'shortDate' }} <a href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(input) }}">view »</a></li>
-        </ul>
+        <li ng-repeat="obj in loadedChunks track by $index">
+          <strong>{{ obj.input }}</strong>:
+          <ng-pluralize count="obj.measurements.length"
+                   when="{'0': 'No measurements (???)',
+                       'one': '1 measurement',
+                       'other': '{} measurements.'}">
+          </ng-pluralize>
+          <ul class="blockpage-measurements">
+            <li ng-repeat="measurement in obj.measurements">{{ measurement.test_start_time | date:'shortDate' }} <a href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(input) }}">view »</a></li>
+          </ul>
         </li>
       </ul>
+      <div class="loading-more no-show"
+        in-view="loadMoreChunks($index, $inview, $inviewpart)" in-view-options="{debounce: 1000}" ng-hide="chunkEndReached">
+        <i class="fa fa-spinner fa-spin"></i> loading more...
+      </div>
       <div  class="no-show" ng-show="blockpageList.length === 0">
         We've identified no blocked pages for this country.
       </div>
