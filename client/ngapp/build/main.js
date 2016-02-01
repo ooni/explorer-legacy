@@ -623,7 +623,9 @@ angular.module('ooniAPIApp')
       $scope.loaded = false;
       if (typeof $scope.worldMap.data[geo.id] !== 'undefined') {
         var country_code = $scope.worldMap.data[geo.id].alpha2;
-        $location.path('/country/' + country_code);
+        $scope.$apply(function() {
+          $location.path('/country/' + country_code);
+        })
       }
     };
 
