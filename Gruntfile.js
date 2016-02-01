@@ -349,6 +349,11 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/../../bower_components/flag-icon-css',
           src: ['flags/*/*.svg'],
           dest: "<%= yeoman.dist %>/"
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/../../bower_components/font-awesome/',
+          src: ['fonts/*.{woff,woff2,ttf}'],
+          dest: "<%= yeoman.dist %>/"
         }]
       },
       styles: {
@@ -534,7 +539,6 @@ module.exports = function (grunt) {
     'copy:dist',
     'cssmin',
     'uglify',
-    'filerev',
     'usemin',
     'htmlmin'
   ]);
