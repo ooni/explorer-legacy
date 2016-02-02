@@ -998,7 +998,7 @@ angular.module('ooniAPIApp')
         } else {
           $scope.viewRowObject = function(row) {
               var report = row.entity;
-              if (report.input === undefined) {
+              if (typeof report.input === 'undefined' || report.input === null) {
                   return '/measurement/' + report.id;
               } else {
                   return '/measurement/' + report.id + '?input=' + encodeURIComponent(report.input);

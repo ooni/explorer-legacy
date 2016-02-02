@@ -89,7 +89,7 @@
                        'other': '{} measurements.'}">
           </ng-pluralize>
           <ul class="blockpage-measurements">
-            <li ng-repeat="measurement in obj.measurements">{{ measurement.test_start_time | date:'shortDate' }} <a href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(input) }}">view »</a></li>
+            <li ng-repeat="measurement in obj.measurements">{{ measurement.test_start_time | date:'shortDate' }} <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a></li>
           </ul>
         </li>
       </ul>
