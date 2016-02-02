@@ -1,4 +1,4 @@
-# OONI API
+# OONI Explorer
 
 This is the code for the OONI report API accessible via:
 
@@ -36,7 +36,7 @@ To run this within a development environment for network and postgres free
 development do:
 
 ```
-NODE_ENV="development" slc run
+NODE_ENV="development" grunt serve
 ```
 
 Edit the script inside of `server/boot/create-fixtures.js` to create custom
