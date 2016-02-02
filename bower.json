@@ -19,6 +19,7 @@
     "es5-shim": "~3.1.0",
     "angular-route": "~1.2.16",
     "angular-resource": "~1.2.16",
+    "topojson": "topojson#1.6.20",
     "angular-datamaps": "~0.1.0",
     "colorbrewer": "~1.0.0",
     "angular-typewrite": "~0.0.4",

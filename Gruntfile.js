@@ -321,13 +321,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -355,6 +348,11 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>/../../bower_components/flag-icon-css',
           src: ['flags/*/*.svg'],
+          dest: "<%= yeoman.dist %>/"
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/../../bower_components/font-awesome/',
+          src: ['fonts/*.{woff,woff2,ttf}'],
           dest: "<%= yeoman.dist %>/"
         }]
       },
@@ -539,10 +537,8 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
-    'filerev',
     'usemin',
     'htmlmin'
   ]);
