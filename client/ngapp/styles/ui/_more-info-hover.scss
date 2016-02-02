@@ -1,0 +1,26 @@
+.hover-wrapper {
+  position: relative;
+  cursor: pointer;
+
+  label {
+    font-size: .8em;
+  }
+
+  .hover-definition {
+    display: none;
+    position: absolute;
+    background: rgba(0, 0, 0, .8);
+    color: white;
+    padding: .5em;
+    width: 20rem;
+    opacity: 0;
+    top: 2rem;
+    left: 0;
+    vertical-align: top;
+  }
+
+  &:hover .hover-definition {
+    display: inline-block;
+    opacity: 1;
+  }
+}

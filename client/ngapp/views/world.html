@@ -1,0 +1,43 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-3" ng-show="loaded">
+          <p class="explanation">OONI, or the Open Observatory of Network Interference, is a global community driven network of probes that measure the internet to identify "network anomalies" that can be a sign of internet censorship or surveillance. In the map bellow you can see where measurements are run the most and in which countries we have identified, through our measurements, instances of internet censorship and particular types of censorship software or vendors.</p>
+        <datamap map="worldMap" on-click="map_clicked" class="map" plugins="mapPlugins" plugin-data="mapPluginData"></datamap>
+        <div class="worldMap"></div>
+        <div class="worldMapLegend">
+            <dl>
+                <dt style="background-color: {{worldMap.fills.HIGH}}"></dt>
+                <dd>More than 100.000 measurements</dd>
+                <dt style="background-color: {{worldMap.fills.MEDIUM}}"></dt>
+                <dd>More than 10.000 measurements</dd>
+                <dt style="background-color: {{worldMap.fills.LOW}}"></dt>
+                <dd>Less than 10.000 measurements</dd>
+                <dt style="background-color: {{worldMap.fills.BLOCKPAGE}}"></dt>
+                <dd>Confirmed cases of censorship</dd>
+                <dt class="icon-legend"><i class="fa fa-industry"></i></dt>
+                <dd>Vendor has been identified</dd>
+            </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ooni-loader
+    loaded="loaded">
+  </div>
+
+  <p>
+    Browse the countries below to find a country you want to investigate the tests for:
+  </p>
+
+  <div ooni-grid-wrapper
+    hide-filter="true"
+    get-data-function="loadReports"
+    view-row-object-function="viewCountry"
+    custom-column-defs="columnDefs"
+    enable-pagination="false"
+    use-external-pagination="false"
+    use-external-sorting="false">
+  </div>
+</main>

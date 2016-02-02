@@ -3,8 +3,8 @@ module.exports = function(app) {
   Object
     .keys(routes)
     .forEach(function(route) {
-          app.get(route, function(req, res) {
-                  res.sendFile(app.get('indexFile'));
-                });
-        });
+      app.get(route, function(req, res) {
+              res.sendFile(app.get('indexFile'));
+            });
+    });
 };

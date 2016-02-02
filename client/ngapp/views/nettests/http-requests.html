@@ -1,0 +1,61 @@
+<div ng-controller="HTTPRequestsViewCtrl">
+    <div class="overview">
+        <div class="result">
+            <div class="anomalous-result" ng-if="anomaly==true">
+                This measurement contains data that could be a sign of network tampering or censorship.
+            </div>
+            <div class="normal-result" ng-if="anomaly==false">
+                This measurement looks normal.
+            </div>
+        </div>
+        <div>
+            <label for="experiment_failure">Experiment failure: </label><span id="experiment-failure">{{ experiment_failure }}</span>
+            <label for="body_length_match">Body length match: </label><span id="body-length-match">{{ body_length_match }}</span>
+            <label for="input">input: </label><span id="input">{{ report.input  }}</span>
+        </div>
+
+        <div class="description">
+            <h3>What does this test do?</h3>
+
+            <p>
+            This test requests a website first over the network of the user and then over the Tor network. The two results are compared and if the length of the body differs by some percentage, then we consider that there is an anomaly. Other signs of anomalies can include the fact that the request over the user's network fails or that the headers do not match. Basically, if there's a difference in the body length of the two websites, then it is likely the case that content is blocked in the one website.
+            </p>
+            <p class="note">
+            Note: False positives might occur when the tor control connection is being discriminated by the server. This happens, for example, when the cloud flare CAPTCHA page appears.
+            </p>
+        </div>
+    </div>
+    <h3>Comparison of response headers</h3>
+    <div class="experiment-vs-control">
+        View: <button class="secondary" ng-class="{'selected': viewingAllHeaders}" ng-click="viewingAllHeaders = true">all headers</button>
+        <button class="secondary" ng-class="{'selected': !viewingAllHeaders}" ng-click="viewingAllHeaders = false">different headers</button>
+        <table>
+            <thead>
+                <td class="header-name">Header Name</td>
+                <td class="control-value">Control</td>
+                <td class="experiment-value">Experiment</td>
+            </thead>
+            <tbody>
+                <tr ng-repeat="header_name in header_names"
+                    ng-class="{'difference': control.response.headers[header_name] !== experiment.response.headers[header_name]}"
+                    ng-show="viewingAllHeaders || control.response.headers[header_name] !== experiment.response.headers[header_name]">
+                    <td class="header-name">{{ header_name }}
+
+                      </td>
+                    <td>{{ control.response.headers[header_name] }}</td>
+                    <td>{{ experiment.response.headers[header_name] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="experiment-body" ng-if="experiment_body">
+            <h3>Experiment HTML body</h3>
+            <div ui-codemirror
+                ng-class="{'openCodeMirror': expandExperimentBody}"
+                ui-codemirror-opts="code_mirror_options"
+                ng-model="experiment_body">
+            </div>
+            <div class="expandBody" ng-click="expandExperimentBody = !expandExperimentBody">expand ›</div>
+        </div>
+    </div>
+
+</div>

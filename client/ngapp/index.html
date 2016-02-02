@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>OONI API</title>
+    <title>OONI APIS</title>
 
     <!--
     The base allows us to use relative links to resources even when
@@ -13,6 +13,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
     <!-- build:css(client/) styles/vendor.css -->
     <link rel="stylesheet" href="../bower_components/flag-icon-css/css/flag-icon.css">
     <link rel="stylesheet" href="../bower_components/colorbrewer/colorbrewer.css">
@@ -20,6 +21,10 @@
     <link rel="stylesheet" href="../bower_components/angular-typewrite/dist/angular-typewrite.css" />
     <link rel="stylesheet" href="../bower_components/flag-icon-css/css/flag-icon.min.css" />
     <link rel="stylesheet" href="../bower_components/angular-ui-grid/ui-grid.css" />
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="../bower_components/json-formatter/dist/json-formatter.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="../bower_components/codemirror/lib/codemirror.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -27,12 +32,24 @@
     <!-- endbuild -->
   </head>
   <body ng-app="ooniAPIApp">
- 
+
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <div class="header-wrapper">
+    <header class="container">
+      <div class="row">
+        <div class="brand">
+          <h1>OONI Measurements Explorer</h1>
+        </div>
+      </div>
+    </header>
+    </div>
 
     <div class="container">
+      <div class="view-chooser" role="group" aria-label="choose a view">
+        <a ng-class="{selected: $location.path() === '/world/'}" href="/world/">World</a><a ng-class="{selected: $location.path() === '/explore/'}" href="/explore/">Explorer</a><a ng-class="{selected: $location.path() === '/overview/'}" href="/overview/">Highlights</a>
+      </div>
       <div ng-view></div>
     </div>
 
@@ -43,7 +60,9 @@
 
     <!-- build:js(client/) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/es5-shim/es5-shim.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/json3/lib/json3.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
@@ -51,19 +70,26 @@
     <script src="../bower_components/d3/d3.js"></script>
     <script src="../bower_components/topojson/topojson.js"></script>
     <script src="../bower_components/datamaps/dist/datamaps.all.js"></script>
-    <script src="../bower_components/angular-datamaps/dist/angular-datamaps.min.js"></script>
+    <script src="../bower_components/angular-datamaps/dist/angular-datamaps.js"></script>
     <script src="../bower_components/colorbrewer/colorbrewer.js"></script>
     <script src="../bower_components/angular-typewrite/dist/angular-typewrite.js"></script>
     <script src="../bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="../bower_components/iso-3166-country-codes-angular/dist/iso-3166-country-codes-angular.min.js"></script>
+    <script src="../bower_components/json-formatter/dist/json-formatter.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+    <script src="../bower_components/codemirror/lib/codemirror.js"></script>
+    <script src="../bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
+    <script src="../bower_components/codemirror/mode/xml/xml.js"></script>
+    <script src="../bower_components/angular-inview/angular-inview.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js(client/{.tmp,ngapp,.}) scripts/scripts.js -->
     <script src="config/bundle.js"></script>
-    <script src="scripts/services/lbclient.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/report.js"></script>
+
+    <script src="/build/main.js"></script>
     <!-- endbuild -->
 </body>
 </html>

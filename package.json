@@ -11,15 +11,15 @@
     "async": "~0.9.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
+    "country-data": "0.0.19",
     "errorhandler": "^1.1.1",
     "loopback": "^2.14.0",
     "loopback-boot": "^2.6.5",
-    "loopback-datasource-juggler": "^2.19.0",
     "loopback-component-storage": "~1.0.5",
-    "serve-favicon": "^2.0.1",
     "loopback-connector-postgresql": "~2.1.0",
+    "loopback-datasource-juggler": "^2.19.0",
     "proquint": "0.0.1",
-    "country-data": "0.0.19"
+    "serve-favicon": "^2.0.1"
   },
   "optionalDependencies": {
     "loopback-explorer": "^1.1.0"
@@ -30,6 +30,7 @@
     "connect-livereload": "^0.4.0",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^0.8.2",
+    "grunt-cli": "",
     "grunt-concurrent": "^0.5.0",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-concat": "^0.5.0",
@@ -47,6 +48,7 @@
     "grunt-mocha-test": "^0.12.6",
     "grunt-newer": "^0.7.0",
     "grunt-ng-annotate": "^0.8.0",
+    "grunt-sass": "^1.1.0",
     "grunt-svgmin": "^0.4.0",
     "grunt-usemin": "^2.3.0",
     "grunt-wiredep": "^1.8.0",
@@ -58,8 +60,7 @@
     "load-grunt-tasks": "^0.6.0",
     "loopback-testing": "^1.0.4",
     "mocha": "^2.1.0",
-    "time-grunt": "^0.4.0",
-    "grunt-cli": ""
+    "time-grunt": "^0.4.0"
   },
   "repository": {
     "type": "",

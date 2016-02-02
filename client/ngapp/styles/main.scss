@@ -1,0 +1,78 @@
+$ooni-blue: #0588CB;
+$white: #fff;
+$footer-background-color: #26292c;
+$footer-color: #b4b4b4;
+
+$blocked: #B83564;
+$red: #cc0000;
+$unblocked: #4FD156;
+
+$off-white: #f2f2f2;
+
+$grey: #c1c1c1;
+
+$transition-speed: .5s;
+$button-border-radius: 3px;
+
+@import "mixins";
+
+@import "ui/fonts",
+        "ui/table",
+        "ui/buttons",
+        "ui/forms",
+        "ui/ui-grid",
+        "ui/more-info-hover",
+        "base",
+        "country",
+        "report",
+        "world";
+
+.header-wrapper {
+  background-color: $ooni-blue;
+
+  .row {
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  header h1 {
+    color: white;
+    margin-bottom: 0;
+    padding: 1rem 0;
+  }
+}
+
+.view-chooser {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+  z-index: 999;
+
+  a {
+    @include button-mixin;
+    border-radius: 0;
+    font-size: 1rem;
+  }
+
+  .selected {
+    @include primary-button-mixin;
+    border-radius: 0;
+    font-size: 1rem;
+  }
+
+  a:first-child {
+    border-right: 0;
+    border-bottom-left-radius: $button-border-radius;
+    border-top-left-radius: $button-border-radius;
+  }
+
+  a:last-child {
+    border-left: 0;
+    border-bottom-right-radius: $button-border-radius;
+    border-top-right-radius: $button-border-radius;
+  }
+
+  a:nth-child(2) {
+    border-left: 1px solid $ooni-blue;
+  }
+}

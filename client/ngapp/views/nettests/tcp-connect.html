@@ -1,0 +1,38 @@
+<div>
+    <div class="overview">
+        <div>
+          <h3>Details for this specific test:</h3>
+          <table class="test-details">
+            <tbody>
+            <tr ooni-report-detail-table-row
+              content="report.test_keys.connection === 'success'"
+              label="'Connection Success?'"
+              >
+            </tr>
+            <tr ooni-report-detail-table-row
+              content="report.input"
+              label="'Test Input'">
+            </tr>
+            <tr ooni-report-detail-table-row
+              content="report.test_keys.test_version"
+              label="'Test Version'">
+            </tr>
+            <tr ooni-report-detail-table-row
+              content="report.test_keys.test_start_time | date: 'short'"
+              label="'Test Start Time'">
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="description">
+            <h3>What does this test do?</h3>
+
+            <p>
+            This test attempts to connect to a particular endpoint, such as a website, and it sees if it's able to connect. If it's not able to, then that's a sign of network tampering.
+            </p><p class="note">
+            Note: False positives can occur when the endpoint is down and you simply cannot connect to it anyway.
+            </p>
+        </div>
+    </div>
+</div>

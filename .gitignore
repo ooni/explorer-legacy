@@ -21,3 +21,4 @@ bower_components
 client/dist
 .tmp
 server/providers-private.json
+server/datasources.development.js

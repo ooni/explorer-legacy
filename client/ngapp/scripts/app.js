@@ -14,7 +14,13 @@ angular
     'ngResource',
     'datamaps',
     'angularTypewrite',
-    'ui.grid'
+    'ui.grid',
+    'ui.grid.pagination',
+    'ui.codemirror',
+    'iso-3166-country-codes',
+    'jsonFormatter',
+    'daterangepicker',
+    'angular-inview'
   ])
   .config(function ($routeProvider, $locationProvider) {
     Object.keys(window.CONFIG.routes)
@@ -25,8 +31,13 @@ angular
 
     $routeProvider
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/world'
       });
 
     $locationProvider.html5Mode(true);
-});
+  })
+  // Things to run before the app loads;
+  .run(function($rootScope, $location) {
+
+    $rootScope.$location = $location;
+  });

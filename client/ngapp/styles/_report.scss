@@ -1,0 +1,123 @@
+.anomalies {
+  list-style: none;
+
+  li {
+    margin-left: 0;
+  }
+}
+
+.report h3 {
+  line-height: 2.6;
+}
+
+label[for="anomalies"] {
+  margin-top: 1rem;
+  display: block;
+}
+
+.experiment-vs-control {
+  margin-top: 1rem;
+
+  table {
+    position: relative;
+    width: 100%;
+  }
+
+  thead {
+    font-weight: bold;
+    td {
+      padding: 0.25rem 0.5rem
+    }
+  }
+
+  .control-value, .experiment-value {
+    width: 40%;
+  }
+
+  .header-name {
+    width: 20%;
+  }
+
+  tbody td {
+    font-size: .8rem;
+  }
+
+  .difference td{
+    background-color: transparentize($blocked, 0.9);
+  }
+}
+
+.CodeMirror {
+  font-size: .8rem;
+  background-color: $off-white;
+  padding: .5rem;
+  height: 250px;
+  transition: height $transition-speed;
+}
+
+.openCodeMirror {
+  .CodeMirror {
+    height: 500px;
+  }
+}
+
+.expandBody {
+  color: darken($off-white, 20%);
+}
+
+.overview,
+.details {
+  margin-top: 1rem;
+
+  label {
+    font-weight: bold;
+  }
+
+  .description {
+    margin-top: 1rem;
+  }
+
+  .anomalous-result {
+      background-color: $blocked;
+      padding: 2rem;
+      color: $off-white;
+  }
+
+  .normal-result {
+      background-color: $unblocked;
+      padding: 2rem;
+      color: $off-white;
+  }
+
+
+  .result {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+}
+
+.inline-test-spec {
+  display: inline-block;
+  box-sizing: border-box;
+  margin-top: .5rem;
+  border: 1px solid $grey;
+  border-right: 0;
+  padding: .5rem 1rem;
+
+  &:last-child {
+    border-right: 1px solid $grey;
+  }
+
+  /*&:hover {
+    max-width: 1000px;
+    width: auto;
+    text-overflow: auto;
+  }*/
+}
+
+.note {
+  padding: .5rem .7rem;
+  background-color: transparentize($ooni-blue, .5);
+  border: 1px solid $ooni-blue;
+}

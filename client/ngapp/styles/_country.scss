@@ -1,0 +1,133 @@
+.country {
+  h1 {
+    margin-bottom: 1rem;
+  }
+}
+
+
+.map {
+  margin-top: -80px;
+}
+
+.explanation {
+  text-align: center;
+  max-width: 640px;
+  margin: 0rem auto 2rem;
+}
+
+.statistics {
+  margin-top: 1rem;
+}
+
+.graph-description {
+  text-align: center;
+  font-size: .8rem;
+  margin-top: .5rem;
+
+  i {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+  }
+
+  .measured {
+    background: $ooni-blue;
+  }
+  .blocked {
+    background: $blocked;
+  }
+}
+
+.bar-chart-wrapper {
+  text-align: center;
+
+  a:hover {
+    color: darken($ooni-blue, 10%);
+    cursor: pointer;
+  }
+}
+
+.bar-chart {
+
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+
+
+  .bar {
+    cursor: pointer;
+    display: inline-block;
+    fill: $ooni-blue;
+    margin-right: 2rem;
+
+    &.blocked {
+      fill: $blocked;
+    }
+  }
+
+  text {
+    fill: $grey;
+    opacity: 1;
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+
+    &.date {
+      text-anchor: start;
+      font-size: 14px;
+    }
+    &.total {
+      fill: $ooni-blue;
+      text-anchor: middle;
+    }
+    &.blocked {
+      fill: $blocked;
+      text-anchor: start;
+    }
+  }
+
+  .hidden {
+    opacity: 0;
+  }
+}
+
+.country section {
+  margin-top: 2em;
+
+  h2 {
+    margin-bottom: 1em;
+  }
+
+  .no-show {
+    background-color: $off-white;
+    padding: 2rem;
+    text-align: center;
+    color: $grey;
+  }
+
+  &.websites-blocked {
+    ul {
+      font-size: .8rem;
+      list-style: none;
+    }
+
+    li {
+      display: inline-block;
+      vertical-align: top;
+      width: 32%;
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  &.vendors {
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        width: 45%;
+      }
+    }
+  }
+}

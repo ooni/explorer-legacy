@@ -1,0 +1,19 @@
+<div>
+    <div class="overview">
+        <div>
+            <label for="body_length_match">body_length_match: </label><span id="input">{{ report.test_keys.body_length_match }}</span>
+            <label for="input">input: </label><span id="input">{{ report.input  }}</span>
+        </div>
+
+        <div class="description">
+            <h3>What does this test do?</h3>
+
+            <p>
+            This test looks to see if the HTTP headers sent by a probe are being altered when they are transmitted to a control back-end server run by OONI. This is the sign of a transparent HTTP proxy manipulating the traffic of a probe.
+            </p>
+            <p class="note">
+            (HTTP headers: When you access a website, the HTTP protocol defines what you need to send so that you can connect to a website. You need to send different “fields”, such as the path that you want to access, the method of the request, etc.)
+            </p>
+        </div>
+    </div>
+</div>

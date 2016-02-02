@@ -38,8 +38,8 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        files: ['<%= yeoman.app %>/scripts/**/*.js'],
+        tasks: ['concat'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -49,8 +49,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.scss'],
+        tasks: ['sass', 'newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -188,8 +188,7 @@ module.exports = function (grunt) {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
+          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -222,6 +221,17 @@ module.exports = function (grunt) {
       }
     },
 
+    sass: {
+      options: {
+        sourceMap: true,
+      },
+      dist: {
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.scss'
+        }
+      }
+    },
+
     // The following *-min tasks will produce minified files in the dist folder
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
@@ -244,9 +254,18 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // concat: {
-    //   dist: {}
-    // },
+    concat: {
+      options: {
+        // define a string to put between each file in the concatenated output
+        separator: ';'
+      },
+      dist: {
+        // the files to concatenate
+        src: ['<%= yeoman.app %>/scripts/**/*.js'],
+        // the location of the resulting JS file
+        dest: 'client/ngapp/build/main.js'
+      }
+    },
 
     imagemin: {
       dist: {
@@ -323,7 +342,9 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'data/{,*/}*.json',
+            'styles/fonts/*',
+            'styles/*.{woff,ttf}'
           ]
         }, {
           expand: true,
@@ -348,12 +369,14 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'concat',
         'copy:styles'
       ],
       test: [
         'copy:styles'
       ],
       dist: [
+        'concat',
         'copy:styles',
         'imagemin',
         'svgmin'
@@ -466,6 +489,7 @@ module.exports = function (grunt) {
       'build-lbclient',
       'build-config',
       'wiredep',
+      'sass',
       'concurrent:server',
       'autoprefixer',
       'run:development',
@@ -482,6 +506,7 @@ module.exports = function (grunt) {
     'clean:server',
     'build-lbclient',
     'build-config',
+    'sass',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -508,6 +533,7 @@ module.exports = function (grunt) {
     'build-config',
     'wiredep',
     'useminPrepare',
+    'sass',
     'concurrent:dist',
     'autoprefixer',
     'concat',

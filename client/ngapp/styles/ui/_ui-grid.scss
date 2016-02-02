@@ -1,0 +1,35 @@
+.ui-grid {
+  border: none;
+}
+
+.ui-grid-header {
+  border-top: 3px solid $ooni-blue;
+
+  .ui-grid-top-panel {
+    background: transparent;
+  }
+
+  .ui-grid-header-cell {
+    border-right: none;
+  }
+}
+
+.ui-grid-row {
+  cursor: pointer;
+
+  &:hover {
+    .ui-grid-cell {
+      background-color: darken($white, 10%);
+    }
+  }
+}
+
+.ui-grid-viewport {
+  .ui-grid-cell {
+    border-right: none;
+  }
+}
+
+.row-link {
+     color: #000;
+}

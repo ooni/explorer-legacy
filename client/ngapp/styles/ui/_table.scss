@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  th {
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
+tbody {
+  td,
+  th {
+    padding: .25rem .5rem;
+    transition: $transition-speed background-color;
+  }
+
+  th {
+    font-weight: 600;
+    text-align: left;
+  }
+
+  tr:nth-child(even) td,
+  tr:nth-child(even) th{
+    background-color: darken($white, 2%);
+  }
+
+  tr:hover td,
+  tr:hover th {
+    background-color: $off-white;
+  }
+}
+
+table.countries {
+  td {
+    cursor: pointer;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  i::before {
+    color: $off-white;
+    transition: color $transition-speed;
+  }
+
+  &:hover {
+    i::before {
+      color: $ooni-blue;
+    }
+  }
+}

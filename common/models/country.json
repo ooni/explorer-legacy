@@ -1,7 +1,8 @@
 {
   "name": "country",
+  "plural": "countries",
   "base": "PersistedModel",
-  "idInjection": false,
+  "idInjection": true,
   "options": {
     "validateUpsert": true
   },
@@ -9,15 +10,15 @@
     "name": {
       "type": "String"
     },
-    "iso_alpha3": {
+    "iso_alpha2": {
       "type": "String"
     },
-    "iso_alpha2": {
+    "iso_alpha3": {
       "type": "String"
     }
   },
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": {}
 }
