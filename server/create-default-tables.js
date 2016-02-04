@@ -112,8 +112,8 @@ ds.automigrate(lbTables, function(er) {
   });
 
   nettest.create({
-    'name': 'meek_frontend_requests_test',
-    'long_name': 'Meek frontent requests',
+    'name': 'meek_fronted_requests_test',
+    'long_name': 'Meek fronted requests',
     'description': 'Tests the meek cloudfronted frontend to verify accessibility',
     'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-013-meek-fronted-requests.md'
   });
