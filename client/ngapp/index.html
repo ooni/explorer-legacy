@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>OONI APIS</title>
+    <title>OONI Explorer</title>
 
     <!--
     The base allows us to use relative links to resources even when
@@ -37,19 +37,21 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="header-wrapper">
-    <header class="container">
-      <div class="row">
-        <div class="brand">
-          <h1>OONI Measurements Explorer</h1>
+      <header class="container">
+        <div class="row">
+          <a href="/world/" class="brand">
+            <img src="/images/explorer-logo-48.png">
+            <h1>OONI Explorer</h1>
+          </a>
+          <div class="view-chooser" role="group" aria-label="choose a view">
+            <a ng-class="{selected: $location.path() === '/world/'}" href="/world/">World</a>
+            <a ng-class="{selected: $location.path() === '/explore/'}" href="/explore/">Explorer</a>
+            <a ng-class="{selected: $location.path() === '/overview/'}" href="/overview/">Highlights</a>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
     </div>
-
     <div class="container">
-      <div class="view-chooser" role="group" aria-label="choose a view">
-        <a ng-class="{selected: $location.path() === '/world/'}" href="/world/">World</a><a ng-class="{selected: $location.path() === '/explore/'}" href="/explore/">Explorer</a><a ng-class="{selected: $location.path() === '/overview/'}" href="/overview/">Highlights</a>
-      </div>
       <div ng-view></div>
     </div>
 
@@ -87,7 +89,6 @@
 
     <!-- build:js(client/{.tmp,ngapp,.}) scripts/scripts.js -->
     <script src="config/bundle.js"></script>
-
     <script src="/build/main.js"></script>
     <!-- endbuild -->
 </body>
