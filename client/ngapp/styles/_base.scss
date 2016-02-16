@@ -31,7 +31,7 @@ pre, code {
 html {
   font-size: 16px;
   color: #1c1c1c;
-  background-color: $white;
+  background-color: $color-white;
   min-width: 320px;
 }
 
@@ -47,8 +47,8 @@ main {
 }
 
 footer {
-  color: $footer-color;
-  background-color: $footer-background-color;
+  color: $color-footer-color;
+  background-color: $color-footer-background-color;
 }
 
 .container {
@@ -209,7 +209,7 @@ h2 {
 .homepage .col-1 h2 {
   font-size: 0.95rem;
   font-weight: bold;
-  color: $ooni-blue;
+  color: $color-ooni-blue;
   border-top: 0.2rem solid #0588cb;
   padding-top: 0.2rem;
   margin: 0 0 1rem;
@@ -217,7 +217,7 @@ h2 {
 
 a {
   text-decoration: none;
-  color: $ooni-blue;
+  color: $color-ooni-blue;
 }
 
 p, ol, ul {
@@ -234,7 +234,7 @@ th, td {
 }
 
 pre {
-  background-color: $off-white;
+  background-color: $color-off-white;
   padding: 0.5rem 1rem;
   margin: 1.6rem 0;
   position: relative;
@@ -376,15 +376,15 @@ header .wordmark {
 /* How it works */
 
 .homepage .how-it-works {
-  background-color: $ooni-blue;
-  color: $white;
+  background-color: $color-ooni-blue;
+  color: $color-white;
   padding: 2rem 0;
   margin-bottom: 3.5rem;
 }
 
 .homepage .how-it-works h2 {
-  color: $white;
-  border-color: $white;
+  color: $color-white;
+  border-color: $color-white;
   margin-bottom: 0;
 }
 
@@ -425,7 +425,7 @@ header .wordmark {
 
 .table-caption {
   font-size: 0.85rem;
-  color: $grey;
+  color: $color-grey;
 }
 
 
@@ -447,7 +447,7 @@ h1.article-title {
 }
 
 .byline {
-  color: $grey;
+  color: $color-grey;
   font-size: 0.8rem;
   margin-bottom: 2.6rem;
 }
@@ -461,7 +461,7 @@ h1.article-title {
 /* Footer */
 
 footer h2 {
-  color: $footer-color;
+  color: $color-footer-color;
   border: none;
   font-size: 1rem;
   font-weight: normal;
@@ -501,13 +501,13 @@ footer h2 {
   object-fit: cover;
   width: 100%;
   height: 20rem;
-  background-color: $ooni-blue;
+  background-color: $color-ooni-blue;
   margin-top: 0.24rem;
 }
 
 pre span.chr {
   font-size: 10px;
-  color: $white;
+  color: $color-white;
   background-color: #099;
   border-radius: 4px;
   vertical-align: 2px;
@@ -522,7 +522,7 @@ pre span.explain {
 pre span.lw {
   position: absolute;
   right: -22px;
-  color: $footer-color;
+  color: $color-footer-color;
 }
 
 
@@ -566,7 +566,7 @@ pre span.lw {
 
 .toc .active {
   font-weight: bold;
-  color: $ooni-blue;
+  color: $color-ooni-blue;
 }
 
 .toc a {

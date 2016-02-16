@@ -43,13 +43,13 @@ label[for="anomalies"] {
   }
 
   .difference td{
-    background-color: transparentize($blocked, 0.9);
+    background-color: transparentize($color-blocked, 0.9);
   }
 }
 
 .CodeMirror {
   font-size: .8rem;
-  background-color: $off-white;
+  background-color: $color-off-white;
   padding: .5rem;
   height: 250px;
   transition: height $transition-speed;
@@ -62,7 +62,7 @@ label[for="anomalies"] {
 }
 
 .expandBody {
-  color: darken($off-white, 20%);
+  color: darken($color-off-white, 20%);
 }
 
 .overview,
@@ -78,15 +78,15 @@ label[for="anomalies"] {
   }
 
   .anomalous-result {
-      background-color: $blocked;
+      background-color: $color-blocked;
       padding: 2rem;
-      color: $off-white;
+      color: $color-off-white;
   }
 
   .normal-result {
-      background-color: $unblocked;
+      background-color: $color-unblocked;
       padding: 2rem;
-      color: $off-white;
+      color: $color-off-white;
   }
 
 
@@ -101,12 +101,12 @@ label[for="anomalies"] {
   display: inline-block;
   box-sizing: border-box;
   margin-top: .5rem;
-  border: 1px solid $grey;
+  border: 1px solid $color-grey;
   border-right: 0;
   padding: .5rem 1rem;
 
   &:last-child {
-    border-right: 1px solid $grey;
+    border-right: 1px solid $color-grey;
   }
 
   /*&:hover {
@@ -118,6 +118,6 @@ label[for="anomalies"] {
 
 .note {
   padding: .5rem .7rem;
-  background-color: transparentize($ooni-blue, .5);
-  border: 1px solid $ooni-blue;
+  background-color: transparentize($color-ooni-blue, .5);
+  border: 1px solid $color-ooni-blue;
 }

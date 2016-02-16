@@ -3,7 +3,7 @@
 }
 
 .ui-grid-header {
-  border-top: 3px solid $ooni-blue;
+  border-top: 3px solid $color-ooni-blue;
 
   .ui-grid-top-panel {
     background: transparent;
@@ -19,7 +19,7 @@
 
   &:hover {
     .ui-grid-cell {
-      background-color: darken($white, 10%);
+      background-color: darken($color-white, 10%);
     }
   }
 }

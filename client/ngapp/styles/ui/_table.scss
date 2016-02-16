@@ -24,12 +24,12 @@ tbody {
 
   tr:nth-child(even) td,
   tr:nth-child(even) th{
-    background-color: darken($white, 2%);
+    background-color: darken($color-white, 2%);
   }
 
   tr:hover td,
   tr:hover th {
-    background-color: $off-white;
+    background-color: $color-off-white;
   }
 }
 
@@ -43,13 +43,13 @@ table.countries {
   cursor: pointer;
 
   i::before {
-    color: $off-white;
+    color: $color-off-white;
     transition: color $transition-speed;
   }
 
   &:hover {
     i::before {
-      color: $ooni-blue;
+      color: $color-ooni-blue;
     }
   }
 }

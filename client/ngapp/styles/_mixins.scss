@@ -1,25 +1,19 @@
-@mixin button-mixin {
-  padding: .25rem .5rem;
+@mixin button-mixin($border) {
+  padding: .35rem .5rem;
   font-size: .8rem;
-  border-radius: $button-border-radius;
+  line-height: inherit;
   cursor: pointer;
-  border: 1px solid $ooni-blue;
+  border: $border;
   font-family: "Fira Sans";
   font-weight: 300;
-
   transition: $transition-speed background-color, $transition-speed color;
-
-  &:hover {
-    background-color: darken($ooni-blue, 10%);
-    color: white;
-  };
 }
 
-@mixin primary-button-mixin {
-  @include button-mixin;
-  background-color: $ooni-blue;
-  color: $white;
-  border: 1px solid darken($ooni-blue, 10%);
+@mixin primary-button-mixin($border, $background-color, $color) {
+  @include button-mixin($border);
+  background-color: $background-color;
+  color: $color;
+  border: $border;
 }
 
 @mixin placeholder-text($font-family, $font-weight) {

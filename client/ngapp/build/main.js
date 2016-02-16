@@ -250,10 +250,11 @@ angular.module('ooniAPIApp')
     }
 
     function loading_success(data) {
-      console.log('found')
       $scope.report = data[0];
-      console.log(data[0]);
-
+      $scope.network_information = " ( " + $scope.report.probe_asn + " )"
+      Report.asnName({asn: $scope.report.probe_asn}, function(result) {
+        $scope.network_information = result[0].name + $scope.network_information;
+      });
 
       $scope.nettest = Nettest.findOne({
         filter: {
@@ -1525,7 +1526,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/reports/:id/exists",
@@ -1726,7 +1727,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/reports/count",
@@ -1786,7 +1787,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1800,7 +1801,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/reports/change-stream",
@@ -1818,7 +1819,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` -
+         *  - `probe_cc` – `{string=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1843,50 +1844,16 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Report#vendors
+         * @name lbServices.Report#websiteDetails
          * @methodOf lbServices.Report
          *
          * @description
          *
-         * Returns the identified vendors of censorship and surveillance equipment
+         * Returns website details
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` -
-         *
-         * @param {function(Array.<Object>,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Array.<Object>} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Report` object.)
-         * </em>
-         */
-        "vendors": {
-          isArray: true,
-          url: urlBase + "/reports/vendors",
-          method: "GET"
-        },
-
-        /**
-         * @ngdoc method
-         * @name lbServices.Report#vendors
-         * @methodOf lbServices.Report
-         *
-         * @description
-         *
-         * Returns the identified vendors of censorship and surveillance equipment
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `probe_cc` – `{string=}` -
+         *  - `website_url` – `{string=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1911,16 +1878,50 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Report#vendors
+         * @name lbServices.Report#asnName
          * @methodOf lbServices.Report
          *
          * @description
          *
-         * Returns the identified vendors of censorship and surveillance equipment
+         * Returns ASN name
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` -
+         *  - `asn` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "asnName": {
+          isArray: true,
+          url: urlBase + "/reports/asnName",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#websiteMeasurements
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns website's measurements
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `website_url` – `{string=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1940,6 +1941,40 @@ module.factory(
         "websiteMeasurements": {
           isArray: true,
           url: urlBase + "/reports/websiteMeasurements",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#vendors
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns the identified vendors of censorship and surveillance equipment
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `probe_cc` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "vendors": {
+          isArray: true,
+          url: urlBase + "/reports/vendors",
           method: "GET"
         },
 
@@ -1989,7 +2024,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` -
+         *  - `probe_cc` – `{string=}` - 
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2202,7 +2237,7 @@ module.factory(
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `refresh` – `{boolean=}` -
+         *  - `refresh` – `{boolean=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2393,7 +2428,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/countries/:id/exists",
@@ -2594,7 +2629,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/countries/count",
@@ -2654,7 +2689,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2668,7 +2703,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/countries/change-stream",
@@ -2991,7 +3026,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` -
+         *  - `exists` – `{boolean=}` - 
          */
         "exists": {
           url: urlBase + "/nettests/:id/exists",
@@ -3192,7 +3227,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` -
+         *  - `count` – `{number=}` - 
          */
         "count": {
           url: urlBase + "/nettests/count",
@@ -3252,7 +3287,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` -
+         *  - `options` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -3266,7 +3301,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` -
+         *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
           url: urlBase + "/nettests/change-stream",
