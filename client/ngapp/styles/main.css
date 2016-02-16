@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* OONI Explorer - Stylesheet */
 @font-face {
   font-family: "Charter";
   src: url("fonts/charter-regular.woff"); }
@@ -80,9 +81,9 @@ table.countries td {
     color: #0588CB; }
 
 button {
-  padding: .25rem .5rem;
+  padding: .35rem .5rem;
   font-size: .8rem;
-  border-radius: 3px;
+  line-height: inherit;
   cursor: pointer;
   border: 1px solid #0588CB;
   font-family: "Fira Sans";
@@ -90,7 +91,7 @@ button {
   transition: 0.5s background-color, 0.5s color;
   background-color: #0588CB;
   color: #fff;
-  border: 1px solid #046799; }
+  border: 1px solid #0588CB; }
   button:hover {
     background-color: #046799;
     color: white; }
@@ -98,6 +99,9 @@ button {
 button.secondary {
   background-color: #fff;
   color: #0588CB; }
+  button.secondary:hover {
+    background-color: #046799;
+    color: white; }
 
 button.secondary.selected {
   background-color: #046799;
@@ -741,8 +745,6 @@ pre span.lw {
   margin-top: -80px; }
 
 .explanation {
-  text-align: center;
-  max-width: 640px;
   margin: 0rem auto 2rem; }
 
 .statistics {
@@ -926,56 +928,58 @@ label[for="anomalies"] {
   .header-wrapper .row {
     margin-bottom: 1rem;
     margin-top: 0; }
+  .header-wrapper header img {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -5px;
+    left: 0px;
+    margin-right: 20px; }
   .header-wrapper header h1 {
+    display: inline-block;
     color: white;
     margin-bottom: 0;
     padding: 1rem 0; }
-
-.view-chooser {
-  text-align: center;
-  margin: 2rem 0;
-  position: relative;
-  z-index: 999; }
-  .view-chooser a {
-    padding: .25rem .5rem;
-    font-size: .8rem;
-    border-radius: 3px;
-    cursor: pointer;
-    border: 1px solid #0588CB;
-    font-family: "Fira Sans";
-    font-weight: 300;
-    transition: 0.5s background-color, 0.5s color;
-    border-radius: 0;
-    font-size: 1rem; }
-    .view-chooser a:hover {
-      background-color: #046799;
-      color: white; }
-  .view-chooser .selected {
-    padding: .25rem .5rem;
-    font-size: .8rem;
-    border-radius: 3px;
-    cursor: pointer;
-    border: 1px solid #0588CB;
-    font-family: "Fira Sans";
-    font-weight: 300;
-    transition: 0.5s background-color, 0.5s color;
-    background-color: #0588CB;
-    color: #fff;
-    border: 1px solid #046799;
-    border-radius: 0;
-    font-size: 1rem; }
-    .view-chooser .selected:hover {
-      background-color: #046799;
-      color: white; }
-  .view-chooser a:first-child {
-    border-right: 0;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px; }
-  .view-chooser a:last-child {
-    border-left: 0;
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px; }
-  .view-chooser a:nth-child(2) {
-    border-left: 1px solid #0588CB; }
+  .header-wrapper .view-chooser {
+    text-align: center;
+    position: relative;
+    z-index: 999; }
+    .header-wrapper .view-chooser a {
+      padding: .35rem .5rem;
+      font-size: .8rem;
+      line-height: inherit;
+      cursor: pointer;
+      border: 3px;
+      font-family: "Fira Sans";
+      font-weight: 300;
+      transition: 0.5s background-color, 0.5s color;
+      margin: 0 .85rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      border-radius: 3px; }
+      .header-wrapper .view-chooser a:hover {
+        background-color: #046799;
+        color: white; }
+      .header-wrapper .view-chooser a.selected {
+        padding: .35rem .5rem;
+        font-size: .8rem;
+        line-height: inherit;
+        cursor: pointer;
+        border: 0px;
+        font-family: "Fira Sans";
+        font-weight: 300;
+        transition: 0.5s background-color, 0.5s color;
+        background-color: #fff;
+        color: #0588CB;
+        border: 0px;
+        border-radius: 0;
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: inherit;
+        border-radius: 3px; }
+        .header-wrapper .view-chooser a.selected:hover {
+          background-color: #fff;
+          color: #0588CB; }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,21 +1,25 @@
-$ooni-blue: #0588CB;
-$white: #fff;
-$footer-background-color: #26292c;
-$footer-color: #b4b4b4;
+/* OONI Explorer - Stylesheet */
 
-$blocked: #B83564;
-$red: #cc0000;
-$unblocked: #4FD156;
+// Colors
+$color-ooni-blue: #0588CB;
+$color-white: #fff;
+$color-off-white: #f2f2f2;
+$color-footer-background-color: #26292c;
+$color-footer-color: #b4b4b4;
+$color-blocked: #B83564;
+$color-unblocked: #4FD156;
+$color-red: #cc0000;
+$color-grey: #c1c1c1;
 
-$off-white: #f2f2f2;
-
-$grey: #c1c1c1;
-
-$transition-speed: .5s;
+// Buttons
+$button-border: 1px solid $color-ooni-blue;
+$button-border-hover: 1px solid darken($color-ooni-blue, 10%);
 $button-border-radius: 3px;
 
-@import "mixins";
+// Other
+$transition-speed: .5s;
 
+@import "mixins";
 @import "ui/fonts",
         "ui/table",
         "ui/buttons",
@@ -28,51 +32,62 @@ $button-border-radius: 3px;
         "world";
 
 .header-wrapper {
-  background-color: $ooni-blue;
+  background-color: $color-ooni-blue;
 
   .row {
     margin-bottom: 1rem;
     margin-top: 0;
   }
 
-  header h1 {
-    color: white;
-    margin-bottom: 0;
-    padding: 1rem 0;
-  }
-}
+  header {
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      top: -5px;
+      left: 0px;
+      margin-right: 20px;
+    }
 
-.view-chooser {
-  text-align: center;
-  margin: 2rem 0;
-  position: relative;
-  z-index: 999;
-
-  a {
-    @include button-mixin;
-    border-radius: 0;
-    font-size: 1rem;
-  }
-
-  .selected {
-    @include primary-button-mixin;
-    border-radius: 0;
-    font-size: 1rem;
+    h1 {
+      display: inline-block;
+      color: white;
+      margin-bottom: 0;
+      padding: 1rem 0;
+    }
   }
 
-  a:first-child {
-    border-right: 0;
-    border-bottom-left-radius: $button-border-radius;
-    border-top-left-radius: $button-border-radius;
-  }
+  .view-chooser {
+    text-align: center;
+    position: relative;
+    z-index: 999;
 
-  a:last-child {
-    border-left: 0;
-    border-bottom-right-radius: $button-border-radius;
-    border-top-right-radius: $button-border-radius;
-  }
+    a {
+      @include button-mixin(3px);
+      margin: 0 .85rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: $color-white;
+      border-radius: 3px;
 
-  a:nth-child(2) {
-    border-left: 1px solid $ooni-blue;
+      &:hover {
+        background-color: darken($color-ooni-blue, 10%);
+        color: white;
+      }
+
+      &.selected {
+        @include primary-button-mixin(0px, $color-white, $color-ooni-blue);
+        border-radius: 0;
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: inherit;
+        border-radius: 3px;
+
+        &:hover {
+          background-color: $color-white;
+          color: $color-ooni-blue;
+        }
+      }
+    }
   }
 }

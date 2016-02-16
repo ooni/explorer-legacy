@@ -10,8 +10,6 @@
 }
 
 .explanation {
-  text-align: center;
-  max-width: 640px;
   margin: 0rem auto 2rem;
 }
 
@@ -31,10 +29,10 @@
   }
 
   .measured {
-    background: $ooni-blue;
+    background: $color-ooni-blue;
   }
   .blocked {
-    background: $blocked;
+    background: $color-blocked;
   }
 }
 
@@ -42,7 +40,7 @@
   text-align: center;
 
   a:hover {
-    color: darken($ooni-blue, 10%);
+    color: darken($color-ooni-blue, 10%);
     cursor: pointer;
   }
 }
@@ -58,16 +56,16 @@
   .bar {
     cursor: pointer;
     display: inline-block;
-    fill: $ooni-blue;
+    fill: $color-ooni-blue;
     margin-right: 2rem;
 
     &.blocked {
-      fill: $blocked;
+      fill: $color-blocked;
     }
   }
 
   text {
-    fill: $grey;
+    fill: $color-grey;
     opacity: 1;
     font-size: 16px;
     font-family: "Fira Sans", sans-serif;
@@ -77,11 +75,11 @@
       font-size: 14px;
     }
     &.total {
-      fill: $ooni-blue;
+      fill: $color-ooni-blue;
       text-anchor: middle;
     }
     &.blocked {
-      fill: $blocked;
+      fill: $color-blocked;
       text-anchor: start;
     }
   }
@@ -99,10 +97,10 @@
   }
 
   .no-show {
-    background-color: $off-white;
+    background-color: $color-off-white;
     padding: 2rem;
     text-align: center;
-    color: $grey;
+    color: $color-grey;
   }
 
   &.websites-blocked {
