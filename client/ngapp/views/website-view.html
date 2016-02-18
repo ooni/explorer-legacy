@@ -5,5 +5,12 @@
         <span ng-bind="websiteUrl"><span>
       </h1>
     </div>
+    <div class="row">
+      <ul>
+        <li ng-repeat="measurement in measurements">
+        {{ measurement.probe_cc }}: <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </main>

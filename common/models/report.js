@@ -14,10 +14,27 @@ module.exports = function(Report) {
       { http: { verb: 'get' },
         description: 'Returns the list of URLs that appear to be blocked in a given country',
         accepts: {arg: 'probe_cc', type: 'string'},
-        returns: { arg: 'data', type: ['Object'], root: true  }
+        returns: {arg: 'data', type: ['Object'], root: true}
       }
   );
 
+  Report.website = function (website_url, callback) {
+    var ds = Report.dataSource
+    var wildcard_url = '%' + website_url
+
+    var sql = "SELECT * FROM blockpage_urls WHERE input LIKE $1"
+
+    ds.connector.query(sql, [wildcard_url], callback)
+  }
+
+  Report.remoteMethod(
+      'website',
+      { http: { verb: 'get' },
+        description: 'Returns websites information',
+        accepts: {arg: 'website_url', type: 'string'},
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  )
 
   Report.vendors = function(probe_cc, callback) {
     var ds = Report.dataSource;
@@ -37,7 +54,7 @@ module.exports = function(Report) {
       { http: { verb: 'get' },
         description: 'Returns the identified vendors of censorship and surveillance equipment',
         accepts: {arg: 'probe_cc', type: 'string'},
-        returns: { arg: 'data', type: ['Object'], root: true  }
+        returns: {arg: 'data', type: ['Object'], root: true}
       }
   );
 
