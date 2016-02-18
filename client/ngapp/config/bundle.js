@@ -22,7 +22,7 @@ window.CONFIG = {
     },
     "/website/:id": {
       "controller": "WebsiteDetailViewCtrl",
-      "templateUrl": "/views/website-detail-view.html"
+      "templateUrl": "/views/website-view.html"
     }
   }
 };

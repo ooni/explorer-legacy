@@ -37,7 +37,7 @@ angular
     $locationProvider.html5Mode(true);
   })
   // Things to run before the app loads;
-  .run(function($rootScope, $location) {
+  .run(function ($rootScope, $location) {
 
     $rootScope.$location = $location;
   });
@@ -453,7 +453,7 @@ angular.module('ooniAPIApp')
   .controller('OverviewCtrl', function ($rootScope, $location) {
     $rootScope.loaded = true;
 });
-;'use strict';
+;'use strict'
 
 /**
  * @ngdoc function
@@ -465,9 +465,8 @@ angular.module('ooniAPIApp')
 
 angular.module('ooniAPIApp')
   .controller('WebsiteDetailViewCtrl', function ($scope, Report, $http, $routeParams) {
-
-
-})
+    $scope.websiteUrl = $routeParams.id
+  })
 ;'use strict';
 
 /**

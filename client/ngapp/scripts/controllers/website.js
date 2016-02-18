@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @ngdoc function
@@ -10,6 +10,5 @@
 
 angular.module('ooniAPIApp')
   .controller('WebsiteDetailViewCtrl', function ($scope, Report, $http, $routeParams) {
-
-
-})
+    $scope.websiteUrl = $routeParams.id
+  })
