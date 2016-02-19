@@ -176,6 +176,19 @@ button.secondary.selected {
 .row-link {
   color: #000; }
 
+.country section,
+.website section {
+  margin-top: 2em; }
+  .country section h2,
+  .website section h2 {
+    margin-bottom: 1em; }
+  .country section .no-show,
+  .website section .no-show {
+    background-color: #f2f2f2;
+    padding: 2rem;
+    text-align: center;
+    color: #c1c1c1; }
+
 .hover-wrapper {
   position: relative;
   cursor: pointer; }
@@ -801,29 +814,22 @@ pre span.lw {
   .bar-chart .hidden {
     opacity: 0; }
 
-.country section {
-  margin-top: 2em; }
-  .country section h2 {
-    margin-bottom: 1em; }
-  .country section .no-show {
-    background-color: #f2f2f2;
-    padding: 2rem;
-    text-align: center;
-    color: #c1c1c1; }
-  .country section.websites-blocked ul {
-    font-size: .8rem;
-    list-style: none; }
-  .country section.websites-blocked li {
+.country section.websites-blocked ul {
+  font-size: .8rem;
+  list-style: none; }
+
+.country section.websites-blocked li {
+  display: inline-block;
+  vertical-align: top;
+  width: 32%;
+  margin-left: 0;
+  padding-left: 0; }
+
+.country section.vendors ul {
+  list-style: none; }
+  .country section.vendors ul li {
     display: inline-block;
-    vertical-align: top;
-    width: 32%;
-    margin-left: 0;
-    padding-left: 0; }
-  .country section.vendors ul {
-    list-style: none; }
-    .country section.vendors ul li {
-      display: inline-block;
-      width: 45%; }
+    width: 45%; }
 
 .anomalies {
   list-style: none; }
@@ -925,6 +931,9 @@ label[for="anomalies"] {
 .icon-legend {
   font-size: 0.6em;
   color: #cc0000; }
+
+.capitalize {
+  text-transform: capitalize; }
 
 .header-wrapper {
   background-color: #0588CB; }

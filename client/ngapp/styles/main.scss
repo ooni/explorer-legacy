@@ -22,11 +22,16 @@ $button-border-radius: 3px;
         "ui/buttons",
         "ui/forms",
         "ui/ui-grid",
+        "ui/section",
         "ui/more-info-hover",
         "base",
         "country",
         "report",
         "world";
+
+.capitalize {
+  text-transform: capitalize;
+}
 
 .header-wrapper {
   background-color: $ooni-blue;

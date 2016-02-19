@@ -9,12 +9,23 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('WebsiteDetailViewCtrl', function ($scope, Report, $http, $routeParams) {
+  .controller('WebsiteDetailViewCtrl', function ($scope, Report, $http, $routeParams, ISO3166) {
     $scope.websiteUrl = $routeParams.id
+    $scope.encodeInput = window.encodeURIComponent;
 
-    console.log($scope.websiteUrl)
     Report.websiteMeasurements({website_url: $scope.websiteUrl}, function (resp) {
-      $scope.measurements = resp
+      $scope.measurementsByCountry = {}
+      resp.forEach(function (measurement) {
+        if ($scope.measurementsByCountry[measurement.probe_cc] !== undefined) {
+          $scope.measurementsByCountry[measurement.probe_cc].measurements
+            .push(measurement)
+        } else {
+          $scope.measurementsByCountry[measurement.probe_cc] = {
+            measurements: [measurement],
+            country: ISO3166.getCountryName(measurement.probe_cc)
+          }
+        }
+      })
     }, function (err) {
       if (err) console.log('err', err)
     })
@@ -26,5 +37,5 @@ angular.module('ooniAPIApp')
       if (err) console.log('err', err)
     })
 
-    var alexaUrl = 'http://data.alexa.com/data?cli=10&data=snbamz&url=' + $scope.websiteUrl
+    // var alexaUrl = 'http://data.alexa.com/data?cli=10&data=snbamz&url=' + $scope.websiteUrl
   })

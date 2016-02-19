@@ -29,9 +29,9 @@
 
         <div>
           <span for="country">This test was run in </span>
-          <span id="country">
+          <span id="country" class="capitalize">
             <i class="flag-icon"
-              ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ countryName }}
+              ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ countryName | lowercase }}
           </span>
         </div>
         <div class="spec-in-all-tests">
