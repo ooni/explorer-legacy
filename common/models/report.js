@@ -18,19 +18,35 @@ module.exports = function(Report) {
       }
   );
 
-  Report.website = function (website_url, callback) {
+  Report.websiteDetails = function (website_url, callback) {
     var ds = Report.dataSource
     var wildcard_url = '%' + website_url
 
-    var sql = "SELECT * FROM blockpage_urls WHERE input LIKE $1"
-
+    var sql = 'SELECT * FROM test_lists_urls WHERE url LIKE $1'
     ds.connector.query(sql, [wildcard_url], callback)
   }
 
   Report.remoteMethod(
-      'website',
+      'websiteDetails',
       { http: { verb: 'get' },
-        description: 'Returns websites information',
+        description: 'Returns website details',
+        accepts: {arg: 'website_url', type: 'string'},
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  )
+
+  Report.websiteMeasurements = function (website_url, callback) {
+    var ds = Report.dataSource
+    var wildcard_url = '%' + website_url
+
+    var sql = 'SELECT * FROM blockpage_urls WHERE input LIKE $1'
+    ds.connector.query(sql, [wildcard_url], callback)
+  }
+
+  Report.remoteMethod(
+      'websiteMeasurements',
+      { http: { verb: 'get' },
+        description: 'Returns website\'s measurements',
         accepts: {arg: 'website_url', type: 'string'},
         returns: {arg: 'data', type: ['Object'], root: true}
       }

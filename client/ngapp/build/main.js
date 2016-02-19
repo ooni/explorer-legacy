@@ -99,6 +99,7 @@ angular.module('ooniAPIApp')
 
     var loadingMore = false;
     var chunkLength = 50;
+
     $scope.loadMoreChunks = function() {
       if ($scope.chunkedArray && !loadingMore) {
         loadingMore = true;
@@ -468,18 +469,20 @@ angular.module('ooniAPIApp')
     $scope.websiteUrl = $routeParams.id
 
     console.log($scope.websiteUrl)
-    Report.website({website_url: $scope.websiteUrl}, function (resp) {
+    Report.websiteMeasurements({website_url: $scope.websiteUrl}, function (resp) {
       $scope.measurements = resp
     }, function (err) {
-      if (err) console.log(err)
+      if (err) console.log('err', err)
+    })
+
+    Report.websiteDetails({website_url: $scope.websiteUrl}, function (resp) {
+      $scope.details = resp[0]
+      console.log($scope.details)
+    }, function (err) {
+      if (err) console.log('err', err)
     })
 
     var alexaUrl = 'http://data.alexa.com/data?cli=10&data=snbamz&url=' + $scope.websiteUrl
-
-    $http.get(alexaUrl)
-      .then(function (resp) {
-        console.log(resp)
-      })
   })
 ;'use strict';
 
@@ -1875,9 +1878,43 @@ module.factory(
          * This usually means the response is a `Report` object.)
          * </em>
          */
-        "website": {
+        "websiteDetails": {
           isArray: true,
-          url: urlBase + "/reports/website",
+          url: urlBase + "/reports/websiteDetails",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#vendors
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns the identified vendors of censorship and surveillance equipment
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `probe_cc` – `{string=}` -
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "websiteMeasurements": {
+          isArray: true,
+          url: urlBase + "/reports/websiteMeasurements",
           method: "GET"
         },
 

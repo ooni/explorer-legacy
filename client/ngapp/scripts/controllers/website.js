@@ -13,16 +13,18 @@ angular.module('ooniAPIApp')
     $scope.websiteUrl = $routeParams.id
 
     console.log($scope.websiteUrl)
-    Report.website({website_url: $scope.websiteUrl}, function (resp) {
+    Report.websiteMeasurements({website_url: $scope.websiteUrl}, function (resp) {
       $scope.measurements = resp
     }, function (err) {
-      if (err) console.log(err)
+      if (err) console.log('err', err)
+    })
+
+    Report.websiteDetails({website_url: $scope.websiteUrl}, function (resp) {
+      $scope.details = resp[0]
+      console.log($scope.details)
+    }, function (err) {
+      if (err) console.log('err', err)
     })
 
     var alexaUrl = 'http://data.alexa.com/data?cli=10&data=snbamz&url=' + $scope.websiteUrl
-
-    $http.get(alexaUrl)
-      .then(function (resp) {
-        console.log(resp)
-      })
   })

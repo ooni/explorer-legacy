@@ -2,13 +2,22 @@
   <div class="container">
     <div class="row">
       <h1>
-        <span ng-bind="websiteUrl"><span>
+        <span ng-bind="websiteUrl" class=><span>
       </h1>
     </div>
-    <div class="row">
+    <div>
+      <p>Category: <span class="highlight" ng-bind="details.category_code"></span></p>
+      <p>We started measuring this URL on <span class="highlight" ng-bind="details.date_added"></span>.
+      </p>
+      <p>
+        The URL was suggested for measuring by <span class="highlight" ng-bind="details.source"></span>.
+      </p>
+    </div>
+    <div>
+      <h2>Measurements Run on the URL</h2>
       <ul>
-        <li ng-repeat="measurement in measurements">
-        {{ measurement.probe_cc }}: <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a>
+        <li ng-repeat="measurement in measurements | orderBy:'test_start_time'">
+        <a href="/country/{{ measurement.probe_cc}}/">{{ measurement.probe_cc }}</a> - {{ measurement.test_start_time | date:'shortDate' }}: <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a>
         </li>
       </ul>
     </div>

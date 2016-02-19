@@ -92,7 +92,7 @@
             <a ng-href="/website/{{ obj.input.replace('http://', '') }}/">View Page Information »</a>
           </div>
           <ul class="blockpage-measurements">
-            <li ng-repeat="measurement in obj.measurements">
+            <li ng-repeat="measurement in obj.measurements | orderBy:'test_start_time'">
               {{ measurement.test_start_time | date:'shortDate' }}
               <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a></li>
           </ul>

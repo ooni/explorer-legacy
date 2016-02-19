@@ -56,6 +56,7 @@ angular.module('ooniAPIApp')
 
     var loadingMore = false;
     var chunkLength = 50;
+
     $scope.loadMoreChunks = function() {
       if ($scope.chunkedArray && !loadingMore) {
         loadingMore = true;

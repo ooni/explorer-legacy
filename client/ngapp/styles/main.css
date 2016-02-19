@@ -79,6 +79,11 @@ table.countries td {
   .clickable:hover i::before {
     color: #0588CB; }
 
+.highlight {
+  background-color: #d1effe;
+  padding-left: .5rem;
+  padding-right: .5rem; }
+
 button {
   padding: .25rem .5rem;
   font-size: .8rem;
