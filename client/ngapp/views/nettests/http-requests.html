@@ -18,10 +18,10 @@
             <h3>What does this test do?</h3>
 
             <p>
-            This test requests a website first over the network of the user and then over the Tor network. The two results are compared and if the length of the body differs by some percentage, then we consider that there is an anomaly. Other signs of anomalies can include the fact that the request over the user's network fails or that the headers do not match. Basically, if there's a difference in the body length of the two websites, then it is likely the case that content is blocked in the one website.
+            This test requests a website first over the network of the user and then over the Tor network. The two results are compared and if the length of the body of the websites differs by some percentage, then we consider that there is an anomaly. Other signs of anomalies can include the fact that the request over the user's network fails or that the headers do not match.
             </p>
             <p class="note">
-            Note: False positives might occur when the tor control connection is being discriminated by the server. This happens, for example, when the cloud flare CAPTCHA page appears.
+            Note: False positives might occur when the Tor control connection is being discriminated by the server. This happens, for example, when a CloudFlare CAPTCHA page appears.
             </p>
         </div>
     </div>
