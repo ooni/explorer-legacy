@@ -14,7 +14,7 @@
             <label for="body_length_match">Body length match: </label><span id="body-length-match">{{ body_length_match }}</span>
             <br/>
             <label for="input">input: </label><span id="input">{{ report.input  }}</span>
-            <a ng-href="/website/{{ report.input.replace('http://', '') }}/">View Website Information »</a>
+            <a ng-href="/website/{{ encodeInput(report.input.replace('http://', '')) }}">View Website Information »</a>
         </div>
 
         <div class="description">

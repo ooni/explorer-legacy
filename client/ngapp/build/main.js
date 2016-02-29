@@ -332,6 +332,8 @@ var definitions = {
 ;angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
+  $scope.encodeInput = window.encodeURIComponent;
+
   angular.forEach($scope.report.test_keys.requests, function(request) {
     if (request.request.tor === true || request.request.tor.is_tor === true) {
       $scope.control = request;

@@ -20,7 +20,7 @@ window.CONFIG = {
       "controller": "CountryDetailViewCtrl",
       "templateUrl": "/views/country-view.html"
     },
-    "/website/:id": {
+    "/website/:id*": {
       "controller": "WebsiteDetailViewCtrl",
       "templateUrl": "/views/website-view.html"
     }
