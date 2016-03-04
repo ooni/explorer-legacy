@@ -1,15 +1,20 @@
+/* World Map Legend */
+
 .worldMapLegend {
     margin-top: -230px;
     margin-bottom: 50px;
+
     dt {
         display: block;
         width: 10px;
         height: 10px;
     }
+
     dd {
          display: inline;
     }
 }
+
 .icon-legend {
   font-size: 0.6em;
   color: $color-red;
