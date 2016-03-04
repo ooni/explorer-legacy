@@ -1,21 +1,27 @@
 /* World Map Legend */
 
 .worldMapLegend {
-    margin-top: -230px;
+    margin-top: -300px;
     margin-bottom: 50px;
 
-    dt {
+    dl {
+      margin-bottom: 15px;
+      font-size: 16px;
+
+      dd {
         display: block;
-        width: 10px;
-        height: 10px;
-    }
 
-    dd {
-         display: inline;
-    }
-}
+        span {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 2px;
+        }
 
-.icon-legend {
-  font-size: 0.6em;
-  color: $color-red;
+        i {
+          font-size: 0.6em;
+          color: $color-red;
+        }
+      }
+    }
 }
