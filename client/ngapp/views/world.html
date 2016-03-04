@@ -2,10 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-3" ng-show="loaded">
-          <p class="explanation"><strong>Open Observatory of Network Interference (OONI)</strong>, is a global community of network probes that measure the internet to identify "network anomalies" that can be signs of internet censorship or surveillance.</p>
-      </div>
-      <div class="col-3" ng-show="loaded">
-         <p class="explanation">Using the map on this page you can see where measurements are run and in which countries we have identified instances of internet censorship and particular types of censorship software or vendors.</p>
+        <h1>World Map</h1>
       </div>
     </div>
     <div class="row">
@@ -13,27 +10,37 @@
         <datamap map="worldMap" on-click="map_clicked" class="map" plugins="mapPlugins" plugin-data="mapPluginData"></datamap>
         <div class="worldMap"></div>
         <div class="worldMapLegend">
+            <strong>Measurements</strong>
             <dl>
-                <dt style="background-color: {{worldMap.fills.HIGH}}"></dt>
-                <dd>More than 100.000 measurements</dd>
-                <dt style="background-color: {{worldMap.fills.MEDIUM}}"></dt>
-                <dd>More than 10.000 measurements</dd>
-                <dt style="background-color: {{worldMap.fills.LOW}}"></dt>
-                <dd>Less than 10.000 measurements</dd>
-                <dt style="background-color: {{worldMap.fills.BLOCKPAGE}}"></dt>
-                <dd>Confirmed cases of censorship</dd>
-                <dt class="icon-legend"><i class="fa fa-industry"></i></dt>
-                <dd>Vendor has been identified</dd>
+              <dd>
+                <span style="background-color: {{worldMap.fills.HIGH}}"></span> More than 100,000
+              </dd>
+              <dd>
+                <span style="background-color: {{worldMap.fills.MEDIUM}}"></span> More than 10,000
+              </dd>
+              <dd>
+                <span style="background-color: {{worldMap.fills.LOW}}"></span> Less than 10,000
+              </dd>
+            </dl>
+            <strong>Discoveries</strong>
+            <dl>
+              <dd>
+                <span style="background-color: {{worldMap.fills.BLOCKPAGE}}"></span> Confirmed censorship cases
+              </dd>
+              <dd>
+                <i class="fa fa-industry"></i> Vendors identified
+              </dd>
             </dl>
         </div>
       </div>
     </div>
   </div>
+  <hr ng-show="loaded">
 
-  <div ooni-loader
-    loaded="loaded">
+  <div ooni-loader loaded="loaded">
   </div>
 
+  <h2>Country List</h2>
   <p>
     Browse the countries below to find a country you want to investigate the tests for:
   </p>
@@ -47,4 +54,5 @@
     use-external-pagination="false"
     use-external-sorting="false">
   </div>
+
 </main>
