@@ -24,12 +24,12 @@ angular.module('ooniAPIApp')
         console.log('error', error)
       })
 
-    Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageCount({probe_cc: $scope.countryCode}, function(resp) {
       // this goes off and gets processed by the bar-chart directive
       $scope.blockpageCount = resp;
     });
 
-    Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageList({probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
 
       $scope.chunkedBlockpageList = {}
@@ -56,6 +56,7 @@ angular.module('ooniAPIApp')
 
     var loadingMore = false;
     var chunkLength = 50;
+
     $scope.loadMoreChunks = function() {
       if ($scope.chunkedArray && !loadingMore) {
         loadingMore = true;

@@ -32,10 +32,11 @@ angular.module('ooniAPIApp')
     }
 
     function loading_success(data) {
-      console.log('found')
       $scope.report = data[0];
-      console.log(data[0]);
-
+      $scope.network_information = " ( " + $scope.report.probe_asn + " )"
+      Report.asnName({asn: $scope.report.probe_asn}, function(result) {
+        $scope.network_information = result[0].name + $scope.network_information;
+      });
 
       $scope.nettest = Nettest.findOne({
         filter: {

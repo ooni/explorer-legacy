@@ -19,6 +19,10 @@ window.CONFIG = {
     "/country/:id": {
       "controller": "CountryDetailViewCtrl",
       "templateUrl": "/views/country-view.html"
+    },
+    "/website/:id*": {
+      "controller": "WebsiteDetailViewCtrl",
+      "templateUrl": "/views/website-view.html"
     }
   }
 };

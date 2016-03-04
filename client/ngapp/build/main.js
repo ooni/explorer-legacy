@@ -37,7 +37,7 @@ angular
     $locationProvider.html5Mode(true);
   })
   // Things to run before the app loads;
-  .run(function($rootScope, $location) {
+  .run(function ($rootScope, $location) {
 
     $rootScope.$location = $location;
   });
@@ -67,12 +67,12 @@ angular.module('ooniAPIApp')
         console.log('error', error)
       })
 
-    Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageCount({probe_cc: $scope.countryCode}, function(resp) {
       // this goes off and gets processed by the bar-chart directive
       $scope.blockpageCount = resp;
     });
 
-    Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageList({probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
 
       $scope.chunkedBlockpageList = {}
@@ -99,6 +99,7 @@ angular.module('ooniAPIApp')
 
     var loadingMore = false;
     var chunkLength = 50;
+
     $scope.loadMoreChunks = function() {
       if ($scope.chunkedArray && !loadingMore) {
         loadingMore = true;
@@ -343,6 +344,8 @@ var definitions = {
 ;angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
+  $scope.encodeInput = window.encodeURIComponent;
+
   angular.forEach($scope.report.test_keys.requests, function(request) {
     if (request.request.tor === true || request.request.tor.is_tor === true) {
       $scope.control = request;
@@ -465,6 +468,47 @@ angular.module('ooniAPIApp')
   .controller('OverviewCtrl', function ($rootScope, $location) {
     $rootScope.loaded = true;
 });
+;'use strict'
+
+/**
+ * @ngdoc function
+ * @name ooniAPIApp.controller:WebsiteDetailViewCtrl
+ * @description
+ * # WebsiteDetailViewCtrl
+ * Controller of the ooniAPIApp
+ */
+
+angular.module('ooniAPIApp')
+  .controller('WebsiteDetailViewCtrl', function ($scope, Report, $http, $routeParams, ISO3166) {
+    $scope.websiteUrl = $routeParams.id
+    $scope.encodeInput = window.encodeURIComponent;
+
+    Report.websiteMeasurements({website_url: $scope.websiteUrl}, function (resp) {
+      $scope.measurementsByCountry = {}
+      resp.forEach(function (measurement) {
+        if ($scope.measurementsByCountry[measurement.probe_cc] !== undefined) {
+          $scope.measurementsByCountry[measurement.probe_cc].measurements
+            .push(measurement)
+        } else {
+          $scope.measurementsByCountry[measurement.probe_cc] = {
+            measurements: [measurement],
+            country: ISO3166.getCountryName(measurement.probe_cc)
+          }
+        }
+      })
+    }, function (err) {
+      if (err) console.log('err', err)
+    })
+
+    Report.websiteDetails({website_url: $scope.websiteUrl}, function (resp) {
+      $scope.details = resp[0]
+      console.log($scope.details)
+    }, function (err) {
+      if (err) console.log('err', err)
+    })
+
+    // var alexaUrl = 'http://data.alexa.com/data?cli=10&data=snbamz&url=' + $scope.websiteUrl
+  })
 ;'use strict';
 
 /**
@@ -1481,7 +1525,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/reports/:id/exists",
@@ -1682,7 +1726,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/reports/count",
@@ -1742,7 +1786,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1756,7 +1800,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/reports/change-stream",
@@ -1774,7 +1818,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` - 
+         *  - `probe_cc` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1808,7 +1852,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` - 
+         *  - `probe_cc` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1828,6 +1872,74 @@ module.factory(
         "vendors": {
           isArray: true,
           url: urlBase + "/reports/vendors",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#vendors
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns the identified vendors of censorship and surveillance equipment
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `probe_cc` – `{string=}` -
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "websiteDetails": {
+          isArray: true,
+          url: urlBase + "/reports/websiteDetails",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#vendors
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns the identified vendors of censorship and surveillance equipment
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `probe_cc` – `{string=}` -
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "websiteMeasurements": {
+          isArray: true,
+          url: urlBase + "/reports/websiteMeasurements",
           method: "GET"
         },
 
@@ -1877,7 +1989,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` - 
+         *  - `probe_cc` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2090,7 +2202,7 @@ module.factory(
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `refresh` – `{boolean=}` - 
+         *  - `refresh` – `{boolean=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2281,7 +2393,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/countries/:id/exists",
@@ -2482,7 +2594,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/countries/count",
@@ -2542,7 +2654,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2556,7 +2668,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/countries/change-stream",
@@ -2879,7 +2991,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/nettests/:id/exists",
@@ -3080,7 +3192,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/nettests/count",
@@ -3140,7 +3252,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -3154,7 +3266,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/nettests/change-stream",

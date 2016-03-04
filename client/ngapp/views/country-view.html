@@ -3,16 +3,16 @@
     <div class="row">
       <h1>
         <i class="flag-icon" ng-class="'flag-icon-' + countryCode | lowercase"></i>
-        <span ng-bind="countryName"><span>
+        <span ng-bind="countryName | lowercase" class="capitalize"><span>
       </h1>
     </div>
 
     <p>
-      Here's what we know about anomalies with internet connections located in {{ countryName }}.
+      Here's what we know about anomalies with internet connections located in <span class="capitalize">{{ countryName | lowercase }}</span>.
     </p>
 
     <p>
-      <h4>We've got {{ count | number }} measurements for {{ countryName }}.</h4>
+      <h4>We've got {{ count | number }} measurements for <span class="capitalize">{{ countryName | lowercase }}</span>.</h4>
     </p>
 
     <div ooni-country-bar-chart
@@ -88,8 +88,13 @@
                        'one': '1 measurement',
                        'other': '{} measurements.'}">
           </ng-pluralize>
+          <div>
+            <a href="/website/{{ encodeInput(obj.input.replace('http://', '')) }}">View Page Information »</a>
+          </div>
           <ul class="blockpage-measurements">
-            <li ng-repeat="measurement in obj.measurements">{{ measurement.test_start_time | date:'shortDate' }} <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a></li>
+            <li ng-repeat="measurement in obj.measurements | orderBy:'test_start_time'">
+              {{ measurement.test_start_time | date:'shortDate' }}
+              <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a></li>
           </ul>
         </li>
       </ul>
