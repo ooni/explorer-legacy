@@ -22,7 +22,7 @@ module.exports = function(Report) {
     var ds = Report.dataSource
     var wildcard_url = '%' + website_url
 
-    var sql = 'SELECT * FROM test_lists_urls WHERE url LIKE $1'
+    var sql = 'SELECT * FROM domains WHERE url LIKE $1'
     ds.connector.query(sql, [wildcard_url], callback)
   }
 
@@ -34,6 +34,23 @@ module.exports = function(Report) {
         returns: {arg: 'data', type: ['Object'], root: true}
       }
   )
+
+  Report.asnName = function (asn, callback) {
+    var ds = Report.dataSource
+
+    var sql = 'SELECT name FROM asns WHERE asn = $1'
+    ds.connector.query(sql, [asn], callback)
+  }
+
+  Report.remoteMethod(
+      'asnName',
+      { http: { verb: 'get' },
+        description: 'Returns ASN name',
+        accepts: {arg: 'asn', type: 'string'},
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  )
+
 
   Report.websiteMeasurements = function (website_url, callback) {
     var ds = Report.dataSource
