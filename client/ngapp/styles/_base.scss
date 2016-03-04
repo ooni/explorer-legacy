@@ -16,11 +16,15 @@ html {
   line-height: 1.4;
 }
 
-h1, h2, nav, .toc {
+h1,
+h2,
+nav,
+.toc {
   font-family: "Fira Sans", sans-serif;
 }
 
-pre, code {
+pre,
+code {
   font-family: "Source Code Pro", monospace;
 }
 
@@ -94,24 +98,90 @@ footer .row {
 /* Single-column layout */
 
 @media (max-width: 699px) {
-  html { font-size: 14px; }
-  .row { display: block; }
-  .col-1, .col-2, .col-3 { margin: 0 2.5rem !important; }
-  .container { width: auto; min-width: 20rem; }
-  .homepage nav .col-1 { display: none; }
-  nav { display: block; margin: 2rem 0 4rem !important; }
-  nav .col-2 { margin-top: 1rem !important; line-height: 2; }
-  .homepage nav a { margin: 0 1rem !important; }
-  .homepage header, .homepage nav, .homepage footer { text-align: center; }
-  .homepage header img { margin-bottom: 0.6rem !important; }
-  .homepage header p { width: auto; max-width: 23em; margin: auto; }
-  .toc { display: none; }
-  .homepage .col-1 h2 { margin: 6rem 0 2.5rem !important; width: 12rem; }
-  .homepage .how-it-works .col-1 h2 { margin: 0 !important; }
-  .sponsors { display: block !important; }
-  .sponsors a { margin-bottom: 2rem; }
-  .measurements table, .homepage .how-it-works img { width: calc(100% - 3rem * 2); }
-  .tcol-1 { width: 8rem !important; padding-right: 1rem; }
+
+  html {
+    font-size: 14px;
+  }
+
+  .row {
+    display: block;
+  }
+
+  .col-1,
+  .col-2,
+  .col-3 {
+    margin: 0 2.5rem !important;
+  }
+
+  .container {
+    width: auto; min-width: 20rem;
+  }
+
+  nav {
+    display: block;
+    margin: 2rem 0 4rem !important;
+  }
+
+  nav .col-2 {
+    margin-top: 1rem !important;
+    line-height: 2;
+  }
+
+  .homepage {
+
+    nav a {
+      margin: 0 1rem !important;
+    }
+
+    header,
+    nav,
+    footer {
+      text-align: center;
+    }
+
+    header {
+      img {
+        margin-bottom: 0.6rem !important;
+      }
+
+      p {
+        width: auto; max-width: 23em; margin: auto;
+      }
+    }
+
+    nav .col-1 {
+      display: none;
+    }
+
+    .col-1 h2 {
+      margin: 6rem 0 2.5rem !important; width: 12rem;
+    }
+
+    .how-it-works .col-1 h2 {
+      margin: 0 !important;
+    }
+  }
+
+  .toc {
+    display: none;
+  }
+
+  .sponsors {
+    display: block !important;
+  }
+
+  .sponsors a {
+    margin-bottom: 2rem;
+  }
+
+  .measurements table,
+  .homepage .how-it-works img {
+    width: calc(100% - 3rem * 2);
+  }
+
+  .tcol-1 {
+    width: 8rem !important; padding-right: 1rem;
+  }
 }
 
 @media (min-width: 350px) {
@@ -141,44 +211,44 @@ footer .row {
 
 @media (min-width: 810px) {
   html { font-size: 15px; }
-  .col-1, .col-2, .col-3 { margin: 0 4rem; }
+  .col-1, .col-2, .col-3 { margin: 0; }
   .tcol-1           { padding-right: 4rem; }
   .col-1     { width: calc(12.5rem * 1 + 4rem * 0); }
-  .col-2     { width: calc(12.5rem * 2 + 4rem * 1); }
-  .col-3     { width: calc(12.5rem * 3 + 4rem * 2); }
+  .col-2     { width: calc(12.5rem * 3 + 4rem * 1); }
+  .col-3     { width: calc(12.5rem * 5 + 4rem * 2); }
   .container { width: calc(12.5rem * 3 + 4rem * 4); }
   .tcol-1    { width: calc(12.5rem * 1 + 4rem * 1); }
 }
 
 @media (min-width: 920px) {
   html { font-size: 16px; }
-  .col-1, .col-2, .col-3 { margin: 0 4.2rem; }
+  .col-1, .col-2, .col-3 { margin: 0; }
   .tcol-1           { padding-right: 4.2rem; }
   .col-1     { width: calc(12.5rem * 1 + 4.2rem * 0); }
-  .col-2     { width: calc(12.5rem * 2 + 4.2rem * 1); }
-  .col-3     { width: calc(12.5rem * 3 + 4.2rem * 2); }
+  .col-2     { width: calc(12.5rem * 3 + 4.2rem * 1); }
+  .col-3     { width: calc(12.5rem * 5 + 4.2rem * 2); }
   .container { width: calc(12.5rem * 3 + 4.2rem * 4); }
   .tcol-1    { width: calc(12.5rem * 1 + 4.2rem * 1); }
 }
 
 @media (min-width: 1030px) {
   html { font-size: 17px; }
-  .col-1, .col-2, .col-3 { margin: 0 5rem; }
+  .col-1, .col-2, .col-3 { margin: 0; }
   .tcol-1           { padding-right: 5rem; }
   .col-1     { width: calc(13rem * 1 + 5rem * 0); }
-  .col-2     { width: calc(13rem * 2 + 5rem * 1); }
-  .col-3     { width: calc(13rem * 3 + 5rem * 2); }
+  .col-2     { width: calc(13rem * 3 + 5rem * 1); }
+  .col-3     { width: calc(13rem * 5 + 5rem * 2); }
   .container { width: calc(13rem * 3 + 5rem * 4); }
   .tcol-1    { width: calc(13rem * 1 + 5rem * 1); }
 }
 
 @media (min-width: 1200px) {
   html { font-size: 18px; }
-  .col-1, .col-2, .col-3 { margin: 0 5.5rem; }
+  .col-1, .col-2, .col-3 { margin: 0; }
   .tcol-1           { padding-right: 5.5rem; }
   .col-1     { width: calc(14rem * 1 + 5.5rem * 0); }
-  .col-2     { width: calc(14rem * 2 + 5.5rem * 1); }
-  .col-3     { width: calc(14rem * 3 + 5.5rem * 2); }
+  .col-2     { width: calc(14rem * 3 + 5.5rem * 1); }
+  .col-3     { width: calc(14rem * 5 + 5.5rem * 2); }
   .container { width: calc(14rem * 3 + 5.5rem * 4); }
   .tcol-1    { width: calc(14rem * 1 + 5.5rem * 1); }
 }
@@ -256,11 +326,14 @@ p.cta {
   margin-bottom: 2.6em;
 }
 
-.col-2 p:last-child, p.cta:last-child {
+.col-2 p:last-child,
+p.cta:last-child {
   margin-bottom: 0;
 }
 
-p.cta a:hover, p a:hover, li a:hover {
+p.cta a:hover,
+p a:hover,
+li a:hover {
   text-decoration: underline;
 }
 
@@ -274,153 +347,155 @@ p.cta a::after {
 
 blockquote {
   margin: 0 0 1.2rem 3em;
-}
 
-blockquote p {
-  text-indent: -0.38em;
-}
+  p {
+    text-indent: -0.38em;
+  }
 
-blockquote dl {
-  font-size: 0.8rem;
-  margin-left: 3rem;
-}
+  dl {
+    font-size: 0.8rem;
+    margin-left: 3rem;
+  }
 
-blockquote dl dt {
-  text-indent: -1.7em;
+  dl dt {
+    text-indent: -1.7em;
+  }
 }
-
 
 /* ================================================================== */
 /* Figures */
 
 .figure {
   margin: 2.6rem 0;
-}
 
-.figure img {
-  display: block;
-  margin-bottom: 1.2rem;
-}
+  img {
+    display: block;
+    margin-bottom: 1.2rem;
+  }
 
-.figure .caption {
-  font-size: 0.9rem;
-  font-style: italic;
+  .caption {
+    font-size: 0.9rem;
+    font-style: italic;
+  }
 }
-
 
 /* ================================================================== */
 /* Navigation */
-
-nav .col-2 {
-  flex: 1 1;
-}
 
 .article nav .col-2 {
   opacity: 0.3;
 }
 
-nav a {
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-right: 2rem;
-  color: inherit;
-}
+nav {
 
-nav a:last-child {
-  margin-right: 0;
-}
+  .col-2 {
+    flex: 1 1;
+  }
 
-nav h1 {
-  display: inline;
-  font-weight: bold;
-  font-size: 1.38rem;
-  text-transform: uppercase;
-  margin-bottom: 0;
-}
+  a {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 2rem;
+    color: inherit;
+  }
 
-nav .logo {
-  vertical-align: -5px;
-  margin-right: 0.32rem;
-  opacity: 0.5;
-}
+  a:last-child {
+    margin-right: 0;
+  }
 
-nav .wordmark {
-  opacity: 0.3;
+  h1 {
+    display: inline;
+    font-weight: bold;
+    font-size: 1.38rem;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+
+  .logo {
+    vertical-align: -5px;
+    margin-right: 0.32rem;
+    opacity: 0.5;
+  }
+
+  .wordmark {
+    opacity: 0.3;
+  }
 }
 
 
 /* ================================================================== */
 /* Header */
 
-header h2 {
-  margin: 0;
-}
+header {
 
-header p {
-  width: 21.5em;
-}
+  h2 {
+    margin: 0;
+  }
 
-header .logo {
-  object-fit: contain;
-  height: 12.5rem;
-}
+  p {
+    width: 21.5em;
+  }
 
-header .wordmark {
-  height: 2.6rem;
-  margin: 1.4rem 0 1.2rem;
-}
+  .logo {
+    object-fit: contain;
+    height: 12.5rem;
+  }
 
+  .wordmark {
+    height: 2.6rem;
+    margin: 1.4rem 0 1.2rem;
+  }
+}
 
 /* ================================================================== */
 /* How it works */
 
-.homepage .how-it-works {
-  background-color: $color-ooni-blue;
-  color: $color-white;
-  padding: 2rem 0;
-  margin-bottom: 3.5rem;
-}
+.homepage {
 
-.homepage .how-it-works h2 {
-  color: $color-white;
-  border-color: $color-white;
-  margin-bottom: 0;
-}
+  .how-it-works {
+    background-color: $color-ooni-blue;
+    color: $color-white;
+    padding: 2rem 0;
+    margin-bottom: 3.5rem;
 
-.homepage .how-it-works img {
-  display: block;
-  object-fit: contain;
-  height: 17.5rem;
-}
+    h2 {
+      color: $color-white;
+      border-color: $color-white;
+      margin-bottom: 0;
+    }
 
+    img {
+      display: block;
+      object-fit: contain;
+      height: 17.5rem;
+    }
+  }
+}
 
 /* ================================================================== */
 /* Recent measurements */
 
 .measurements {
   margin-bottom: 2rem;
-}
 
-.measurements table, .measurements tbody, .measurements td {
-}
+  tr {
+    height: 40px;
+    align-items: center;
+  }
 
-.measurements tr {
-  height: 40px;
-  align-items: center;
-}
+  td {
+    text-align: center;
+  }
 
-.measurements td {
-  text-align: center;
-}
+  td.tcol-1 {
+    text-align: right;
+  }
 
-.measurements td.tcol-1 {
-  text-align: right;
-}
-
-.measurements img {
-  display: block;
-  margin: auto;
+  img {
+    display: block;
+    margin: auto;
+  }
 }
 
 .table-caption {
@@ -432,14 +507,16 @@ header .wordmark {
 /* ================================================================== */
 /* Blog */
 
-.blog-summary a {
-  display: block;
-  color: inherit;
-  margin-bottom: 2em;
-}
+.blog-summary {
+  a {
+    display: block;
+    color: inherit;
+    margin-bottom: 2em;
+  }
 
-.blog-summary p.title {
-  margin-bottom: 0.2rem;
+  p.title {
+    margin-bottom: 0.2rem;
+  }
 }
 
 h1.article-title {
@@ -450,10 +527,10 @@ h1.article-title {
   color: $color-grey;
   font-size: 0.8rem;
   margin-bottom: 2.6rem;
-}
 
-.byline .author::after {
-  content: ", ";
+  .author::after {
+    content: ", ";
+  }
 }
 
 
@@ -472,22 +549,21 @@ footer h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
 
-.sponsors a {
-  display: block;
-}
+  a {
+    display: block;
+  }
 
-.sponsors img {
-  opacity: 0.5;
-  mix-blend-mode: luminosity;
-  vertical-align: middle;
-}
+  img {
+    opacity: 0.5;
+    mix-blend-mode: luminosity;
+    vertical-align: middle;
+  }
 
-.sponsors .bytemark {
-  opacity: 0.38;
+  .bytemark {
+    opacity: 0.38;
+  }
 }
-
 
 /* ================================================================== */
 /* Article pages */
@@ -505,84 +581,90 @@ footer h2 {
   margin-top: 0.24rem;
 }
 
-pre span.chr {
-  font-size: 10px;
-  color: $color-white;
-  background-color: #099;
-  border-radius: 4px;
-  vertical-align: 2px;
-  padding: 0 2px;
-  margin: 0 1px;
-}
+pre {
 
-pre span.explain {
-  color: #d14;
-}
+  span.chr {
+    font-size: 10px;
+    color: $color-white;
+    background-color: #099;
+    border-radius: 4px;
+    vertical-align: 2px;
+    padding: 0 2px;
+    margin: 0 1px;
+  }
 
-pre span.lw {
-  position: absolute;
-  right: -22px;
-  color: $color-footer-color;
-}
+  span.explain {
+    color: #d14;
+  }
 
+  span.lw {
+    position: absolute;
+    right: -22px;
+    color: $color-footer-color;
+  }
+}
 
 /* ================================================================== */
 /* Table of contents */
 
-.toc h2 {
-  font-size: 1.15rem;
-  font-weight: bold;
-  margin: 1.4em 0 1.4em;
-}
+.toc {
 
-.toc h3 {
-  font-size: 1.15rem;
-  font-weight: normal;
-  margin: 0 0 0.6em;
-}
+  h2 {
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin: 1.4em 0 1.4em;
 
-.toc h4 {
-  font-size: 0.85rem;
-  font-weight: normal;
-  margin: 0 0 0.2em;
-}
+    .closure::before {
+      content: "►";
+      font-size: 0.8rem;
+    }
+  }
 
-.toc h2, .toc h3 {
-  position: relative;
-  margin-left: 1.4rem;
-}
+  h3 {
+    font-size: 1.15rem;
+    font-weight: normal;
+    margin: 0 0 0.6em;
 
-.toc .closure {
-  margin-right: 0.5rem;
-  position: absolute;
-  left: -1.4rem;
-}
+    .closure::before {
+      content: "▼";
+      font-size: 0.7rem;
+    }
+  }
 
-.toc .indent {
-  margin-left: 0.25rem;
-  padding-left: 1rem;
-  border-left: 1px solid #f2f2f2;
-}
+  h4 {
+    font-size: 0.85rem;
+    font-weight: normal;
+    margin: 0 0 0.2em;
+  }
 
-.toc .active {
-  font-weight: bold;
-  color: $color-ooni-blue;
-}
+  h2, h3 {
+    position: relative;
+    margin-left: 1.4rem;
+  }
 
-.toc a {
-  color: inherit;
-}
+  a {
+    color: inherit;
+  }
 
-.toc a:hover {
-  text-decoration: underline;
-}
+  a:hover {
+    text-decoration: underline;
+  }
 
-.toc h2 .closure::before {
-  content: "►";
-  font-size: 0.8rem;
-}
+  .closure {
+    margin-right: 0.5rem;
+    position: absolute;
+    left: -1.4rem;
+  }
 
-.toc h3 .closure::before {
-  content: "▼";
-  font-size: 0.7rem;
+  .indent {
+    margin-left: 0.25rem;
+    padding-left: 1rem;
+    border-left: 1px solid #f2f2f2;
+  }
+
+  .active {
+    font-weight: bold;
+    color: $color-ooni-blue;
+  }
+
 }
