@@ -382,7 +382,7 @@ var definitions = {
   if ($scope.body_length_match === 'false') {
     $scope.anomaly = true;
   }
-  if ($scope.experiment_failure !== 'none' && $scope.control_failure === 'none') {
+  if ($scope.experiment_failure !== 'none' && ($scope.control_failure === 'none' || $scope.control_failure === 'unknown')) {
     $scope.anomaly = true;
   }
 
