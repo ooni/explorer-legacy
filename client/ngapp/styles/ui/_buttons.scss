@@ -1,13 +1,23 @@
 button {
-  @include primary-button-mixin;
+  @include primary-button-mixin($button-border, $color-ooni-blue, $color-white);
+
+  &:hover {
+    background-color: darken($color-ooni-blue, 10%);
+    color: white;
+  }
 }
 
 button.secondary {
-  background-color: $white;
-  color: $ooni-blue;
+  background-color: $color-white;
+  color: $color-ooni-blue;
+
+  &:hover {
+    background-color: darken($color-ooni-blue, 10%);
+    color: white;
+  }
 }
 
 button.secondary.selected {
-  background-color: darken($ooni-blue, 10%);
-  color: $white;
+  background-color: darken($color-ooni-blue, 10%);
+  color: $color-white;
 }
