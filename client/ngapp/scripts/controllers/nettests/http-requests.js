@@ -41,6 +41,9 @@ angular.module('ooniAPIApp')
   if ($scope.experiment_failure !== 'none' && ($scope.control_failure === 'none' || $scope.control_failure === 'unknown')) {
     $scope.anomaly = true;
   }
+  if ($scope.report.test_keys.headers_match == false) {
+       $scope.anomaly = true;
+  }
 
   $scope.header_names = [];
   if ($scope.control && $scope.control.response) {
