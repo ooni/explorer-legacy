@@ -1341,7 +1341,7 @@ angular.module('ooniAPIApp')
   })
 
 .directive('ooniInfoExplorerList',
-  function () {
+  function (Nettest) {
     return {
       restrict: 'A',
       scope: {
@@ -1349,6 +1349,82 @@ angular.module('ooniAPIApp')
       },
       link: function ($scope) {
         console.log('loaded explorer list')
+
+        $scope.queryOptions = {}
+        $scope.queryOptions.pageNumber = 0
+        $scope.queryOptions.pageSize = 100
+
+        $scope.queryOptions.order = 'test_start_time DESC'
+        $scope.queryOptions.where = {}
+
+        $scope.filterCallback = function() {
+          $scope.getDataFunction($scope.queryOptions).then(assignData)
+        }
+
+        var assignData = function (response) {
+          $scope.measurements = response
+          $scope.total = Math.floor($scope.measurements.total / $scope.queryOptions.pageSize)
+          console.log($scope.total)
+          console.log('assigning data')
+        }
+
+        $scope.goTo = function (page) {
+          console.log('going to')
+          $scope.queryOptions.pageNumber = page
+          $scope.getDataFunction($scope.queryOptions).then(assignData)
+        }
+
+        $scope.getDataFunction($scope.queryOptions).then(assignData)
+      },
+      templateUrl: 'views/directives/ooni-info-explorer-list.directive.html'
+    }
+  })
+
+.directive('ooniPagination',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        pageNumber: '=',
+        goTo: '=',
+        total: '=',
+        pageSize: '='
+      },
+      templateUrl: 'views/directives/ooni-pagination.directive.html'
+    }
+  })
+
+.directive('ooniExplorerListMeasurement',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        measurement: '=ooniExplorerListMeasurement'
+
+      },
+      link: function ($scope) {
+        $scope.encodeInput = window.encodeURIComponent
+      },
+      templateUrl: 'views/directives/ooni-explorer-list-measurement.directive.html'
+    }
+  })
+
+.directive('ooniFilterListForm',
+  function (Nettest) {
+    return {
+      restrict: 'A',
+      scope: {
+        queryOptions: '=',
+        afterFilter: '='
+      },
+      link: function ($scope) {
+        $scope.encodeInput = window.encodeURIComponent
+        $scope.inputFilter = ''
+        $scope.testNameFilter = ''
+        $scope.countryCodeFilter = ''
+        $scope.startDateFilter = ''
+        $scope.endDateFilter = ''
+        $scope.nettests = Nettest.find()
 
         $scope.dateRangePicker = {}
 
@@ -1367,53 +1443,30 @@ angular.module('ooniAPIApp')
           }
         }
 
-        $scope.encodeInput = window.encodeURIComponent
+        $scope.filterMeasurements = function () {
+          $scope.queryOptions.where = {}
+          if ($scope.inputFilter.length > 0) {
+            $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'}
+          }
+          if ($scope.testNameFilter.length > 0) {
+            $scope.queryOptions.where['test_name'] = $scope.testNameFilter
+          }
+          if ($scope.countryCodeFilter.length > 0) {
+            $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter
+          }
+          var start, end
+          if ($scope.dateRangePicker.date.startDate && $scope.dateRangePicker.date.endDate) {
+            start = $scope.dateRangePicker.date.startDate.hours(0).minutes(0).toISOString()
+            end = $scope.dateRangePicker.date.endDate.hours(0).minutes(0).toISOString()
+            $scope.queryOptions.where['test_start_time'] = {
+              between: [start, end]
+            }
+          }
 
-        $scope.queryOptions = {}
-        $scope.queryOptions.pageNumber = 0
-        $scope.queryOptions.pageSize = 100
-
-        $scope.queryOptions.order = 'test_start_time DESC'
-        $scope.queryOptions.where = {}
-
-        $scope.filterMeasurements = function() {
-            $scope.queryOptions.where = {};
-            if ($scope.inputFilter.length > 0) {
-                $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
-            }
-            if ($scope.testNameFilter.length > 0) {
-                $scope.queryOptions.where['test_name'] = $scope.testNameFilter;
-            }
-            if ($scope.countryCodeFilter.length > 0) {
-                $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
-            }
-            var start, end;
-            if ($scope.dateRangePicker.date.startDate && $scope.dateRangePicker.date.endDate) {
-              start = $scope.dateRangePicker.date.startDate.hours(0).minutes(0).toISOString();
-              end = $scope.dateRangePicker.date.endDate.hours(0).minutes(0).toISOString();
-              $scope.queryOptions.where['test_start_time'] = {
-                between: [start, end]
-              }
-            }
-            $scope.getDataFunction($scope.queryOptions).then(assignData);
+          $scope.afterFilter()
         }
-
-        var assignData = function (response) {
-          $scope.measurements = response
-          $scope.total = Math.floor($scope.measurements.total/$scope.queryOptions.pageSize)
-          console.log($scope.measurements.total, $scope.queryOptions.pageSize)
-          console.log($scope.total)
-          console.log('assigning data')
-        }
-
-        $scope.goTo = function (page) {
-          $scope.queryOptions.pageNumber = page
-          $scope.getDataFunction($scope.queryOptions).then(assignData)
-        }
-
-        $scope.getDataFunction($scope.queryOptions).then(assignData)
       },
-      templateUrl: 'views/directives/ooni-info-explorer-list.directive.html'
+      templateUrl: 'views/directives/ooni-filter-list-form.directive.html'
     }
   })
 ;;(function(window, angular, undefined) {'use strict';

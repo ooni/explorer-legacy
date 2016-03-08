@@ -1,0 +1,22 @@
+<div class="column probe-cc">
+  <a href="/country/{{measurement.probe_cc}}" title="View {{measurement.probe_cc}}"><i class="flag-icon" ng-class="'flag-icon-' + measurement.probe_cc | lowercase"></i> {{ measurement.probe_cc}}</a>
+</div>
+<div class="column name">{{ measurement.test_name }}
+  <a title="View Measurement"
+  href="/measurement/{{ measurement.id }}{{ measurement.input ? '?input=' + encodeInput(measurement.input) : '' }}">
+    <small ng-show="$parent.$index === 0">
+      View measurement »</small>
+    <small ng-show="$parent.$index > 0">View »</small>
+  </a>
+</div>
+<div class="column input">{{ measurement.input }}
+<a title="View Website"
+  ng-show="measurement.input"
+  href="/website/{{ encodeInput(measurement.input.replace('http://', '')) }}">
+    <small ng-show="$parent.$index === 0">
+      View Page Information »</small>
+    <small ng-show="$parent.$index > 0">View »</small>
+  </a>
+</div>
+<div class="column probe-asn">{{ measurement.probe_asn }}</div>
+<div class="column start-time">{{ measurement.test_start_time|date:'shortDate' }}</div>
