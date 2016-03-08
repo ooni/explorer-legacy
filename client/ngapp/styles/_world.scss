@@ -1,5 +1,29 @@
 /* World Map Legend */
 
+.countryToolTip {
+  position: absolute;
+  top: 0px;
+  padding-top: 30px;
+  padding-left: 30px;
+  width: 100%;
+  background-color: $color-off-white;
+  color: black;
+
+  .countryName {
+    font-weight: 800;
+  }
+
+  .measurementCount {
+    font-weight: 500;
+  }
+}
+
+.worldMap {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
 .worldMapLegend {
     margin-top: -300px;
     margin-bottom: 50px;

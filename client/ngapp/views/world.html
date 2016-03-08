@@ -7,30 +7,38 @@
     </div>
     <div class="row">
       <div class="col-3" ng-show="loaded">
-        <datamap map="worldMap" on-click="map_clicked" class="map" plugins="mapPlugins" plugin-data="mapPluginData"></datamap>
-        <div class="worldMap"></div>
-        <div class="worldMapLegend">
-            <strong>Measurements</strong>
-            <dl>
-              <dd>
-                <span style="background-color: {{worldMap.fills.HIGH}}"></span> More than 100,000
-              </dd>
-              <dd>
-                <span style="background-color: {{worldMap.fills.MEDIUM}}"></span> More than 10,000
-              </dd>
-              <dd>
-                <span style="background-color: {{worldMap.fills.LOW}}"></span> Less than 10,000
-              </dd>
-            </dl>
-            <strong>Discoveries</strong>
-            <dl>
-              <dd>
-                <span style="background-color: {{worldMap.fills.BLOCKPAGE}}"></span> Confirmed censorship cases
-              </dd>
-              <dd>
-                <i class="fa fa-industry"></i> Vendors identified
-              </dd>
-            </dl>
+        <div class="worldMap">
+          <datamap map="worldMap" on-click="mapClicked" class="map" plugins="mapPlugins" plugin-data="mapPluginData"></datamap>
+
+          <div class="countryToolTip" ng-show="selectedCountryCode">
+              <p><span class="countryName">{{selectedCountryName}}</span></p>
+              <p>We have collected <span class="measurementCount">{{selectedReportCount}}</span> measurements.</p>
+              <p><a ng-click="closeCountryTooltip()">close</a> <a href="/country/{{selectedCountryCode}}">view measurements</a></p>
+          </div>
+
+          <div class="worldMapLegend">
+              <strong>Measurements</strong>
+              <dl>
+                <dd>
+                  <span style="background-color: {{worldMap.fills.HIGH}}"></span> More than 100,000
+                </dd>
+                <dd>
+                  <span style="background-color: {{worldMap.fills.MEDIUM}}"></span> More than 10,000
+                </dd>
+                <dd>
+                  <span style="background-color: {{worldMap.fills.LOW}}"></span> Less than 10,000
+                </dd>
+              </dl>
+              <strong>Discoveries</strong>
+              <dl>
+                <dd>
+                  <span style="background-color: {{worldMap.fills.BLOCKPAGE}}"></span> Confirmed censorship cases
+                </dd>
+                <dd>
+                  <i class="fa fa-industry"></i> Vendors identified
+                </dd>
+              </dl>
+          </div>
         </div>
       </div>
     </div>

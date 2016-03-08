@@ -530,7 +530,7 @@ angular.module('ooniAPIApp')
  */
 
 angular.module('ooniAPIApp')
-  .controller('WorldCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope) {
+  .controller('WorldCtrl', function ($q, $scope, $anchorScroll, $location, Report, Country, $rootScope, ISO3166) {
 
     $scope.loaded = false;
 
@@ -684,14 +684,31 @@ angular.module('ooniAPIApp')
       return deferred.promise;
     }
 
-    $scope.map_clicked = function(geo) {
-      console.log('map clicked', moment().unix())
-      $scope.loaded = false;
+    var zoomMap = function(scale, offsetX, offsetY) {
+       offsetX = offsetX || 0;
+       offsetY = offsetY || 0;
+       var translate = [
+            -1 * offsetX,
+            -1 * offsetY
+       ];
+       var datamapSvg = d3.select("datamap svg");
+       datamapSvg.selectAll('g')
+        .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
+    };
+
+    $scope.closeCountryTooltip = function() {
+      $scope.selectedCountryCode = undefined;
+      zoomMap(1);
+    };
+
+    $scope.mapClicked = function(geo) {
       if (typeof $scope.worldMap.data[geo.id] !== 'undefined') {
-        var country_code = $scope.worldMap.data[geo.id].alpha2;
-        $scope.$apply(function() {
-          $location.path('/country/' + country_code);
-        })
+        $scope.selectedCountryCode = $scope.worldMap.data[geo.id].alpha2;
+        $scope.selectedCountryName = ISO3166.getCountryName($scope.selectedCountryCode);
+        $scope.selectedReportCount = $scope.worldMap.data[geo.id].reportCount;
+        zoomMap(2, d3.event.offsetX, d3.event.offsetY);
+      } else {
+        $scope.closeCountryTooltip();
       }
     };
 
