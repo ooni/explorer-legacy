@@ -1327,6 +1327,7 @@ angular.module('ooniAPIApp')
         getDataFunction: '='
       },
       link: function ($scope) {
+
         var assignData = function (response) {
           $scope.countries = response.sort(function (a, b) {
             return a.name > b.name
