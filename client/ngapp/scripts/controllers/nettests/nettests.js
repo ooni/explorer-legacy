@@ -21,7 +21,7 @@ angular.module('ooniAPIApp')
           nettestSlug = $scope.report.test_name.replace('_', '-');
         }
         var url = '/views/nettests/' + nettestSlug + '.html';
-        return url;
+        return url
       }
     },
     template: '<div ng-include="getContentUrl()">fasdfdas</div>'

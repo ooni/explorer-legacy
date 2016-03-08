@@ -331,18 +331,6 @@ var definitions = {
 }
 
 ;angular.module('ooniAPIApp')
-.controller('HTTPRequestsViewCtrl', function ($scope){
-    angular.forEach($scope.report.test_keys.requests, function(request){
-        if (request.request.tor == true || request.request.tor.is_tor == true) {
-            $scope.control = request.response;
-        } else {
-            $scope.experiment = request.response;
-        }
-    })
-})
-.controller('DNSConsistencyViewCtrl', function ($scope, $location){
-});
-;angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
   $scope.encodeInput = window.encodeURIComponent;
@@ -384,6 +372,9 @@ var definitions = {
   }
   if ($scope.experiment_failure !== 'none' && ($scope.control_failure === 'none' || $scope.control_failure === 'unknown')) {
     $scope.anomaly = true;
+  }
+  if ($scope.report.test_keys.headers_match == false) {
+       $scope.anomaly = true;
   }
 
   $scope.header_names = [];
@@ -434,7 +425,7 @@ angular.module('ooniAPIApp')
           nettestSlug = $scope.report.test_name.replace('_', '-');
         }
         var url = '/views/nettests/' + nettestSlug + '.html';
-        return url;
+        return url
       }
     },
     template: '<div ng-include="getContentUrl()">fasdfdas</div>'
@@ -538,30 +529,6 @@ angular.module('ooniAPIApp')
       alpha3: {},
       alpha2: {}
     };
-
-    $scope.columnDefs = [{
-        name: 'Country Code',
-        field:'alpha2'
-    },
-    {
-        name: 'Country Name',
-        field:'name'
-    },
-    {
-        name: 'Count',
-        field:'count',
-        sortingAlgorithm: function(a, b) {
-            a = parseInt(a);
-            b = parseInt(b);
-            if (a > b) {
-                return 1;
-            } else if (a < b) {
-                return -1;
-            } else {
-                return 0;
-            }
-        }
-    }]
 
     $scope.worldMap = {
         scope: 'world',
@@ -674,6 +641,7 @@ angular.module('ooniAPIApp')
                       $scope.worldMap.data[country.alpha3]["fillKey"] = "HIGH";
                   }
               })
+
               $scope.loaded = true;
               deferred.resolve($scope.reportsByCountry);
           }, function(err, resp){
@@ -1347,6 +1315,27 @@ angular.module('ooniAPIApp')
       templateUrl: 'views/directives/ooni-country-bar-chart.directive.html',
     };
 })
+
+.directive('ooniInfoCountryList',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        getDataFunction: '='
+      },
+      link: function ($scope) {
+        console.log('linking')
+        var assignData = function (response) {
+          $scope.countries = response.sort(function (a, b) {
+            return a.name > b.name
+          })
+        }
+
+        $scope.getDataFunction({}).then(assignData)
+      },
+      templateUrl: 'views/directives/ooni-info-country-list.directive.html'
+    }
+  })
 ;;(function(window, angular, undefined) {'use strict';
 
 var urlBase = "/api";

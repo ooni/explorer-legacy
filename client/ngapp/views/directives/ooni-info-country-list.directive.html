@@ -1,0 +1,5 @@
+<ul>
+  <li ng-repeat="country in countries">
+    <i class="flag-icon" ng-class="'flag-icon-' + country.alpha2 | lowercase"></i> <a href="/country/{{country.alpha2}}/">{{ country.name }}</a> - {{ country.count }}
+  </li>
+</ul>

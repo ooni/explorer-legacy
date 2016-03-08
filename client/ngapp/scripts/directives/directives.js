@@ -403,3 +403,24 @@ angular.module('ooniAPIApp')
       templateUrl: 'views/directives/ooni-country-bar-chart.directive.html',
     };
 })
+
+.directive('ooniInfoCountryList',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        getDataFunction: '='
+      },
+      link: function ($scope) {
+        console.log('linking')
+        var assignData = function (response) {
+          $scope.countries = response.sort(function (a, b) {
+            return a.name > b.name
+          })
+        }
+
+        $scope.getDataFunction({}).then(assignData)
+      },
+      templateUrl: 'views/directives/ooni-info-country-list.directive.html'
+    }
+  })
