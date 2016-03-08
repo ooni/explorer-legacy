@@ -22,15 +22,24 @@ $transition-speed: .5s;
 @import "mixins";
 @import "ui/fonts",
         "ui/table",
+        "ui/p",
+        "ui/pagination",
+        "ui/table-of-contents",
         "ui/buttons",
         "ui/forms",
         "ui/ui-grid",
+        "ui/section",
         "ui/more-info-hover",
         "base",
         "loading",
         "country",
+        "explore",
         "report",
         "world";
+
+.capitalize {
+  text-transform: capitalize;
+}
 
 .header-wrapper {
   background-color: $color-ooni-blue;

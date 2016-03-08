@@ -1,6 +1,8 @@
 angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
+  $scope.encodeInput = window.encodeURIComponent;
+
   angular.forEach($scope.report.test_keys.requests, function(request) {
     if (request.request.tor === true || request.request.tor.is_tor === true) {
       $scope.control = request;
@@ -20,15 +22,27 @@ angular.module('ooniAPIApp')
     $scope.body_length_match = 'false';
   }
 
-  $scope.experiment_failure = $scope.experiment.failure || 'none';
-  $scope.control_failure = $scope.control.failure || 'none';
+  if (typeof $scope.experiment === 'undefined') {
+    $scope.experiment_failure = 'unknown';
+  } else {
+    $scope.experiment_failure = $scope.experiment.failure || 'none';
+  }
+
+  if (typeof $scope.control === 'undefined') {
+    $scope.control_failure = 'unknown';
+  } else {
+    $scope.control_failure = $scope.control.failure || 'none';
+  }
 
   $scope.anomaly = false;
   if ($scope.body_length_match === 'false') {
     $scope.anomaly = true;
   }
-  if ($scope.experiment_failure !== 'none' && $scope.control_failure === 'none') {
+  if ($scope.experiment_failure !== 'none' && ($scope.control_failure === 'none' || $scope.control_failure === 'unknown')) {
     $scope.anomaly = true;
+  }
+  if ($scope.report.test_keys.headers_match == false) {
+       $scope.anomaly = true;
   }
 
   $scope.header_names = [];

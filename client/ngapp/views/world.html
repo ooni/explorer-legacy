@@ -37,22 +37,14 @@
   </div>
   <hr ng-show="loaded">
 
-  <div ooni-loader loaded="loaded">
-  </div>
+  <div ooni-loader loaded="loaded"></div>
 
-  <h2>Country List</h2>
-  <p>
-    Browse the countries below to find a country you want to investigate the tests for:
-  </p>
-
-  <div ooni-grid-wrapper
-    hide-filter="true"
-    get-data-function="loadReports"
-    view-row-object-function="viewCountry"
-    custom-column-defs="columnDefs"
-    enable-pagination="false"
-    use-external-pagination="false"
-    use-external-sorting="false">
+  <div ng-show="loaded">
+    <h2>Country List</h2>
+    <p>
+      Browse the countries below to find a country you want to investigate the measurements for:
+    </p>
+    <div ooni-info-country-list get-data-function="loadReports"></div>
   </div>
 
 </main>

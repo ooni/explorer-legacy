@@ -14,10 +14,60 @@ module.exports = function(Report) {
       { http: { verb: 'get' },
         description: 'Returns the list of URLs that appear to be blocked in a given country',
         accepts: {arg: 'probe_cc', type: 'string'},
-        returns: { arg: 'data', type: ['Object'], root: true  }
+        returns: {arg: 'data', type: ['Object'], root: true}
       }
   );
 
+  Report.websiteDetails = function (website_url, callback) {
+    var ds = Report.dataSource
+    var wildcard_url = '%' + website_url
+
+    var sql = 'SELECT * FROM domains WHERE url LIKE $1'
+    ds.connector.query(sql, [wildcard_url], callback)
+  }
+
+  Report.remoteMethod(
+      'websiteDetails',
+      { http: { verb: 'get' },
+        description: 'Returns website details',
+        accepts: {arg: 'website_url', type: 'string'},
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  )
+
+  Report.asnName = function (asn, callback) {
+    var ds = Report.dataSource
+
+    var sql = 'SELECT name FROM asns WHERE asn = $1'
+    ds.connector.query(sql, [asn], callback)
+  }
+
+  Report.remoteMethod(
+      'asnName',
+      { http: { verb: 'get' },
+        description: 'Returns ASN name',
+        accepts: {arg: 'asn', type: 'string'},
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  )
+
+
+  Report.websiteMeasurements = function (website_url, callback) {
+    var ds = Report.dataSource
+    var wildcard_url = '%' + website_url
+
+    var sql = 'SELECT * FROM blockpage_urls WHERE input LIKE $1'
+    ds.connector.query(sql, [wildcard_url], callback)
+  }
+
+  Report.remoteMethod(
+      'websiteMeasurements',
+      { http: { verb: 'get' },
+        description: 'Returns website\'s measurements',
+        accepts: {arg: 'website_url', type: 'string'},
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  )
 
   Report.vendors = function(probe_cc, callback) {
     var ds = Report.dataSource;
@@ -37,7 +87,7 @@ module.exports = function(Report) {
       { http: { verb: 'get' },
         description: 'Returns the identified vendors of censorship and surveillance equipment',
         accepts: {arg: 'probe_cc', type: 'string'},
-        returns: { arg: 'data', type: ['Object'], root: true  }
+        returns: {arg: 'data', type: ['Object'], root: true}
       }
   );
 

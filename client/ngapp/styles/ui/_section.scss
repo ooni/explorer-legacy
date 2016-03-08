@@ -1,0 +1,15 @@
+.country section,
+.website section {
+  margin-top: 2em;
+
+  h2 {
+    margin-bottom: 1em;
+  }
+
+  .no-show {
+    background-color: $color-off-white;
+    padding: 2rem;
+    text-align: center;
+    color: $color-grey;
+  }
+}

@@ -37,8 +37,7 @@ angular
     $locationProvider.html5Mode(true);
   })
   // Things to run before the app loads;
-  .run(function($rootScope, $location) {
-
+  .run(function ($rootScope, $location, $anchorScroll) {
     $rootScope.$location = $location;
   });
 ;'use strict';
@@ -52,9 +51,9 @@ angular
  */
 
 angular.module('ooniAPIApp')
-  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166) {
+  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location) {
+
     $scope.loaded = false;
-    console.log('country controller loaded', moment().unix())
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
@@ -67,12 +66,12 @@ angular.module('ooniAPIApp')
         console.log('error', error)
       })
 
-    Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageCount({probe_cc: $scope.countryCode}, function(resp) {
       // this goes off and gets processed by the bar-chart directive
       $scope.blockpageCount = resp;
     });
 
-    Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageList({probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
 
       $scope.chunkedBlockpageList = {}
@@ -99,6 +98,7 @@ angular.module('ooniAPIApp')
 
     var loadingMore = false;
     var chunkLength = 50;
+
     $scope.loadMoreChunks = function() {
       if ($scope.chunkedArray && !loadingMore) {
         loadingMore = true;
@@ -160,7 +160,6 @@ angular.module('ooniAPIApp')
       Report.find(query, function(data) {
         deferred.resolve(data);
         $scope.loaded = true;
-        console.log('finished loading country data', moment().unix())
       });
 
       return deferred.promise;
@@ -205,11 +204,16 @@ angular.module('ooniAPIApp')
           }
       }
 
-      Report.find(query, function(data) {
-        deferred.resolve(data);
+      Report.count(query, function (count) {
+        Report.find(query, function(data) {
+          data.total = count.count
+          deferred.resolve(data);
 
-        $scope.loaded = true;
-      });
+          $scope.loaded = true;
+        });
+      })
+
+
 
       return deferred.promise;
     }
@@ -249,10 +253,11 @@ angular.module('ooniAPIApp')
     }
 
     function loading_success(data) {
-      console.log('found')
       $scope.report = data[0];
-      console.log(data[0]);
-
+      $scope.network_information = " ( " + $scope.report.probe_asn + " )"
+      Report.asnName({asn: $scope.report.probe_asn}, function(result) {
+        $scope.network_information = result[0].name + $scope.network_information;
+      });
 
       $scope.nettest = Nettest.findOne({
         filter: {
@@ -331,6 +336,8 @@ var definitions = {
 ;angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
+  $scope.encodeInput = window.encodeURIComponent;
+
   angular.forEach($scope.report.test_keys.requests, function(request) {
     if (request.request.tor === true || request.request.tor.is_tor === true) {
       $scope.control = request;
@@ -350,15 +357,27 @@ var definitions = {
     $scope.body_length_match = 'false';
   }
 
-  $scope.experiment_failure = $scope.experiment.failure || 'none';
-  $scope.control_failure = $scope.control.failure || 'none';
+  if (typeof $scope.experiment === 'undefined') {
+    $scope.experiment_failure = 'unknown';
+  } else {
+    $scope.experiment_failure = $scope.experiment.failure || 'none';
+  }
+
+  if (typeof $scope.control === 'undefined') {
+    $scope.control_failure = 'unknown';
+  } else {
+    $scope.control_failure = $scope.control.failure || 'none';
+  }
 
   $scope.anomaly = false;
   if ($scope.body_length_match === 'false') {
     $scope.anomaly = true;
   }
-  if ($scope.experiment_failure !== 'none' && $scope.control_failure === 'none') {
+  if ($scope.experiment_failure !== 'none' && ($scope.control_failure === 'none' || $scope.control_failure === 'unknown')) {
     $scope.anomaly = true;
+  }
+  if ($scope.report.test_keys.headers_match == false) {
+       $scope.anomaly = true;
   }
 
   $scope.header_names = [];
@@ -409,7 +428,7 @@ angular.module('ooniAPIApp')
           nettestSlug = $scope.report.test_name.replace('_', '-');
         }
         var url = '/views/nettests/' + nettestSlug + '.html';
-        return url;
+        return url
       }
     },
     template: '<div ng-include="getContentUrl()">fasdfdas</div>'
@@ -453,6 +472,47 @@ angular.module('ooniAPIApp')
   .controller('OverviewCtrl', function ($rootScope, $location) {
     $rootScope.loaded = true;
 });
+;'use strict'
+
+/**
+ * @ngdoc function
+ * @name ooniAPIApp.controller:WebsiteDetailViewCtrl
+ * @description
+ * # WebsiteDetailViewCtrl
+ * Controller of the ooniAPIApp
+ */
+
+angular.module('ooniAPIApp')
+  .controller('WebsiteDetailViewCtrl', function ($scope, Report, $http, $routeParams, ISO3166) {
+    $scope.websiteUrl = $routeParams.id
+    $scope.encodeInput = window.encodeURIComponent;
+
+    Report.websiteMeasurements({website_url: $scope.websiteUrl}, function (resp) {
+      $scope.measurementsByCountry = {}
+      resp.forEach(function (measurement) {
+        if ($scope.measurementsByCountry[measurement.probe_cc] !== undefined) {
+          $scope.measurementsByCountry[measurement.probe_cc].measurements
+            .push(measurement)
+        } else {
+          $scope.measurementsByCountry[measurement.probe_cc] = {
+            measurements: [measurement],
+            country: ISO3166.getCountryName(measurement.probe_cc)
+          }
+        }
+      })
+    }, function (err) {
+      if (err) console.log('err', err)
+    })
+
+    Report.websiteDetails({website_url: $scope.websiteUrl}, function (resp) {
+      $scope.details = resp[0]
+      console.log($scope.details)
+    }, function (err) {
+      if (err) console.log('err', err)
+    })
+
+    // var alexaUrl = 'http://data.alexa.com/data?cli=10&data=snbamz&url=' + $scope.websiteUrl
+  })
 ;'use strict';
 
 /**
@@ -472,30 +532,6 @@ angular.module('ooniAPIApp')
       alpha3: {},
       alpha2: {}
     };
-
-    $scope.columnDefs = [{
-        name: 'Country Code',
-        field:'alpha2'
-    },
-    {
-        name: 'Country Name',
-        field:'name'
-    },
-    {
-        name: 'Count',
-        field:'count',
-        sortingAlgorithm: function(a, b) {
-            a = parseInt(a);
-            b = parseInt(b);
-            if (a > b) {
-                return 1;
-            } else if (a < b) {
-                return -1;
-            } else {
-                return 0;
-            }
-        }
-    }]
 
     $scope.worldMap = {
         scope: 'world',
@@ -608,6 +644,7 @@ angular.module('ooniAPIApp')
                       $scope.worldMap.data[country.alpha3]["fillKey"] = "HIGH";
                   }
               })
+
               $scope.loaded = true;
               deferred.resolve($scope.reportsByCountry);
           }, function(err, resp){
@@ -1281,6 +1318,157 @@ angular.module('ooniAPIApp')
       templateUrl: 'views/directives/ooni-country-bar-chart.directive.html',
     };
 })
+
+.directive('ooniInfoCountryList',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        getDataFunction: '='
+      },
+      link: function ($scope) {
+
+        var assignData = function (response) {
+          $scope.countries = response.sort(function (a, b) {
+            return a.name > b.name
+          })
+        }
+
+        $scope.getDataFunction({}).then(assignData)
+      },
+      templateUrl: 'views/directives/ooni-info-country-list.directive.html'
+    }
+  })
+
+.directive('ooniInfoExplorerList',
+  function (Nettest) {
+    return {
+      restrict: 'A',
+      scope: {
+        getDataFunction: '='
+      },
+      link: function ($scope) {
+        console.log('loaded explorer list')
+
+        $scope.queryOptions = {}
+        $scope.queryOptions.pageNumber = 0
+        $scope.queryOptions.pageSize = 100
+
+        $scope.queryOptions.order = 'test_start_time DESC'
+        $scope.queryOptions.where = {}
+
+        $scope.filterCallback = function() {
+          $scope.getDataFunction($scope.queryOptions).then(assignData)
+        }
+
+        var assignData = function (response) {
+          $scope.measurements = response
+          $scope.total = Math.floor($scope.measurements.total / $scope.queryOptions.pageSize)
+          console.log($scope.total)
+          console.log('assigning data')
+        }
+
+        $scope.goTo = function (page) {
+          console.log('going to')
+          $scope.queryOptions.pageNumber = page
+          $scope.getDataFunction($scope.queryOptions).then(assignData)
+        }
+
+        $scope.getDataFunction($scope.queryOptions).then(assignData)
+      },
+      templateUrl: 'views/directives/ooni-info-explorer-list.directive.html'
+    }
+  })
+
+.directive('ooniPagination',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        pageNumber: '=',
+        goTo: '=',
+        total: '=',
+        pageSize: '='
+      },
+      templateUrl: 'views/directives/ooni-pagination.directive.html'
+    }
+  })
+
+.directive('ooniExplorerListMeasurement',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        measurement: '=ooniExplorerListMeasurement'
+
+      },
+      link: function ($scope) {
+        $scope.encodeInput = window.encodeURIComponent
+      },
+      templateUrl: 'views/directives/ooni-explorer-list-measurement.directive.html'
+    }
+  })
+
+.directive('ooniFilterListForm',
+  function (Nettest) {
+    return {
+      restrict: 'A',
+      scope: {
+        queryOptions: '=',
+        afterFilter: '='
+      },
+      link: function ($scope) {
+        $scope.encodeInput = window.encodeURIComponent
+        $scope.inputFilter = ''
+        $scope.testNameFilter = ''
+        $scope.countryCodeFilter = ''
+        $scope.startDateFilter = ''
+        $scope.endDateFilter = ''
+        $scope.nettests = Nettest.find()
+
+        $scope.dateRangePicker = {}
+
+        $scope.dateRangePicker.date = {
+          startDate: null,
+          endDate: null
+        }
+
+        $scope.dateRangePicker.options = {
+          maxDate: moment(),
+          autoUpdateInput: true,
+          eventHandlers: {
+            'cancel.daterangepicker': function(ev, picker) {
+              $scope.dateRangePicker.date = {startDate: null, endDate: null}
+            }
+          }
+        }
+
+        $scope.filterMeasurements = function () {
+          $scope.queryOptions.where = {}
+          if ($scope.inputFilter.length > 0) {
+            $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'}
+          }
+          if ($scope.testNameFilter.length > 0) {
+            $scope.queryOptions.where['test_name'] = $scope.testNameFilter
+          }
+          if ($scope.countryCodeFilter.length > 0) {
+            $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter
+          }
+          var start, end
+          if ($scope.dateRangePicker.date.startDate && $scope.dateRangePicker.date.endDate) {
+            start = $scope.dateRangePicker.date.startDate.hours(0).minutes(0).toISOString()
+            end = $scope.dateRangePicker.date.endDate.hours(0).minutes(0).toISOString()
+            $scope.queryOptions.where['test_start_time'] = {
+              between: [start, end]
+            }
+          }
+
+          $scope.afterFilter()
+        }
+      },
+      templateUrl: 'views/directives/ooni-filter-list-form.directive.html'
+    }
+  })
 ;;(function(window, angular, undefined) {'use strict';
 
 var urlBase = "/api";
@@ -1782,6 +1970,108 @@ module.factory(
         "blockpageList": {
           isArray: true,
           url: urlBase + "/reports/blockpageList",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#websiteDetails
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns website details
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `website_url` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "websiteDetails": {
+          isArray: true,
+          url: urlBase + "/reports/websiteDetails",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#asnName
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns ASN name
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `asn` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "asnName": {
+          isArray: true,
+          url: urlBase + "/reports/asnName",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#websiteMeasurements
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns website's measurements
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `website_url` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "websiteMeasurements": {
+          isArray: true,
+          url: urlBase + "/reports/websiteMeasurements",
           method: "GET"
         },
 

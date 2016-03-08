@@ -25,3 +25,27 @@
       }
     }
 }
+
+.countries-list {
+  list-style: none;
+  margin: 0;
+
+  li {
+    margin: 0;
+    padding: .5rem .5rem;
+
+    &:nth-child(odd) {
+      background-color: $color-off-white;
+    }
+  }
+  .country {
+    width: 35%;
+    display: inline-block;
+  }
+
+  .count {
+    width: 10%;
+    text-align: right;
+    display: inline-block;
+  }
+}

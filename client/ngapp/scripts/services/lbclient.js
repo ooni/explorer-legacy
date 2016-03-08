@@ -504,6 +504,108 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name lbServices.Report#websiteDetails
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns website details
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `website_url` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "websiteDetails": {
+          isArray: true,
+          url: urlBase + "/reports/websiteDetails",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#asnName
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns ASN name
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `asn` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "asnName": {
+          isArray: true,
+          url: urlBase + "/reports/asnName",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Report#websiteMeasurements
+         * @methodOf lbServices.Report
+         *
+         * @description
+         *
+         * Returns website's measurements
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `website_url` – `{string=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Report` object.)
+         * </em>
+         */
+        "websiteMeasurements": {
+          isArray: true,
+          url: urlBase + "/reports/websiteMeasurements",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
          * @name lbServices.Report#vendors
          * @methodOf lbServices.Report
          *

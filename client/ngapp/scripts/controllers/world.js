@@ -18,30 +18,6 @@ angular.module('ooniAPIApp')
       alpha2: {}
     };
 
-    $scope.columnDefs = [{
-        name: 'Country Code',
-        field:'alpha2'
-    },
-    {
-        name: 'Country Name',
-        field:'name'
-    },
-    {
-        name: 'Count',
-        field:'count',
-        sortingAlgorithm: function(a, b) {
-            a = parseInt(a);
-            b = parseInt(b);
-            if (a > b) {
-                return 1;
-            } else if (a < b) {
-                return -1;
-            } else {
-                return 0;
-            }
-        }
-    }]
-
     $scope.worldMap = {
         scope: 'world',
         responsive: true,
@@ -153,6 +129,7 @@ angular.module('ooniAPIApp')
                       $scope.worldMap.data[country.alpha3]["fillKey"] = "HIGH";
                   }
               })
+
               $scope.loaded = true;
               deferred.resolve($scope.reportsByCountry);
           }, function(err, resp){

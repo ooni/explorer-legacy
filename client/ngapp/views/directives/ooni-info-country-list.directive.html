@@ -1,0 +1,15 @@
+
+<form class="filter-form">
+<div class="form-group inline">
+  <label>Filter:</label>
+  <input placeholder="eg. Iran" ng-model="countryFilter"/>
+</div>
+</form>
+
+<ul class="countries-list">
+  <li ng-repeat="country in countries | filter: countryFilter">
+    <a href="/country/{{country.alpha2}}/" class="country">
+      <i class="flag-icon" ng-class="'flag-icon-' + country.alpha2 | lowercase"></i> {{ country.name }}</a>
+      <span class="count">{{ country.count|number }}</span> <span ng-if="$index === 0">measurements run</span>
+  </li>
+</ul>

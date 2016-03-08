@@ -1,0 +1,41 @@
+.explore {
+  .explorer-list {
+    list-style: none;
+    margin: 0;
+
+    li {
+      margin: 0;
+      padding: .5rem;
+
+      &:nth-child(odd) {
+        background-color: $color-off-white;
+      }
+    }
+  }
+
+  .column {
+    display: inline-block;
+  }
+
+  .probe-cc {
+    width: 9%;
+  }
+
+  .name {
+    width: 37%;
+  }
+
+  .input {
+    width: 34%;
+  }
+
+  .probe-asn {
+    width: 9%;
+    text-align: right;
+  }
+
+  .start-time {
+    width: 9%;
+    text-align: right;
+  }
+}

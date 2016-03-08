@@ -9,9 +9,9 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166) {
+  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location) {
+
     $scope.loaded = false;
-    console.log('country controller loaded', moment().unix())
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
@@ -24,12 +24,12 @@ angular.module('ooniAPIApp')
         console.log('error', error)
       })
 
-    Report.blockpageCount( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageCount({probe_cc: $scope.countryCode}, function(resp) {
       // this goes off and gets processed by the bar-chart directive
       $scope.blockpageCount = resp;
     });
 
-    Report.blockpageList( {probe_cc: $scope.countryCode}, function(resp) {
+    Report.blockpageList({probe_cc: $scope.countryCode}, function(resp) {
       $scope.blockpageList = resp;
 
       $scope.chunkedBlockpageList = {}
@@ -56,6 +56,7 @@ angular.module('ooniAPIApp')
 
     var loadingMore = false;
     var chunkLength = 50;
+
     $scope.loadMoreChunks = function() {
       if ($scope.chunkedArray && !loadingMore) {
         loadingMore = true;
@@ -117,7 +118,6 @@ angular.module('ooniAPIApp')
       Report.find(query, function(data) {
         deferred.resolve(data);
         $scope.loaded = true;
-        console.log('finished loading country data', moment().unix())
       });
 
       return deferred.promise;

@@ -36,11 +36,16 @@ angular.module('ooniAPIApp')
           }
       }
 
-      Report.find(query, function(data) {
-        deferred.resolve(data);
+      Report.count(query, function (count) {
+        Report.find(query, function(data) {
+          data.total = count.count
+          deferred.resolve(data);
 
-        $scope.loaded = true;
-      });
+          $scope.loaded = true;
+        });
+      })
+
+
 
       return deferred.promise;
     }

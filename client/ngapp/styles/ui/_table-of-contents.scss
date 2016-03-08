@@ -1,0 +1,19 @@
+.toc {
+
+  border: 1px solid $color-grey;
+  padding: .5rem 1rem;
+  display: inline-block;
+  list-style: none;
+  vertical-align: top;
+  margin-right: .5rem;
+  font-size: 14px;
+
+  li {
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    cursor: pointer;
+  }
+}

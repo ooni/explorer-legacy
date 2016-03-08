@@ -1,0 +1,28 @@
+<div ooni-filter-list-form
+  query-options="queryOptions"
+  after-filter="filterCallback"
+  >
+</div>
+<div ooni-pagination
+  page-number="queryOptions.pageNumber"
+  go-to="goTo"
+  total="measurements.total"
+  page-size="queryOptions.pageSize">
+
+</div>
+
+<ul class="explorer-list">
+  <li ng-repeat="measurement in measurements"
+    ooni-explorer-list-measurement="measurement">
+
+  </li>
+</ul>
+
+<div ooni-pagination
+  page-number="queryOptions.pageNumber"
+  go-to="goTo"
+  total="measurements.total"
+  page-size="queryOptions.pageSize">
+</div>
+
+

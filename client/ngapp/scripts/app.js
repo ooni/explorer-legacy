@@ -37,7 +37,6 @@ angular
     $locationProvider.html5Mode(true);
   })
   // Things to run before the app loads;
-  .run(function($rootScope, $location) {
-
+  .run(function ($rootScope, $location, $anchorScroll) {
     $rootScope.$location = $location;
   });

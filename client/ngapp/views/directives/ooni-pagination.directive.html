@@ -1,0 +1,13 @@
+<ul class="pagination">
+  <li ng-if="pageNumber > 0">
+    <a ng-click="goTo(pageNumber - 1)">« Previous</a>
+  </li><li>
+    {{ pageNumber + 1 }}
+  </li><li ng-hide="pageNumber >= Math.floor(total / pageSize)">
+    <a ng-click="goTo(pageNumber + 1)">Next »</a>
+  </li>
+</ul>
+
+<span>
+  {{ total|number }} measurements
+</span>
