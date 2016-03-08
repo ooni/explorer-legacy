@@ -37,8 +37,11 @@ angular
     $locationProvider.html5Mode(true);
   })
   // Things to run before the app loads;
-  .run(function ($rootScope, $location) {
-
+  .run(function ($rootScope, $location, $anchorScroll) {
+    $rootScope.$on('$routeChangeSuccess', function (newRoute, oldRoute) {
+      console.log($location.hash())
+      if($location.hash()) $anchorScroll();
+    });
     $rootScope.$location = $location;
   });
 ;'use strict';
@@ -52,9 +55,9 @@ angular
  */
 
 angular.module('ooniAPIApp')
-  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166) {
+  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location) {
+
     $scope.loaded = false;
-    console.log('country controller loaded', moment().unix())
 
     $scope.countryCode = $routeParams.id;
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
@@ -161,7 +164,6 @@ angular.module('ooniAPIApp')
       Report.find(query, function(data) {
         deferred.resolve(data);
         $scope.loaded = true;
-        console.log('finished loading country data', moment().unix())
       });
 
       return deferred.promise;
@@ -185,6 +187,7 @@ angular.module('ooniAPIApp')
                                            $rootScope) {
 
     $scope.loadMeasurements = function(queryOptions) {
+      console.log('loading measurements')
 
       $scope.loaded = false;
 
@@ -207,6 +210,7 @@ angular.module('ooniAPIApp')
       }
 
       Report.find(query, function(data) {
+        console.log('found')
         deferred.resolve(data);
 
         $scope.loaded = true;
@@ -1324,7 +1328,6 @@ angular.module('ooniAPIApp')
         getDataFunction: '='
       },
       link: function ($scope) {
-        console.log('linking')
         var assignData = function (response) {
           $scope.countries = response.sort(function (a, b) {
             return a.name > b.name
@@ -1334,6 +1337,29 @@ angular.module('ooniAPIApp')
         $scope.getDataFunction({}).then(assignData)
       },
       templateUrl: 'views/directives/ooni-info-country-list.directive.html'
+    }
+  })
+
+.directive('ooniInfoExplorerList',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        getDataFunction: '='
+      },
+      link: function ($scope) {
+        console.log('loaded explorer list')
+        $scope.encodeInput = window.encodeURIComponent
+
+        var assignData = function (response) {
+          $scope.objects = response.sort(function (a, b) {
+            return a.name > b.name
+          })
+        }
+
+        $scope.getDataFunction({}).then(assignData)
+      },
+      templateUrl: 'views/directives/ooni-info-explorer-list.directive.html'
     }
   })
 ;;(function(window, angular, undefined) {'use strict';

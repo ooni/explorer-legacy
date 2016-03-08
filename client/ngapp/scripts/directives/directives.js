@@ -412,7 +412,6 @@ angular.module('ooniAPIApp')
         getDataFunction: '='
       },
       link: function ($scope) {
-        console.log('linking')
         var assignData = function (response) {
           $scope.countries = response.sort(function (a, b) {
             return a.name > b.name
@@ -422,5 +421,28 @@ angular.module('ooniAPIApp')
         $scope.getDataFunction({}).then(assignData)
       },
       templateUrl: 'views/directives/ooni-info-country-list.directive.html'
+    }
+  })
+
+.directive('ooniInfoExplorerList',
+  function () {
+    return {
+      restrict: 'A',
+      scope: {
+        getDataFunction: '='
+      },
+      link: function ($scope) {
+        console.log('loaded explorer list')
+        $scope.encodeInput = window.encodeURIComponent
+
+        var assignData = function (response) {
+          $scope.objects = response.sort(function (a, b) {
+            return a.name > b.name
+          })
+        }
+
+        $scope.getDataFunction({}).then(assignData)
+      },
+      templateUrl: 'views/directives/ooni-info-explorer-list.directive.html'
     }
   })

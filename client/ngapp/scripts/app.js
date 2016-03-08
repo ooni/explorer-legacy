@@ -37,7 +37,10 @@ angular
     $locationProvider.html5Mode(true);
   })
   // Things to run before the app loads;
-  .run(function ($rootScope, $location) {
-
+  .run(function ($rootScope, $location, $anchorScroll) {
+    $rootScope.$on('$routeChangeSuccess', function (newRoute, oldRoute) {
+      console.log($location.hash())
+      if($location.hash()) $anchorScroll();
+    });
     $rootScope.$location = $location;
   });

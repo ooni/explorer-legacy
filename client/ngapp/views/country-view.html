@@ -7,15 +7,39 @@
       </h1>
     </div>
 
-    <p>
-      Here's what we know about anomalies with internet connections located in <span class="capitalize">{{ countryName | lowercase }}</span>.
-    </p>
+    <ul class="toc">
+      <li ng-show="blockpageCount">
+        <a href="#blockpageCount-bar-chart">Bar Chart</a>
+      </li>
+      <li>
+        <a href="#measurements">Measurements</a>
+      </li>
+      <li>
+        <a href="#country-data">Country Data</a>
+      </li>
+      <li>
+        <a href="#methods">Methods</a>
+      </li>
+      <li>
+        <a href="#vendors">Vendors</a>
+      </li>
+      <li ng-show="blockpageCount">
+        <a href="#vendors">Blocked Sites</a>
+      </li>
+    </ul>
 
-    <p>
-      <h4>We've got {{ count | number }} measurements for <span class="capitalize">{{ countryName | lowercase }}</span>.</h4>
-    </p>
+    <div class="hang-right">
 
-    <div ooni-country-bar-chart
+      <p>
+        Here's what we know about anomalies with internet connections located in <span class="capitalize">{{ countryName | lowercase }}</span>.
+      </p>
+
+      <p>
+        <h4>We've got {{ count | number }} measurements for <span class="capitalize">{{ countryName | lowercase }}</span>.</h4>
+      </p>
+    </div>
+
+    <div id="bar-chart" ooni-country-bar-chart
       country-data="blockpageCount"
       ng-show="blockpageCount">
     </div>
@@ -24,12 +48,12 @@
       loaded="loaded">
     </div>
 
-    <div ooni-grid-wrapper
+    <div id="measurements" ooni-grid-wrapper
       get-data-function="loadMeasurements"
       total-items="count">
     </div>
 
-    <div class="statistics">
+    <div class="statistics" id="country-data">
     <h2>
       Country Internet Statistics
     </h2>
@@ -58,12 +82,12 @@
     </table>
     </div>
 
-    <section class="reasons">
+    <section class="reasons" id="methods">
       <h2>Methods of Censorship</h2>
 
     </div>
 
-    <section class="vendors">
+    <section class="vendors" id="vendors">
       <h2>Identified Vendors</h2>
       <ul ng-show="vendors.length > 0">
         <li ng-repeat="vendor in vendors">
@@ -78,7 +102,7 @@
       </div>
     </section>
 
-    <section class="websites-blocked">
+    <section class="websites-blocked" id="blocked-sites">
       <h2>Blocked Websites</h2>
       <ul ng-show="blockpageList.length > 0">
         <li ng-repeat="obj in loadedChunks track by $index">
