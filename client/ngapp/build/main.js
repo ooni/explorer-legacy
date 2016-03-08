@@ -38,10 +38,6 @@ angular
   })
   // Things to run before the app loads;
   .run(function ($rootScope, $location, $anchorScroll) {
-    $rootScope.$on('$routeChangeSuccess', function (newRoute, oldRoute) {
-      console.log($location.hash())
-      if($location.hash()) $anchorScroll();
-    });
     $rootScope.$location = $location;
   });
 ;'use strict';
@@ -187,7 +183,6 @@ angular.module('ooniAPIApp')
                                            $rootScope) {
 
     $scope.loadMeasurements = function(queryOptions) {
-      console.log('loading measurements')
 
       $scope.loaded = false;
 
@@ -209,12 +204,16 @@ angular.module('ooniAPIApp')
           }
       }
 
-      Report.find(query, function(data) {
-        console.log('found')
-        deferred.resolve(data);
+      Report.count(query, function (count) {
+        Report.find(query, function(data) {
+          data.total = count.count
+          deferred.resolve(data);
 
-        $scope.loaded = true;
-      });
+          $scope.loaded = true;
+        });
+      })
+
+
 
       return deferred.promise;
     }
@@ -1349,15 +1348,69 @@ angular.module('ooniAPIApp')
       },
       link: function ($scope) {
         console.log('loaded explorer list')
-        $scope.encodeInput = window.encodeURIComponent
 
-        var assignData = function (response) {
-          $scope.objects = response.sort(function (a, b) {
-            return a.name > b.name
-          })
+        $scope.dateRangePicker = {}
+
+        $scope.dateRangePicker.date = {
+          startDate: null,
+          endDate: null
         }
 
-        $scope.getDataFunction({}).then(assignData)
+        $scope.dateRangePicker.options = {
+          maxDate: moment(),
+          autoUpdateInput: true,
+          eventHandlers: {
+            'cancel.daterangepicker': function(ev, picker) {
+              $scope.dateRangePicker.date = {startDate: null, endDate: null}
+            }
+          }
+        }
+
+        $scope.encodeInput = window.encodeURIComponent
+
+        $scope.queryOptions = {}
+        $scope.queryOptions.pageNumber = 0
+        $scope.queryOptions.pageSize = 100
+
+        $scope.queryOptions.order = 'test_start_time DESC'
+        $scope.queryOptions.where = {}
+
+        $scope.filterMeasurements = function() {
+            $scope.queryOptions.where = {};
+            if ($scope.inputFilter.length > 0) {
+                $scope.queryOptions.where['input'] = {'like': '%' + $scope.inputFilter + '%'};
+            }
+            if ($scope.testNameFilter.length > 0) {
+                $scope.queryOptions.where['test_name'] = $scope.testNameFilter;
+            }
+            if ($scope.countryCodeFilter.length > 0) {
+                $scope.queryOptions.where['probe_cc'] = $scope.countryCodeFilter;
+            }
+            var start, end;
+            if ($scope.dateRangePicker.date.startDate && $scope.dateRangePicker.date.endDate) {
+              start = $scope.dateRangePicker.date.startDate.hours(0).minutes(0).toISOString();
+              end = $scope.dateRangePicker.date.endDate.hours(0).minutes(0).toISOString();
+              $scope.queryOptions.where['test_start_time'] = {
+                between: [start, end]
+              }
+            }
+            $scope.getDataFunction($scope.queryOptions).then(assignData);
+        }
+
+        var assignData = function (response) {
+          $scope.measurements = response
+          $scope.total = Math.floor($scope.measurements.total/$scope.queryOptions.pageSize)
+          console.log($scope.measurements.total, $scope.queryOptions.pageSize)
+          console.log($scope.total)
+          console.log('assigning data')
+        }
+
+        $scope.goTo = function (page) {
+          $scope.queryOptions.pageNumber = page
+          $scope.getDataFunction($scope.queryOptions).then(assignData)
+        }
+
+        $scope.getDataFunction($scope.queryOptions).then(assignData)
       },
       templateUrl: 'views/directives/ooni-info-explorer-list.directive.html'
     }

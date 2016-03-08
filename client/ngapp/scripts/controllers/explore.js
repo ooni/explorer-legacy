@@ -15,7 +15,6 @@ angular.module('ooniAPIApp')
                                            $rootScope) {
 
     $scope.loadMeasurements = function(queryOptions) {
-      console.log('loading measurements')
 
       $scope.loaded = false;
 
@@ -37,12 +36,16 @@ angular.module('ooniAPIApp')
           }
       }
 
-      Report.find(query, function(data) {
-        console.log('found')
-        deferred.resolve(data);
+      Report.count(query, function (count) {
+        Report.find(query, function(data) {
+          data.total = count.count
+          deferred.resolve(data);
 
-        $scope.loaded = true;
-      });
+          $scope.loaded = true;
+        });
+      })
+
+
 
       return deferred.promise;
     }

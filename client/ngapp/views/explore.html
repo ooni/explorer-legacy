@@ -1,4 +1,4 @@
-<main>
+<main class="explore">
 <p>
   Explore our measurements and reports from various types of tests and countries. Use the filter to narrow down what you're looking for.
 </p>
@@ -11,7 +11,9 @@
     >
   </div> -->
 
-  <div ooni-info-explorer-list
+  <div
+    ng-show="loaded"
+    ooni-info-explorer-list
     get-data-function="loadMeasurements">
   </div>
 </main>
