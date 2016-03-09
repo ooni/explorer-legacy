@@ -1,8 +1,19 @@
 <div>
     <div class="overview">
         <div>
-            <label for="body_length_match">body_length_match: </label><span id="input">{{ report.test_keys.body_length_match }}</span>
-            <label for="input">input: </label><span id="input">{{ report.input  }}</span>
+            <label for="send_host_header">Send host header: </label><span id="send_host_header">{{ report.test_keys.send_host_header }}</span>
+            <br/>
+            <label for="filtering_of_subdomain">Filtering of subdomain: </label><span id="filtering_of_subdomain">{{ report.test_keys.filtering_of_subdomain }}</span>
+            <br/>
+            <label for="transparent_http_proxy">Transparent HTTP proxy: </label><span id="transparent_http_proxy">{{ report.test_keys.transparent_http_proxy }}</span>
+            <br/>
+            <label for="filtering_add_tab_to_host">Filtering by adding tab to host: </label><span id="filtering_add_tab_to_host">{{ report.test_keys.filtering_add_tab_to_host }}</span>
+            <br/>
+            <label for="filtering_via_fuzzy_matching">Filtering via fuzzy matching: </label><span id="filtering_via_fuzzy_matching">{{ report.test_keys.filtering_via_fuzzy_matching }}</span>
+            <br/>
+            <label for="filtering_prepend_newline_to_method">Filtering by prepending newline to method: </label><span id="filtering_prepend_newline_to_method">{{ report.test_keys.filtering_prepend_newline_to_method }}</span>
+            <br/>
+            <label for="input">Website: </label><span id="input">{{ report.input  }}</span>
         </div>
 
         <div class="description">

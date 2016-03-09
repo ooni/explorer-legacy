@@ -8,12 +8,13 @@
                 This measurement looks normal.
             </div>
         </div>
+
         <div>
             <label for="experiment_failure">Experiment failure: </label><span id="experiment-failure">{{ experiment_failure }}</span>
             <br/>
             <label for="body_length_match">Body length match: </label><span id="body-length-match">{{ body_length_match }}</span>
             <br/>
-            <label for="input">input: </label><span id="input">{{ report.input  }}</span>
+            <label for="input">Website: </label><span id="input">{{ report.input  }}</span>
             <a ng-href="/website/{{ encodeInput(report.input.replace('http://', '')) }}">View Website Information »</a>
         </div>
 
