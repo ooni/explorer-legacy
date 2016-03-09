@@ -10,7 +10,6 @@
 
 angular.module('ooniAPIApp')
   .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location, $timeout) {
-
     $scope.loaded = false;
 
     $scope.countryCode = $routeParams.id;
@@ -23,6 +22,15 @@ angular.module('ooniAPIApp')
       }, function(error) {
         console.log('error', error)
       })
+
+    Country.findOne({
+      filter: {
+        where: {iso_alpha2: $scope.countryCode},
+        include: ['censorship_methods']
+      }
+    }, function(response) {
+        $scope.censorshipMethods = response.censorship_methods;
+    });
 
     Report.blockpageCount({probe_cc: $scope.countryCode}, function(resp) {
       // this goes off and gets processed by the bar-chart directive

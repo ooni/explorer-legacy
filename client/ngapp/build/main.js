@@ -52,7 +52,6 @@ angular
 
 angular.module('ooniAPIApp')
   .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location, $timeout) {
-
     $scope.loaded = false;
 
     $scope.countryCode = $routeParams.id;
@@ -65,6 +64,15 @@ angular.module('ooniAPIApp')
       }, function(error) {
         console.log('error', error)
       })
+
+    Country.findOne({
+      filter: {
+        where: {iso_alpha2: $scope.countryCode},
+        include: ['censorship_methods']
+      }
+    }, function(response) {
+        $scope.censorshipMethods = response.censorship_methods;
+    });
 
     Report.blockpageCount({probe_cc: $scope.countryCode}, function(resp) {
       // this goes off and gets processed by the bar-chart directive
@@ -1649,7 +1657,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/reports/:id/exists",
@@ -1850,7 +1858,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/reports/count",
@@ -1910,7 +1918,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1924,7 +1932,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/reports/change-stream",
@@ -1942,7 +1950,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` - 
+         *  - `probe_cc` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -1976,7 +1984,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `website_url` – `{string=}` - 
+         *  - `website_url` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2010,7 +2018,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `asn` – `{string=}` - 
+         *  - `asn` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2044,7 +2052,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `website_url` – `{string=}` - 
+         *  - `website_url` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2078,7 +2086,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` - 
+         *  - `probe_cc` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2147,7 +2155,7 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `probe_cc` – `{string=}` - 
+         *  - `probe_cc` – `{string=}` -
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2360,7 +2368,7 @@ module.factory(
          *
          *  - `id` – `{*}` - PersistedModel id
          *
-         *  - `refresh` – `{boolean=}` - 
+         *  - `refresh` – `{boolean=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2551,7 +2559,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/countries/:id/exists",
@@ -2752,7 +2760,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/countries/count",
@@ -2812,7 +2820,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -2826,7 +2834,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/countries/change-stream",
@@ -3149,7 +3157,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `exists` – `{boolean=}` - 
+         *  - `exists` – `{boolean=}` -
          */
         "exists": {
           url: urlBase + "/nettests/:id/exists",
@@ -3350,7 +3358,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `count` – `{number=}` - 
+         *  - `count` – `{number=}` -
          */
         "count": {
           url: urlBase + "/nettests/count",
@@ -3410,7 +3418,7 @@ module.factory(
          *
          * @param {Object} postData Request data.
          *
-         *  - `options` – `{object=}` - 
+         *  - `options` – `{object=}` -
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -3424,7 +3432,7 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `changes` – `{ReadableStream=}` - 
+         *  - `changes` – `{ReadableStream=}` -
          */
         "createChangeStream": {
           url: urlBase + "/nettests/change-stream",

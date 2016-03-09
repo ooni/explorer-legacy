@@ -44,5 +44,9 @@
   "nettest": {
     "dataSource": "db",
     "public": true
+  },
+  "censorship_method": {
+    "dataSource": "db",
+    "public": true
   }
 }
