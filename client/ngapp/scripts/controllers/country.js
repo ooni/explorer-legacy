@@ -9,7 +9,7 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location) {
+  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location, $timeout) {
 
     $scope.loaded = false;
 

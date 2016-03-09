@@ -463,6 +463,22 @@ angular.module('ooniAPIApp')
     }
   })
 
+.directive('scrollTo', function() {
+
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attrs) {
+        $element.bind('click', function(event) {
+          var sectionName = $attrs.scrollTo;
+          var currentPosition = window.pageYOffset;
+          var bbox = document.getElementById(sectionName).getBoundingClientRect();
+          var scrollOffsetY = bbox.top + currentPosition;
+          window.scroll(0, scrollOffsetY);
+        })
+      }
+    }
+  })
+
 .directive('ooniPagination',
   function () {
     return {

@@ -51,7 +51,7 @@ angular
  */
 
 angular.module('ooniAPIApp')
-  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location) {
+  .controller('CountryDetailViewCtrl', function ($q, $scope, $rootScope, $filter, Report, $http, $routeParams, ISO3166, $anchorScroll, $location, $timeout) {
 
     $scope.loaded = false;
 
@@ -1387,6 +1387,24 @@ angular.module('ooniAPIApp')
         $scope.getDataFunction($scope.queryOptions).then(assignData)
       },
       templateUrl: 'views/directives/ooni-info-explorer-list.directive.html'
+    }
+  })
+
+.directive('scrollTo', function() {
+
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attrs) {
+          console.log("Linking");
+        $element.bind('click', function(event) {
+            console.log("Got event");
+          var sectionName = $attrs.scrollTo;
+          var currentPosition = window.pageYOffset;
+          var bbox = document.getElementById(sectionName).getBoundingClientRect();
+          var scrollOffsetY = bbox.top + currentPosition;
+          window.scroll(0, scrollOffsetY);
+        })
+      }
     }
   })
 
