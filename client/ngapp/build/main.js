@@ -1395,9 +1395,7 @@ angular.module('ooniAPIApp')
     return {
       restrict: 'A',
       link: function ($scope, $element, $attrs) {
-          console.log("Linking");
         $element.bind('click', function(event) {
-            console.log("Got event");
           var sectionName = $attrs.scrollTo;
           var currentPosition = window.pageYOffset;
           var bbox = document.getElementById(sectionName).getBoundingClientRect();
