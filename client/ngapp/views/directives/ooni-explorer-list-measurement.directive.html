@@ -11,8 +11,7 @@
 </div>
 <div class="column input">{{ measurement.input }}
 <a title="View Website"
-  ng-if="measurement.test_name == 'http_requests' || measurement.test_name == 'dns_consistency' || measurement.test_name == 'http_host'"
-  ng-show="measurement.input"
+  ng-show="measurement.input && (measurement.test_name == 'http_requests' || measurement.test_name == 'dns_consistency' || measurement.test_name == 'http_host')"
   href="/website/{{ encodeInput(measurement.input.replace('http://', '').replace('https://', '')) }}">
     <small ng-show="$parent.$index === 0">
       View Page Information »</small>
