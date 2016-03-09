@@ -1,0 +1,27 @@
+{
+  "name": "censorship_method",
+  "plural": "censorship_methods",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "postgresql": {
+      "table": "censorship_methods"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "Number"
+    },
+    "name": {
+      "type": "String"
+    },
+    "description": {
+      "type": "String"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
