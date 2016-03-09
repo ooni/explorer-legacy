@@ -437,7 +437,7 @@ angular.module('ooniAPIApp')
       $scope.getContentUrl = function() {
         var nettestSlug = 'nettest';
         if ($scope.report !== undefined) {
-          nettestSlug = $scope.report.test_name.replace('_', '-');
+          nettestSlug = $scope.report.test_name.replace(/_/g, '-');
         }
         var url = '/views/nettests/' + nettestSlug + '.html';
         return url
