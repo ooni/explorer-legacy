@@ -414,9 +414,7 @@ angular.module('ooniAPIApp')
       link: function ($scope) {
 
         var assignData = function (response) {
-          $scope.countries = response.sort(function (a, b) {
-            return a.name > b.name
-          })
+          $scope.countries = response;
         }
 
         $scope.getDataFunction({}).then(assignData)

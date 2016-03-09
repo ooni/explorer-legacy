@@ -334,6 +334,18 @@ var definitions = {
 }
 
 ;angular.module('ooniAPIApp')
+.controller('HTTPRequestsViewCtrl', function ($scope){
+    angular.forEach($scope.report.test_keys.requests, function(request){
+        if (request.request.tor == true || request.request.tor.is_tor == true) {
+            $scope.control = request.response;
+        } else {
+            $scope.experiment = request.response;
+        }
+    })
+})
+.controller('DNSConsistencyViewCtrl', function ($scope, $location){
+});
+;angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
   $scope.encodeInput = window.encodeURIComponent;
@@ -1329,9 +1341,7 @@ angular.module('ooniAPIApp')
       link: function ($scope) {
 
         var assignData = function (response) {
-          $scope.countries = response.sort(function (a, b) {
-            return a.name > b.name
-          })
+          $scope.countries = response;
         }
 
         $scope.getDataFunction({}).then(assignData)
