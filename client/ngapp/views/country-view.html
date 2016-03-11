@@ -82,10 +82,15 @@
     </table>
     </div>
 
-    <section class="reasons" id="methods">
+    <section class="reasons" id="methods" ng-show="censorshipMethods.length > 0">
       <h2>Methods of Censorship</h2>
-
-    </div>
+      <ul>
+          <li ng-repeat="censorshipMethod in censorshipMethods">
+            <h3>{{censorshipMethod.name}}</h3>
+            <p>{{censorshipMethod.description}}</p>
+          </li>
+      </ul>
+    </section>
 
     <section class="vendors" id="vendors">
       <h2>Identified Vendors</h2>
