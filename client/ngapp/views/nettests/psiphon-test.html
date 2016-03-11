@@ -1,0 +1,35 @@
+<div>
+    <div class="overview">
+        <div>
+            <label for="request_success">Request success: </label><span id="request_success">{{ report.test_keys.request_success }}</span>
+            <br/>
+            <label for="bootstrapped_success">Bootstrapped success: </label><span id="bootstrapped_success">{{ report.test_keys.bootstrapped_success }}</span>
+        </div>
+
+        <div class="description">
+            <h3>What does this test do?</h3>
+
+            <p>
+            Ability to measure whether Psiphon is working from the given network vantage point.
+            </p>
+            <p class="note">TODO: This description needs to be made better.
+            </p>
+        </div>
+
+        <div class="command-output">
+          <h3>Console standard output</h3>
+          <div ui-codemirror
+                ui-codemirror-opts="code_mirror_options"
+                ng-model="report.test_keys.commands[0].command_stdout">
+          </div>
+
+          <h3>Console error output</h3>
+          <div ui-codemirror
+                ui-codemirror-opts="code_mirror_options"
+                ng-model="report.test_keys.commands[0].command_stderr">
+          </div>
+        </div>
+
+
+    </div>
+</div>

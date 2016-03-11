@@ -1,16 +1,12 @@
 <div>
     <div class="overview">
-        <div class="test-specific-spec">
-          <h3>Details for this specific test:</h3>
-          <table class="test-details">
-            <tbody>
-              <tr ooni-report-detail-table-row
-                content="report.input"
-                label="'Test Input'">
-              </tr>
-            </tbody>
-          </table>
+        <div>
+            <label for="inconsistent_resolvers">Inconsistent resolvers: </label><span id="inconsistent-resolvers">{{ report.test_keys.inconsistent }}</span>
+            <br/>
+            <label for="input">Website: </label><span id="input">{{ report.input  }}</span>
+            <a ng-href="/website/{{ report.input }}">View Website Information »</a>
         </div>
+
 
         <div class="description">
             <h3>What does this test do?</h3>

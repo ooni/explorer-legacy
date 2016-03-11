@@ -21,5 +21,22 @@
             This test attempts to trigger parsing errors in middle boxes that parse the HTTP protocol. This indicates that the network under analysis has deep packet inspection (DPI) capabilities. It can also often lead to fingerprinting the version and model of interference equipment used by a certain network. For example, the use of BlueCoat has been detected through this test. You can learn about BlueCoat here (link to report). This test sends out invalid HTTP requests and verifies if a control back-end is able to receive them and if it's not able to, then there's a sign of tampering.
             </p>
         </div>
+
+        <div class="tampered-responses" ng-show="report.test_keys.tampering == true">
+          <h3>Content of responses from middlebox</h3>
+          <div ng-repeat="receivedData in report.test_keys.received track by $index">
+            <div ng-if="receivedData.length > 0">
+              <h4>Response number {{$index}}</h4>
+              <div ui-codemirror
+                  ui-codemirror-opts="code_mirror_options"
+                  ng-model="receivedData">
+              </div>
+            </div>
+            <div ng-if="receivedData.length == 0">
+              <p>Response number {{$index}} was empty</p>
+            </div>
+          </div>
+        </div>
+
     </div>
 </div>
