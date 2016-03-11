@@ -15,7 +15,7 @@
         <option ng-repeat="option in nettests" value="{{option.name}}">{{option.long_name}}</option>
     </select>
   </div>
-  <div class="form-group" ng-show="countryCodes">
+  <div class="form-group" ng-show="showCountryFilter">
     <label class="sr-only" for="countryCode">Country Code:</label>
 
     <select name="repeatSelectCountry"

@@ -334,18 +334,6 @@ var definitions = {
 }
 
 ;angular.module('ooniAPIApp')
-.controller('HTTPRequestsViewCtrl', function ($scope){
-    angular.forEach($scope.report.test_keys.requests, function(request){
-        if (request.request.tor == true || request.request.tor.is_tor == true) {
-            $scope.control = request.response;
-        } else {
-            $scope.experiment = request.response;
-        }
-    })
-})
-.controller('DNSConsistencyViewCtrl', function ($scope, $location){
-});
-;angular.module('ooniAPIApp')
 .controller('HTTPRequestsViewCtrl', function ($scope, $location){
 
   $scope.encodeInput = window.encodeURIComponent;
@@ -951,24 +939,6 @@ angular.module('ooniAPIApp')
         useExternalSorting: '=?', // defaults to True
       },
       link: function ($scope, $element, $attrs) {
-        $scope.dateRangePicker = {}
-
-        $scope.dateRangePicker.date = {
-          startDate: null,
-          endDate: null
-        };
-
-        $scope.dateRangePicker.options = {
-          maxDate: moment(),
-          autoUpdateInput: true,
-          eventHandlers: {
-            'cancel.daterangepicker': function(ev, picker) {
-              $scope.dateRangePicker.date = {startDate: null, endDate: null}
-            }
-          }
-        }
-
-        $scope.filterFormOpen = false;
 
         $rootScope.$watch('loaded', function() {
           // There is some problems with how rootscope is seen
@@ -980,21 +950,9 @@ angular.module('ooniAPIApp')
           $scope.gridOptions.totalItems = newVal;
         })
 
-        $scope.$watch('countryCodes', function(ccsBool) {
-          if (ccsBool !== undefined && ccsBool === true) {
-            $scope.allCountryCodes = {}
-            Report.countByCountry({}, function(data) {
-              // TODO: this should be loaded on app load if it's used regularly in views.
-              // Don't want to reload every time the view is loaded.
-
-              data.forEach(function(country) {
-                $scope.allCountryCodes[country.alpha2] = country.name;
-              })
-            }, function(error) {
-              console.log('error', error)
-            })
-          }
-        });
+        $scope.filterCallback = function() {
+          $scope.getDataFunction($scope.queryOptions).then(assignData)
+        }
 
         $scope.gridOptions = {};
         $scope.queryOptions = {};
@@ -1003,13 +961,6 @@ angular.module('ooniAPIApp')
 
         $scope.queryOptions.order = "test_start_time DESC";
         $scope.queryOptions.where = {};
-
-        $scope.inputFilter = "";
-        $scope.testNameFilter = "";
-        $scope.countryCodeFilter = "";
-        $scope.startDateFilter = "";
-        $scope.endDateFilter = "";
-        $scope.nettests = Nettest.find();
 
         if ($scope.customColumnDefs !== undefined) {
           $scope.gridOptions.columnDefs = $scope.customColumnDefs;
@@ -1374,12 +1325,9 @@ angular.module('ooniAPIApp')
         var assignData = function (response) {
           $scope.measurements = response
           $scope.total = Math.floor($scope.measurements.total / $scope.queryOptions.pageSize)
-          console.log($scope.total)
-          console.log('assigning data')
         }
 
         $scope.goTo = function (page) {
-          console.log('going to')
           $scope.queryOptions.pageNumber = page
           $scope.getDataFunction($scope.queryOptions).then(assignData)
         }
@@ -1391,7 +1339,6 @@ angular.module('ooniAPIApp')
   })
 
 .directive('scrollTo', function() {
-
     return {
       restrict: 'A',
       link: function ($scope, $element, $attrs) {
@@ -1436,12 +1383,13 @@ angular.module('ooniAPIApp')
   })
 
 .directive('ooniFilterListForm',
-  function (Nettest) {
+  function (Nettest, Report) {
     return {
       restrict: 'A',
       scope: {
         queryOptions: '=',
-        afterFilter: '='
+        afterFilter: '=',
+        showCountryFilter: '='
       },
       link: function ($scope) {
         $scope.encodeInput = window.encodeURIComponent
@@ -1491,6 +1439,24 @@ angular.module('ooniAPIApp')
 
           $scope.afterFilter()
         }
+
+        $scope.$watch('showCountryFilter', function (ccsBool) {
+          console.log(ccsBool)
+          if (ccsBool !== undefined && ccsBool === true) {
+            console.log('its true')
+            $scope.allCountryCodes = {}
+            Report.countByCountry({}, function (data) {
+              // TODO: this should be loaded on app load if it's used regularly in views.
+              // Don't want to reload every time the view is loaded.
+
+              data.forEach(function (country) {
+                $scope.allCountryCodes[country.alpha2] = country.name;
+              })
+            }, function (error) {
+              console.log('error', error)
+            })
+          }
+        })
       },
       templateUrl: 'views/directives/ooni-filter-list-form.directive.html'
     }
