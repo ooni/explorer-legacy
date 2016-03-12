@@ -1,8 +1,8 @@
 window.CONFIG = {
   "routes": {
-    "/overview/": {
-      "controller": "OverviewCtrl",
-      "templateUrl": "/views/overview.html"
+    "/highlights/": {
+      "controller": "HighlightsCtrl",
+      "templateUrl": "/views/highlights.html"
     },
     "/world/": {
       "controller": "WorldCtrl",
