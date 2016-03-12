@@ -9,6 +9,6 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('OverviewCtrl', function ($rootScope, $location) {
+  .controller('HighlightsCtrl', function ($rootScope, $location) {
     $rootScope.loaded = true;
 });
