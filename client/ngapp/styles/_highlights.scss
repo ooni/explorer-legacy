@@ -1,6 +1,7 @@
 .ooni-highlight {
 
     padding-left: 20px;
+    padding-right: 20px;
     padding-top: 20px;
 
     margin-right: 10px;
@@ -9,6 +10,14 @@
     border-radius: 3px;
     background-color: $color-ooni-blue;
     color: white;
+
+    a {
+        color: $color-grey;
+    }
+
+    a:hover {
+        color: white;
+    }
 
     .ooni-highlight-number {
         font-weight: 500;
