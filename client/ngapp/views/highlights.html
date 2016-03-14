@@ -4,11 +4,22 @@
 
 <div class="row">
   <div class="col-3 ooni-highlight">
-    <p><span class="ooni-highlight-number">8.5</span> million measurements have been conducted in <span class="ooni-highlight-number">3</span> years.</p>
+    <p><span class="ooni-highlight-number">8.5</span> million network measurements have been carried out across <span class="ooni-highlight-number">91</span> countries around the world in <span class="ooni-highlight-number">3</span> years (from late 2012 to early 2016).</p>
   </div>
 
   <div class="col-3 ooni-highlight">
-    <p><span class="ooni-highlight-number">8</span> countries with confirmed cases of censorship.</p>
+    <p><span class="ooni-highlight-number">8</span> countries have <strong>confirmed cases of censorship</strong>: <strong>Russia, China, Iran, Saudi Arabia, Turkey, India, Indonesia and Greece</strong>.</p> 
+    <p>By "confirmed censorship" we mean that we have an accurate heuristic to determine when blocking is occurring. Generally this means that we are looking for a block page in the response body of a HTTP request test.</p>
+  </div>
+  
+  <div class="col-3 ooni-highlight">
+  <p><strong>Network anomalies</strong> have been detected in <span class="ooni-highlight-number">71</span> out of 91 tested countries.</p> 
+  <p>However, not all network anomalies are necessarily cases of censorship and/or traffic manipulation.</p>  
+  </div>
+  
+  <div class="col-3 ooni-highlight">
+  <p><span class="ooni-highlight-number">3</span> vendors have been identified through our network measurements: <strong>Blue Coat, Squid and Privoxy</strong>. The use of their software has been detected in <span class="ooni-highlight-number">11</span> countries around the world: <strong>USA, Canada, Portugal, Spain, Italy, the Netherlands, Switzerland, Moldova, Iraq, Uganda and Myanmar</strong>.</p>
+  <p>Such software may or may not have been responsible for online censorship and/or traffic manipulation.</p>
   </div>
 
 </div>
@@ -27,7 +38,7 @@
       <i class="flag-icon flag-icon-pk"></i>
       <h3>Pakistan</h3>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Multiple (HTTP-invalid-request-line) tests conducted in Pakistan show that "middle boxes" (software which could potentially be used for censorship and/or traffic manipulation) were present in Pakistani networks. However, it remains unclear if such software was actually used for the purpose of censorship and/or traffic manipulation.</p>
   </div>
 
 </div>
@@ -35,18 +46,18 @@
 <div class="row">
   <div class="col-3 ooni-highlight">
     <div class="country-name">
-      <i class="flag-icon flag-icon-us"></i>
-      <h3>United States</h3>
+      <i class="flag-icon flag-icon-sa"></i>
+      <h3>Saudi Arabia</h3>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Through our (HTTP request) tests in Saudi Arabia, we detected <span class="ooni-highlight-number">x</span> blocked websites, including <strong>www.arabtimes.com, www.mossad.gov.il and www.anonym.to</strong>, a site for anonymous online browsing.</p>
   </div>
 
   <div class="col-3 ooni-highlight">
     <div class="country-name">
-      <i class="flag-icon flag-icon-it"></i>
-      <h3>Italy</h3>
+      <i class="flag-icon flag-icon-cu"></i>
+      <h3>Cuba</h3>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>While we did not detect any block pages in Cuba, many websites triggered connectivity errors. Such websites include <strong>www.cubafreepress.org</strong> and <strong>www.cubademocraciayvida.org</strong>, which were likely censored.</p>
   </div>
 
 </div>
@@ -57,7 +68,12 @@
       <i class="flag-icon flag-icon-ug"></i>
       <h3>Uganda</h3>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Following reports that Facebook and Twitter were blocked in Uganda leading up to its 2016 general elections, we ran OONI tests in the country. While we were unable to detect block pages, we believe that the following could be possibilities:
+    <ul>
+      <li>Facebook and Twitter were only blocked in specific networks (excluding the one we tested), and not countrywide</li>
+      <li>Ugandan ISPs did not forward their users' requests to connect to the servers of Facebook and Twitter</li>
+      <li>Ugandan ISPs chose to block some requests, while not others. Over the last three years of conducting network measurments, we have noticed that this often appears to be a common practice of censorship.</li>
+    </ul></p>
   </div>
 
   <div class="col-3 ooni-highlight">
@@ -65,8 +81,26 @@
       <i class="flag-icon flag-icon-vn"></i>
       <h3>Vietnam</h3>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Multiple (HTTP-invalid-request-line) tests conducted in Vietnam from 2013 to 2015 show that "middle boxes" (software which could potentially be used for censorship and/or traffic manipulation) were present in Vietnamese networks. However, it remains unclear if such software was actually used for the purpose of censorship and/or traffic manipulation.</p>
   </div>
-
+  
+  <div class="col-3 ooni-highlight">
+    <div class="country-name">
+      <i class="flag-icon flag-icon-mm"></i>
+      <h3>Myanmar</h3>
+    </div>
+    <p><strong>Blue Coat</strong> software (some types of which can potenially be used for internet filtering, censorship and surveillance) was detected in Myanmar through one of our (HTTP-field-manipulation) tests in late 2012. It's unclear, however, if this was a countrywide deployment or if it was only used in the specific network that we tested.</p>
+    <p>Two years later we ran the same test in the same network in Myanmar, but did not detect the presence of Blue Coat.</p>
 </div>
+</div>
+
+<div class="row">
+  <div class="col-3 ooni-highlight">
+    <div class="country-name">
+      <i class="flag-icon flag-icon-ir"></i>
+      <h3>Iran</h3>
+    </div>
+    <p>Through our (HTTP request) tests in Iran, we detected <span class="ooni-highlight-number">x</span> blocked websites, including <strong>www.iranrights.org, www.iranpressnews.com and www.iransocialforum.org</strong>.</p>
+    <p>However, our Psiphon tests showed that access to Pshiphon was not blocked in Iran and this proxy could potentially still be used for accessing blocked websites.</p>
+    </div>
 
