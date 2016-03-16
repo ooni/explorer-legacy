@@ -7,11 +7,20 @@
         <div class="description">
             <h3>What does this test do?</h3>
 
-            <p>
-            Ability to detect uncensored fronted domains that can transmit requests to the "inside" meek-server via an intermediary web service.
-            </p>
-            <p class="note">TODO: This description needs to be made better.
-            </p>
+            <p>This test examines whether the domains used by Meek (a type of Tor bridge) work in tested networks.</p>
+
+<p>Meek is a pluggable transport which uses non-blocked domains, such as <strong>google.com</strong>, <strong>amazon.com</strong> and <strong>microsoft.com</strong>, to proxy its users over [Tor](https://www.torproject.org/) to blocked websites, while hiding both the fact that they are connecting to such websites and how they are connecting to them. As such, Meek is useful for not only connecting to websites that are blocked, but for also hiding which websites you are connecting to.</p> 
+
+<p>Below is a simplified explanation of how this works:</p>
+
+<p>[user] → [https://www.google.com] → [https://www.meek.google.com] → [Tor] → [blocked-website]</p>
+
+<p>The user will receive a response (access to a blocked website, for example) from cloud-fronted domains, such as google.com, through the following way:</p>
+
+<p>[blocked-website] → [Tor] → [https://www.meek.google.com] → [https://www.google.com] → [user]</p>
+
+<p>In short, this test does an encrypted connection to cloud-fronted domains over HTTPS and examines whether it can connect to them or not.</p>
+           
         </div>
     </div>
 </div>
