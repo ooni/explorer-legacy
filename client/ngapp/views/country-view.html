@@ -12,19 +12,19 @@
         <a href="#blockpageCount-bar-chart">Bar Chart</a>
       </li>
       <li>
-        <a href="#measurements">Measurements</a>
+        <a scroll-to="measurements">Measurements</a>
       </li>
       <li>
-        <a href="#country-data">Country Data</a>
+        <a scroll-to="country-data">Country Data</a>
       </li>
       <li>
-        <a href="#methods">Methods</a>
+        <a scroll-to="methods">Methods</a>
       </li>
       <li>
-        <a href="#vendors">Vendors</a>
+        <a scroll-to="vendors">Vendors</a>
       </li>
       <li ng-show="blockpageCount">
-        <a href="#blocked-sites">Blocked Sites</a>
+        <a scroll-to="blocked-sites">Blocked Sites</a>
       </li>
     </ul>
 
@@ -82,10 +82,15 @@
     </table>
     </div>
 
-    <section class="reasons" id="methods">
+    <section class="reasons" id="methods" ng-show="censorshipMethods.length > 0">
       <h2>Methods of Censorship</h2>
-
-    </div>
+      <ul>
+          <li ng-repeat="censorshipMethod in censorshipMethods">
+            <h3>{{censorshipMethod.name}}</h3>
+            <p>{{censorshipMethod.description}}</p>
+          </li>
+      </ul>
+    </section>
 
     <section class="vendors" id="vendors">
       <h2>Identified Vendors</h2>

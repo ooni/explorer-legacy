@@ -1,0 +1,31 @@
+<div>
+    <div class="overview">
+        <div>
+            <label for="success">Successfully connected: </label><span id="success">{{ report.test_keys.success }}</span>
+        </div>
+
+        <div class="description">
+            <h3>What does this test do?</h3>
+
+            <p>
+            Ability to measure whether Lantern is working from the given network vantage point.
+            </p>
+            <p class="note">TODO: This description needs to be made better.
+            </p>
+        </div>
+
+        <div class="command-output">
+          <h3>Console standard output</h3>
+          <div ui-codemirror
+                ui-codemirror-opts="code_mirror_options"
+                ng-model="report.test_keys.commands[0].command_stdout">
+          </div>
+
+          <h3>Console error output</h3>
+          <div ui-codemirror
+                ui-codemirror-opts="code_mirror_options"
+                ng-model="report.test_keys.commands[0].command_stderr">
+          </div>
+        </div>
+    </div>
+</div>

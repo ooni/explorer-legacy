@@ -2,11 +2,14 @@
   "name": "country",
   "plural": "countries",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "properties": {
+    "id": {
+      "type": "Number"
+    },
     "name": {
       "type": "String"
     },
@@ -18,7 +21,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "censorship_methods": {
+      "type": "hasAndBelongsToMany",
+      "model": "censorship_method",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

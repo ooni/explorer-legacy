@@ -1,8 +1,19 @@
 <div>
     <div class="overview">
         <div>
-            <label for="body_length_match">body_length_match: </label><span id="input">{{ report.test_keys.body_length_match }}</span>
-            <label for="input">input: </label><span id="input">{{ report.input  }}</span>
+            <label for="header_field_name">Header field name tampering: </label><span id="header_field_name">{{ report.test_keys.tampering.header_field_name}}</span>
+            <br/>
+            <label for="header_field_value">Header field value tampering: </label><span id="header_field_value">{{ report.test_keys.tampering.header_field_value}}</span>
+            <br/>
+            <label for="header_field_number">Header field number tampering: </label><span id="header_field_number">{{ report.test_keys.tampering.header_field_number}}</span>
+            <br/>
+            <label for="header_name_capitalization">Header name capitalization: </label><span id="header_name_capitalization">{{ report.test_keys.tampering.header_name_capitalization}}</span>
+            <br/>
+            <label for="request_line_capitalization">Request line capitalization tampering: </label><span id="header_field_name">{{ report.test_keys.tampering.request_line_capitalization}}</span>
+            <br/>
+            <label for="total">Total tampering: </label><span id="total">{{ report.test_keys.tampering.total }}</span>
+            <br/>
+            <label for="header_name_diff">Header name diff: </label><span id="total">{{ report.test_keys.tampering.header_name_diff }}</span>
         </div>
 
         <div class="description">
