@@ -16,13 +16,6 @@ angular.module('ooniAPIApp')
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
     $scope.encodeInput = window.encodeURIComponent;
 
-    $http.get('bower_components/factbook-country-data/data/' + $scope.countryCode + '.json')
-      .then(function(response) {
-        $scope.countryDetails = response.data;
-      }, function(error) {
-        console.log('error', error)
-      })
-
     Country.findOne({
       filter: {
         where: {iso_alpha2: $scope.countryCode},
