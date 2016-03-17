@@ -1,7 +1,7 @@
 
 <form class="filter-form">
 <div class="form-group inline">
-  <label>Filter:</label>
+  <label>Filter Country Name:</label>
   <input placeholder="eg. Iran" ng-model="countryFilter"/>
 </div>
 </form>
@@ -10,6 +10,6 @@
   <li ng-repeat="country in countries | orderBy:'name' | filter: countryFilter">
     <a href="/country/{{country.alpha2}}/" class="country">
       <i class="flag-icon" ng-class="'flag-icon-' + country.alpha2 | lowercase"></i> {{ country.name }}</a>
-      <span class="count">{{ country.count|number }}</span> <span ng-if="$index === 0">measurements run</span>
+      <div class="count"><span>{{ country.count|number }}</span> measurements</div>
   </li>
 </ul>
