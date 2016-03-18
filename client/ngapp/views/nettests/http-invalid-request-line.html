@@ -15,8 +15,7 @@
         </div>
 
         <div class="description">
-            <h3>What does this test do?</h3>
-
+            <h3>HTTP Invalid Request</h3>
             <p>This test tries to detect the presence of censorship and/or surveillance software (“middle box”) which could be responsible for traffic manipulation.</p>
 
             <p>A very useful debugging and measurement tool is an echo service, which simply sends back to the originating source any data it receives. Instead of sending a normal HTTP request, this test sends an invalid HTTP request line - containing an invalid HTTP version number, an invalid field count and a huge request method – to an echo service listening on the standard HTTP port. If a middle box is not present in the network between the user and an echo service, then the echo service will send the invalid HTTP request line back to the user, exactly as it received it. In such cases, we assume that there is no visible traffic manipulation in the tested network.</p>
