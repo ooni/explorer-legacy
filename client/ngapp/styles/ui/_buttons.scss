@@ -1,3 +1,5 @@
+/* Buttons */
+
 button {
   @include primary-button-mixin($button-border, $color-ooni-blue, $color-white);
 
