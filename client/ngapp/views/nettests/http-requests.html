@@ -8,15 +8,19 @@
                 <i cass=""></i> This measurement looks normal.
             </div>
         </div>
-
         <div>
-            <label for="input">Website: </label><span id="input">{{ report.input  }}</span>
-            <a ng-href="/website/{{ encodeInput(report.input.replace('http://', '')) }}">View Website Information »</a>
+          <h3>Website</h3>
+            <label for="input">URL: </label> <a href="{{ report.input  }}" target="_blank">{{ report.input  }}</a>
             <br>
-            <label for="experiment_failure">Experiment failure: </label><span id="experiment-failure">{{ experiment_failure }}</span>
+            <label for="experiment_failure">Experiment Failure: </label><span id="experiment-failure">{{ experiment_failure }}</span>
             <br>
-            <label for="body_length_match">Body length match: </label><span id="body-length-match">{{ body_length_match }}</span>
+            <label for="body_length_match">Body Length Match: </label><span id="body-length-match">{{ body_length_match }}</span>
+            <br>
+            <p>
+              <a ng-href="/website/{{ encodeInput(report.input.replace('http://', '')) }}">View measurements for URL</a>
+            </p>
         </div>
+        <hr>
 
         <div class="description">
           <h3>HTTP Request</h3>
@@ -42,8 +46,8 @@
 
     <h3><i class="icon-http-headers"></i> HTTP Response Headers</h3>
     <div class="experiment-vs-control">
-        View: <button class="secondary" ng-class="{'selected': viewingAllHeaders}" ng-click="viewingAllHeaders = true">all headers</button>
-        <button class="secondary" ng-class="{'selected': !viewingAllHeaders}" ng-click="viewingAllHeaders = false">different headers</button>
+        View: <button class="secondary" ng-class="{'selected': viewingAllHeaders}" ng-click="viewingAllHeaders = true">All Headers</button>
+        <button class="secondary" ng-class="{'selected': !viewingAllHeaders}" ng-click="viewingAllHeaders = false">Different Headers</button>
         <table>
             <thead>
                 <td class="header-name">Header Name</td>

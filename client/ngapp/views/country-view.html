@@ -34,9 +34,7 @@
         Here's what we know about anomalies with internet connections located in <span class="capitalize">{{ countryName | lowercase }}</span>.
       </p>
 
-      <p>
-        <h4>We've got {{ count | number }} measurements for <span class="capitalize">{{ countryName | lowercase }}</span>.</h4>
-      </p>
+      <h3><span class="detail">{{ count | number }}</span> Measurements Collected</h3>
     </div>
 
     <div id="bar-chart" ooni-country-bar-chart

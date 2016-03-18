@@ -7,7 +7,7 @@
     <p><a href="/world/">Go Back Home</a></p>
   </div>
 
-  <div class="container" ng-hide="!loaded">
+  <div class="container" ng-hide="!loaded || not_found">
     <div class="row">
       <h1 id="country" class="capitalize">
         <i class="flag-icon"
@@ -23,10 +23,10 @@
           <h1>
             <i class="icon-measurement"></i> {{ nettest.long_name }} <span class="detail">{{report.test_start_time | date:'shortDate'}}</span>
           </h1>
-          <p>ID: {{measurementId}}</p>
+          <p><strong>ID:</strong> {{measurementId}}</p>
 
           <div class="details">
-            <span class="detail tiny">Probe Details</span>
+            <span class="detail tiny">Probe</span>
             <div class="spec-in-all-tests">
               <div class="inline-test-spec">
                 <span id="'asn'"

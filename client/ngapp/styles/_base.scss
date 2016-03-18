@@ -17,9 +17,14 @@ html {
 
 h1,
 h2,
+h3,
 nav,
 .toc {
   font-family: "Fira Sans", sans-serif;
+
+  i {
+    margin-right: $base-spacing;
+  }
 }
 
 pre,
