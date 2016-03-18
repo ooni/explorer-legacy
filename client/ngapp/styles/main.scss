@@ -13,6 +13,7 @@ $color-grey-light: #d9d9d9;
 $color-grey: #c1c1c1;
 
 // Misc
+$base-spacing: 10px;
 $border-radius: 3px;
 
 // Buttons
@@ -34,12 +35,13 @@ $transition-speed: .5s;
         "ui/ui-grid",
         "ui/section",
         "ui/more-info-hover",
+        "ui/icons",
         "base",
         "loading",
         "country",
         "highlights",
         "explore",
-        "report",
+        "measurement",
         "world";
 
 .capitalize {

@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'ooni-icons';
+    src:    url('fonts/ooni-icons.eot?lb0vhf');
+    src:    url('fonts/ooni-icons.eot?lb0vhf#iefix') format('embedded-opentype'),
+        url('fonts/ooni-icons.ttf?lb0vhf') format('truetype'),
+        url('fonts/ooni-icons.woff?lb0vhf') format('woff'),
+        url('fonts/ooni-icons.svg?lb0vhf#ooni-icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+i {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'ooni-icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-analysis:before {
+    content: "\e900";
+}
+.icon-censorhip-tampering:before {
+    content: "\e901";
+}
+.icon-censorhip-vendor:before {
+    content: "\e902";
+}
+.icon-censorship-confirmed:before {
+    content: "\e903";
+}
+.icon-country-statistics:before {
+    content: "\e904";
+}
+.icon-decentralization:before {
+    content: "\e905";
+}
+.icon-distributed:before {
+    content: "\e906";
+}
+.icon-http-body:before {
+    content: "\e907";
+}
+.icon-http-headers:before {
+    content: "\e908";
+}
+.icon-measurement:before {
+    content: "\e909";
+}
+.icon-progress:before {
+    content: "\e90a";
+}
+.icon-research:before {
+    content: "\e90b";
+}
+.icon-server:before {
+    content: "\e90c";
+}
+.icon-tor:before {
+    content: "\e90d";
+}
