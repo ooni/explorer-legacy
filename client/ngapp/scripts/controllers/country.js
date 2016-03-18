@@ -16,7 +16,7 @@ angular.module('ooniAPIApp')
     $scope.countryName = ISO3166.getCountryName($scope.countryCode);
     $scope.encodeInput = window.encodeURIComponent;
 
-    $http.get('bower_components/factbook-country-data/data/' + $scope.countryCode + '.json')
+    $http.get('data/factbook/' + $scope.countryCode.toLowerCase() + '.json')
       .then(function(response) {
         $scope.countryDetails = response.data;
       }, function(error) {
