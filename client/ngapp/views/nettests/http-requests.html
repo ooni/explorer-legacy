@@ -2,20 +2,20 @@
     <div class="overview">
         <div class="result">
             <div class="anomalous-result" ng-if="anomaly==true">
-                This measurement contains data that could be a sign of network tampering or censorship.
+                <i class="icon-censorhip-tampering"></i> This measurement contains data that could be a sign of network tampering or censorship.
             </div>
             <div class="normal-result" ng-if="anomaly==false">
-                This measurement looks normal.
+                <i cass=""></i> This measurement looks normal.
             </div>
         </div>
 
         <div>
-            <label for="experiment_failure">Experiment failure: </label><span id="experiment-failure">{{ experiment_failure }}</span>
-            <br/>
-            <label for="body_length_match">Body length match: </label><span id="body-length-match">{{ body_length_match }}</span>
-            <br/>
             <label for="input">Website: </label><span id="input">{{ report.input  }}</span>
             <a ng-href="/website/{{ encodeInput(report.input.replace('http://', '')) }}">View Website Information »</a>
+            <br>
+            <label for="experiment_failure">Experiment failure: </label><span id="experiment-failure">{{ experiment_failure }}</span>
+            <br>
+            <label for="body_length_match">Body length match: </label><span id="body-length-match">{{ body_length_match }}</span>
         </div>
 
         <div class="description">
@@ -38,7 +38,9 @@
           </p>
         </div>
     </div>
-    <h3>Comparison of response headers</h3>
+    <hr>
+
+    <h3><i class="icon-http-headers"></i> HTTP Response Headers</h3>
     <div class="experiment-vs-control">
         View: <button class="secondary" ng-class="{'selected': viewingAllHeaders}" ng-click="viewingAllHeaders = true">all headers</button>
         <button class="secondary" ng-class="{'selected': !viewingAllHeaders}" ng-click="viewingAllHeaders = false">different headers</button>
@@ -60,8 +62,9 @@
                 </tr>
             </tbody>
         </table>
+        <hr>
         <div class="experiment-body" ng-if="experiment_body">
-            <h3>Experiment HTML body</h3>
+            <h3><i class="icon-http-body"></i> HTTP Response Body</h3>
             <div ui-codemirror
                 ng-class="{'openCodeMirror': expandExperimentBody}"
                 ui-codemirror-opts="code_mirror_options"
@@ -70,5 +73,6 @@
             <div class="expandBody" ng-click="expandExperimentBody = !expandExperimentBody">expand ›</div>
         </div>
     </div>
+    <hr>
 
 </div>

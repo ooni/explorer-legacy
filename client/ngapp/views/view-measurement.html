@@ -1,76 +1,66 @@
-<main class="report">
+<main class="measurement">
 
-<div ng-show="not_found">
-  <h2>404 - Report not found</h2>
-  <p>This can either mean that the report you submitted has not yet been
-  processed or that it was not submitted successfully.</p>
-  <p>Try again later</p>
-</div>
+  <div ng-show="not_found">
+    <h1><i class="icon-decentralization"></i> 404 - Report Not Found</h1>
+    <p>This can either mean that the report you submitted has not yet been
+    processed or that it was not submitted successfully. Please try again later.</p>
+    <p><a href="/world/">Go Back Home</a></p>
+  </div>
 
-<div class="container" ng-hide="!loaded">
-  <div class="row report-list-header">
-    <div class="col-3">
-      <h1>Report: {{measurementId}}</h1>
-      <h2>A {{ nettest.long_name }} test ran on {{report.test_start_time | date:'shortDate'}}</h2>
+  <div class="container" ng-hide="!loaded">
+    <div class="row">
+      <h1 id="country" class="capitalize">
+        <i class="flag-icon"
+          ng-class="'flag-icon-' + report.probe_cc | lowercase "></i>
+          <span ng-bind="countryName | lowercase" class="capitalize"><span>
+      </h1>
+      <a href="/country/{{report.probe_cc}}">Back to Country</a>
+    </div>
+    <div class="row report-list-header">
+      <div class="col-3">
+        <div class="measurement-info">
+          <span class="detail tiny">Measurement</span>
+          <h1>
+            <i class="icon-measurement"></i> {{ nettest.long_name }} <span class="detail">{{report.test_start_time | date:'shortDate'}}</span>
+          </h1>
+          <p>ID: {{measurementId}}</p>
 
-      <!-- <div class="summary">
-        <h3>
-          Summary
-        </h3>
+          <div class="details">
+            <span class="detail tiny">Probe Details</span>
+            <div class="spec-in-all-tests">
+              <div class="inline-test-spec">
+                <span id="'asn'"
+                    label="'Network'"
+                    ooni-more-info-hover
+                    content="network_information"
+                    definition="definitions.probe_asn"></span>
+              </div>
+              <div class="inline-test-spec">
+                <span id="'software_name'"
+                    label="'Name'"
+                    ooni-more-info-hover
+                    content="report.software_name"
+                    definition="definitions.software_name"></span>
+              </div>
+              <div class="inline-test-spec">
+                <span id="'software_version'"
+                    label="'Version'"
+                    ooni-more-info-hover
+                    content="report.software_version"
+                    definition="definitions.software_version"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div ng-if="report"
-          ooni-nettest-summary
+          ooni-nettest-details
           report="report"></div>
-      </div> -->
+        <h3><i class="icon-analysis"></i> Inspect Raw Measurement Data:</h3>
+        <json-formatter open="1" json="report.test_keys">
+        </json-formatter>
 
-      <div class="details">
-        <h3>
-          Report Details
-        </h3>
-
-        <div>
-          <span for="country">This test was run in </span>
-          <span id="country" class="capitalize">
-            <i class="flag-icon"
-              ng-class="'flag-icon-' + report.probe_cc | lowercase "></i> {{ countryName | lowercase }}
-          </span>
-        </div>
-        <div class="spec-in-all-tests">
-          <div class="inline-test-spec">
-            <span id="'asn'"
-                label="'Probe Network'"
-                ooni-more-info-hover
-                content="network_information"
-                definition="definitions.probe_asn"></span>
-          </div>
-        </div>
-        <div class="spec-in-all-tests">
-          <div class="inline-test-spec">
-            <span id="'software_name'"
-                label="'Software Name'"
-                ooni-more-info-hover
-                content="report.software_name"
-                definition="definitions.software_name"></span>
-          </div>
-          <div class="inline-test-spec">
-            <span id="'software_version'"
-                label="'Software Version'"
-                ooni-more-info-hover
-                content="report.software_version"
-                definition="definitions.software_version"></span>
-          </div>
-        </div>
       </div>
-
-      <div ng-if="report"
-        ooni-nettest-details
-        report="report"></div>
-      <h3>
-          Inspect raw measurement data:
-      </h3>
-      <json-formatter open="1" json="report.test_keys">
-      </json-formatter>
-
     </div>
   </div>
-</div>
 </main>

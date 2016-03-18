@@ -6,9 +6,34 @@
   }
 }
 
-.report h3 {
-  line-height: 2.6;
+.measurement {
+
+  h1 {
+    margin: .5rem 0;
+  }
+
+  h3 {
+    line-height: 2.6;
+  }
+
+  .measurement-info {
+    background-color: $color-off-white;
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+
+    .detail {
+
+      font-family: 'Fira Sans';
+      color: $color-grey;
+
+      &.tiny {
+        font-size: 16px;
+      }
+    }
+  }
+
 }
+
 
 label[for="anomalies"] {
   margin-top: 1rem;
@@ -30,7 +55,8 @@ label[for="anomalies"] {
     }
   }
 
-  .control-value, .experiment-value {
+  .control-value,
+  .experiment-value {
     width: 40%;
   }
 
@@ -42,7 +68,7 @@ label[for="anomalies"] {
     font-size: .8rem;
   }
 
-  .difference td{
+  .difference td {
     background-color: transparentize($color-blocked, 0.9);
   }
 }
@@ -80,7 +106,14 @@ label[for="anomalies"] {
   .anomalous-result {
       background-color: $color-blocked;
       padding: 2rem;
+      margin-bottom: 1rem;
       color: $color-off-white;
+
+      font-size: 18px;
+
+      i {
+        font-size: 30px;
+      }
   }
 
   .normal-result {
@@ -88,7 +121,6 @@ label[for="anomalies"] {
       padding: 2rem;
       color: $color-off-white;
   }
-
 
   .result {
     margin-bottom: 10px;
@@ -108,12 +140,6 @@ label[for="anomalies"] {
   &:last-child {
     border-right: 1px solid $color-grey;
   }
-
-  /*&:hover {
-    max-width: 1000px;
-    width: auto;
-    text-overflow: auto;
-  }*/
 }
 
 .note {
