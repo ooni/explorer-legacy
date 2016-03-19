@@ -4,6 +4,10 @@ window.CONFIG = {
       "controller": "HighlightsCtrl",
       "templateUrl": "/views/highlights.html"
     },
+    "/about/": {
+      "controller": "HighlightsCtrl",
+      "templateUrl": "/views/about.html"
+    },
     "/world/": {
       "controller": "WorldCtrl",
       "templateUrl": "/views/world.html"
