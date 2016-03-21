@@ -52,7 +52,7 @@ angular.module('ooniAPIApp')
     }
 
     function loading_failure() {
-      console.log('failed')
+      console.log('failed');
       $rootScope.loaded = true;
       $scope.not_found = true;
     }

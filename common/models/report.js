@@ -18,6 +18,30 @@ module.exports = function(Report) {
       }
   );
 
+  Report.total = function(callback) {
+    var ds = Report.dataSource;
+    var sql = "SELECT SUM(count) FROM country_counts_view;";
+
+    ds.connector.query(sql, [], function(err, rows) {
+        if (err) {
+             return callback(err, null);
+        }
+        callback(null,
+                 {
+                     "total": parseInt(rows[0].sum)
+                 }
+        );
+    });
+  }
+
+  Report.remoteMethod(
+      'total',
+      { http: { verb: 'get' },
+        description: 'Returns the total number of measurements collected',
+        returns: {arg: 'data', type: 'Object', root: true}
+      }
+  );
+
   Report.websiteDetails = function (website_url, callback) {
     var ds = Report.dataSource
     var wildcard_url = '%' + website_url

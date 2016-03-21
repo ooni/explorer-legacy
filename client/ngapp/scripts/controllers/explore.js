@@ -36,9 +36,9 @@ angular.module('ooniAPIApp')
           }
       }
 
-      Report.count(query, function (count) {
+      Report.total(function (result) {
         Report.find(query, function(data) {
-          data.total = count.count
+          data.total = result.total;
           deferred.resolve(data);
 
           $scope.loaded = true;
