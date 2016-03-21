@@ -6,12 +6,21 @@
         </div>
 
         <div class="description">
-            <h3>DNS Spoofing</h3>
-            <p>
-            This test assesses if the blocking is happening due to DNS spoofing or not. DNS spoofing occurs when your connection to a DNS resolver is spoofed and you always receive a falsified answer. For example, you know that the Pirate Bay is blocked on Vodafone. So you take the piratebay domain, the DNS resolver of Vodafone and then that of a DNS resolver which you know that lies (e.g. Google DNS resolver). If however they both match, that means that something between you and Google has spoofed the response and thus DNS censorship is happening by spoofing the responses.
-            </p>
+            <h3>DNS Spoof</h3>
+            <p> This test assesses if the blocking is happening due to DNS
+            spoofing or not. DNS spoofing occurs when your connection to a DNS
+            resolver is spoofed and you always receive a falsified answer. For
+            example, you know that a certain domain is blocked on a given network.
+            So you take this domain, the DNS resolver of the network and
+            then that of a DNS resolver which you know that doesn't lie
+            (e.g. Google DNS resolver). If they both match, that means that
+            something between you and Google has spoofed the response and thus
+            DNS censorship is happening by spoofing the responses. </p>
             <p class="note">
-            Note: If you run this test with a site that is not censored, it will tell you that spoofing is occurring (because they match), while it's actually not. In such cases, you may have false positives.
+            Note: If you run this test with a site that is not censored, it
+            will tell you that spoofing is occurring (because they match),
+            while it's actually not. In such cases, you may have false
+            positives.
             </p>
         </div>
     </div>
