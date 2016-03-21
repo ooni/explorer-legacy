@@ -451,6 +451,24 @@ module.exports = function (grunt) {
     fs.writeFileSync(outputPath, content, 'utf-8');
   });
 
+  grunt.registerTask('copy-factbook-data', 'Copy the factbook data', function(target) {
+      if (target == 'dist') {
+        var outputPath = path.resolve(__dirname, appConfig.dist, 'data',
+                                      'factbook');
+      } else {
+        var outputPath = path.resolve(__dirname, appConfig.app, 'data',
+                                      'factbook');
+      }
+      grunt.file.mkdir(outputPath);
+      var inputPath = path.resolve(__dirname, 'bower_components');
+      inputPath = path.join(inputPath, 'factbook-country-data', 'data');
+      fs.readdirSync(inputPath)
+          .forEach(function(f) {
+              var inputContent = fs.readFileSync(path.join(inputPath, f));
+              fs.writeFileSync(path.join(outputPath, f), inputContent);
+      });
+  });
+
   grunt.registerTask('run', 'Start the app server', function() {
     var done = this.async();
 
@@ -486,6 +504,7 @@ module.exports = function (grunt) {
       'clean:server',
       'build-lbclient',
       'build-config',
+      'copy-factbook-data',
       'wiredep',
       'sass',
       'concurrent:server',
@@ -529,6 +548,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'build-lbclient',
     'build-config',
+    'copy-factbook-data:dist',
     'wiredep',
     'useminPrepare',
     'sass',
