@@ -207,7 +207,11 @@ angular.module('ooniAPIApp')
           "Extracting square root of i",
           "Modifying the space time continuum",
           "Adjusting ultra speed variable to be nominal",
-          "Performing a safety meeting"
+          "Exploring the dark web",
+          "Listening to the frequency of space",
+          "Searching for alien life forms",
+          "Turning down gravity to 8.63",
+          "Proving Fermat's last theorem"
         ];
       },
       templateUrl: 'views/directives/ooni-loader.directive.html',
