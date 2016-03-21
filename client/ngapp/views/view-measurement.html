@@ -21,7 +21,8 @@
         <div class="measurement-info">
           <span class="detail tiny">Measurement</span>
           <h1>
-            <i class="icon-measurement"></i> {{ nettest.long_name }} <span class="detail">{{report.test_start_time | date:'shortDate'}}</span>
+            <i class="icon-measurement"></i> {{ nettest.long_name }}
+            <span class="detail">{{report.test_start_time | date:'medium'}}</span>
           </h1>
           <p><strong>ID:</strong> {{measurementId}}</p>
 
