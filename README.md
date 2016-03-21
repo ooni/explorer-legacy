@@ -1,8 +1,8 @@
 # OONI Explorer
 
-This is the code for the OONI report API accessible via:
+This is the code for the OONI Measurement Explorer accessible via:
 
-http://api.ooni.io/
+https://explorer.ooni.torproject.org/
 
 ## Setup
 
@@ -58,13 +58,13 @@ Run the postgres shell and run the following commands:
 
 ```
 # Create the user
-CREATE USER operator WITH PASSWORD 'seCure'
+CREATE USER ooni WITH PASSWORD 'seCure'
 
 # Create the dummy database
-CREATE DATABASE ooni_api_db
+CREATE DATABASE ooni_explorer
 
 # Grant the priviledges
-GRANT ALL PRIVILEGES ON DATABASE ooni_api_db to operator
+GRANT ALL PRIVILEGES ON DATABASE ooni_explorer to ooni
 ```
 
 ### Run
