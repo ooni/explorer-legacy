@@ -20,6 +20,7 @@
 
         i {
           font-size: 0.6em;
+          font-family: 'FontAwesome' !important;
           color: $color-red;
         }
       }
@@ -71,7 +72,6 @@
 
 }
 
-
 @media (max-width: 1029px) {
 
   .countries-list {
@@ -95,4 +95,9 @@
       width: 97%;
     }
   }
+
+  .world-map-container {
+    display: none;
+  }
+
 }
