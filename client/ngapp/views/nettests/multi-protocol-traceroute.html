@@ -8,7 +8,7 @@
         <div class="description">
             <h3>Multi-Protocol Traceroute</h3>
             <p>
-            This test looks at what paths packets take when establishing connections based on certain protocols and port combinations. ICMP traceroutes: often they are treated differently than using the TCP or other protocols. Also they are effected by the types of ports that you use. Multi-protocol traceroutes, on the other hand, perform a traceroute on various different ports and protocols simultaneously. OONI constructs packets in such a way that they perform a traceroute from multiple protocols and paths simultaneously.
+            Every time we connect to a server, our devices make requests which are encapsulated in a packet. A traceroute is a way of understanding which paths packets take in a network. OONI constructs packets in such a way that they perform a traceroute from multiple protocols and ports simultaneously, in an attempt to detect traffic manipulation.
             </p>
         </div>
     </div>
