@@ -66,7 +66,6 @@ This is how the nginx configuration should look like
 server {
         listen 80;
         server_name explorer.ooni.torproject.org explorer.ooni.io;
-        root /usr/share/nginx/html/;
 
         location / {
           proxy_pass http://127.0.0.1:3000;
@@ -76,10 +75,6 @@ server {
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
         }
-        location ~ /.well-known {
-          allow all;
-        }
-
 }
 server {
 # SSL configuration
@@ -96,13 +91,6 @@ server {
     proxy_set_header Host $host;
     proxy_cache_bypass $http_upgrade;
   }
-
-  root /usr/share/nginx/html/;
-
-  location ~ /.well-known {
-    allow all;
-  }
-
 }
 ```
 
