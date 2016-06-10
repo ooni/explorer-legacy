@@ -96,7 +96,7 @@
         <li ng-repeat="vendor in vendors">
           <h3>{{vendor.vendor}}</h3>
           <strong>ASN: {{ vendor.probe_asn }}</strong><br/>
-          Identified on: {{ vendor.test_start_time | date:'shortDate'}} <br/>
+          Identified on: {{ vendor.test_start_time | date:'yyyy-MM-dd'}} <br/>
           <a href="/measurement/{{ vendor.report_id }}">view measurement »</a>
         </li>
       </ul>
@@ -120,7 +120,7 @@
           </div>
           <ul class="blockpage-measurements">
             <li ng-repeat="measurement in obj.measurements | orderBy:'test_start_time'">
-              {{ measurement.test_start_time | date:'shortDate' }}
+              {{ measurement.test_start_time | date:'yyyy-MM-dd' }}
               <a ng-href="/measurement/{{ measurement.report_id }}?input={{ encodeInput(measurement.input) }}">view »</a></li>
           </ul>
         </li>
