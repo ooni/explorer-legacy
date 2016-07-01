@@ -47,7 +47,6 @@ angular.module('ooniAPIApp')
 
   $scope.header_names = [];
   if ($scope.control && $scope.control.response) {
-      console.log($scope.control);
       for (var header_name in $scope.control.response.headers) {
           if ($scope.header_names.indexOf(header_name) == -1) {
               $scope.header_names.push(header_name);
@@ -65,8 +64,16 @@ angular.module('ooniAPIApp')
 
   $scope.code_mirror_options = {
       lineWrapping : true,
-      mode: 'xml',
-      readOnly: 'nocursor'
+      mode: 'xml'
   }
+})
+.controller('DNSConsistencyViewCtrl', function ($scope, $location){
+})
+.controller('WebConnectivityViewCtrl', function ($scope, $location){
+  $scope.encodeInput = window.encodeURIComponent;
 
+  $scope.code_mirror_options = {
+      lineWrapping : true,
+      mode: 'xml'
+  }
 });

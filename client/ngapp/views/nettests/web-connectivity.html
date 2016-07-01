@@ -1,0 +1,172 @@
+<div ng-controller="WebConnectivityViewCtrl">
+    <div class="overview">
+        <div class="result">
+            <div class="anomalous-result" ng-if="report.test_keys.blocking!=false">
+                <i class="icon-censorhip-tampering"></i> This measurement contains data that could be a sign of network tampering or censorship.
+            </div>
+            <div class="normal-result" ng-if="report.test_keys.blocking==false">
+                <i cass=""></i> This measurement looks normal.
+            </div>
+        </div>
+        <div>
+          <h3>Website</h3>
+            <label for="input">URL: </label> <a href="{{ report.input  }}" target="_blank">{{ report.input  }}</a>
+            <br>
+            <label for="blocking_reason">Reason for blocking: </label><span id="blocking-reason">{{ report.test_keys.blocking }}</span>
+            <br>
+
+            <p>
+              <a ng-href="/website/{{ encodeInput(report.input.replace('http://', '')) }}">View measurements for URL</a>
+            </p>
+        </div>
+        <hr>
+
+        <div class="description">
+          <h3>Web Connectivity</h3>
+          <p>This test examines whether websites are reachable and if they are not, it
+          attempts to determine whether access to them is blocked through DNS tampering,
+          TCP connection RST/IP blocking or by a transparent HTTP proxy.</p>
+
+          <p>Specifically, this test is designed to perform the following:</p>
+
+          <ul>
+            <li>Resolver identification</li>
+
+            <li>DNS lookup</li>
+
+            <li>TCP connect</li>
+
+            <li>HTTP GET request</li>
+          </ul>
+
+          <p>By default, this test performs the above (excluding the first step, which is
+          performed only over the network of the user) both over a control server and over
+          the network of the user. If the results from both networks match, then there is
+          no clear sign of network interference; but if the results are different, then
+          the websites that the user is testing are likely censored.</p>
+
+          <p>Below we provide information about how each step performed under the web
+          connectivity test works.</p>
+
+          <h4>1. Resolver identification</h4>
+
+          <p>The domain name system (DNS) is what is responsible for transforming a host name
+          (e.g. torproject.org) into an IP address (e.g. 38.229.72.16). Internet Service
+          Providers, amongst others, run DNS resolvers which map IP addresses to host
+          names. In some circumstances though, ISPs map the requested host names to the
+          wrong IP addresses, which is a form of tampering.</p>
+
+          <p>As a first step, the web connectivity test attempts to identify which DNS
+          resolver is being used by the user. It does so by performing a DNS query to
+          special domains (such as whoami.akamai.com) which will disclose the IP address
+          of the resolver.</p>
+
+          <h4>2. DNS lookup</h4>
+
+          <p>Once the web connectivity test has identified the DNS resolver of the user, it
+          then attempts to identify which addresses and are mapped to the tested host
+          names by the resolver. It does so by performing a DNS lookup, which asks the
+          resolver to disclose which IP addresses are mapped to the tested host names, as
+          well as which other host names are linked to the tested host names under DNS
+          queries.</p>
+
+          <h4>3. TCP connect</h4>
+
+          <p>The web connectivity test will then try to connect to the tested websites by
+          attempting to establish a TCP session on port 80 (or port 443 for URLs that
+          begin with HTTPS) for the list of IP addresses that were identified in the
+          previous step (DNS lookup).</p>
+
+          <h4>4. HTTP GET request</h4>
+
+          <p>As the web connectivity test connects to tested websites (through the previous
+          step), it sends requests through the HTTP protocol to the servers which are
+          hosting those websites. A server normally responds to an HTTP GET request with
+          the content of the webpage that is requested.</p>
+
+          <h4>Comparison of results: Identifying censorship</h4>
+
+          <p>Once the above steps of the web connectivity test are performed *both* over a
+          control server and over the network of the user, the collected results are then
+          compared with the aim of identifying whether and how tested websites are
+          tampered with. If the compared results do *not* match, then there is a sign of
+          network interference.</p>
+
+         <p>Below are the conditions under which the following types of blocking are
+         identified:</p>
+
+         <ul>
+           <li><strong>DNS blocking:</strong> If the DNS responses (such as the IP addresses mapped to
+             host names) do <i>not</i> match</li>
+
+           <li><strong>TCP/IP blocking:</strong> If a TCP session to connect to websites was <i>not</i>
+             established over the network of the user</li>
+
+           <li><strong>HTTP blocking:</strong> If the HTTP request over the user's network failed, or the</li>
+
+           <li><strong>HTTP status codes</strong> don't match, or all of the following apply:
+             <ul>
+               <li>The body length of compared websites (over the control server and the
+                 network of the user) differs by some percentage</li>
+               <li>The HTTP headers names do not match</li>
+               <li>The HTML title tags do not match</li>
+            </ul>
+           </li>
+
+           <p>The examples below (testing piratebay.se and google.com for censorship in Italy) show
+           what the output of the web connectivity test could look like:</p>
+
+           <p class="note"><strong>Note:</strong> DNS resolvers, such as Google or your local ISP, often provide users
+         with IP addresses that are closest to them geographically. Often this is not
+         done with the intent of network tampering, but merely for the purpose of
+         providing users faster access to websites. As a result, some false positives
+         might arise in OONI measurements. Other false positives might occur when tested
+         websites serve different content depending on the country that the user is
+         connecting from, or in the cases when websites return failures even though they
+         are not tampered with.
+           </p>
+        </div>
+    </div>
+    <hr>
+
+    <div>
+      <h3>DNS query answers</h3>
+      <strong>Resolver: </strong> {{ report.test_keys.client_resolver }}
+      <h4>Answers</h4>
+      <ul>
+        <li ng-repeat="answer in report.test_keys.queries[0].answers">
+          {{answer.ipv4}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="experiment-body" ng-if="report.test_keys.requests[0].response.body">
+      <h3><i class="icon-http-body"></i> HTTP Response Body</h3>
+      <div ui-codemirror
+             ng-class="{'openCodeMirror': expandExperimentBody}"
+             ui-codemirror-opts="code_mirror_options"
+             ng-model="report.test_keys.requests[0].response.body">
+      </div>
+      <div class="expandBody" ng-click="expandExperimentBody = !expandExperimentBody">expand ›</div>
+    </div>
+
+    <div>
+      <h3>TCP Connect results</h3>
+      <ul>
+        <li ng-repeat="tcp_connect in report.test_keys.tcp_connect">
+          <p>Connection to <strong>{{tcp_connect.ip}}:{{tcp_connect.port}}</strong>
+
+          <span ng-if="tcp_connect.status.success==true"> was successful</span>
+
+          <span ng-if="tcp_connect.status.success==failed && tcp_connect.blocked==true"> failed due to blocking</span>
+          <span ng-if="tcp_connect.status.success==failed && tcp_connect.blocked==false"> failed, but not due to blocking.</span>
+
+          </p>
+
+        </li>
+      </ul>
+    </div>
+
+
+
+</div>

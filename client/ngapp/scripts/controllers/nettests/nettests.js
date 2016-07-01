@@ -50,4 +50,3 @@ angular.module('ooniAPIApp')
     // template: '<div ng-include="getContentUrl()"></div>'
   }
 });
-;
