@@ -22,9 +22,10 @@
           <span class="detail tiny">Measurement</span>
           <h1>
             <i class="icon-measurement"></i> {{ nettest.long_name }}
-            <span class="detail">{{report.test_start_time | date:'medium'}}</span>
+            <span class="detail">{{report.measurement_start_time| date:"yyyy-MM-dd HH:mm:ss 'UTC'":"UTC"}}</span>
           </h1>
           <p><strong>ID:</strong> {{measurementId}}</p>
+          <p><strong>Test runtime:</strong> {{report.test_runtime}} seconds</p>
 
           <div class="details">
             <span class="detail tiny">Probe</span>

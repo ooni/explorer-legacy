@@ -43,6 +43,12 @@
     "test_start_time": {
       "type": "Date"
     },
+    "test_runtime": {
+      "type": "Number"
+    },
+    "measurement_start_time": {
+      "type": "Date"
+    },
     "test_name": {
       "type": "String",
       "required": true
