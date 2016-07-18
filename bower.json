@@ -14,15 +14,15 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.16",
+    "angular": "~1.4",
     "json3": "~3.3.1",
     "es5-shim": "~3.1.0",
-    "angular-route": "~1.2.16",
-    "angular-resource": "~1.2.16",
+    "angular-route": "~1.4",
+    "angular-resource": "~1.4",
     "topojson": "topojson#1.6.20",
     "angular-datamaps": "~0.1.0",
     "colorbrewer": "~1.0.0",
-    "angular-typewrite": "~0.0.4",
+    "angular-typewrite": "~0.0.14",
     "flag-icon-css": "",
     "angular-ui-grid": "~3.0.0-rc.21",
     "font-awesome": "fontawesome#~4.5.0",
@@ -34,11 +34,11 @@
     "angular-inview": "~1.5.6"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.16",
-    "angular-scenario": "~1.2.16"
+    "angular-mocks": "~1.4",
+    "angular-scenario": "~1.4"
   },
   "resolutions": {
-    "angular": "1.2.29"
+    "angular": "1.4"
   },
   "overrides": {
     "font-awesome": {
