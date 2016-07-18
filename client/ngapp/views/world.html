@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-3 world-map-container" ng-show="loaded">
+      <div class="col-3 world-map-container" ng-if="loaded">
         <datamap map="worldMap" on-click="map_clicked" class="map" plugins="mapPlugins" plugin-data="mapPluginData"></datamap>
         <div class="worldMap"></div>
         <div class="worldMapLegend">

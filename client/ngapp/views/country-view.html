@@ -39,7 +39,7 @@
 
     <div id="bar-chart" ooni-country-bar-chart
       country-data="blockpageCount"
-      ng-show="blockpageCount">
+      ng-if="blockpageCount.length > 0">
     </div>
 
     <div ooni-loader
