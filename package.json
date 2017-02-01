@@ -11,7 +11,7 @@
     "async": "~0.9.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
-    "country-data": "0.0.19",
+    "country-data": "0.0.31",
     "errorhandler": "^1.1.1",
     "loopback": "^2.14.0",
     "loopback-boot": "^2.6.5",

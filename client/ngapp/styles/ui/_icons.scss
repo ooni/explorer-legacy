@@ -26,6 +26,10 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+i.fa {
+    font-family: 'FontAwesome' !important;
+}
+
 .icon-analysis:before {
     content: "\e900";
 }
