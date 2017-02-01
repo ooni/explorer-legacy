@@ -131,6 +131,30 @@ ds.automigrate(lbTables, function(er) {
     'description': 'Tests to see if the openvpn client works with a set of openvpn endpoints',
     'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-015-openvpn.md'
   });
+  nettest.create({
+    'name': 'vanilla_tor',
+    'long_name': 'Vanilla Tor',
+    'description': 'Test to see if tor with no bridges works',
+    'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-016-vanilla-tor.md'
+  });
+  nettest.create({
+    'name': 'web_connectivity',
+    'long_name': 'Web Connectivity',
+    'description': '',
+    'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-017-web-connectivity.md'
+  });
+  nettest.create({
+    'name': 'whatsapp',
+    'long_name': 'WhatsApp',
+    'description': '',
+    'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-018-whatsapp.md'
+  });
 
+  nettest.create({
+    'name': 'facebook_messenger',
+    'long_name': 'Facebook Messenger',
+    'description': '',
+    'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-019-facebook-messenger.md'
+  });
   ds.disconnect();
 });
