@@ -140,20 +140,20 @@ ds.automigrate(lbTables, function(er) {
   nettest.create({
     'name': 'web_connectivity',
     'long_name': 'Web Connectivity',
-    'description': '',
+    'description': 'Examines whether access to websites is blocked through DNS tampering, TCP or IP blocking, or by a transparent HTTP proxy',
     'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-017-web-connectivity.md'
   });
   nettest.create({
     'name': 'whatsapp',
     'long_name': 'WhatsApp',
-    'description': '',
+    'description': 'Checks to see if WhatsApp is working',
     'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-018-whatsapp.md'
   });
 
   nettest.create({
     'name': 'facebook_messenger',
     'long_name': 'Facebook Messenger',
-    'description': '',
+    'description': 'Checks to see if Facebook Messenger is working',
     'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-019-facebook-messenger.md'
   });
   ds.disconnect();
