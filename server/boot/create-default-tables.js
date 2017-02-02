@@ -2,19 +2,28 @@ var async = require('async');
 module.exports = function(app) {
   var ds = app.dataSources.db;
 
-  async.parallel([
-      async.apply(createCountryRows),
-      async.apply(createNettestRows)
-  ]);
+  async.series([
+      createNettestRows,
+      createCensorshipMethods,
+      createCountryRows
+  ], function(err, result) {
+    if (err) { console.log(err);return }
+    console.log("Mapping method to country");
+    mapMethodToCountry(function(err, result) {
+      if (err) { console.log(err);return }
+      console.log("Mapping done");
+    });
+  });
 
   function createCountryRows(cb) {
     var country_rows = [];
     var countries = require('country-data').countries;
-    countries.all.forEach(function(country) {
+    countries.all.forEach(function(country, idx) {
         country_rows.push({
             'iso_alpha2': country.alpha2,
             'iso_alpha3': country.alpha3,
-            'name': country.name
+            'name': country.name,
+            'id': idx
         });
     });
     console.log('Inserting country data');
@@ -23,6 +32,62 @@ module.exports = function(app) {
       console.log('Automigrated country data');
       app.models.country.create(country_rows, cb);
     });
+  }
+
+  function mapMethodToCountry(cb) {
+    var dns_hijacking = 1;
+    var http_proxy = 2;
+    var tcp_ip = 3;
+
+    var methodsByCountry = {
+        'TR': [dns_hijacking],
+        'IR': [dns_hijacking,http_proxy],
+        'SA': [http_proxy],
+        'ID': [http_proxy],
+        'CN': [dns_hijacking,tcp_ip],
+        'RU': [http_proxy],
+        'GR': [dns_hijacking,http_proxy]
+    }
+
+    async.mapValues(methodsByCountry, function(methods, iso_alpha2, cb2) {
+        console.log("" + iso_alpha2 + "->" + methods);
+      app.models.country.findOne({'where': {'iso_alpha2': iso_alpha2}}, function(err, country) {
+        if (err) {console.log(err); return cb2(err)};
+        async.map(methods, function(methodId) {
+            console.log("Adding ", methodId, "to ", country);
+            app.models.censorship_method.findById(methodId, function(err, method) {
+                country.censorship_methods.add(method);
+            });
+        }, function(err, results) {
+              if (err) return cb2(err);
+              cb2(null, results);
+        })
+      });
+    }, function(err, results) {
+        if (err) {return cb(err)};
+        cb(null, results);
+    });
+  }
+
+  function createCensorshipMethods(cb) {
+      var methods = [{
+          'id': 1,
+          'name': 'DNS hijacking',
+          'description': 'DNS hijacking involves sending falsified DNS query responses to requests sent by clients'
+      },{
+          'id': 2,
+          'name': 'Transparent HTTP proxy',
+          'description': 'A transparent HTTP proxy is a middle box that will intercept the requests of users and either block them or display an error message'
+      },{
+          'id': 3,
+          'name': 'TCP/IP blocking',
+          'description': 'TCP/IP based blocking is blocking or impeding the ability of a client to connect to the server'
+      }];
+      ds.automigrate(['censorship_method', 'countrycensorship_method'], function(err) {
+          if (err) return cb(err);
+          console.log('Automigrated censorship methods');
+          app.models.censorship_method.create(methods, cb);
+      });
   }
 
   function createNettestRows(cb) {
