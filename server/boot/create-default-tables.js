@@ -19,6 +19,9 @@ module.exports = function(app) {
     var country_rows = [];
     var countries = require('country-data').countries;
     countries.all.forEach(function(country, idx) {
+        if (country.alpha2 == 'TW') {
+            country.name = 'Taiwan';
+        }
         country_rows.push({
             'iso_alpha2': country.alpha2,
             'iso_alpha3': country.alpha3,
