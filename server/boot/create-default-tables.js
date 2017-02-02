@@ -49,12 +49,15 @@ module.exports = function(app) {
         'GR': [dns_hijacking,http_proxy]
     }
 
+    /* This horror of spaghetti code is the result of many hours of debugging loopback and trying to decipher it's cryptic error messages just so that I could write 2 integers inside of a table.
+     * This is not what a ORM is supposed to do.
+     * I am not going to fix this.
+     * */
     async.mapValues(methodsByCountry, function(methods, iso_alpha2, cb2) {
         console.log("" + iso_alpha2 + "->" + methods);
       app.models.country.findOne({'where': {'iso_alpha2': iso_alpha2}}, function(err, country) {
         if (err) {console.log(err); return cb2(err)};
         async.map(methods, function(methodId) {
-            console.log("Adding ", methodId, "to ", country);
             app.models.censorship_method.findById(methodId, function(err, method) {
                 country.censorship_methods.add(method);
             });
