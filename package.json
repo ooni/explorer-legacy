@@ -8,7 +8,7 @@
     "build": "bower install; grunt build"
   },
   "dependencies": {
-    "async": "~0.9.0",
+    "async": "~2.1.4",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "country-data": "0.0.31",
