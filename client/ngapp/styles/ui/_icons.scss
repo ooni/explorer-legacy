@@ -11,7 +11,7 @@
     font-style: normal;
 }
 
-i {
+@mixin ooni-icons {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'ooni-icons' !important;
     speak: none;
@@ -26,44 +26,87 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-analysis {
+    @include ooni-icons;
+}
 .icon-analysis:before {
     content: "\e900";
+}
+.icon-censorhip-tampering {
+    @include ooni-icons;
 }
 .icon-censorhip-tampering:before {
     content: "\e901";
 }
+.icon-censorhip-vendor {
+    @include ooni-icons;
+}
 .icon-censorhip-vendor:before {
     content: "\e902";
+}
+.icon-censorship-confirmed {
+    @include ooni-icons;
 }
 .icon-censorship-confirmed:before {
     content: "\e903";
 }
+.icon-country-statistics {
+    @include ooni-icons;
+}
 .icon-country-statistics:before {
     content: "\e904";
+}
+.icon-decentralization {
+    @include ooni-icons;
 }
 .icon-decentralization:before {
     content: "\e905";
 }
+.icon-distributed {
+    @include ooni-icons;
+}
 .icon-distributed:before {
     content: "\e906";
+}
+.icon-http-body {
+    @include ooni-icons;
 }
 .icon-http-body:before {
     content: "\e907";
 }
+.icon-http-headers {
+    @include ooni-icons;
+}
 .icon-http-headers:before {
     content: "\e908";
+}
+.icon-measurement {
+    @include ooni-icons;
 }
 .icon-measurement:before {
     content: "\e909";
 }
+.icon-progress {
+    @include ooni-icons;
+}
 .icon-progress:before {
     content: "\e90a";
+}
+.icon-research {
+    @include ooni-icons;
 }
 .icon-research:before {
     content: "\e90b";
 }
+.icon-server {
+    @include ooni-icons;
+}
 .icon-server:before {
     content: "\e90c";
+}
+.icon-tor {
+    @include ooni-icons;
 }
 .icon-tor:before {
     content: "\e90d";
