@@ -16,13 +16,13 @@
     </select>
   </div>
   <div class="form-group" ng-show="showCountryFilter">
-    <label class="sr-only" for="countryCode">Country Code:</label>
+    <label class="sr-only" for="countryCode">Country:</label>
 
     <select name="repeatSelectCountry"
       id="countryCode"
       ng-model="countryCodeFilter"
-      ng-options="key as value for (key, value) in allCountryCodes">
-        <option value="">-- Select Country Code --</option>
+      ng-options="value.alpha2 as value.name for value in allCountryCodes | orderBy:'name'">
+        <option value="">-- Select Country --</option>
     </select>
     <!-- <input type="text" class="form-control" ng-model="countryCodeFilter" placeholder="Country code"/> -->
   </div>

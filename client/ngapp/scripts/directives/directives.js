@@ -533,13 +533,16 @@ angular.module('ooniAPIApp')
           console.log(ccsBool)
           if (ccsBool !== undefined && ccsBool === true) {
             console.log('its true')
-            $scope.allCountryCodes = {}
+            $scope.allCountryCodes = []
             Report.countByCountry({}, function (data) {
               // TODO: this should be loaded on app load if it's used regularly in views.
               // Don't want to reload every time the view is loaded.
 
               data.forEach(function (country) {
-                $scope.allCountryCodes[country.alpha2] = country.name;
+                $scope.allCountryCodes.push({
+                    'alpha2': country.alpha2,
+                    'name': country.name,
+                });
               })
             }, function (error) {
               console.log('error', error)
