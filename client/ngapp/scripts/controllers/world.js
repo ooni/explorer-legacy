@@ -55,6 +55,7 @@ angular.module('ooniAPIApp')
 
             icons.enter()
                 .append('text')
+                .filter(function(d) { return d.alpha2 !== 'ZZ' })
                 .attr('class', 'icon')
                 .attr('font-family', 'FontAwesome')
                 .attr('font-size', '0.6em')
