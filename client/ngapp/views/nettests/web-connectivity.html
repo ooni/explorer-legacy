@@ -10,7 +10,7 @@
         </div>
         <div>
           <h3>Website</h3>
-            <label for="input">URL: </label> <a href="{{ report.input  }}" target="_blank">{{ report.input  }}</a>
+            <label for="input">URL: </label> <a href="{{ report.input  }}" rel="nofollow" target="_blank">{{ report.input  }}</a>
             <br>
             <label for="blocking_reason">Reason for blocking: </label><span id="blocking-reason">{{ report.test_keys.blocking }}</span>
             <br>
