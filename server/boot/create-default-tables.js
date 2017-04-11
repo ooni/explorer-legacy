@@ -220,6 +220,11 @@ module.exports = function(app) {
           'description': 'Checks to see if Facebook Messenger is working',
           'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-019-facebook-messenger.md'
       },
+          'name': 'telegram',
+          'long_name': 'Telegram',
+          'description': 'Checks to see if Telegram is working',
+          'spec_url': 'https://github.com/TheTorProject/ooni-spec/blob/master/test-specs/ts-020-telegram.md'
+      },
 
       ];
       console.log('Inserting nettest data');
