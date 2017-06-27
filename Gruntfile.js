@@ -452,11 +452,12 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('copy-factbook-data', 'Copy the factbook data', function(target) {
-      if (target == 'dist') {
-        var outputPath = path.resolve(__dirname, appConfig.dist, 'data',
+      var outputPath
+      if (target === 'dist') {
+        outputPath = path.resolve(__dirname, appConfig.dist, 'data',
                                       'factbook');
       } else {
-        var outputPath = path.resolve(__dirname, appConfig.app, 'data',
+        outputPath = path.resolve(__dirname, appConfig.app, 'data',
                                       'factbook');
       }
       grunt.file.mkdir(outputPath);
