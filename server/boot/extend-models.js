@@ -9,7 +9,7 @@ module.exports = function(app) {
     providers = require('../providers.json');
   }
 
-  var storageHandler = StorageService({
+  var storageHandler = new StorageService({
     provider: 'amazon',
     key: providers.amazon.key,
     keyId: providers.amazon.keyId,

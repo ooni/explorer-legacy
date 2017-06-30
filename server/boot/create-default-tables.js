@@ -19,7 +19,7 @@ module.exports = function(app) {
     var country_rows = [];
     var countries = require('country-data').countries;
     countries.all.forEach(function(country, idx) {
-        if (country.alpha2 == 'TW') {
+        if (country.alpha2 === 'TW') {
             country.name = 'Taiwan';
         }
         country_rows.push({
@@ -59,7 +59,7 @@ module.exports = function(app) {
     async.mapValues(methodsByCountry, function(methods, iso_alpha2, cb2) {
         console.log("" + iso_alpha2 + "->" + methods);
       app.models.country.findOne({'where': {'iso_alpha2': iso_alpha2}}, function(err, country) {
-        if (err) {console.log(err); return cb2(err)};
+        if (err) {console.log(err); return cb2(err)}
         async.map(methods, function(methodId) {
             app.models.censorship_method.findById(methodId, function(err, method) {
                 country.censorship_methods.add(method);
@@ -70,7 +70,7 @@ module.exports = function(app) {
         })
       });
     }, function(err, results) {
-        if (err) {return cb(err)};
+        if (err) {return cb(err)}
         cb(null, results);
     });
   }
@@ -228,6 +228,6 @@ module.exports = function(app) {
         console.log('Automigrated nettest data');
         app.models.nettest.create(nettest_rows, cb);
       });
-  };
+  }
 
 }
