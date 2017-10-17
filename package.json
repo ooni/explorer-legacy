@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "async": "~2.1.4",
+    "axios": "^0.16.2",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "country-data": "0.0.31",
@@ -18,7 +19,9 @@
     "loopback-component-storage": "~1.0.5",
     "loopback-connector-postgresql": "~2.1.0",
     "loopback-datasource-juggler": "^2.19.0",
+    "node-sass": "^4.5.3",
     "proquint": "0.0.1",
+    "qs": "^6.5.1",
     "serve-favicon": "^2.0.1"
   },
   "optionalDependencies": {
