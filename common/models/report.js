@@ -1,5 +1,68 @@
-var countries = require('country-data').countries;
+var axios = require('axios')
+var qs = require('qs')
+
+var countries = require('country-data').countries
+
+var apiClient = axios.create({
+  baseURL: 'https://api.ooni.io/api/v1/',
+  timeout: 90000, // Maybe set this lower once performance is boosted
+})
+
 module.exports = function(Report) {
+
+  Report.findMeasurements = function(probe_cc, input, order, page_number,
+      page_size, since, until, test_name, callback) {
+    var apiQuery = {}
+    if (probe_cc) {
+      apiQuery.probe_cc = probe_cc
+    }
+    if (input) {
+      apiQuery.input = input
+    }
+    /*
+     * XXX currently disabled due to gateway timeouts
+     * cc @darkk
+    if (order) {
+      apiQuery.order_by = order.split(' ')[0]
+      apiQuery.order = order.split(' ')[1]
+    }
+    */
+    if (page_number && page_size) {
+      apiQuery.offset = page_number * page_size
+      apiQuery.limit = page_size
+    }
+    if (since) {
+      apiQuery.since= since
+    }
+    if (until) {
+      apiQuery.until = until
+    }
+
+    apiClient.get(`/measurements?${qs.stringify(apiQuery)}`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
+  }
+  Report.remoteMethod(
+      'findMeasurements',
+      { http: { verb: 'get' },
+        description: 'Returns the list of measurements matching the query',
+        accepts: [
+          {arg: 'probe_cc', type: 'string'},
+          {arg: 'input', type: 'string'},
+          {arg: 'order', type: 'string'},
+          {arg: 'page_number', type: 'string'},
+          {arg: 'page_size', type: 'string'},
+          {arg: 'since', type: 'string'},
+          {arg: 'until', type: 'string'},
+          {arg: 'test_name', type: 'string'}
+        ],
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  );
 
 
   Report.blockpageList = function(probe_cc, callback) {
