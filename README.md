@@ -92,5 +92,5 @@ For more details about deploying in production see [docs/deployment.md](docs/dep
 To regenerate the angular.js services from the server-side REST API spec run:
 
 ```
-lb-ng server/server.js client/ngapp/scripts/services/lbclient.js
+grunt build
 ```
