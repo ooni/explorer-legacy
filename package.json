@@ -5,7 +5,8 @@
   "scripts": {
     "pretest": "jshint .",
     "test": "grunt test",
-    "build": "bower install; grunt build"
+    "build": "bower install; grunt build",
+    "start": "node server.js"
   },
   "dependencies": {
     "async": "~2.1.4",
