@@ -41,7 +41,7 @@ docker run -d \
 ### On Mac OS X
 
 ```
-brew install node
+brew install yarn
 ```
 
 ### Install dependencies
@@ -49,17 +49,9 @@ brew install node
 Install the node dependencies:
 
 ```
-npm install --development
-npm install -g jshint
-npm install -g bower
-npm install -g grunt-cli
-npm install -g strongloop
-```
-
-Then install the bower dependencies:
-
-```
-bower update
+yarn add global jshint
+yarn add global grunt-cli
+yarn install --development
 ```
 
 ## Development environment

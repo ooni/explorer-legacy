@@ -1,12 +1,14 @@
 {
-  "name": "ooni-api",
+  "name": "ooni-explorer",
   "version": "1.0.0",
+  "license": "BSD-3-Clause",
   "main": "server/server.js",
   "scripts": {
     "pretest": "jshint .",
     "test": "grunt test",
     "build": "bower install; grunt build",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'bower_components', 'junction') } catch (e) { }\""
   },
   "dependencies": {
     "async": "~2.1.4",
@@ -23,7 +25,34 @@
     "node-sass": "^4.5.3",
     "proquint": "0.0.1",
     "qs": "^6.5.1",
-    "serve-favicon": "^2.0.1"
+    "serve-favicon": "^2.0.1",
+    "@bower_components/angular": "angular/bower-angular#~1.4",
+    "@bower_components/angular-datamaps": "git://github.com/dmachat/angular-datamaps.git#~0.1.0",
+    "@bower_components/angular-daterangepicker": "git://github.com/fragaria/angular-daterangepicker.git#~0.2.2",
+    "@bower_components/angular-inview": "thenikso/angular-inview#~1.5.6",
+    "@bower_components/angular-mocks": "angular/bower-angular-mocks#~1.4",
+    "@bower_components/angular-resource": "angular/bower-angular-resource#~1.4",
+    "@bower_components/angular-route": "angular/bower-angular-route#~1.4",
+    "@bower_components/angular-scenario": "angular/bower-angular-scenario#~1.4",
+    "@bower_components/angular-typewrite": "antoniocapelo/Angular-Typewrite#~0.0.14",
+    "@bower_components/angular-ui-codemirror": "git://github.com/angular-ui/ui-codemirror.git#~0.3.0",
+    "@bower_components/angular-ui-grid": "git://github.com/angular-ui/bower-ui-grid.git#~3.0.0-rc.21",
+    "@bower_components/bootstrap": "git://github.com/twbs/bootstrap.git#^3.0.0",
+    "@bower_components/bootstrap-daterangepicker": "dangrossman/bootstrap-daterangepicker#^2.0.0",
+    "@bower_components/codemirror": "marijnh/CodeMirror#^5.0",
+    "@bower_components/colorbrewer": "git://github.com/undashes/colorbrewer.git#~1.0.0",
+    "@bower_components/d3": "mbostock-bower/d3-bower#^3.5.6",
+    "@bower_components/datamaps": "markmarkoh/datamaps#~0.4.0",
+    "@bower_components/es5-shim": "git://github.com/es-shims/es5-shim.git#~3.1.0",
+    "@bower_components/factbook-country-data": "git://github.com/simonv3/factbook-country-data#0cceccd6e393e6a860798e0b7e5be28c4f18efd4",
+    "@bower_components/flag-icon-css": "lipis/flag-icon-css#*",
+    "@bower_components/font-awesome": "git://github.com/FortAwesome/Font-Awesome.git#~4.5.0",
+    "@bower_components/iso-3166-country-codes-angular": "git://github.com/BluePyth/iso-3166-country-codes-angular.git#~1.1.1",
+    "@bower_components/jquery": "jquery/jquery-dist#1.9.1 - 2",
+    "@bower_components/json-formatter": "git://github.com/mohsen1/json-formatter.git#~0.4.2",
+    "@bower_components/json3": "git://github.com/bestiejs/json3.git#~3.3.1",
+    "@bower_components/moment": "moment/moment#>=2.9.0",
+    "@bower_components/topojson": "git://github.com/mbostock/topojson.git#1.6.20"
   },
   "optionalDependencies": {
     "loopback-explorer": "^1.1.0"
@@ -71,5 +100,8 @@
     "type": "",
     "url": ""
   },
-  "description": "ooni-api"
+  "description": "ooni-explorer",
+  "engines": {
+    "yarn": ">= 1.0.0"
+  }
 }
