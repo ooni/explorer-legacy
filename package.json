@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "jshint .",
     "test": "grunt test",
-    "build": "bower install; grunt build",
+    "build": "grunt build",
     "start": "node server.js",
     "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'bower_components', 'junction') } catch (e) { }\""
   },
@@ -90,7 +90,6 @@
     "karma": "^0.12.17",
     "karma-chrome-launcher": "^0.1.4",
     "karma-jasmine": "^0.1.5",
-    "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^0.6.0",
     "loopback-testing": "^1.0.4",
     "mocha": "^2.1.0",
