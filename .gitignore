@@ -21,7 +21,6 @@ bower_components
 client/dist
 .tmp
 server/providers-private.json
-server/datasources.development.js
 client/ngapp/styles/main.css
 client/ngapp/styles/main.css.map
 client/ngapp/build/main.js
