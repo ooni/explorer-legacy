@@ -206,9 +206,9 @@ module.exports = function(Report) {
   Report.blockpageCount = function(probe_cc, callback) {
     apiClient.get(`/_/blockpage_count`)
       .then(function(response) {
-        callback(null, response.data.results.filter(function(d) {
+        callback(null, response.data.results && response.data.results.filter(function(d) {
           return d.probe_cc == probe_cc
-        }))
+        }) || [])
       })
       .catch(function(error) {
         callback(error, null);
