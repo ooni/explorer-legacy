@@ -4,7 +4,9 @@ var qs = require('qs')
 var countries = require('country-data').countries
 
 var apiClient = axios.create({
-  //baseURL: 'https://api.ooni.io/api/',
+  // XXX Uncomment this when we deploy it
+  // baseURL: 'https://api.ooni.io/api/',
+  // XXX We use this base URL for testing
   baseURL: 'http://localhost:3001/api/',
   timeout: 90000, // Maybe set this lower once performance is boosted
 })
@@ -139,13 +141,17 @@ module.exports = function(Report) {
       }
   )
 
-
   Report.websiteMeasurements = function (website_url, callback) {
-    var ds = Report.dataSource
-    var wildcard_url = '%' + website_url
-
-    var sql = 'SELECT * FROM blockpage_urls WHERE input LIKE $1'
-    ds.connector.query(sql, [wildcard_url], callback)
+    var apiQuery = {
+      input: website_url
+    }
+    apiClient.get(`/_/website_measurements?${qs.stringify(apiQuery)}`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
@@ -180,7 +186,6 @@ module.exports = function(Report) {
   );
 
   Report.blockpageDetected = function(callback) {
-    var ds = Report.dataSource;
     apiClient.get(`/_/blockpage_detected`)
       .then(function(response) {
         callback(null, response.data.results)
@@ -199,10 +204,15 @@ module.exports = function(Report) {
   );
 
   Report.blockpageCount = function(probe_cc, callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT * FROM blockpage_count WHERE probe_cc = $1 ORDER BY test_start_time";
-
-    ds.connector.query(sql, [probe_cc], callback);
+    apiClient.get(`/_/blockpage_count`)
+      .then(function(response) {
+        callback(null, response.data.results.filter(function(d) {
+          return d.probe_cc == probe_cc
+        }))
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
