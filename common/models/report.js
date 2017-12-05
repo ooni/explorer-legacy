@@ -181,8 +181,13 @@ module.exports = function(Report) {
 
   Report.blockpageDetected = function(callback) {
     var ds = Report.dataSource;
-    var sql = "SELECT DISTINCT probe_cc FROM blockpage_count";
-    ds.connector.query(sql, callback);
+    apiClient.get(`/_/blockpage_detected`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
