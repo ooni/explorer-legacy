@@ -532,7 +532,6 @@ angular.module('ooniAPIApp')
         $scope.$watch('showCountryFilter', function (ccsBool) {
           console.log(ccsBool)
           if (ccsBool !== undefined && ccsBool === true) {
-            console.log('its true')
             $scope.allCountryCodes = []
             Report.countByCountry({}, function (data) {
               // TODO: this should be loaded on app load if it's used regularly in views.
