@@ -89,19 +89,13 @@ module.exports = function(Report) {
   );
 
   Report.total = function(callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT SUM(count) FROM country_counts_view;";
-
-    ds.connector.query(sql, [], function(err, rows) {
-        if (err) {
-             return callback(err, null);
-        }
-        callback(null,
-                 {
-                     "total": parseInt(rows[0].sum)
-                 }
-        );
-    });
+    apiClient.get(`/_/measurement_count_total`)
+      .then(function(response) {
+        callback(null, response.data)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
@@ -216,15 +210,10 @@ module.exports = function(Report) {
   );
 
   Report.countByCountry = function(callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT probe_cc, count FROM country_counts_view";
-
-    ds.connector.query(sql, function(err, data){
-        if (err) {
-            callback(err, null);
-        }
+    apiClient.get(`/_/measurement_count_by_country`)
+      .then(function(response) {
         var result = [];
-        data.forEach(function(row) {
+        response.data.results.forEach(function(row) {
             var country = countries[row['probe_cc']];
             if (country !== undefined) {
                 result.push({
@@ -235,9 +224,11 @@ module.exports = function(Report) {
                 });
             }
         });
-
-        callback(err, result);
-    });
+        callback(null, result)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
