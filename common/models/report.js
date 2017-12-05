@@ -4,7 +4,8 @@ var qs = require('qs')
 var countries = require('country-data').countries
 
 var apiClient = axios.create({
-  baseURL: 'https://api.ooni.io/api/v1/',
+  //baseURL: 'https://api.ooni.io/api/',
+  baseURL: 'http://localhost:3001/api/',
   timeout: 90000, // Maybe set this lower once performance is boosted
 })
 
@@ -38,7 +39,7 @@ module.exports = function(Report) {
       apiQuery.until = until
     }
 
-    apiClient.get(`/measurements?${qs.stringify(apiQuery)}`)
+    apiClient.get(`/v1/measurements?${qs.stringify(apiQuery)}`)
       .then(function(response) {
         callback(null, response.data.results)
       })
@@ -66,10 +67,16 @@ module.exports = function(Report) {
 
 
   Report.blockpageList = function(probe_cc, callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT * FROM blockpage_urls WHERE probe_cc = $1";
-
-    ds.connector.query(sql, [probe_cc], callback);
+    var apiQuery = {
+      probe_cc: probe_cc
+    }
+    apiClient.get(`/_/blockpages?${qs.stringify(apiQuery)}`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
