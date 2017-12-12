@@ -19,7 +19,6 @@ angular.module('ooniAPIApp')
       $scope.loaded = false;
 
       var deferred = $q.defer();
-      console.log(queryOptions)
       var query = {
           filter: {
               fields: {
