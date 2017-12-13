@@ -1,8 +1,7 @@
 {
-  "name": "ooni-api",
+  "name": "ooni-explorer",
   "version": "0.0.0",
-  "homepage": "http://api.ooni.io/",
-  "license": "MIT",
+  "license": "BSD-2-Clause",
   "private": true,
   "appPath": "client/ngapp",
   "testPath": "client/ngapp/test/spec",

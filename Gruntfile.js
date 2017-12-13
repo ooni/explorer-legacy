@@ -414,11 +414,16 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-lbclient', 'Build lbclient browser bundle', function() {
     var done = this.async();
+    console.log('building lbclient')
     grunt.util.spawn({
-      cmd: ["lb-ng"],
+      cmd: 'lb-ng',
       args: ["server/server.js", "client/ngapp/scripts/services/lbclient.js"],
       opts: {stdio: "inherit"}
-    }, function cb(){
+    }, function cb(error, result, code) {
+      if (code !== 0) {
+        console.log('built lbclient', error, result, code)
+        grunt.fatal('Failed to build lbclient')
+      }
       done();
     });
   });

@@ -8,7 +8,7 @@ module.exports = {
     "name": "postgres",
     "debug": false,
     "connector": "postgresql",
-    "ssl": true
+    "ssl": process.env.DISABLE_SSL !== 'true'
   },
   "mem": {
     "name": "mem",

@@ -3,7 +3,7 @@
 </div>
 <div class="column name">{{ measurement.test_name }}
   <a title="View Measurement"
-  href="/measurement/{{ measurement.id }}{{ measurement.input ? '?input=' + encodeInput(measurement.input) : '' }}">
+  href="/measurement/{{ measurement.report_id }}{{ measurement.input ? '?input=' + encodeInput(measurement.input) : '' }}">
     <small ng-show="$parent.$index === 0">
       View measurement »</small>
     <small ng-show="$parent.$index > 0">View »</small>

@@ -120,9 +120,11 @@ angular.module('ooniAPIApp')
                       reportCountry: country.name,
                       alpha2: country.alpha2
                   };
+                  /*
                   if (alpha2WithBlockingDetected.indexOf(country.alpha2) !== -1) {
                       $scope.worldMap.data[country.alpha3]["fillKey"] = "BLOCKPAGE";
-                  } else if (country.count < 10000) {
+                  } else */
+                  if (country.count < 10000) {
                       $scope.worldMap.data[country.alpha3]["fillKey"] = "LOW";
                   } else if (country.count < 100000) {
                       $scope.worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";

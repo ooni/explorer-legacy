@@ -44,7 +44,7 @@ angular.module('ooniAPIApp')
         $scope.queryOptions.pageNumber = 0;
         $scope.queryOptions.pageSize = 100;
 
-        $scope.queryOptions.order = "test_start_time DESC";
+        $scope.queryOptions.order = "measurement_start_time DESC";
         $scope.queryOptions.where = {};
 
         if ($scope.customColumnDefs !== undefined) {
@@ -69,7 +69,7 @@ angular.module('ooniAPIApp')
               },
               {
                   name: 'Start time',
-                  field:'test_start_time'
+                  field:'measurement_start_time'
               },
               {
                   field: 'id',
@@ -84,9 +84,9 @@ angular.module('ooniAPIApp')
           $scope.viewRowObject = function(row) {
               var report = row.entity;
               if (typeof report.input === 'undefined' || report.input === null) {
-                  return '/measurement/' + report.id;
+                  return '/measurement/' + report.report_id;
               } else {
-                  return '/measurement/' + report.id + '?input=' + encodeURIComponent(report.input);
+                  return '/measurement/' + report.report_id + '?input=' + encodeURIComponent(report.input);
               }
           }
         }
@@ -532,7 +532,6 @@ angular.module('ooniAPIApp')
         $scope.$watch('showCountryFilter', function (ccsBool) {
           console.log(ccsBool)
           if (ccsBool !== undefined && ccsBool === true) {
-            console.log('its true')
             $scope.allCountryCodes = []
             Report.countByCountry({}, function (data) {
               // TODO: this should be loaded on app load if it's used regularly in views.

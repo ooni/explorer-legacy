@@ -1,12 +1,83 @@
-var countries = require('country-data').countries;
+var axios = require('axios')
+var qs = require('qs')
+
+var countries = require('country-data').countries
+
+var apiClient = axios.create({
+  baseURL: 'https://api.ooni.io/api/', // yes, that's hardcoded
+  timeout: 90000, // Maybe set this lower once performance is boosted
+})
+
 module.exports = function(Report) {
+
+  Report.findMeasurements = function(probe_cc, input, order, page_number,
+      page_size, since, until, test_name, report_id, callback) {
+    var apiQuery = {}
+    if (probe_cc) {
+      apiQuery.probe_cc = probe_cc
+    }
+    if (input) {
+      apiQuery.input = input
+    }
+    if (report_id) {
+      apiQuery.report_id = report_id
+    }
+    /*
+    if (order) {
+      apiQuery.order_by = order.split(' ')[0]
+      apiQuery.order = order.split(' ')[1]
+    }
+    */
+    if (page_number && page_size) {
+      apiQuery.offset = page_number * page_size
+      apiQuery.limit = page_size
+    }
+    if (since) {
+      apiQuery.since= since
+    }
+    if (until) {
+      apiQuery.until = until
+    }
+
+    apiClient.get(`/v1/measurements?${qs.stringify(apiQuery)}`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
+  }
+  Report.remoteMethod(
+      'findMeasurements',
+      { http: { verb: 'get' },
+        description: 'Returns the list of measurements matching the query',
+        accepts: [
+          {arg: 'probe_cc', type: 'string'},
+          {arg: 'input', type: 'string'},
+          {arg: 'order', type: 'string'},
+          {arg: 'page_number', type: 'string'},
+          {arg: 'page_size', type: 'string'},
+          {arg: 'since', type: 'string'},
+          {arg: 'until', type: 'string'},
+          {arg: 'test_name', type: 'string'},
+          {arg: 'report_id', type: 'string'}
+        ],
+        returns: {arg: 'data', type: ['Object'], root: true}
+      }
+  );
 
 
   Report.blockpageList = function(probe_cc, callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT * FROM blockpage_urls WHERE probe_cc = $1";
-
-    ds.connector.query(sql, [probe_cc], callback);
+    var apiQuery = {
+      probe_cc: probe_cc
+    }
+    apiClient.get(`/_/blockpages?${qs.stringify(apiQuery)}`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
@@ -19,19 +90,13 @@ module.exports = function(Report) {
   );
 
   Report.total = function(callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT SUM(count) FROM country_counts_view;";
-
-    ds.connector.query(sql, [], function(err, rows) {
-        if (err) {
-             return callback(err, null);
-        }
-        callback(null,
-                 {
-                     "total": parseInt(rows[0].sum)
-                 }
-        );
-    });
+    apiClient.get(`/_/measurement_count_total`)
+      .then(function(response) {
+        callback(null, response.data)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
@@ -75,13 +140,17 @@ module.exports = function(Report) {
       }
   )
 
-
   Report.websiteMeasurements = function (website_url, callback) {
-    var ds = Report.dataSource
-    var wildcard_url = '%' + website_url
-
-    var sql = 'SELECT * FROM blockpage_urls WHERE input LIKE $1'
-    ds.connector.query(sql, [wildcard_url], callback)
+    var apiQuery = {
+      input: website_url
+    }
+    apiClient.get(`/_/website_measurements?${qs.stringify(apiQuery)}`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
@@ -116,9 +185,13 @@ module.exports = function(Report) {
   );
 
   Report.blockpageDetected = function(callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT DISTINCT probe_cc FROM blockpage_count";
-    ds.connector.query(sql, callback);
+    apiClient.get(`/_/blockpage_detected`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
@@ -130,10 +203,16 @@ module.exports = function(Report) {
   );
 
   Report.blockpageCount = function(probe_cc, callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT * FROM blockpage_count WHERE probe_cc = $1 ORDER BY test_start_time";
-
-    ds.connector.query(sql, [probe_cc], callback);
+    var apiQuery = {
+      probe_cc: probe_cc
+    }
+    apiClient.get(`/_/blockpage_count?${qs.stringify(apiQuery)}`)
+      .then(function(response) {
+        callback(null, response.data.results)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
@@ -146,15 +225,10 @@ module.exports = function(Report) {
   );
 
   Report.countByCountry = function(callback) {
-    var ds = Report.dataSource;
-    var sql = "SELECT probe_cc, count FROM country_counts_view";
-
-    ds.connector.query(sql, function(err, data){
-        if (err) {
-            callback(err, null);
-        }
+    apiClient.get(`/_/measurement_count_by_country`)
+      .then(function(response) {
         var result = [];
-        data.forEach(function(row) {
+        response.data.results.forEach(function(row) {
             var country = countries[row['probe_cc']];
             if (country !== undefined) {
                 result.push({
@@ -165,9 +239,11 @@ module.exports = function(Report) {
                 });
             }
         });
-
-        callback(err, result);
-    });
+        callback(null, result)
+      })
+      .catch(function(error) {
+        callback(error, null);
+      })
   }
 
   Report.remoteMethod(
