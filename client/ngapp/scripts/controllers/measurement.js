@@ -9,7 +9,7 @@
  */
 
 angular.module('ooniAPIApp')
-  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $rootScope, $location, Report, Nettest, Country, $routeParams, ISO3166) {
+  .controller('MeasurementDetailViewCtrl', function ($q, $scope, $anchorScroll, $rootScope, $location, $http, Report, Nettest, Country, $routeParams, ISO3166) {
 
     $scope.measurementId = $routeParams.id;
     $scope.measurementInput = $routeParams.input;
@@ -21,21 +21,13 @@ angular.module('ooniAPIApp')
     $scope.pageSize = 100;
     $scope.definitions = definitions;
 
-    var query = {
-      filter: {
-        where: {
-          'id': $scope.measurementId,
-        },
-        offset: $scope.pageNumber * $scope.pageSize,
-        limit: $scope.pageSize
-      }
-    }
-
     function loading_success(data) {
-      $scope.report = data[0];
-      $scope.network_information = " ( " + $scope.report.probe_asn + " )"
+      $scope.report = data;
+      $scope.network_information = $scope.report.probe_asn
       Report.asnName({asn: $scope.report.probe_asn}, function(result) {
-        $scope.network_information = result[0].name + $scope.network_information;
+        if (result[0] != undefined) {
+          $scope.network_information = result[0].name + " ( " + $scope.network_information + " )";
+        }
       });
 
       $scope.nettest = Nettest.findOne({
@@ -57,12 +49,22 @@ angular.module('ooniAPIApp')
       $scope.not_found = true;
     }
 
-    if ($scope.measurementInput !== undefined) {
-        query['filter']['where']['input'] = $scope.measurementInput;
-        $scope.measurement = Report.find(query, loading_success, loading_failure);
-    } else {
-        $scope.measurements = Report.find(query, loading_success, loading_failure);
+    function getMeasurementJson(reportId, input, cb, eb) {
+      var query = {
+        report_id: reportId,
+      }
+      if (input !== undefined) {
+        query['input'] = input
+      }
+      return Report.findMeasurements(query, function(result) {
+        $http.get(result[0].measurement_url)
+          .then(function(response) {
+            cb(response.data)
+          }, eb)
+      }, eb)
     }
+
+    $scope.measurement = getMeasurementJson($scope.measurementId, $scope.measurementInput, loading_success, loading_failure)
 
 });
 

@@ -629,6 +629,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              *  - `test_name` – `{string=}` -
              *
+             *  - `report_id` – `{string=}` -
+             *
              * @param {function(Array.<Object>,Object)=} successCb
              *   Success callback with two arguments: `value`, `responseHeaders`.
              *

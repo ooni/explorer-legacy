@@ -11,13 +11,16 @@ var apiClient = axios.create({
 module.exports = function(Report) {
 
   Report.findMeasurements = function(probe_cc, input, order, page_number,
-      page_size, since, until, test_name, callback) {
+      page_size, since, until, test_name, report_id, callback) {
     var apiQuery = {}
     if (probe_cc) {
       apiQuery.probe_cc = probe_cc
     }
     if (input) {
       apiQuery.input = input
+    }
+    if (report_id) {
+      apiQuery.report_id = report_id
     }
     /*
     if (order) {
@@ -56,7 +59,8 @@ module.exports = function(Report) {
           {arg: 'page_size', type: 'string'},
           {arg: 'since', type: 'string'},
           {arg: 'until', type: 'string'},
-          {arg: 'test_name', type: 'string'}
+          {arg: 'test_name', type: 'string'},
+          {arg: 'report_id', type: 'string'}
         ],
         returns: {arg: 'data', type: ['Object'], root: true}
       }
