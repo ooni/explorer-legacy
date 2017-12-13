@@ -92,9 +92,10 @@ angular.module('ooniAPIApp')
       })
     });
 
-    Report.count({where: {probe_cc: $scope.countryCode }}, function(count) {
-      $scope.count = count.count;
-    });
+    Report.countByCountry(function (result) {
+      var thisCountry = result.filter(function(item) { return item.alpha2 === $scope.countryCode })
+      $scope.count = (thisCountry[0] && thisCountry[0].count) || -1
+    })
 
     // XXX should use external pagination feature of ui grid
     // http://ui-grid.info/docs/#/tutorial/314_external_pagination
@@ -131,14 +132,11 @@ angular.module('ooniAPIApp')
       params.page_size = queryOptions.pageSize
       params.page_number = queryOptions.pageNumber
 
-      Report.total(function (result) {
-        Report.findMeasurements(params, function(data) {
-          data.total = result.total;
-          deferred.resolve(data);
+      Report.findMeasurements(params, function(data) {
+        deferred.resolve(data);
 
-          $scope.loaded = true;
-        });
-      })
+        $scope.loaded = true;
+      });
 
       return deferred.promise;
     }
