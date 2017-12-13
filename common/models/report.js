@@ -19,14 +19,10 @@ module.exports = function(Report) {
     if (input) {
       apiQuery.input = input
     }
-    /*
-     * XXX currently disabled due to gateway timeouts
-     * cc @darkk
     if (order) {
       apiQuery.order_by = order.split(' ')[0]
       apiQuery.order = order.split(' ')[1]
     }
-    */
     if (page_number && page_size) {
       apiQuery.offset = page_number * page_size
       apiQuery.limit = page_size

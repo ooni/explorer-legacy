@@ -118,15 +118,27 @@ angular.module('ooniAPIApp')
               limit: queryOptions.pageSize
           }
       }
+      var params = {}
 
-      if (queryOptions.order) {
-        query.filter.order = queryOptions.order;
+      if (queryOptions.where) {
+        params.probe_cc = queryOptions.where.probe_cc
+        params.input = queryOptions.where.input
+        params.test_name = queryOptions.where.test_name
+        params.since = queryOptions.where.test_start_time && queryOptions.where.test_start_time.between[0]
+        params.until = queryOptions.where.test_start_time && queryOptions.where.test_start_time.between[1]
       }
+      params.order = queryOptions.order
+      params.page_size = queryOptions.pageSize
+      params.page_number = queryOptions.pageNumber
 
-      Report.find(query, function(data) {
-        deferred.resolve(data);
-        $scope.loaded = true;
-      });
+      Report.total(function (result) {
+        Report.findMeasurements(params, function(data) {
+          data.total = result.total;
+          deferred.resolve(data);
+
+          $scope.loaded = true;
+        });
+      })
 
       return deferred.promise;
     }
