@@ -19,10 +19,12 @@ module.exports = function(Report) {
     if (input) {
       apiQuery.input = input
     }
+    /*
     if (order) {
       apiQuery.order_by = order.split(' ')[0]
       apiQuery.order = order.split(' ')[1]
     }
+    */
     if (page_number && page_size) {
       apiQuery.offset = page_number * page_size
       apiQuery.limit = page_size
