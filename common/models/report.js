@@ -22,6 +22,10 @@ module.exports = function(Report) {
     if (report_id) {
       apiQuery.report_id = report_id
     }
+    if (test_name) {
+      apiQuery.test_name = test_name
+    }
+
     /*
     if (order) {
       apiQuery.order_by = order.split(' ')[0]
