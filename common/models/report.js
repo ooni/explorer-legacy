@@ -22,12 +22,15 @@ module.exports = function(Report) {
     if (report_id) {
       apiQuery.report_id = report_id
     }
-    /*
+    if (test_name) {
+      apiQuery.test_name = test_name
+    }
+
     if (order) {
       apiQuery.order_by = order.split(' ')[0]
       apiQuery.order = order.split(' ')[1]
     }
-    */
+
     if (page_number && page_size) {
       apiQuery.offset = page_number * page_size
       apiQuery.limit = page_size
