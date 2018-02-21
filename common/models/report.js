@@ -44,7 +44,11 @@ module.exports = function(Report) {
 
     apiClient.get(`/v1/measurements?${qs.stringify(apiQuery)}`)
       .then(function(response) {
-        callback(null, response.data.results)
+        // This is a workaround
+        callback(null, response.data.results.map(function(row) {
+          row['test_start_time'] = row['measurement_start_time']
+          return row
+        }))
       })
       .catch(function(error) {
         callback(error, null);
