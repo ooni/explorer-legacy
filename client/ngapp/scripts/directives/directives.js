@@ -44,7 +44,7 @@ angular.module('ooniAPIApp')
         $scope.queryOptions.pageNumber = 0;
         $scope.queryOptions.pageSize = 100;
 
-        $scope.queryOptions.order = "measurement_start_time DESC";
+        $scope.queryOptions.order = "test_start_time DESC";
         $scope.queryOptions.where = {};
 
         if ($scope.customColumnDefs !== undefined) {
@@ -69,7 +69,7 @@ angular.module('ooniAPIApp')
               },
               {
                   name: 'Start time',
-                  field:'measurement_start_time'
+                  field:'test_start_time'
               },
               {
                   field: 'id',
