@@ -96,9 +96,9 @@
   version "4.5.0"
   resolved "git://github.com/FortAwesome/Font-Awesome.git#fddd2c240452e6c8990c4ef75e0265b455aa7968"
 
-"@bower_components/iso-3166-country-codes-angular@git://github.com/hellais/iso-3166-country-codes-angular#611d0cf4dc2244a74cd337c516744d1dce235e7c":
+"@bower_components/iso-3166-country-codes-angular@git://github.com/darkk/not-iso-3166-country-codes-angular#bc92770016619590e7e4e8ee6dfd60757e97759a":
   version "1.2.1"
-  resolved "git://github.com/hellais/iso-3166-country-codes-angular#611d0cf4dc2244a74cd337c516744d1dce235e7c"
+  resolved "git://github.com/darkk/not-iso-3166-country-codes-angular#bc92770016619590e7e4e8ee6dfd60757e97759a"
 
 "@bower_components/jquery@jquery/jquery-dist#1.9.1 - 2":
   version "2.2.4"
