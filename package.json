@@ -32,7 +32,7 @@
     "@bower_components/factbook-country-data": "git://github.com/simonv3/factbook-country-data#0cceccd6e393e6a860798e0b7e5be28c4f18efd4",
     "@bower_components/flag-icon-css": "lipis/flag-icon-css#*",
     "@bower_components/font-awesome": "git://github.com/FortAwesome/Font-Awesome.git#~4.5.0",
-    "@bower_components/iso-3166-country-codes-angular": "git://github.com/darkk/not-iso-3166-country-codes-angular#bc92770016619590e7e4e8ee6dfd60757e97759a",
+    "@bower_components/iso-3166-country-codes-angular": "git://github.com/hellais/iso-3166-country-codes-angular#611d0cf4dc2244a74cd337c516744d1dce235e7c",
     "@bower_components/jquery": "jquery/jquery-dist#1.9.1 - 2",
     "@bower_components/json-formatter": "git://github.com/mohsen1/json-formatter.git#~0.4.2",
     "@bower_components/json3": "git://github.com/bestiejs/json3.git#~3.3.1",
