@@ -25,7 +25,7 @@
     "flag-icon-css": "",
     "angular-ui-grid": "~3.0.0-rc.21",
     "font-awesome": "fontawesome#~4.5.0",
-    "iso-3166-country-codes-angular": "https://github.com/darkk/not-iso-3166-country-codes-angular/archive/bc92770016619590e7e4e8ee6dfd60757e97759a.zip",
+    "iso-3166-country-codes-angular": "https://github.com/hellais/iso-3166-country-codes-angular/archive/611d0cf4dc2244a74cd337c516744d1dce235e7c.zip",
     "json-formatter": "~0.4.2",
     "factbook-country-data": "https://github.com/simonv3/factbook-country-data/archive/0cceccd6e393e6a860798e0b7e5be28c4f18efd4.zip",
     "angular-daterangepicker": "~0.2.2",
