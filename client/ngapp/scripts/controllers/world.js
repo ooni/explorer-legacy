@@ -34,7 +34,7 @@ angular.module('ooniAPIApp')
               var reportCount = data !== null ? data.reportCount : 0;
               return ['<div class="hoverinfo"><strong>',
                       'Number of measurements ' + geo.properties.name,
-                      ': ' +  reportCount,
+                      ': ' +  reportCount.toLocaleString(),
                       '</strong></div>'].join('');
             },
             highlightFillColor: '#26292C',
