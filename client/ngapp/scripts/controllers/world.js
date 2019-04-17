@@ -108,36 +108,25 @@ angular.module('ooniAPIApp')
       }
 
       Report.countByCountry(query, function(report_counts) {
-          Report.blockpageDetected(function(blockpage_countries) {
-              var alpha2WithBlockingDetected = [];
-              angular.forEach(blockpage_countries, function(country) {
-                alpha2WithBlockingDetected.push(country.probe_cc);
-              });
-              $scope.reportsByCountry = report_counts;
-              angular.forEach(report_counts, function(country){
-                  $scope.worldMap.data[country.alpha3] = {
-                      reportCount: country.count,
-                      reportCountry: country.name,
-                      alpha2: country.alpha2
-                  };
-                  /*
-                  if (alpha2WithBlockingDetected.indexOf(country.alpha2) !== -1) {
-                      $scope.worldMap.data[country.alpha3]["fillKey"] = "BLOCKPAGE";
-                  } else */
-                  if (country.count < 10000) {
-                      $scope.worldMap.data[country.alpha3]["fillKey"] = "LOW";
-                  } else if (country.count < 100000) {
-                      $scope.worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
-                  } else {
-                      $scope.worldMap.data[country.alpha3]["fillKey"] = "HIGH";
-                  }
-              })
+        $scope.reportsByCountry = report_counts;
+        angular.forEach(report_counts, function(country){
+            $scope.worldMap.data[country.alpha3] = {
+                reportCount: country.count,
+                reportCountry: country.name,
+                alpha2: country.alpha2
+            };
 
-              $scope.loaded = true;
-              deferred.resolve($scope.reportsByCountry);
-          }, function(err, resp){
-            console.log(err, resp);
-          });
+            if (country.count < 10000) {
+                $scope.worldMap.data[country.alpha3]["fillKey"] = "LOW";
+            } else if (country.count < 100000) {
+                $scope.worldMap.data[country.alpha3]["fillKey"] = "MEDIUM";
+            } else {
+                $scope.worldMap.data[country.alpha3]["fillKey"] = "HIGH";
+            }
+        })
+
+        $scope.loaded = true;
+        deferred.resolve($scope.reportsByCountry);
       });
 
       return deferred.promise;
