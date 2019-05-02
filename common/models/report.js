@@ -4,7 +4,7 @@ var qs = require('qs')
 var countries = require('country-data').countries
 
 var apiClient = axios.create({
-  baseURL: 'https://api.test.ooni.io/api/', // yes, that's hardcoded
+  baseURL: 'https://api.ooni.io/api/', // yes, that's hardcoded
   timeout: 90000, // Maybe set this lower once performance is boosted
 })
 
