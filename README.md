@@ -1,8 +1,8 @@
-# OONI Explorer
+# OONI Explorer Legacy
 
-This is the code for the OONI Measurement Explorer accessible via:
+**This repository is deprecated**
 
-https://explorer.ooni.torproject.org/
+For the current OONI Explorer code repository see: https://github.com/ooni/explorer.
 
 ## Setup
 
