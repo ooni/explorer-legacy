@@ -39,7 +39,7 @@
     "@bower_components/moment": "moment/moment#>=2.9.0",
     "@bower_components/topojson": "git://github.com/mbostock/topojson.git#1.6.20",
     "async": "~2.1.4",
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "country-data": "0.0.31",
