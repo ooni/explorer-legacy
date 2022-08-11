@@ -47,7 +47,7 @@
     "loopback": "^2.14.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-storage": "~1.0.5",
-    "loopback-connector-postgresql": "~2.1.0",
+    "loopback-connector-postgresql": "~5.5.1",
     "loopback-datasource-juggler": "^2.19.0",
     "node-sass": "^4.5.3",
     "proquint": "0.0.1",
